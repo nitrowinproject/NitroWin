@@ -3,7 +3,7 @@
     Initializes the helper to run correctly
 
 .DESCRIPTION
-    Runs automatically when the NitroWin.Helper package is imported.
+    Runs automatically when the NitroWin.Helper module is imported.
 
 .EXAMPLE
     Initialize-Helper

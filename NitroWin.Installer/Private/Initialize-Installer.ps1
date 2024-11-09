@@ -3,7 +3,7 @@
     Initializes the installer to run correctly
 
 .DESCRIPTION
-    Runs automatically when the NitroWin.Installer package is imported.
+    Runs automatically when the NitroWin.Installer module is imported.
 
 .EXAMPLE
     Initialize-Installer
