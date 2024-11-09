@@ -14,3 +14,6 @@ Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Private') -Filter
 # Export all public functions
 $functionNames = Get-ChildItem -Path $PSScriptRoot -Filter *.ps1 -Recurse | ForEach-Object { $_.BaseName }
 Export-ModuleMember -Function $functionNames
+
+# Run initialization script
+Initialize-Helper
