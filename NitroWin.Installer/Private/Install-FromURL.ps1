@@ -1,3 +1,14 @@
+<#
+.SYNOPSIS
+    Downloads and executes a file from the Internet
+
+.PARAMETER url
+    The URL of the executable
+
+.EXAMPLE
+    Install-FromURL -url "https://example.com/program.exe" -name "Example"
+#>
+
 function Install-FromURL {
     param (
         [string]$url,

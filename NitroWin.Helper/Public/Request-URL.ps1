@@ -1,3 +1,14 @@
+<#
+.SYNOPSIS
+    Sends an HTTP request to a specified URL and returns the response code
+
+.PARAMETER url
+    The URL to request
+
+.EXAMPLE
+    Request-URL -url "https://github.com/"
+#>
+
 function Request-URL {
     param (
         [string]$url

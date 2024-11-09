@@ -1,3 +1,17 @@
+<#
+.SYNOPSIS
+    Downloads a file from the Internet and returns its path after downloading
+
+.PARAMETER url
+    The URL of the file to be downloaded
+
+.PARAMETER outpath
+    The download location of the file to be downloaded
+
+.EXAMPLE
+    Get-FileFromURL -url "https://example.com/example.txt" -outpath "C:\Downloads"
+#>
+
 function Get-FileFromURL {
     param (
         [string]$url,
