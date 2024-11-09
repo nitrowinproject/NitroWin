@@ -13,4 +13,4 @@ $functionNames = Get-ChildItem -Path $PSScriptRoot -Filter *.ps1 -Recurse | ForE
 Export-ModuleMember -Function $functionNames
 
 # Run initialization script
-Initialize-Helper
+Initialize-Installer
