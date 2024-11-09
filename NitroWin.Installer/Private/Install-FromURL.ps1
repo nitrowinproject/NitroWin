@@ -9,8 +9,8 @@ function Install-FromURL {
             $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder)
         }
         catch {
-            $message = 'Error while downloading {0}. Continue without installing?' -f $name
-            $title = 'Error while downloading {0}' -f $name
+            $message = "Error while downloading {0}. Continue without installing?" -f $name
+            $title = "Error while downloading {0}" -f $name
 
             $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
             if (-Not ($prompt -eq 'Yes')) {
@@ -22,8 +22,8 @@ function Install-FromURL {
                 Invoke-Expression $download
             }
             catch {
-                $message = 'Error while installing {0}. Continue without installing?' -f $name
-                $title = 'Error while installing {0}' -f $name
+                $message = "Error while installing {0}. Continue without installing?" -f $name
+                $title = "Error while installing {0}" -f $name
     
                 $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
                 if (-Not ($prompt -eq 'Yes')) {
@@ -33,8 +33,8 @@ function Install-FromURL {
         }
     }
     else {
-        $message = 'Error while downloading {0}. Continue without installing?' -f $name
-        $title = 'Error while downloading {0}' -f $name
+        $message = "Error while downloading {0}. Continue without installing?" -f $name
+        $title = "Error while downloading {0}" -f $name
 
         $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
         if (-Not ($prompt -eq 'Yes')) {
