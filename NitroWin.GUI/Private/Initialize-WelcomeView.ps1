@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Initializes the WelcomeView run correctly
+    Initializes the WelcomeView to run correctly
 
 .DESCRIPTION
     Runs automatically when the NitroWin.GUI package is imported.

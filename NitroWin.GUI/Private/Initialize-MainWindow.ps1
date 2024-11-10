@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Initializes the MainWindow run correctly
+    Initializes the MainWindow to run correctly
 
 .DESCRIPTION
     Runs automatically when the NitroWin.GUI package is imported.
