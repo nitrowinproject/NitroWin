@@ -16,4 +16,6 @@ I think, it's really good for setting up a fresh Windows installation. But you c
 
 ## License
 
-This project is licensed under the Unlicense.
+This project is licensed under the [Unlicense](LICENSE).
+
+This project uses icons, which are licensed under the [MIT License](NOTICE.md). For more details, check out [NOTICE.md](NOTICE.md).
