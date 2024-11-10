@@ -13,7 +13,7 @@ function Initialize-WelcomeView {
     $welcomeViewForm = Initialize-Form -xamlfile ".\NitroWin.GUI\GUI\WelcomeView.xaml"
 
     $Global:WelcomeContinueButton.Add_Click({
-        $Global:mainWindow.Content = Initialize-LicenseView
+        $Global:mainWindow.Content = $Global:licenseViewForm
     })
 
     return $welcomeViewForm
