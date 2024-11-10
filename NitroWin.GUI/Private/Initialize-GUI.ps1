@@ -21,12 +21,12 @@ function Initialize-GUI {
     $Global:mainWindow = Initialize-MainWindow
     
     # Export views
-    Export-ModuleMember -Variable $Global:mainWindow
-
-    Export-ModuleMember -Variable $Global:welcomeViewForm
-    Export-ModuleMember -Variable $Global:licenseViewForm
     Export-ModuleMember -Variable $Global:dnsViewForm
     Export-ModuleMember -Variable $Global:appSelectionViewForm
+    Export-ModuleMember -Variable $Global:licenseViewForm
+    Export-ModuleMember -Variable $Global:welcomeViewForm
+
+    Export-ModuleMember -Variable $Global:mainWindow
 
     <#
         $mainWindow.ShowDialog() | Out-Null
