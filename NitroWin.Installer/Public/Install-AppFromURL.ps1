@@ -6,7 +6,7 @@
     The URL of the executable
 
 .EXAMPLE
-    Install-FromURL -url "https://example.com/program.exe" -name "Example"
+    Install-AppFromURL -url "https://example.com/program.exe" -name "Example"
 #>
 
 function Install-AppFromURL {
