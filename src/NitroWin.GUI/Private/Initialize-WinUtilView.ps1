@@ -11,6 +11,14 @@
 
 function Initialize-WinUtilView {
     $winUtilViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\WinUtilView.xaml"
+    
+    $WinUtilCheckBox.Add_Checked({
+        $WinUtilContinueButton.isEnabled = $true
+    })
+
+    $WinUtilCheckBox.Add_Unchecked({
+        $WinUtilContinueButton.isEnabled = $false
+    })
 
     return $winUtilViewForm
 }
