@@ -1,9 +1,3 @@
-# Path to manifest
-$ManifestPath = Join-Path -Path $PSScriptRoot -ChildPath 'NitroWin.GUI.psd1'
-
-# Read manifest as hashtable
-$GuiManifest = Import-PowerShellDataFile -Path $ManifestPath
-
 # Import all functions from the Public and Private folders
 Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Public') -Filter *.ps1 | ForEach-Object { . $_.FullName }
 Get-ChildItem -Path (Join-Path -Path $PSScriptRoot -ChildPath 'Private') -Filter *.ps1 | ForEach-Object { . $_.FullName }
