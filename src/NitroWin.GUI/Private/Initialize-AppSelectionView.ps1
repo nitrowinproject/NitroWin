@@ -10,7 +10,7 @@
 #>
 
 function Initialize-AppSelectionView {
-    $appSelectionViewForm = Initialize-Form -xamlfile ".\NitroWin.GUI\GUI\AppSelectionView.xaml"
+    $appSelectionViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\AppSelectionView.xaml"
 
     $AppCheckBox.Add_Checked({
         $AppContinueButton.isEnabled = $true

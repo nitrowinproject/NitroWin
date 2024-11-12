@@ -10,7 +10,7 @@
 #>
 
 function Initialize-DNSView {
-    $dnsViewForm = Initialize-Form -xamlfile ".\NitroWin.GUI\GUI\DNSView.xaml"
+    $dnsViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\DNSView.xaml"
 
     return $dnsViewForm
 }

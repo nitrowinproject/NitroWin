@@ -10,7 +10,7 @@
 #>
 
 function Initialize-MainWindow {
-    $mainWindow = Initialize-Form -xamlfile ".\NitroWin.GUI\GUI\MainWindow.xaml"
+    $mainWindow = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\MainWindow.xaml"
 
     $Global:MainContent.Content = $Global:welcomeViewForm
 
