@@ -12,5 +12,21 @@
 function Initialize-DNSView {
     $dnsViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\DNSView.xaml"
 
+    $DNSCloudflareNormal.Add_Checked({
+        $DNSContinueButton.isEnabled = $true
+    })
+
+    $DNSCloudflareMalware.Add_Checked({
+        $DNSContinueButton.isEnabled = $true
+    })
+
+    $DNSCloudflareMalwareAdult.Add_Checked({
+        $DNSContinueButton.isEnabled = $true
+    })
+
+    $DNSQuad9.Add_Checked({
+        $DNSContinueButton.isEnabled = $true
+    })
+
     return $dnsViewForm
 }
