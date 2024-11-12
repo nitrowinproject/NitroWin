@@ -20,5 +20,9 @@ function Initialize-WinUtilView {
         $WinUtilContinueButton.isEnabled = $false
     })
 
+    $WinUtilContinueButton.Add_Click({
+        $Global:mainWindow.Content = $Global:finishView
+    })
+
     return $winUtilViewForm
 }

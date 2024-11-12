@@ -13,6 +13,7 @@ function Initialize-GUI {
     Add-Type -AssemblyName 'PresentationFramework'
 
     # Read Views
+    $Global:finishView = Initialize-FinishView
     $Global:winUtilView = Initialize-WinUtilView
     $Global:dnsViewForm = Initialize-DNSView
     $Global:appSelectionViewForm = Initialize-AppSelectionView
@@ -22,6 +23,7 @@ function Initialize-GUI {
     $Global:mainWindow = Initialize-MainWindow
     
     # Export views
+    Export-ModuleMember -Variable $Global:finishView
     Export-ModuleMember -Variable $Global:winUtilView
     Export-ModuleMember -Variable $Global:dnsViewForm
     Export-ModuleMember -Variable $Global:appSelectionViewForm
