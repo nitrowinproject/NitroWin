@@ -5,9 +5,6 @@
 .DESCRIPTION
     Optimizes your Windows installation and help you set it up
 
-.EXAMPLE
-    iex (irm https://raw.githubusercontent.com/Nitro4542/NitroWin/main/NitroWin.ps1)
-
 .NOTES
     https://github.com/Nitro4542/NitroWin/
 #>
