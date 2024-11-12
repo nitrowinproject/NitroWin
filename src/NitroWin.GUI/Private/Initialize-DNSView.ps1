@@ -28,5 +28,9 @@ function Initialize-DNSView {
         $DNSContinueButton.isEnabled = $true
     })
 
+    $DNSContinueButton.Add_Click({
+        $Global:mainWindow.Content = $Global:winUtilView
+    })
+
     return $dnsViewForm
 }
