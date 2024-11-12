@@ -30,6 +30,12 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Image Margin="20" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" MaxWidth="24">
+            <Image.Source>
+                https://raw.githubusercontent.com/ChrisTitusTech/winutil/main/docs/assets/favicon.png
+            </Image.Source>
+        </Image>
+
         <Label Content="WinUtil by ChrisTitusTech" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20" FontSize="24" FontWeight="Bold"/>
 
         <TextBlock Margin="20" Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center">
