@@ -18,6 +18,8 @@ I think, it's really good for setting up a fresh Windows installation. But you c
 
 This project is licensed under the [Unlicense](LICENSE).
 
-This project uses icons, which are licensed under the [MIT License](NOTICE.md). For more details, check out [NOTICE.md](NOTICE.md).
+This project uses icons, which are licensed under the [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE).
 
 It also uses part of the [WinUtil repo](https://github.com/ChrisTitusTech/winutil) by [ChrisTitusTech](https://github.com/ChrisTitusTech), which is also licensed under the [MIT License](https://github.com/ChrisTitusTech/winutil/blob/main/LICENSE).
+
+For more details, check out [NOTICE.md](NOTICE.md).
