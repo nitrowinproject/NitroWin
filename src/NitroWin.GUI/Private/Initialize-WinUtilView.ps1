@@ -21,6 +21,7 @@ function Initialize-WinUtilView {
     })
 
     $WinUtilContinueButton.Add_Click({
+        Invoke-WinUtil
         $Global:mainWindow.Content = $Global:finishView
     })
 
