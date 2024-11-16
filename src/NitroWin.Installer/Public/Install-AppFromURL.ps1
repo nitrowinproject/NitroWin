@@ -6,7 +6,7 @@
     The URL of the executable
 
 .PARAMETER name
-    The name of the executable
+    The name of the app
 
 .EXAMPLE
     Install-AppFromURL -url "https://example.com/program.exe" -name "Example"
