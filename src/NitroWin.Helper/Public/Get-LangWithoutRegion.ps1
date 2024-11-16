@@ -6,10 +6,10 @@
     Returns only the language, not the region. If your language was English it would return "en".
 
 .EXAMPLE
-    Get-SystemLanguage
+    Get-LangWithoutRegion
 #>
 
-function Get-SystemLanguage {
+function Get-LangWithoutRegion {
     $lang = (Get-WinSystemLocale).Name
     $splitlang = $lang -split "-"
 
