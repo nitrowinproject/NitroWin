@@ -14,7 +14,7 @@ function Format-AppName {
         [string]$id
     )
 
-    $split = $id -split "."
+    $split = $id.Split(".")[-1]
 
-    return $split[1]
+    return $split
 }
