@@ -3,5 +3,5 @@
     Author = 'Nitro4542'
     Description = 'GUI for NitroWin'
 
-    RequiredModules = @('NitroWin.Helper')
+    RequiredModules = @('NitroWin.Helper', 'NitroWin.Installer')
 }
