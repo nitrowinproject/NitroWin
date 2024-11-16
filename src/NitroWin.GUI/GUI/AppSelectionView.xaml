@@ -17,6 +17,24 @@
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
+        <DrawingGroup x:Key="creditcard">
+            <DrawingGroup.ClipGeometry>
+                <RectangleGeometry Rect="0.0,0.0,24.0,24.0"/>
+            </DrawingGroup.ClipGeometry>
+            <GeometryDrawing>
+                <GeometryDrawing.Pen>
+                    <Pen Brush="#ff000000" LineJoin="Round" Thickness="1.5" DashCap="Round" EndLineCap="Round" StartLineCap="Round">
+                        <Pen.DashStyle>
+                            <DashStyle Dashes=""/>
+                        </Pen.DashStyle>
+                    </Pen>
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                    <PathGeometry Figures="M 2.25 8.25 h 19.5 M 2.25 9 h 19.5 m -16.5 5.25 h 6 m -6 2.25 h 3 m -3.75 3 h 15 a 2.25 2.25 0 0 0 2.25 -2.25 V 6.75 A 2.25 2.25 0 0 0 19.5 4.5 h -15 a 2.25 2.25 0 0 0 -2.25 2.25 v 10.5 A 2.25 2.25 0 0 0 4.5 19.5 Z" FillRule="Nonzero"/>
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingGroup>
+        <DrawingImage Drawing="{StaticResource creditcard}" x:Key="di_creditcard"/>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -43,7 +61,14 @@
         <StackPanel Grid.Row="1" Grid.Column="1" Margin="20">
             <TextBlock Text="Archiving" Margin="0,0,0,2.5"/>
             <CheckBox x:Name="AppArchiving7ZipCheckBox" Content="7-Zip" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
-            <CheckBox x:Name="AppArchivingWinRARCheckBox" Content="WinRAR" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
+            <CheckBox x:Name="AppArchivingWinRARCheckBox" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center">
+                <CheckBox.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" ToolTip="This is paid software.">
+                        <TextBlock Text="WinRAR" Margin="0,0,2.5,0" VerticalAlignment="Center"/>
+                        <Image Source="{StaticResource di_creditcard}" Width="12" VerticalAlignment="Center" Margin="2.5,0,0,0"/>
+                    </StackPanel>
+                </CheckBox.Content>
+            </CheckBox>
         </StackPanel>
 
         <!-- Media Player category -->
@@ -56,7 +81,14 @@
         <!-- Other category -->
         <StackPanel Grid.Row="2" Grid.Column="1" Margin="20">
             <TextBlock Text="Other" Margin="0,0,0,2.5"/>
-            <CheckBox x:Name="AppOtherStartAllBackCheckBox" Content="StartAllBack" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
+            <CheckBox x:Name="AppOtherStartAllBackCheckBox" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center">
+                <CheckBox.Content>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" ToolTip="This is paid software.">
+                        <TextBlock Text="StartAllBack" Margin="0,0,2.5,0" VerticalAlignment="Center"/>
+                        <Image Source="{StaticResource di_creditcard}" Width="12" VerticalAlignment="Center" Margin="2.5,0,0,0"/>
+                    </StackPanel>
+                </CheckBox.Content>
+            </CheckBox>
             <CheckBox x:Name="AppOtherKeePassXCCheckBox" Content="KeePassXC" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
             <CheckBox x:Name="AppOtherUniGetUICheckBox" Content="UniGetUI" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
         </StackPanel>
