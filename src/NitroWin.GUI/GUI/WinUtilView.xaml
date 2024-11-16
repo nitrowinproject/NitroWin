@@ -56,7 +56,7 @@
             </Image.Source>
         </Image>
 
-        <CheckBox x:Name="WinUtilCheckBox" Content="I read and agree to the License of WinUtil" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
+        <CheckBox x:Name="WinUtilCheckBox" Content="I read and agree to the license of WinUtil" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20"/>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Right">
             <Button x:Name="WinUtilSkipButton" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="Black" Template="{StaticResource NoMouseOverButtonTemplate}" Cursor="Hand">
