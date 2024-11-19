@@ -9,10 +9,39 @@ Script to automatically configure your Windows installation for better privacy a
 - More FPS
 - No need to reinstall Windows
 - No Spyware, ads and completely Open Source
+- Create a semi-optimized installation media
 
 ## Use cases
 
 I think, it's really good for setting up a fresh Windows installation. But you can always do this afterwards as well.
+
+## How do I use this?
+
+### Modify exisiting installation
+
+1. Download this repository.
+2. Open up an elevated PowerShell prompt.
+3. Run the following commands inside of that prompt:
+
+   ```powershell
+   Set-ExecutionPolicy Unrestricted -Scope Process -Force
+   .\NitroWin
+   ```
+
+4. The GUI will open up and is ready for you to use.
+
+### Create installation media
+
+1. Create a Windows 11 installation media.
+2. Download this repository.
+3. Open up an elevated PowerShell prompt.
+4. Run the following commands inside of that prompt:
+
+   ```powershell
+   Set-ExecutionPolicy Unrestricted -Scope Process -Force
+   # Replace d:\ with the drive letter of your installation media
+   .\NitroWin --create-install-media d:\
+   ```
 
 ## License
 
