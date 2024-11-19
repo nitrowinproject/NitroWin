@@ -14,4 +14,9 @@ Import-Module ".\src\NitroWin.Installer\NitroWin.Installer.psm1"
 Import-Module ".\src\NitroWin.Tweaks\NitroWin.Tweaks.psm1"
 Import-Module ".\src\NitroWin.GUI\NitroWin.GUI.psm1"
 
-Start-GUI
+if (-Not ($args[0] -eq "--create-install-media")) {
+    Start-GUI
+}
+else {
+    Export-AnswerFile -drive $args[1]
+}
