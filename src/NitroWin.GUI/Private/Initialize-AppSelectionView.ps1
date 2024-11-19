@@ -46,7 +46,7 @@ function Initialize-AppSelectionView {
             Install-Firefox
         }
         if ($AppBrowserBraveCheckBox.isChecked) {
-
+            Start-Process "https://brave.com/"
         }
         if ($AppArchiving7ZipCheckBox.isChecked) {
             $appsToInstallWinget += "7zip.7zip"
@@ -58,7 +58,7 @@ function Initialize-AppSelectionView {
             $appsToInstallWinget += "VideoLAN.VLC"
         }
         if ($AppMediaPlayerKLCPCheckBox.isChecked) {
-            
+            Start-Process "https://codecguide.com/download_k-lite_codec_pack_mega.htm"
         }
         if ($AppOtherStartAllBackCheckBox.isChecked) {
             $appsToInstallWinget += "StartIsBack.StartAllBack"

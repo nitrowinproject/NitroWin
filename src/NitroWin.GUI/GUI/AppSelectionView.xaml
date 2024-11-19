@@ -54,7 +54,7 @@
         <StackPanel Grid.Row="1" Grid.Column="0" Margin="20">
             <TextBlock Text="Browsers" Margin="0,0,0,2.5"/>
             <CheckBox x:Name="AppBrowserFirefoxCheckBox" Content="Firefox ESR (hardened)" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
-            <CheckBox x:Name="AppBrowserBraveCheckBox" Content="Brave" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center" IsEnabled="False"/>
+            <CheckBox x:Name="AppBrowserBraveCheckBox" Content="Brave" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Archiving category -->
@@ -75,7 +75,7 @@
         <StackPanel Grid.Row="2" Grid.Column="0" Margin="20">
             <TextBlock Text="Media Player" Margin="0,0,0,2.5"/>
             <CheckBox x:Name="AppMediaPlayerVLCCheckBox" Content="VLC media player" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
-            <CheckBox x:Name="AppMediaPlayerKLCPCheckBox" Content="K-Lite Codec Pack Mega" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center" IsEnabled="False"/>
+            <CheckBox x:Name="AppMediaPlayerKLCPCheckBox" Content="K-Lite Codec Pack Mega" Margin="0,2.5,0,2.5" VerticalContentAlignment="Center"/>
         </StackPanel>
 
         <!-- Other category -->
