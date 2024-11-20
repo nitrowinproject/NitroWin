@@ -20,6 +20,10 @@ function Initialize-WinUtilView {
         $WinUtilContinueButton.isEnabled = $false
     })
 
+    $WinUtilSkipButton.Add_Click({
+        $Global:mainWindow.Content = $Global:finishView
+    })
+
     $WinUtilContinueButton.Add_Click({
         Invoke-WinUtil
         $Global:mainWindow.Content = $Global:finishView
