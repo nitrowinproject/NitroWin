@@ -23,7 +23,7 @@ function Initialize-AppSelectionView {
     })
     
     $AppSkipButton.Add_Click({
-        $Global:mainWindow.Content = $Global:dnsViewForm
+        $Global:mainWindow.Content = $Global:winUtilView
     })
 
     $AppClearButton.Add_Click({
@@ -75,7 +75,7 @@ function Initialize-AppSelectionView {
         $appsToInstallWinget | ForEach-Object {
             Install-AppFromWinget -id $_ -name (Format-AppName -id $_)
         }
-        $Global:mainWindow.Content = $Global:dnsViewForm
+        $Global:mainWindow.Content = $Global:winUtilView
     })
 
     return $appSelectionViewForm
