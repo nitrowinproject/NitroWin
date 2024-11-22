@@ -19,5 +19,5 @@ function Install-AppFromWinget {
     )
     
     $command = "winget.exe install --id=$id --exact --source winget --accept-package-agreements --accept-source-agreements --interactive --scope machine"
-    Start-Process powershell -ArgumentList '-NoProfile -Command $command' -Verb RunAs
+    Start-Process powershell -ArgumentList "-NoProfile -Command $command" -Verb RunAs
 }
