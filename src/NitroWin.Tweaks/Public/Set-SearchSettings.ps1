@@ -32,7 +32,7 @@ function Set-SearchSettings {
     foreach ($path in $paths.Keys) {
         Test-RegistryPath -Path $path
         foreach ($key in $paths[$path].Keys) {
-            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -PropertyType DWord -Force
+            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -Type DWord
         }
     }
 }
