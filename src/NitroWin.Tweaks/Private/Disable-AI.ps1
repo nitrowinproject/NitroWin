@@ -24,7 +24,7 @@ function Disable-AI {
         "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" = @{
             "ShowCopilotButton" = 0
         }
-        "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot" = @{
+        "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot"          = @{
             "TurnOffWindowsCopilot" = 1
         }
     }

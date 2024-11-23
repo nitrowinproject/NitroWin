@@ -68,7 +68,7 @@ function Disable-Telemetry {
     New-ItemProperty -Path $genertictelemetryregpath -Name $genertictelemetryname -Value $genertictelemetryvalue -PropertyType $genertictelemetrytype
 
     # Disable diagnostic tracking
-    $diagtrackregpath ="HKLM:\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance"
+    $diagtrackregpath = "HKLM:\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance"
     $diagtrackname = "DisableDiagnosticTracing"
     $diagtrackvalue = "1"
     $diagtracktype = "DWord"

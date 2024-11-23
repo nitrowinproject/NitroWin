@@ -13,8 +13,8 @@ function Initialize-FinishView {
     $finishViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\FinishView.xaml"
 
     $FinishContinueButton.Add_Click({
-        Restart-Computer
-    })
+            Restart-Computer
+        })
 
     return $finishViewForm
 }

@@ -15,68 +15,68 @@ function Initialize-AppSelectionView {
     $appsToInstallWinget = @()
 
     $AppLicenseCheckBox.Add_Checked({
-        $AppContinueButton.isEnabled = $true
-    })
+            $AppContinueButton.isEnabled = $true
+        })
 
     $AppLicenseCheckBox.Add_Unchecked({
-        $AppContinueButton.isEnabled = $false
-    })
+            $AppContinueButton.isEnabled = $false
+        })
     
     $AppSkipButton.Add_Click({
-        $Global:mainWindow.Content = $Global:winUtilView
-    })
+            $Global:mainWindow.Content = $Global:winUtilView
+        })
 
     $AppClearButton.Add_Click({
-        $AppBrowserFirefoxCheckBox.isChecked = $false
-        $AppBrowserBraveCheckBox.isChecked = $false
+            $AppBrowserFirefoxCheckBox.isChecked = $false
+            $AppBrowserBraveCheckBox.isChecked = $false
 
-        $AppArchiving7ZipCheckBox.isChecked = $false
-        $AppArchivingWinRARCheckBox.isChecked = $false
+            $AppArchiving7ZipCheckBox.isChecked = $false
+            $AppArchivingWinRARCheckBox.isChecked = $false
 
-        $AppMediaPlayerVLCCheckBox.isChecked = $false
-        $AppMediaPlayerKLCPCheckBox.isChecked = $false
+            $AppMediaPlayerVLCCheckBox.isChecked = $false
+            $AppMediaPlayerKLCPCheckBox.isChecked = $false
 
-        $AppOtherStartAllBackCheckBox.isChecked = $false
-        $AppOtherKeePassXCCheckBox.isChecked = $false
-        $AppOtherUniGetUICheckBox.isChecked = $false
-    })
+            $AppOtherStartAllBackCheckBox.isChecked = $false
+            $AppOtherKeePassXCCheckBox.isChecked = $false
+            $AppOtherUniGetUICheckBox.isChecked = $false
+        })
 
     $AppContinueButton.Add_Click({
-        if ($AppBrowserFirefoxCheckBox.isChecked) {
-            Copy-Item -Path ".\assets\firefox\user.js" -Destination Get-DownloadFolder
-            Show-Prompt -message "You can find the hardened user.js in your downloads folder." -title "Firefox hardened user.js" -buttons OK -icon Information
-            Install-Firefox
-        }
-        if ($AppBrowserBraveCheckBox.isChecked) {
-            Start-Process "https://brave.com/"
-        }
-        if ($AppArchiving7ZipCheckBox.isChecked) {
-            $appsToInstallWinget += "7zip.7zip"
-        }
-        if ($AppArchivingWinRARCheckBox.isChecked) {
-            $appsToInstallWinget += "RARLab.WinRAR"
-        }
-        if ($AppMediaPlayerVLCCheckBox.isChecked) {
-            $appsToInstallWinget += "VideoLAN.VLC"
-        }
-        if ($AppMediaPlayerKLCPCheckBox.isChecked) {
-            Start-Process "https://codecguide.com/download_k-lite_codec_pack_mega.htm"
-        }
-        if ($AppOtherStartAllBackCheckBox.isChecked) {
-            $appsToInstallWinget += "StartIsBack.StartAllBack"
-        }
-        if ($AppOtherKeePassXCCheckBox.isChecked) {
-            $appsToInstallWinget += "KeePassXCTeam.KeePassXC"
-        }
-        if ($AppOtherUniGetUICheckBox.isChecked) {
-            $appsToInstallWinget += "MartiCliment.UniGetUI"
-        }
+            if ($AppBrowserFirefoxCheckBox.isChecked) {
+                Copy-Item -Path ".\assets\firefox\user.js" -Destination Get-DownloadFolder
+                Show-Prompt -message "You can find the hardened user.js in your downloads folder." -title "Firefox hardened user.js" -buttons OK -icon Information
+                Install-Firefox
+            }
+            if ($AppBrowserBraveCheckBox.isChecked) {
+                Start-Process "https://brave.com/"
+            }
+            if ($AppArchiving7ZipCheckBox.isChecked) {
+                $appsToInstallWinget += "7zip.7zip"
+            }
+            if ($AppArchivingWinRARCheckBox.isChecked) {
+                $appsToInstallWinget += "RARLab.WinRAR"
+            }
+            if ($AppMediaPlayerVLCCheckBox.isChecked) {
+                $appsToInstallWinget += "VideoLAN.VLC"
+            }
+            if ($AppMediaPlayerKLCPCheckBox.isChecked) {
+                Start-Process "https://codecguide.com/download_k-lite_codec_pack_mega.htm"
+            }
+            if ($AppOtherStartAllBackCheckBox.isChecked) {
+                $appsToInstallWinget += "StartIsBack.StartAllBack"
+            }
+            if ($AppOtherKeePassXCCheckBox.isChecked) {
+                $appsToInstallWinget += "KeePassXCTeam.KeePassXC"
+            }
+            if ($AppOtherUniGetUICheckBox.isChecked) {
+                $appsToInstallWinget += "MartiCliment.UniGetUI"
+            }
 
-        $appsToInstallWinget | ForEach-Object {
-            Install-AppFromWinget -id $_ -name (Format-AppName -id $_)
-        }
-        $Global:mainWindow.Content = $Global:winUtilView
-    })
+            $appsToInstallWinget | ForEach-Object {
+                Install-AppFromWinget -id $_ -name (Format-AppName -id $_)
+            }
+            $Global:mainWindow.Content = $Global:winUtilView
+        })
 
     return $appSelectionViewForm
 }

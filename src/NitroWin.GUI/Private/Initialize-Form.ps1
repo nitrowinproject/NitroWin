@@ -14,7 +14,7 @@ function Initialize-Form {
         [string]$xamlfile
     )
 
-    [xml]$xaml = (Get-Content $xamlfile -Raw) -replace 'x:Name','Name'
+    [xml]$xaml = (Get-Content $xamlfile -Raw) -replace 'x:Name', 'Name'
     if ($xaml.Window) {
         $xaml.Window.RemoveAttribute('x:Class')
         $xaml.Window.RemoveAttribute('mc:Ignorable')
@@ -30,7 +30,7 @@ function Initialize-Form {
 
     $reader = (New-Object System.Xml.XmlNodeReader $xaml)
     try {
-        $Form=[Windows.Markup.XamlReader]::Load( $reader )
+        $Form = [Windows.Markup.XamlReader]::Load( $reader )
         $xaml.SelectNodes("//*[@Name]") | ForEach-Object {
             Set-Variable -Name ($_.Name) -Value $Form.FindName($_.Name) -Scope Global
         }

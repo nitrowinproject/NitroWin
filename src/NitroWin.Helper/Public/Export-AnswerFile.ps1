@@ -13,5 +13,6 @@ function Export-AnswerFile {
     param (
         [string]$drive
     )
+    
     Copy-Item -Path ".\assets\autounattend\autounattend.xml" -Destination $drive
 }

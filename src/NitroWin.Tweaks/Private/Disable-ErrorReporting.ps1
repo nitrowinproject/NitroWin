@@ -8,24 +8,24 @@
 
 function Disable-ErrorReporting {
     $paths = @{
-        "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" = @{
+        "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting"         = @{
             "Disabled" = 1
         }
-        "HKLM:\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting" = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\PCHealth\ErrorReporting"                 = @{
             "DoReport" = 0
-            "ShowUI" = 0
+            "ShowUI"   = 0
         }
-        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting" = @{
-            "Disabled" = 1
-            "DontShowUI" = 1
-            "LoggingDisabled" = 1
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting"         = @{
+            "Disabled"               = 1
+            "DontShowUI"             = 1
+            "LoggingDisabled"        = 1
             "DontSendAdditionalData" = 1
         }
         "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" = @{
             "DisableWerReporting" = 1
         }
-        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Settings" = @{
-            "DisableSendGenericDriverNotFoundToWER" = 1
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Settings"          = @{
+            "DisableSendGenericDriverNotFoundToWER"     = 1
             "DisableSendRequestAdditionalSoftwareToWER" = 1
         }
     }

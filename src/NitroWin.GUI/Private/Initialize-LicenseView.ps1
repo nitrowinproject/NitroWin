@@ -13,16 +13,16 @@ function Initialize-LicenseView {
     $licenseViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\LicenseView.xaml"
 
     $LicenseCheckBox.Add_Checked({
-        $LicenseContinueButton.isEnabled = $true
-    })
+            $LicenseContinueButton.isEnabled = $true
+        })
 
     $LicenseCheckBox.Add_Unchecked({
-        $LicenseContinueButton.isEnabled = $false
-    })
+            $LicenseContinueButton.isEnabled = $false
+        })
 
     $LicenseContinueButton.Add_Click({
-        $Global:mainWindow.Content = Initialize-AppSelectionView
-    })
+            $Global:mainWindow.Content = Initialize-AppSelectionView
+        })
 
     return $licenseViewForm
 }

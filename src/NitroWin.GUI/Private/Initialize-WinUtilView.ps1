@@ -13,30 +13,30 @@ function Initialize-WinUtilView {
     $winUtilViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\WinUtilView.xaml"
     
     $WinUtilCheckBox.Add_Checked({
-        $WinUtilContinueButton.isEnabled = $true
-    })
+            $WinUtilContinueButton.isEnabled = $true
+        })
 
     $WinUtilCheckBox.Add_Unchecked({
-        $WinUtilContinueButton.isEnabled = $false
-    })
+            $WinUtilContinueButton.isEnabled = $false
+        })
 
     $WinUtilSkipButton.Add_Click({
-        if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
-            Install-UltimatePowerPlan
-        }
-        $Global:mainWindow.Content = $Global:finishView
-    })
+            if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
+                Install-UltimatePowerPlan
+            }
+            $Global:mainWindow.Content = $Global:finishView
+        })
 
     $WinUtilContinueButton.Add_Click({
-        if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
-            Install-UltimatePowerPlan
-        }
-        if ((Show-Prompt -message "Run tweaks from NitroWin?" -buttons YesNo -icon Question) -eq "Yes") {
-            Invoke-Tweaks
-        }
-        Invoke-WinUtil
-        $Global:mainWindow.Content = $Global:finishView
-    })
+            if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
+                Install-UltimatePowerPlan
+            }
+            if ((Show-Prompt -message "Run tweaks from NitroWin?" -buttons YesNo -icon Question) -eq "Yes") {
+                Invoke-Tweaks
+            }
+            Invoke-WinUtil
+            $Global:mainWindow.Content = $Global:finishView
+        })
 
     return $winUtilViewForm
 }
