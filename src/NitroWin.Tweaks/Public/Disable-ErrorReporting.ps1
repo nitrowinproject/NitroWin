@@ -36,6 +36,4 @@ function Disable-ErrorReporting {
             Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -PropertyType DWord -Force
         }
     }
-
-    Set-ItemProperty -Path $regpath -Name DisablePrivacyExperience -Value 1
 }
