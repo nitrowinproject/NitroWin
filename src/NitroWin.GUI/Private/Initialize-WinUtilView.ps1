@@ -21,10 +21,16 @@ function Initialize-WinUtilView {
     })
 
     $WinUtilSkipButton.Add_Click({
+        if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
+            Install-UltimatePowerPlan
+        }
         $Global:mainWindow.Content = $Global:finishView
     })
 
     $WinUtilContinueButton.Add_Click({
+        if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
+            Install-UltimatePowerPlan
+        }
         Invoke-WinUtil
         $Global:mainWindow.Content = $Global:finishView
     })
