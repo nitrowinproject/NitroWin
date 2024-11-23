@@ -12,4 +12,6 @@ function Set-LocalTimeServers {
     $servers = "0.$lang.pool.ntp.org 1.$lang.pool.ntp.org 2.$lang.pool.ntp.org 3.$lang.pool.ntp.org"
 
     Invoke-Expression "w32tm /config /syncfromflags:manual /manualpeerlist:`"$servers`""
+    Invoke-Expression "w32tm /config /update"
+    Invoke-Expression "w32tm /resync"
 }
