@@ -8,6 +8,7 @@
 
 function Invoke-Tweaks {
     Disable-AI
+    Disable-AutomaticDriverInstall
     Disable-ErrorReporting
     Disable-Experimentation
     Disable-FrequentAppsInStartMenu
