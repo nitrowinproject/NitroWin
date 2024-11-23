@@ -11,5 +11,5 @@ function Disable-PT {
 
     Test-RegistryPath -path $regpath
 
-    Set-ItemProperty -Path $regpath -Name ScenarioExecutionEnabled -Value 0
+    Set-ItemProperty -Path $regpath -Name ScenarioExecutionEnabled -Value 0 -Type DWord
 }

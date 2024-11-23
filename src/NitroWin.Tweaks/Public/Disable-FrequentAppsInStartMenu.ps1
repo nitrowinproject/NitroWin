@@ -11,5 +11,5 @@ function Disable-FrequentAppsInStartMenu {
 
     Test-RegistryPath -path $regpath
 
-    Set-ItemProperty -Path $regpath -Name NoInstrumentation -Value 1
+    Set-ItemProperty -Path $regpath -Name NoInstrumentation -Value 1 -Type DWord
 }

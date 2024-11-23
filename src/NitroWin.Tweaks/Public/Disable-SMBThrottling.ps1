@@ -9,5 +9,5 @@
 function Disable-SMBThrottling {
     $regpath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters"
 
-    Set-ItemProperty -Path $regpath -Name DisableBandwidthThrottling -Value 1
+    Set-ItemProperty -Path $regpath -Name DisableBandwidthThrottling -Value 1 -Type DWord
 }

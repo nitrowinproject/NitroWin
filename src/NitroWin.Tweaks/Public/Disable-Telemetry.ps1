@@ -52,9 +52,10 @@ function Disable-Telemetry {
     $maxtelemetryregpath2 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
     $maxtelemetryname = "MaxTelemetryAllowed"
     $maxtelemetryvalue = "0"
+    $maxtelemetrytype = "DWord"
 
-    Set-ItemProperty -Path $maxtelemetryregpath -Name $maxtelemetryname -Value $maxtelemetryvalue
-    Set-ItemProperty -Path $maxtelemetryregpath2 -Name $maxtelemetryname -Value $maxtelemetryvalue
+    Set-ItemProperty -Path $maxtelemetryregpath -Name $maxtelemetryname -Value $maxtelemetryvalue -Type $maxtelemetrytype
+    Set-ItemProperty -Path $maxtelemetryregpath2 -Name $maxtelemetryname -Value $maxtelemetryvalue -Type $maxtelemetrytype
 
     # Disable generic telemetry
     $genertictelemetryregpath = "HKLM:\Software\Policies\Microsoft\Windows\DataCollection"
@@ -70,8 +71,9 @@ function Disable-Telemetry {
     $diagtrackregpath ="HKLM:\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance"
     $diagtrackname = "DisableDiagnosticTracing"
     $diagtrackvalue = "1"
+    $diagtracktype = "DWord"
     
-    Set-ItemProperty -Path $diagtrackregpath -Name $diagtrackname -Value $diagtrackvalue
+    Set-ItemProperty -Path $diagtrackregpath -Name $diagtrackname -Value $diagtrackvalue -type $diagtracktype
 
     # Disable NVIDIA telemetry
     $nvidiaregpath = "HKCU:\Software\NVIDIA Corporation\NVControlPanel2\Client"

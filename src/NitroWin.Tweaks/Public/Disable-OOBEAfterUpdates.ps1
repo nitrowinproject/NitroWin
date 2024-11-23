@@ -11,5 +11,5 @@ function Disable-OOBEAfterUpdates {
 
     Test-RegistryPath -path $regpath
 
-    Set-ItemProperty -Path $regpath -Name DisablePrivacyExperience -Value 1
+    Set-ItemProperty -Path $regpath -Name DisablePrivacyExperience -Value 1 -Type DWord
 }
