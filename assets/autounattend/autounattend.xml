@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&CompactOsMode=Default&TimeZoneMode=Implicit&PartitionMode=Interactive&WindowsEditionMode=Interactive&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&DeleteTaskbarIcons=true&HideTaskViewButton=true&LaunchToThisPC=true&DisableFastStartup=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&WifiMode=Interactive&ExpressSettings=DisableAll&KeysMode=Configure&CapsLockInitial=Off&CapsLockBehavior=Toggle&NumLockInitial=On&NumLockBehavior=Toggle&ScrollLockInitial=Off&ScrollLockBehavior=Toggle&ColorMode=Default&WallpaperMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOneNote=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWordPad=true&RemoveYourPhone=true&StartTilesMode=Empty&StartPinsMode=Empty&SystemScript2=%EF%BB%BFWindows+Registry+Editor+Version+5.00%0D%0A%0D%0A%3B+Exclude+drivers+from+Windows+Update%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Ccurrent%5Cdevice%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5CExcludeWUDriversInQualityUpdate%5D%0D%0A%22value%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDevice+Metadata%5D%0D%0A%22PreventDeviceMetadataFromNetwork%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDriverSearching%5D%0D%0A%22SearchOrderConfig%22%3Ddword%3A00000000%0D%0A%22DontSearchWindowsUpdate%22%3Ddword%3A00000001&SystemScriptType2=Reg&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&CompactOsMode=Default&TimeZoneMode=Implicit&PartitionMode=Interactive&WindowsEditionMode=Interactive&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&TaskbarSearch=Hide&ShowFileExtensions=true&DisableWidgets=true&LeftTaskbar=true&DeleteTaskbarIcons=true&HideTaskViewButton=true&LaunchToThisPC=true&DisableFastStartup=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&MakeEdgeUninstallable=true&WifiMode=Interactive&ExpressSettings=DisableAll&KeysMode=Configure&CapsLockInitial=Off&CapsLockBehavior=Toggle&NumLockInitial=On&NumLockBehavior=Toggle&ScrollLockInitial=Off&ScrollLockBehavior=Toggle&ColorMode=Default&WallpaperMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveRdpClient=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWordPad=true&RemoveYourPhone=true&StartTilesMode=Empty&StartPinsMode=Empty&SystemScript0=%EF%BB%BFWindows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Ccurrent%5Cdevice%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5CExcludeWUDriversInQualityUpdate%5D%0D%0A%22value%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDevice+Metadata%5D%0D%0A%22PreventDeviceMetadataFromNetwork%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDriverSearching%5D%0D%0A%22SearchOrderConfig%22%3Ddword%3A00000000%0D%0A%22DontSearchWindowsUpdate%22%3Ddword%3A00000001&SystemScriptType0=Reg&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -108,6 +108,7 @@ $selectors = @(
 	'Microsoft.WindowsMaps';
 	'Microsoft.MixedReality.Portal';
 	'Microsoft.BingNews';
+	'Microsoft.MicrosoftOfficeHub';
 	'Microsoft.Office.OneNote';
 	'Microsoft.OutlookForWindows';
 	'Microsoft.MSPaint';
@@ -170,7 +171,10 @@ $logfile = 'C:\Windows\Temp\remove-packages.log';
 		<File path="C:\Windows\Temp\remove-caps.ps1">
 $selectors = @(
 	'Print.Fax.Scan';
+	'Browser.InternetExplorer';
 	'MathRecognizer';
+	'OneCoreUAP.OneSync';
+	'Microsoft.Windows.PowerShell.ISE';
 	'App.Support.QuickAssist';
 	'App.StepsRecorder';
 	'Media.WindowsMediaPlayer';
@@ -221,6 +225,7 @@ $logfile = 'C:\Windows\Temp\remove-caps.log';
 		</File>
 		<File path="C:\Windows\Temp\remove-features.ps1">
 $selectors = @(
+	'Microsoft-RemoteDesktopConnection';
 	'Recall';
 );
 $getCommand = {
@@ -269,6 +274,26 @@ $logfile = 'C:\Windows\Temp\remove-features.log';
 		<File path="C:\Windows\Setup\Scripts\TaskbarIcons.ps1">
 Remove-ItemProperty -Path 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband' -Name '*';
 		</File>
+		<File path="C:\Windows\Setup\Scripts\MakeEdgeUninstallable.ps1">
+$ErrorActionPreference = 'Stop';
+&amp; {
+	try {
+		$params = @{
+			LiteralPath = 'C:\Windows\System32\IntegratedServicesRegionPolicySet.json';
+			Encoding = 'Utf8';
+		};
+		$o = Get-Content @params | ConvertFrom-Json;
+		$o.policies | ForEach-Object -Process {
+			if( $_.guid -eq '{1bca278a-5d11-4acf-ad2f-f9ab6d7f93a6}' ) {
+				$_.defaultState = 'enabled';
+			}
+		};
+		$o | ConvertTo-Json -Depth 9 | Out-File @params;
+	} catch {
+		$_;
+	}
+} *&gt;&amp;1 &gt;&gt; 'C:\Windows\Setup\Scripts\MakeEdgeUninstallable.log';
+		</File>
 		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1">
 $json = '{"pinnedList":[]}';
 if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
@@ -290,8 +315,6 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.reg">
 &#xFEFF;Windows Registry Editor Version 5.00
-
-; Exclude drivers from Windows Update
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Update]
 "ExcludeWUDriversInQualityUpdate"=dword:00000001
@@ -322,6 +345,9 @@ $scripts = @(
 	};
 	{
 		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate' -Force -ErrorAction 'SilentlyContinue';
+	};
+	{
+		Remove-Item -LiteralPath 'C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk', 'C:\Windows\System32\OneDriveSetup.exe', 'C:\Windows\SysWOW64\OneDriveSetup.exe' -ErrorAction 'Continue';
 	};
 	{
 		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate' -Force -ErrorAction 'SilentlyContinue';
@@ -355,6 +381,9 @@ $scripts = @(
 	};
 	{
 		reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Edge" /v HideFirstRunExperience /t REG_DWORD /d 1 /f;
+	};
+	{
+		Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\MakeEdgeUninstallable.ps1' -Raw | Invoke-Expression;
 	};
 	{
 		Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\SetStartPins.ps1' -Raw | Invoke-Expression;
@@ -411,6 +440,9 @@ $scripts = @(
 		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f;
 	};
 	{
+		Remove-ItemProperty -LiteralPath 'Registry::HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run' -Name 'OneDriveSetup' -Force -ErrorAction 'Continue';
+	};
+	{
 		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t REG_DWORD /d 0 /f;
 	};
 	{
@@ -438,6 +470,9 @@ $scripts = @(
 		foreach( $name in $names ) {
 		  reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v $name /t REG_DWORD /d 0 /f;
 		}
+	};
+	{
+		reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarAl /t REG_DWORD /d 0 /f;
 	};
 	{
 		foreach( $root in 'Registry::HKU\.DEFAULT', 'Registry::HKU\DefaultUser' ) {
