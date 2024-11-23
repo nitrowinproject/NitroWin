@@ -3,10 +3,10 @@
     Returns the path to the current user's download folder
 
 .EXAMPLE
-    Get-DownloadsFolder
+    Get-DownloadFolder
 #>
 
-function Get-DownloadsFolder {
+function Get-DownloadFolder {
     $regPath = "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
     $valueName = "{374DE290-123F-4565-9164-39C4925E467B}"
 
