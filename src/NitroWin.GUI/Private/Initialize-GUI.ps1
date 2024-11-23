@@ -29,8 +29,4 @@ function Initialize-GUI {
     Export-ModuleMember -Variable $Global:welcomeViewForm
 
     Export-ModuleMember -Variable $Global:mainWindow
-
-    <#
-        $mainWindow.ShowDialog() | Out-Null
-    #>
 }
