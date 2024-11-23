@@ -31,6 +31,9 @@ function Initialize-WinUtilView {
         if ((Show-Prompt -message "Install Ultimate Power Plan without CTT branding?" -buttons YesNo -icon Question) -eq "Yes") {
             Install-UltimatePowerPlan
         }
+        if ((Show-Prompt -message "Run tweaks from NitroWin?" -buttons YesNo -icon Question) -eq "Yes") {
+            Invoke-Tweaks
+        }
         Invoke-WinUtil
         $Global:mainWindow.Content = $Global:finishView
     })
