@@ -7,19 +7,22 @@
 #>
 
 function Hide-UnusedWinDefenderPages {
-    $regpath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection"
-    $regpath2 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options"
-    $regpath3 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health"
-
-    $name = "UILockdown"
-    $value = 1
-    $type = "DWord"
-
-    if (-not (Test-Path -Path $regpath)) {
-        New-Item -Path $regpath -Force | Out-Null
+    $paths = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Account protection"            = @{
+            "UILockdown" = 1
+        }
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Family options"                = @{
+            "UILockdown" = 1
+        }
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Device performance and health" = @{
+            "UILockdown" = 1
+        }
     }
 
-    New-ItemProperty -Path $regpath -Name $name -Value $value -PropertyType $type
-    New-ItemProperty -Path $regpath2 -Name $name -Value $value -PropertyType $type
-    New-ItemProperty -Path $regpath3 -Name $name -Value $value -PropertyType $type
+    foreach ($path in $paths.Keys) {
+        Test-RegistryPath -Path $path
+        foreach ($key in $paths[$path].Keys) {
+            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -Type DWord
+        }
+    }
 }
