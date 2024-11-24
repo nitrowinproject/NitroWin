@@ -11,7 +11,7 @@ function Set-NetworkShareSecuritySettings {
         "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" = @{
             "RestrictNullSessAccess" = 1
         }
-        "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" = @{
+        "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"                      = @{
             "RestrictAnonymous" = 1
         }
     }
