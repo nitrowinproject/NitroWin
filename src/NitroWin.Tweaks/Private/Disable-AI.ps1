@@ -7,32 +7,33 @@
 #>
 
 function Disable-AI {
-    # Disable Recall
-    $recallregpath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI"
-    $recallname = "DisableAIDataAnalysis"
-    $recallvalue = 1
-    $recalltype = "DWord"
+    Stop-Process -Name "explorer.exe" -Force | Out-Null
 
-    Test-RegistryPath -path $recallregpath
-
-    Set-ItemProperty -Path $recallregpath -Name $recallname -Value $recallvalue -Type $recalltype
-
-    # Disable and remove Copilot
-    Get-AppxPackage -AllUsers Microsoft.Copilot* | Remove-AppxPackage -AllUsers
-
-    $copilotpaths = @{
+    $paths = @{
         "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" = @{
             "ShowCopilotButton" = 0
         }
         "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot"          = @{
             "TurnOffWindowsCopilot" = 1
         }
-    }
-
-    foreach ($path in $copilotpaths.Keys) {
-        Test-RegistryPath -Path $path
-        foreach ($key in $copilotpaths[$path].Keys) {
-            Set-ItemProperty -Path $path -Name $key -Value $copilotpaths[$path][$key] -Type DWord
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsAI"               = @{
+            "DisableAIDataAnalysis" = 1
         }
     }
+
+    foreach ($path in $paths.Keys) {
+        Test-RegistryPath -Path $path
+        foreach ($key in $paths[$path].Keys) {
+            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -Type DWord
+        }
+    }
+
+    try {
+        Get-AppxPackage -AllUsers Microsoft.Copilot* | Remove-AppxPackage -AllUsers
+    }
+    catch {
+        Show-Prompt -message "Failed to remove Copilot." -title "Failed to remove Copilot" -buttons OK -icon Error
+    }
+
+    Start-Process -FilePath "explorer.exe" | Out-Null
 }
