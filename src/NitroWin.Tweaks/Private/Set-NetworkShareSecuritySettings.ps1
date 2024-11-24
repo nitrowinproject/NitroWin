@@ -7,9 +7,19 @@
 #>
 
 function Set-NetworkShareSecuritySettings {
-    $regpath = "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters"
-    $regpath2 = "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa"
+    $paths = @{
+        "HKLM:\SYSTEM\CurrentControlSet\Services\LanManServer\Parameters" = @{
+            "RestrictNullSessAccess" = 1
+        }
+        "HKLM:\SYSTEM\CurrentControlSet\Control\Lsa" = @{
+            "RestrictAnonymous" = 1
+        }
+    }
 
-    Set-ItemProperty -Path $regpath -Name RestrictNullSessAccess -Value 1 -Type DWord
-    Set-ItemProperty -Path $regpath2 -Name RestrictAnonymous -Value 1 -Type DWord
+    foreach ($path in $paths.Keys) {
+        Test-RegistryPath -Path $path
+        foreach ($key in $paths[$path].Keys) {
+            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -Type DWord
+        }
+    }
 }
