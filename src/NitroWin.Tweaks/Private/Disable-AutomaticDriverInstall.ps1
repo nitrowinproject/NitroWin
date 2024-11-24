@@ -8,26 +8,26 @@
 
 function Disable-AutomaticDriverInstall {
     $paths = @{
-        "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Update" = @{
+        "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Update"                          = @{
             "ExcludeWUDriversInQualityUpdate" = 1
         }
-        "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Update" = @{
+        "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Update"                                 = @{
             "ExcludeWUDriversInQualityUpdate" = 1
         }
-        "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" = @{
+        "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings"                                    = @{
             "ExcludeWUDriversInQualityUpdate" = 1
         }
-        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate"                               = @{
             "ExcludeWUDriversInQualityUpdate" = 1
         }
         "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" = @{
             "value" = 1
         }
-        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" = @{
+        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata"                       = @{
             "PreventDeviceMetadataFromNetwork" = 1
         }
-        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" = @{
-            "SearchOrderConfig" = 0
+        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching"                       = @{
+            "SearchOrderConfig"       = 0
             "DontSearchWindowsUpdate" = 1
         }
     }
