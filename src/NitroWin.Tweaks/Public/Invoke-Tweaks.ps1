@@ -21,6 +21,7 @@ function Invoke-Tweaks {
     Disable-Telemetry
     Disable-WallpaperCompression
     Hide-UnusedWinDefenderPages
+    Set-KeyboardDelay
     Set-LocalTimeServers
     Set-NetworkShareSecuritySettings
     Set-SearchSettings
