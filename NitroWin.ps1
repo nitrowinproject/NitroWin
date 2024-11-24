@@ -18,5 +18,5 @@ if (-Not ($args[0] -eq "--create-install-media")) {
     Start-GUI
 }
 else {
-    Export-AnswerFile -drive $args[1]
+    Deploy-InstallMedia -drive $args[1]
 }
