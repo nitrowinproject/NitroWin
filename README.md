@@ -1,6 +1,10 @@
-# NitroWin
+<div align="center">
+   <img src="assets/logo/NitroWin.svg" alt="NitroWin logo" width="200">
 
-Script to automatically configure your Windows installation for better privacy and usability
+   <h1>NitroWin</h1>
+</div>
+
+Automatically configures your Windows installation for better privacy and usability
 
 ## Features
 
