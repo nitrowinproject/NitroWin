@@ -20,6 +20,9 @@ function Initialize-GUI {
     $Global:welcomeViewForm = Initialize-WelcomeView
 
     $Global:mainWindow = Initialize-MainWindow
+
+    $iconpath = ".\assets\logo\icon.ico"
+    $Global:mainWindow.Icon = [System.Windows.Media.Imaging.BitmapFrame]::Create([Uri]$iconpath)
     
     # Export views
     Export-ModuleMember -Variable $Global:finishView
