@@ -6,7 +6,7 @@
     The drive letter of your installation media
 
 .EXAMPLE
-    Export-AnswerFile D:\
+    Export-AnswerFile -drive d:\
 #>
 
 function Export-AnswerFile {
