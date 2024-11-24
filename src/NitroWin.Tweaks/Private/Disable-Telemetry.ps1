@@ -16,37 +16,37 @@ function Disable-Telemetry {
             "NoGenTicket" = 1
         }
         # Disable customer improvement program
-        "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP" = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\AppV\CEIP"                                              = @{
             "CEIPEnable" = 0
         }
-        "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows" = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\SQMClient\Windows"                                      = @{
             "CEIPEnable" = 0
         }
         # Disable typing insights
-        "HKCU:\SOFTWARE\Microsoft\Input\Settings" = @{
+        "HKCU:\SOFTWARE\Microsoft\Input\Settings"                                                  = @{
             "InsightsEnabled" = 0
         }
         # Set maximum telemetry to 0
-        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" = @{
+        "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"                  = @{
             "MaxTelemetryAllowed" = 0
         }
-        "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" = @{
+        "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection"      = @{
             "MaxTelemetryAllowed" = 0
         }
         # Disable generic telemetry
-        "HKLM:\Software\Policies\Microsoft\Windows\DataCollection" = @{
+        "HKLM:\Software\Policies\Microsoft\Windows\DataCollection"                                 = @{
             "AllowDeviceNameInTelemetry" = 0
         }
         # Disable diagnostic tracking
-        "HKLM:\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance" = @{
+        "HKLM:\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance"                           = @{
             "DisableDiagnosticTracing" = 1
         }
         # Disable NVIDIA telemetry
-        "HKCU:\Software\NVIDIA Corporation\NVControlPanel2\Client" = @{
+        "HKCU:\Software\NVIDIA Corporation\NVControlPanel2\Client"                                 = @{
             "OptInOrOutPreference" = 0
         }
         # Disable DHA
-        "HKLM:\SOFTWARE\Policies\Microsoft\DeviceHealthAttestationService" = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\DeviceHealthAttestationService"                         = @{
             "EnableDeviceHealthAttestationService" = 0
         }
     }
@@ -60,4 +60,4 @@ function Disable-Telemetry {
 
     # Disable .NET cli telemetry
     [System.Environment]::SetEnvironmentVariable("DOTNET_CLI_TELEMETRY_OPTOUT", "1", [System.EnvironmentVariableTarget]::Machine)
-}   
+}
