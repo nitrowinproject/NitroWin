@@ -7,14 +7,21 @@
 #>
 
 function Disable-ProgramCompatibilityAssistent {
-    $regpath = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat"
+    $paths = @{
+        "HKLM:\SOFTWARE\Policies\Microsoft\Windows\AppCompat" = @{
+            "AITEnable"        = 0
+            "AllowTelemetry"   = 0
+            "DisableEngine"    = 1
+            "DisableInventory" = 1
+            "DisablePCA"       = 1
+            "DisableUAR"       = 1
+        }
+    }
 
-    Test-RegistryPath -path $regpath
-
-    $names = @("AITEnable", "AllowTelemetry", "DisableEngine", "DisableInventory", "DisablePCA", "DisableUAR")
-    $values = @(0, 0, 1, 1, 1, 1)
-
-    for (($i = 0); $i -lt $names.Count; $i++) {
-        Set-ItemProperty -Path $regpath -Name $names[$i] -Value $values[$i] -Type DWord
+    foreach ($path in $paths.Keys) {
+        Test-RegistryPath -Path $path
+        foreach ($key in $paths[$path].Keys) {
+            Set-ItemProperty -Path $path -Name $key -Value $paths[$path][$key] -Type DWord
+        }
     }
 }
