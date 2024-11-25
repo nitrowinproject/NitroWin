@@ -2,9 +2,9 @@
    <img src="assets/logo/NitroWin.svg" alt="NitroWin logo" width="200">
 
    <h1>NitroWin</h1>
-</div>
 
-Automatically configures your Windows installation for better privacy and usability
+   <p>Automatically configures your Windows installation for better privacy and usability</p>
+</div>
 
 ## Features
 
