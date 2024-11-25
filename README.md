@@ -9,10 +9,10 @@
 ## Features
 
 - Improved privacy
-- Looks better
+- Removed bloat
 - More FPS
 - No need to reinstall Windows
-- No Spyware, ads and completely Open Source
+- No Spyware, no ads and completely Open Source
 - Create a semi-optimized installation media
 
 ## Use cases
@@ -51,7 +51,7 @@ I think, it's really good for setting up a fresh Windows installation. But you c
 
 This project is licensed under the [Unlicense](LICENSE).
 
-This project uses icons, which are licensed under the [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE).
+This project uses icons from [Heroicons](https://github.com/tailwindlabs/heroicons) by [Tailwind Labs](https://github.com/tailwindlabs), which are licensed under the [MIT License](https://github.com/tailwindlabs/heroicons/blob/master/LICENSE).
 
 It also uses part of the [WinUtil repo](https://github.com/ChrisTitusTech/winutil) by [ChrisTitusTech](https://github.com/ChrisTitusTech), which is also licensed under the [MIT License](https://github.com/ChrisTitusTech/winutil/blob/main/LICENSE).
 
