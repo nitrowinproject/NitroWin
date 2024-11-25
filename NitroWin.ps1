@@ -9,6 +9,8 @@
     https://github.com/Nitro4542/NitroWin/
 #>
 
+#Requires -RunAsAdministrator
+
 Import-Module ".\src\NitroWin.Helper\NitroWin.Helper.psm1"
 Import-Module ".\src\NitroWin.Installer\NitroWin.Installer.psm1"
 Import-Module ".\src\NitroWin.Tweaks\NitroWin.Tweaks.psm1"
