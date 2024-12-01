@@ -7,8 +7,6 @@
 #>
 
 function Disable-AI {
-    Stop-Process -Name "explorer.exe" -Force | Out-Null
-
     $paths = @{
         "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" = @{
             "ShowCopilotButton" = 0
@@ -34,6 +32,4 @@ function Disable-AI {
     catch {
         Show-Prompt -message "Failed to remove Copilot." -title "Failed to remove Copilot" -buttons OK -icon Error
     }
-
-    Start-Process -FilePath "explorer.exe" | Out-Null
 }
