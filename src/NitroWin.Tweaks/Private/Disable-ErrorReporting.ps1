@@ -21,9 +21,9 @@ function Disable-ErrorReporting {
             "LoggingDisabled"        = 1
             "DontSendAdditionalData" = 1
         }
-        "HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" = @{
+        <#"HKLM:\Software\Microsoft\Windows\CurrentVersion\Component Based Servicing" = @{
             "DisableWerReporting" = 1
-        }
+        }#>
         "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceInstall\Settings"          = @{
             "DisableSendGenericDriverNotFoundToWER"     = 1
             "DisableSendRequestAdditionalSoftwareToWER" = 1
