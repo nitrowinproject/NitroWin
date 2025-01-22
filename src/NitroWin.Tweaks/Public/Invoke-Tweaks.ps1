@@ -12,7 +12,7 @@ function Invoke-Tweaks {
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ErrorReporting.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ErrorReportingExtended.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-Experimentation.reg"
-    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-FrequentAppsInStartMenu.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-ExplorerSettings.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-OOBEAfterUpdates.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ProgramCompatibilityAssistent.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-PT.reg"
