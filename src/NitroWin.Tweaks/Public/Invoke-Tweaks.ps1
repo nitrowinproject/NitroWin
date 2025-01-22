@@ -26,4 +26,5 @@ function Invoke-Tweaks {
     Set-LocalTimeServers
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-NetworkShareSettings.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-SearchSettings.reg"
+    Set-NTFSOptions
 }
