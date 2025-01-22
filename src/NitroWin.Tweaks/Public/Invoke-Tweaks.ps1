@@ -8,21 +8,22 @@
 
 function Invoke-Tweaks {
     Disable-AI
-    Disable-AutomaticDriverInstall
-    Disable-ErrorReporting
-    Disable-Experimentation
-    Disable-FrequentAppsInStartMenu
-    Disable-OOBEAfterUpdates
-    Disable-ProgramCompatibilityAssistent
-    Disable-PT
-    Disable-RSOP
-    Disable-SMBThrottling
-    Disable-SoundReductionOnCall
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-AutomaticDriverInstall.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ErrorReporting.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ErrorReportingExtended.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-Experimentation.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-FrequentAppsInStartMenu.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-OOBEAfterUpdates.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ProgramCompatibilityAssistent.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-PT.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-RSOP.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SMBThrottling.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SoundReductionOnCall.reg"
     Disable-Telemetry
-    Disable-WallpaperCompression
-    Hide-UnusedWinDefenderPages
-    Set-KeyboardDelay
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-WallpaperCompression.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Hide-UnusedWinDefenderPages.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-KeyboardDelay.reg"
     Set-LocalTimeServers
-    Set-NetworkShareSecuritySettings
-    Set-SearchSettings
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-NetworkShareSecuritySettings.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-SearchSettings.reg"
 }

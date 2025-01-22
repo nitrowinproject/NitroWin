@@ -1,0 +1,20 @@
+Windows Registry Editor 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
+"SearchboxTaskbarMode"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SearchSettings]
+"IsAADCloudSearchEnabled"=dword:00000000
+"IsDeviceSearchHistoryEnabled"=dword:00000000
+"IsMSACloudSearchEnabled"=dword:00000000
+"SafeSearchMode"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"ConnectedSearchUseWeb"=dword:00000000
+"DisableWebSearch"=dword:00000001
+"AllowSearchToUseLocation"=dword:00000000
+"EnableDynamicContentInWSB"=dword:00000000
+
+[HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer]
+"DisableSearchBoxSuggestions"=dword:00000001
