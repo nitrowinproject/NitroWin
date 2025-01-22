@@ -16,5 +16,5 @@ function Deploy-InstallMedia {
 
     Copy-Item -Path "." -Destination ("{0}\NitroWin" -f $drive) -Recurse
 
-    Export-AnswerFile -drive $drive
+    Copy-Item -Path ".\assets\autounattend\autounattend.xml" -Destination $drive
 }
