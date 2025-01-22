@@ -19,6 +19,7 @@ function Invoke-Tweaks {
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-RSOP.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SMBThrottling.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SoundReductionOnCall.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-Telemetry.reg"
     Disable-Telemetry
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-WallpaperCompression.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Hide-UnusedWinDefenderPages.reg"
