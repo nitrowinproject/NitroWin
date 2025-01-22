@@ -17,7 +17,6 @@ function Invoke-Tweaks {
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-ProgramCompatibilityAssistent.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-PT.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-RSOP.reg"
-    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SMBThrottling.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-SoundReductionOnCall.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Disable-Telemetry.reg"
     Disable-Telemetry
@@ -25,6 +24,6 @@ function Invoke-Tweaks {
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Hide-UnusedWinDefenderPages.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-KeyboardDelay.reg"
     Set-LocalTimeServers
-    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-NetworkShareSecuritySettings.reg"
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-NetworkShareSettings.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-SearchSettings.reg"
 }
