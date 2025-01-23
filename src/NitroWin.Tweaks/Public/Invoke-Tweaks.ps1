@@ -27,4 +27,5 @@ function Invoke-Tweaks {
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-NetworkShareSettings.reg"
     Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Set-SearchSettings.reg"
     Set-NTFSOptions
+    Start-Process reg -ArgumentList "import .\NitroWin.Tweaks\Tweaks\Enable-PowerPlanImporting.reg"
 }

@@ -1,0 +1,11 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\powerscheme\DefaultIcon]
+@="%windir%\\System32\\powercpl.dll,1"
+
+[HKEY_CLASSES_ROOT\powerscheme\Shell\open\command]
+@="powercfg /import \"%1\""
+
+[HKEY_CLASSES_ROOT\.pow]
+@="powerscheme"
+"FriendlyTypeName"="Power Scheme"
