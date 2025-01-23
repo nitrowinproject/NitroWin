@@ -14,7 +14,6 @@ function Initialize-GUI {
 
     # Read Views
     $Global:finishView = Initialize-FinishView
-    $Global:winUtilView = Initialize-WinUtilView
     $Global:appSelectionViewForm = Initialize-AppSelectionView
     $Global:licenseViewForm = Initialize-LicenseView
     $Global:welcomeViewForm = Initialize-WelcomeView
@@ -26,7 +25,6 @@ function Initialize-GUI {
     
     # Export views
     Export-ModuleMember -Variable $Global:finishView
-    Export-ModuleMember -Variable $Global:winUtilView
     Export-ModuleMember -Variable $Global:appSelectionViewForm
     Export-ModuleMember -Variable $Global:licenseViewForm
     Export-ModuleMember -Variable $Global:welcomeViewForm

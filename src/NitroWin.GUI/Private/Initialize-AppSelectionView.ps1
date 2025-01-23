@@ -73,7 +73,7 @@ function Initialize-AppSelectionView {
             $appsToInstallWinget | ForEach-Object {
                 Install-AppFromWinget -id $_ -name (Format-AppName -id $_)
             }
-            $Global:mainWindow.Content = $Global:winUtilView
+            $Global:mainWindow.Content = $Global:finishView
         })
 
     return $appSelectionViewForm
