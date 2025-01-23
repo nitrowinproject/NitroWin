@@ -13,7 +13,7 @@ function Initialize-GUI {
     Add-Type -AssemblyName 'PresentationFramework'
 
     # Read Views
-    $Global:mainView = Initialize-MainView
+    $Global:mainViewForm = Initialize-MainView
 
     $Global:mainWindow = Initialize-MainWindow
 
@@ -21,7 +21,7 @@ function Initialize-GUI {
     $Global:mainWindow.Icon = [System.Windows.Media.Imaging.BitmapFrame]::Create([Uri]$iconpath)
     
     # Export views
-    Export-ModuleMember -Variable $Global:mainView
+    Export-ModuleMember -Variable $Global:mainViewForm
     
     Export-ModuleMember -Variable $Global:mainWindow
 }
