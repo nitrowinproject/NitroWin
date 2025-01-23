@@ -9,7 +9,10 @@
 function Invoke-Tweaks {
     $tweakFiles = Get-ChildItem -Path ".\src\NitroWin.Tweaks\Tweaks" -Filter "*.reg" -Recurse
     
-    Start-Process -FilePath "reg" -ArgumentList "import `"$($file.FullName)`"" -Wait -NoNewWindow
+    foreach ($file in $tweakFiles) {
+        Write-Host "Importing $($file.FullName)..."
+        Start-Process -FilePath "reg" -ArgumentList "import `"$($file.FullName)`"" -Wait -NoNewWindow
+    }
 
     Disable-AI
     Disable-Telemetry
