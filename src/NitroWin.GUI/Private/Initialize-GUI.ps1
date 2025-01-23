@@ -17,7 +17,7 @@ function Initialize-GUI {
 
     $Global:mainWindow = Initialize-MainWindow
 
-    $iconpath = ".\assets\logo\icon.ico"
+    $iconpath = ".\logo\icon.ico"
     $Global:mainWindow.Icon = [System.Windows.Media.Imaging.BitmapFrame]::Create([Uri]$iconpath)
     
     # Export views
