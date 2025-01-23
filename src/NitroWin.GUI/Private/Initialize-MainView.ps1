@@ -12,5 +12,13 @@
 function Initialize-MainView {
     $mainViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\MainView.xaml"
 
+    $imagePath = Join-Path -Path (Get-Location) -ChildPath "assets/logo/NitroWin.png"
+    $imageSource = New-Object System.Windows.Media.Imaging.BitmapImage
+    $imageSource.BeginInit()
+    $imageSource.UriSource = [Uri]::new("file:///$imagePath")
+    $imageSource.EndInit()
+
+    $mainViewForm.FindName("MainViewTopLogoImage").Source = $imageSource
+
     return $mainViewForm
 }

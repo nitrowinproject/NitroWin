@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NitroWin.GUI.WelcomeView"
+﻿<UserControl x:Class="NitroWin.GUI.MainView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -6,10 +6,28 @@
     xmlns:local="clr-namespace:NitroWin.GUI" mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <!-- Top part -->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20px">
+            <Image x:Name="MainViewTopLogoImage" VerticalAlignment="Center" HorizontalAlignment="Center" Width="36" Height="36" Margin="0,0,20,0"/>
+            <Label Content="NitroWin" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="36" FontWeight="Bold"/>
+        </StackPanel>
+        
+
+        <!-- Middle part -->
+
+        <!-- Bottom part -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20">
+            <Button x:Name="MainViewContinueCurrentSystemButton" Content="Install on current system" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="20,10,20,10" Margin="20,0,20,0"/>
+            <Button x:Name="MainViewContinueInstallMediaButton" Content="Create Install Media" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="20,10,20,10"/>
+        </StackPanel>
+
     </Grid>
 </UserControl>
