@@ -24,7 +24,7 @@ Windows Registry Editor Version 5.00
 "AllowTelemetry"=dword:00000000
 "AllowDeviceNameInTelemetry"=dword:00000000
 
-[HKEY_CURRENT_USER\Software\NVIDIA Corporation\NVControlPanel2\Client]
+[HKEY_CURRENT_USER\SOFTWARE\NVIDIA Corporation\NVControlPanel2\Client]
 "OptInOrOutPreference"=dword:00000000
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\DeviceHealthAttestationService]
