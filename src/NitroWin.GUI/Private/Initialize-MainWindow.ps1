@@ -12,7 +12,7 @@
 function Initialize-MainWindow {
     $mainWindow = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\MainWindow.xaml"
 
-    $Global:MainContent.Content = $Global:welcomeViewForm
+    $Global:MainContent.Content = $Global:mainViewForm
 
     return $mainWindow
 }
