@@ -30,7 +30,7 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\DeviceHealthAttestationService]
 "EnableDeviceHealthAttestationService"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack\Start]
+[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\DiagTrack]
 "Start"=dword:00000004
 
 [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener]
@@ -67,5 +67,5 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
 "Enabled"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\AdvertisingInfo]
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
 "DisabledByGroupPolicy"=dword:00000001
