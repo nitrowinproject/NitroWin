@@ -43,8 +43,6 @@ function Initialize-AppSelectionView {
 
     $AppContinueButton.Add_Click({
             if ($AppBrowserFirefoxCheckBox.isChecked) {
-                Copy-Item -Path ".\assets\firefox\user.js" -Destination Get-DownloadFolder
-                Show-Prompt -message "You can find the hardened user.js in your downloads folder." -title "Firefox hardened user.js" -buttons OK -icon Information
                 Install-Firefox
             }
             if ($AppBrowserBraveCheckBox.isChecked) {
