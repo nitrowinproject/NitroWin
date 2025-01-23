@@ -21,9 +21,6 @@ Windows Registry Editor Version 5.00
 [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection]
 "AllowDeviceNameInTelemetry"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance]
-"DisableDiagnosticTracing"=dword:00000001
-
 [HKEY_CURRENT_USER\Software\NVIDIA Corporation\NVControlPanel2\Client]
 "OptInOrOutPreference"=dword:00000000
 
