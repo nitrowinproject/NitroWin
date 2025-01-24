@@ -41,6 +41,64 @@
         </Grid>
 
         <!-- Middle part -->
+        <Grid Grid.Row="1" Grid.Column="0" Margin="20" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Apps" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold"/>
+            <Grid HorizontalAlignment="Stretch" Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="MainViewBraveCheckBox" Content="Brave" Grid.Row="0" Grid.Column="0" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewFirefoxCheckBox" Content="Firefox" Grid.Row="1" Grid.Column="0" Margin="0,0,0,2"/>
+                
+                <CheckBox x:Name="MainView7ZipCheckBox" Content="7-Zip" Grid.Row="0" Grid.Column="1" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewWinRARCheckBox" Content="WinRAR" Grid.Row="1" Grid.Column="1" Margin="0,0,0,2"/>
+
+                <CheckBox x:Name="MainViewKLCPCheckBox" Content="K-Lite Codec Pack Mega" Grid.Row="0" Grid.Column="2" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewVLCCheckBox" Content="VLC media player" Grid.Row="1" Grid.Column="2" Margin="0,0,0,2"/>
+            </Grid>
+
+            <Label Content="Tools" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold"/>
+            <Grid HorizontalAlignment="Stretch" Grid.Row="5" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox x:Name="MainViewWinUtilCheckBox" Content="WinUtil" Grid.Row="0" Grid.Column="0" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewOOSUCheckBox" Content="O&amp;O ShutUp10++" Grid.Row="1" Grid.Column="0" Margin="0,0,0,2"/>
+                
+                <CheckBox x:Name="MainViewKeePassXCCheckBox" Content="KeePassXC" Grid.Row="0" Grid.Column="1" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewUniGetUICheckBox" Content="UniGetUI" Grid.Row="1" Grid.Column="1" Margin="0,0,0,2"/>
+
+                <CheckBox x:Name="MainViewNPppCheckBox" Content="Notepad++" Grid.Row="0" Grid.Column="2" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewPowerShell7CheckBox" Content="PowerShell 7" Grid.Row="1" Grid.Column="2" Margin="0,0,0,2"/>
+            </Grid>
+        </Grid>
 
         <!-- Bottom part -->
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20">
