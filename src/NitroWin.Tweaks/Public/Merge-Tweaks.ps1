@@ -2,13 +2,19 @@
 .SYNOPSIS
     Merges all of NitroWin's registry tweaks into one file
 
+.PARAMETER drive
+    The drive letter of the installation media
+
 .EXAMPLE
-    Merge-Tweaks
+    Merge-Tweaks -mergedFile ".\merged.reg"
 #>
 
 function Merge-Tweaks {
+    param (
+        [string]$mergedFile
+    )
+
     $tweakFiles = Get-ChildItem -Path ".\src\NitroWin.Tweaks\Tweaks" -Filter "*.reg" -Recurse
-    $mergedFile = ".\merged.reg"
 
     if (Test-Path $mergedFile) {
         Remove-Item $mergedFile
