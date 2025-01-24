@@ -52,4 +52,4 @@ Almost all tweaks were taken from the [AtlasOS project](https://github.com/Atlas
 
 This project is not affiliated with Microsoft or any other third-party project this repository uses.
 
-This project also does not distribute modified Windows ISOs.
+This project does not distribute modified Windows ISOs.
