@@ -15,10 +15,30 @@
         </Grid.ColumnDefinitions>
 
         <!-- Top part -->
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20px">
-            <Image x:Name="MainViewTopLogoImage" VerticalAlignment="Center" HorizontalAlignment="Center" Width="36" Height="36" Margin="0,0,20,0"/>
-            <Label Content="NitroWin" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="36" FontWeight="Bold"/>
-        </StackPanel>
+        <Grid Grid.Row="0" Grid.Column="0" Margin="20" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Image x:Name="MainViewTopLogoImage" VerticalAlignment="Center" HorizontalAlignment="Center" Width="36" Height="36" Margin="0,0,20,0"/>
+                <Label Content="NitroWin" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="36" FontWeight="Bold"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Label Content="Select your GPU manufacturer:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,10,0"/>
+                <ComboBox x:Name="MainViewGPUOptionComboBox" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                    <ComboBoxItem>Other</ComboBoxItem>
+                    <ComboBoxItem>AMD</ComboBoxItem>
+                    <ComboBoxItem>NVIDIA</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
         
 
         <!-- Middle part -->
@@ -28,6 +48,5 @@
             <Button x:Name="MainViewContinueCurrentSystemButton" Content="Install on current system" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="20,10,20,10" Margin="20,0,20,0"/>
             <Button x:Name="MainViewContinueInstallMediaButton" Content="Create Install Media" VerticalAlignment="Center" HorizontalAlignment="Right" Padding="20,10,20,10"/>
         </StackPanel>
-
     </Grid>
 </UserControl>

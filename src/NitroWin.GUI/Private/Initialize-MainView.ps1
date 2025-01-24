@@ -20,5 +20,7 @@ function Initialize-MainView {
 
     $mainViewForm.FindName("MainViewTopLogoImage").Source = $imageSource
 
+    $mainViewForm.FindName("MainViewGPUOptionComboBox").SelectedIndex = 0
+
     return $mainViewForm
 }
