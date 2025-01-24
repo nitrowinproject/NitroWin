@@ -21,7 +21,7 @@ I think, it's really good for setting up a fresh Windows installation. But you c
 
 ## How do I use this?
 
-### Modify exisiting installation
+### Modify existing installation
 
 1. Download this repository.
 2. Open up an elevated PowerShell prompt.
