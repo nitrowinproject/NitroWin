@@ -12,30 +12,6 @@
 function Initialize-MainView {
     $mainViewForm = Initialize-Form -xamlfile ".\src\NitroWin.GUI\GUI\MainView.xaml"
 
-    # Define elements
-    # Top part
-    $TopLogoImage = $mainViewForm.FindName("MainViewTopLogoImage")
-    $GPUOptionComboBox = $mainViewForm.FindName("MainViewGPUOptionComboBox")
-
-    # Middle part
-    $BraveCheckBox = $mainViewForm.FindName("MainViewBraveCheckBox")
-    $FirefoxCheckBox = $mainViewForm.FindName("MainViewFirefoxCheckBox")
-    $7ZipCheckBox = $mainViewForm.FindName("MainView7ZipCheckBox")
-    $WinRARCheckBox = $mainViewForm.FindName("MainViewWinRARCheckBox")
-    $KLCPCheckBox = $mainViewForm.FindName("MainViewKLCPCheckBox")
-    $VLCCheckBox = $mainViewForm.FindName("MainViewVLCCheckBox")
-
-    $WinUtilCheckBox = $mainViewForm.FindName("MainViewWinUtilCheckBox")
-    $OOSUCheckBox = $mainViewForm.FindName("MainViewOOSUCheckBox")
-    $KeePassXCCheckBox = $mainViewForm.FindName("MainViewKeePassXCCheckBox")
-    $UniGetUICheckBox = $mainViewForm.FindName("MainViewUniGetUICheckBox")
-    $NotepadPPCheckBox = $mainViewForm.FindName("MainViewNotepadPPCheckBox")
-    $PowerShell7CheckBox = $mainViewForm.FindName("MainViewPowerShell7CheckBox")
-
-    # Bottom part
-    $ContinueCurrentSystemButton = $mainViewForm.FindName("MainViewContinueCurrentSystemButton")
-    $ContinueInstallMediaButton = $mainViewForm.FindName("MainViewContinueInstallMediaButton")
-
     # Load image in top part
     $imagePath = Join-Path -Path (Get-Location) -ChildPath "assets/logo/NitroWin.png"
     $imageSource = New-Object System.Windows.Media.Imaging.BitmapImage
@@ -43,54 +19,54 @@ function Initialize-MainView {
     $imageSource.UriSource = [Uri]::new("file:///$imagePath")
     $imageSource.EndInit()
 
-    $TopLogoImage.Source = $imageSource
+    $MainViewTopLogoImage.Source = $imageSource
 
     # Set Other as default option in ComboBox
-    $GPUOptionComboBox.SelectedIndex = 0
+    $MainViewGPUOptionComboBox.SelectedIndex = 0
     
     # Give buttons some functionality
-    $ContinueCurrentSystemButton.Add_Click({
+    $MainViewContinueCurrentSystemButton.Add_Click({
         Invoke-Tweaks
-        if ($BraveCheckBox.IsChecked) {
+        if ($MainViewBraveCheckBox.isChecked) {
             Install-Brave
         }
-        if ($FirefoxCheckBox.IsChecked) {
+        if ($MainViewFirefoxCheckBox.isChecked) {
             Install-Firefox
         }
-        if ($7ZipCheckBox.IsChecked) {
+        if ($MainView7ZipCheckBox.isChecked) {
             Install-AppFromWinGet -id "7zip.7zip"
         }
-        if ($WinRARCheckBox.IsChecked) {
+        if ($MainViewWinRARCheckBox.isChecked) {
             Install-AppFromWinGet -id "RARLab.WinRAR"
         }
-        if ($KLCPCheckBox.IsChecked) {
+        if ($MainViewKLCPCheckBox.isChecked) {
             Install-AppFromWinGet -id "CodecGuide.K-LiteCodecPack.Mega"
         }
-        if ($VLCCheckBox.IsChecked) {
+        if ($MainViewVLCCheckBox.isChecked) {
             Install-AppFromWinGet -id "VideoLAN.VLC"
         }
 
-        if ($WinUtilCheckBox.IsChecked) {
+        if ($MainViewWinUtilCheckBox.isChecked) {
             Add-WinUtilShortcut
         }
-        if ($OOSUCheckBox.IsChecked) {
+        if ($MainViewOOSUCheckBox.isChecked) {
             Install-OOSU
         }
-        if ($KeePassXCCheckBox.IsChecked) {
+        if ($MainViewKeePassXCCheckBox.isChecked) {
             Install-AppFromWinGet -id "KeePassXCTeam.KeePassXC"
         }
-        if ($UniGetUICheckBox.IsChecked) {
+        if ($MainViewUniGetUICheckBox.isChecked) {
             Install-AppFromWinGet -id "MartiCliment.UniGetUI"
         }
-        if ($NotepadPPCheckBox.IsChecked) {
+        if ($MainViewNotepadPPCheckBox.isChecked) {
             Install-AppFromWinGet -id "Notepad++.Notepad++"
         }
-        if ($PowerShell7CheckBox.IsChecked) {
+        if ($MainViewPowerShell7CheckBox.isChecked) {
             Install-AppFromWinGet -id "Microsoft.PowerShell"
         }
     })
 
-    $ContinueInstallMediaButton.Add_Click({
+    $MainViewContinueInstallMediaButton.Add_Click({
         [void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic')
         $driveLetter = [Microsoft.VisualBasic.Interaction]::InputBox(
             "Enter the drive letter of your installation media as shown in the example below.",

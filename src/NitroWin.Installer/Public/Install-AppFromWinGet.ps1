@@ -15,5 +15,6 @@ function Install-AppFromWinGet {
         [string]$id
     )
 
+    Write-Host "Installing $id..."
     Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -Verb RunAs -ArgumentList "download --id $($id) --exact --skip-license --scope machine --architecture x64 --locale $(Get-WinSystemLocale) --accept-package-agreements --accept-source-agreements --interactive"
 }

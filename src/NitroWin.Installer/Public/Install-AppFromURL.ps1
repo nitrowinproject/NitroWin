@@ -27,6 +27,7 @@ function Install-AppFromURL {
     )
 
     try {
+        Write-Host "Installing $name..."
         $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder)
         Start-Process $download -ArgumentList $arguments -Wait
     }
