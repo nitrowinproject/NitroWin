@@ -11,10 +11,10 @@
 
 #Requires -RunAsAdministrator
 
-Import-Module ".\src\NitroWin.Helper\NitroWin.Helper.psm1"
-Import-Module ".\src\NitroWin.Installer\NitroWin.Installer.psm1"
-Import-Module ".\src\NitroWin.Tweaks\NitroWin.Tweaks.psm1"
-Import-Module ".\src\NitroWin.GUI\NitroWin.GUI.psm1"
+Import-Module ".\src\NitroWin.Helper\NitroWin.Helper.psm1" -Force
+Import-Module ".\src\NitroWin.Installer\NitroWin.Installer.psm1" -Force
+Import-Module ".\src\NitroWin.Tweaks\NitroWin.Tweaks.psm1" -Force
+Import-Module ".\src\NitroWin.GUI\NitroWin.GUI.psm1" -Force
 
 if ($args[0] -eq "--create-install-media") {
     if ($args.Count -ge 2) {
