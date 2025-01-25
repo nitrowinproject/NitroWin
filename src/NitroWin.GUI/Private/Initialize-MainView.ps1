@@ -58,16 +58,16 @@ function Initialize-MainView {
             Install-Firefox
         }
         if ($7ZipCheckBox.IsChecked) {
-            Install-AppFromWinget -id "7zip.7zip"
+            Install-AppFromWinGet -id "7zip.7zip"
         }
         if ($WinRARCheckBox.IsChecked) {
-            Install-AppFromWinget -id "RARLab.WinRAR"
+            Install-AppFromWinGet -id "RARLab.WinRAR"
         }
         if ($KLCPCheckBox.IsChecked) {
-            Install-AppFromWinget -id "CodecGuide.K-LiteCodecPack.Mega"
+            Install-AppFromWinGet -id "CodecGuide.K-LiteCodecPack.Mega"
         }
         if ($VLCCheckBox.IsChecked) {
-            Install-AppFromWinget -id "VideoLAN.VLC"
+            Install-AppFromWinGet -id "VideoLAN.VLC"
         }
 
         if ($WinUtilCheckBox.IsChecked) {
@@ -77,16 +77,16 @@ function Initialize-MainView {
             Install-OOSU
         }
         if ($KeePassXCCheckBox.IsChecked) {
-            Install-AppFromWinget -id "KeePassXCTeam.KeePassXC"
+            Install-AppFromWinGet -id "KeePassXCTeam.KeePassXC"
         }
         if ($UniGetUICheckBox.IsChecked) {
-            Install-AppFromWinget -id "MartiCliment.UniGetUI"
+            Install-AppFromWinGet -id "MartiCliment.UniGetUI"
         }
         if ($NotepadPPCheckBox.IsChecked) {
-            Install-AppFromWinget -id "Notepad++.Notepad++"
+            Install-AppFromWinGet -id "Notepad++.Notepad++"
         }
         if ($PowerShell7CheckBox.IsChecked) {
-            Install-AppFromWinget -id "Microsoft.PowerShell"
+            Install-AppFromWinGet -id "Microsoft.PowerShell"
         }
     })
 
