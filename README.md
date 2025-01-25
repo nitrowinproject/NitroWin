@@ -3,27 +3,46 @@
 
    <h1>NitroWin</h1>
 
-   <p>Automatically configures your Windows installation for better privacy and usability</p>
+   <p>Give Windows some of that Nitro</p>
 </div>
 
 ## Features
 
-- Improved privacy
-- Reduced bloat
-- More FPS
-- No need to reinstall Windows
-- No ads and completely Open Source
-- Create a installation media
+### :lock: · Improved privacy
 
-## When do I use this?
+I removed a lot of telemetry and if you use WinUtil and O&O ShutUp together with NitroWin, you'll basically have all possible telemetry options turned off.
 
-It is recommended to use this while setting up a fresh Windows install.
+### :sunglasses: · Reduced bloat
 
-Although, (almost) all Tweaks from NitroWin which aren't in the [answer file](assets/autounattend/autounattend.xml) can be imported into an existing Windows installation.
+Another thing that this doesn't come with is bloat. But I still included everything you need for a normal Windows installation. If you're missing something or want something removed you can always do that later.
+
+### :rocket: · More FPS
+
+While I can't guarantee this one, it should definitely be better than a stock Windows install. I didn't make NitroWin for more FPS, but rather for the improved privacy.
+
+### :metal: · No need to reinstall Windows
+
+I'd still absolutely recommend reinstalling Windows but most of the tweaks work on already existing installations. You can probably apply all tweaks which aren't in the [answer file](assets/autounattend/autounattend.xml).
+
+### :do_not_litter: · No custom branding
+
+This mod doesn't come with any sort of custom branding to keep Windows as clean as possible.
+
+### :shield: · No security features disabled
+
+Unlike other custom Windows modifications, I'm not disabling anything security related.
+
+### :mag: · Completely open source
+
+This project is completely open source. Please note that Windows is not open source. (Why would you even think that?)
+
+### :window: · Create an optimized Windows installation
+
+This is the most obvious one, I don't think I have to say anything about that one.
 
 ## How do I use this?
 
-1. Download this repository.
+1. Download or clone this repository.
 2. Open up an elevated PowerShell prompt inside of the downloaded repository.
 3. Run the following commands inside of that prompt:
 
