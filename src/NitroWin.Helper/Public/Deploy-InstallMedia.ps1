@@ -11,6 +11,7 @@
 
 function Deploy-InstallMedia {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$drive
     )
 

@@ -11,6 +11,7 @@
 
 function Format-AppName {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$id
     )
 

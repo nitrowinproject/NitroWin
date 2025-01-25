@@ -11,6 +11,7 @@ using namespace System.Windows.Markup
 
 function Initialize-Form {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$xamlfile
     )
 

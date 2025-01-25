@@ -23,7 +23,7 @@ function Install-AppFromURL {
         [Parameter(Mandatory=$true)]
         [string]$name,
 
-        [string]$arguments = $null
+        [string]$arguments
     )
 
     try {

@@ -11,6 +11,7 @@
 
 function Install-AppFromWinGet {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$id
     )
 

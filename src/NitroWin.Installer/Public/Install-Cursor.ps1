@@ -14,6 +14,7 @@
 
 function Install-Cursor {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$cursordir
     )
 

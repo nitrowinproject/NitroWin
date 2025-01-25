@@ -14,7 +14,10 @@
 
 function Get-FileFromURL {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$url,
+        
+        [Parameter(Mandatory=$true)]
         [string]$outpath
     )
     

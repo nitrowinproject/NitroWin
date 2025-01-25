@@ -20,9 +20,15 @@
 
 function Show-Prompt {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$title,
+
+        [Parameter(Mandatory=$true)]
         [string]$message,
+
+        [Parameter(Mandatory=$true)]
         [System.Windows.Forms.MessageBoxButtons]$buttons,
+
         [System.Windows.Forms.MessageBoxIcon]$icon
     )
 
