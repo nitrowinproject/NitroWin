@@ -18,4 +18,5 @@ function Invoke-Tweaks {
     Disable-Telemetry
     Set-LocalTimeServers
     Set-NTFSOptions
+    Add-UltimatePowerPlan
 }
