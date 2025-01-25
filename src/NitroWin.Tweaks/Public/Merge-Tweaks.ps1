@@ -11,7 +11,7 @@
 
 function Merge-Tweaks {
     param (
-        [string]$mergedFile
+        [string]$mergedFile = ".\merged.reg"
     )
 
     $tweakFiles = Get-ChildItem -Path ".\src\NitroWin.Tweaks\Tweaks" -Filter "*.reg" -Recurse
