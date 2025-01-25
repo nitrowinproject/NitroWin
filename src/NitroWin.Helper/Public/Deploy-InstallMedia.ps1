@@ -15,7 +15,7 @@ function Deploy-InstallMedia {
         [string]$drive
     )
 
-    Copy-Item -Path "." -Destination ("{0}\NitroWin" -f $drive) -Recurse
+    Copy-Item -Path "." -Destination "$($drive)\NitroWin" -Recurse
 
     Copy-Item -Path ".\assets\autounattend\autounattend.xml" -Destination $drive
 }
