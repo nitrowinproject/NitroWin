@@ -91,7 +91,15 @@ function Initialize-MainView {
     })
 
     $ContinueInstallMediaButton.Add_Click({
-        
+        [void][System.Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic')
+        $driveLetter = [Microsoft.VisualBasic.Interaction]::InputBox(
+            "Please enter the drive letter of your installation media like the example below.",
+            "Enter drive letter",
+            "D:\"
+        )
+        if (-not [string]::IsNullOrWhiteSpace($driveLetter)) {
+            Deploy-InstallMedia -drive $driveLetter
+        }
     })
 
     return $mainViewForm
