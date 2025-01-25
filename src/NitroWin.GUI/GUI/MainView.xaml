@@ -95,7 +95,7 @@
                 <CheckBox x:Name="MainViewKeePassXCCheckBox" Content="KeePassXC" Grid.Row="0" Grid.Column="1" Margin="0,0,0,2"/>
                 <CheckBox x:Name="MainViewUniGetUICheckBox" Content="UniGetUI" Grid.Row="1" Grid.Column="1" Margin="0,0,0,2"/>
 
-                <CheckBox x:Name="MainViewNPppCheckBox" Content="Notepad++" Grid.Row="0" Grid.Column="2" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewNotepadPPCheckBox" Content="Notepad++" Grid.Row="0" Grid.Column="2" Margin="0,0,0,2"/>
                 <CheckBox x:Name="MainViewPowerShell7CheckBox" Content="PowerShell 7" Grid.Row="1" Grid.Column="2" Margin="0,0,0,2"/>
             </Grid>
         </Grid>
