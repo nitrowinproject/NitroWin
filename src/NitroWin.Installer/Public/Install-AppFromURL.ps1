@@ -8,47 +8,31 @@
 .PARAMETER name
     The name of the app
 
+.PARAMETER arguments
+    Arguments to give to the installer
+
 .EXAMPLE
-    Install-AppFromURL -url "https://example.com/program.exe" -name "Example"
+    Install-AppFromURL -url "https://example.com/program.exe" -name "Example" -arguments "/quiet"
 #>
 
 function Install-AppFromURL {
     param (
+        [Parameter(Mandatory=$true)]
         [string]$url,
-        [string]$name
+
+        [Parameter(Mandatory=$true)]
+        [string]$name,
+
+        [string]$arguments = $null
     )
 
-    if (Request-URL($url) -eq 200) {
-        try {
-            $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder)
-        }
-        catch {
-            $message = "Error while downloading {0}. Continue without installing?" -f $name
-            $title = "Error while downloading {0}" -f $name
-
-            $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
-            if (-Not ($prompt -eq 'Yes')) {
-                Exit 0
-            }
-        }
-        if ($null -eq $download) {
-            try {
-                Invoke-Expression $download
-            }
-            catch {
-                $message = "Error while installing {0}. Continue without installing?" -f $name
-                $title = "Error while installing {0}" -f $name
-    
-                $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
-                if (-Not ($prompt -eq 'Yes')) {
-                    Exit 0
-                }
-            }
-        }
+    try {
+        $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder)
+        Start-Process $download -ArgumentList $arguments -Wait
     }
-    else {
-        $message = "Error while downloading {0}. Continue without installing?" -f $name
-        $title = "Error while downloading {0}" -f $name
+    catch {
+        $message = "Error while installing $($name). Continue without installing?"
+        $title = "Error while installing $($name)"
 
         $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
         if (-Not ($prompt -eq 'Yes')) {
