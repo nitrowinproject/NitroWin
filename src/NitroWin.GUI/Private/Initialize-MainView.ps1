@@ -48,6 +48,51 @@ function Initialize-MainView {
     # Set Other as default option in ComboBox
     $GPUOptionComboBox.SelectedIndex = 0
     
+    # Give buttons functions
+    $ContinueCurrentSystemButton.Add_Click({
+        Invoke-Tweaks
+        if ($BraveCheckBox.IsChecked) {
+            Install-Brave
+        }
+        if ($FirefoxCheckBox.IsChecked) {
+            Install-Firefox
+        }
+        if ($7ZipCheckBox.IsChecked) {
+            Install-AppFromWinget -id "7zip.7zip"
+        }
+        if ($WinRARCheckBox.IsChecked) {
+            Install-AppFromWinget -id "RARLab.WinRAR"
+        }
+        if ($KLCPCheckBox.IsChecked) {
+            Install-AppFromWinget -id "CodecGuide.K-LiteCodecPack.Mega"
+        }
+        if ($VLCCheckBox.IsChecked) {
+            Install-AppFromWinget -id "VideoLAN.VLC"
+        }
+
+        if ($WinUtilCheckBox.IsChecked) {
+            Add-WinUtilShortcut
+        }
+        if ($OOSUCheckBox.IsChecked) {
+            Install-OOSU
+        }
+        if ($KeePassXCCheckBox.IsChecked) {
+            Install-AppFromWinget -id "KeePassXCTeam.KeePassXC"
+        }
+        if ($UniGetUICheckBox.IsChecked) {
+            Install-AppFromWinget -id "MartiCliment.UniGetUI"
+        }
+        if ($NotepadPPCheckBox.IsChecked) {
+            Install-AppFromWinget -id "Notepad++.Notepad++"
+        }
+        if ($PowerShell7CheckBox.IsChecked) {
+            Install-AppFromWinget -id "Microsoft.PowerShell"
+        }
+    })
+
+    <#$ContinueInstallMediaButton.Add_Click({
+
+    })#>
 
     return $mainViewForm
 }
