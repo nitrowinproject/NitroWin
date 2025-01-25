@@ -48,7 +48,7 @@ function Initialize-MainView {
     # Set Other as default option in ComboBox
     $GPUOptionComboBox.SelectedIndex = 0
     
-    # Give buttons functions
+    # Give buttons some functionality
     $ContinueCurrentSystemButton.Add_Click({
         Invoke-Tweaks
         if ($BraveCheckBox.IsChecked) {
@@ -90,9 +90,9 @@ function Initialize-MainView {
         }
     })
 
-    <#$ContinueInstallMediaButton.Add_Click({
-
-    })#>
+    $ContinueInstallMediaButton.Add_Click({
+        
+    })
 
     return $mainViewForm
 }
