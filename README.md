@@ -53,6 +53,16 @@ This is the most obvious one, I don't think I have to say anything about that on
 
 4. The GUI will open up and is ready for you to use.
 
+### Create minimal ISO
+
+If you want to build a minimal ISO, check out [my fork of WinUtil](https://github.com/Nitro4542/winutil). Create an ISO with MicroWin, just as you would with the regular WinUtil. The ISO will automatically contain the answer file and a copy of NitroWin. Note that the automatic user creation doesn't work because I had to remove the answer file from the original repo.
+
+To run my fork of WinUtil, run the following inside an elevated PowerShell prompt:
+
+```powershell
+iex (irm "https://raw.githubusercontent.com/Nitro4542/winutil/main/winutil.ps1")
+```
+
 ## License
 
 This project is licensed under the [Unlicense](LICENSE).
