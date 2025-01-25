@@ -11,6 +11,8 @@
 
 #Requires -RunAsAdministrator
 
+$Host.UI.RawUI.WindowTitle = "NitroWin"
+
 Import-Module ".\src\NitroWin.Helper\NitroWin.Helper.psm1" -Force
 Import-Module ".\src\NitroWin.Installer\NitroWin.Installer.psm1" -Force
 Import-Module ".\src\NitroWin.Tweaks\NitroWin.Tweaks.psm1" -Force
