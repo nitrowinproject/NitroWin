@@ -35,7 +35,13 @@ function Install-AppFromURL {
     try {
         Write-Host "Installing $name..."
         $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder) -filetype $filetype
-        Start-Process $download -ArgumentList $arguments -Wait
+        if ($arguments) {
+            Start-Process $download -ArgumentList $arguments -Wait
+        }
+        else {
+            Start-Process $download -Wait
+        }
+        
     }
     catch {
         $message = "Error while installing $($name). Continue without installing?"
