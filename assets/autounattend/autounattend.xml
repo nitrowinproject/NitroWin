@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&CompactOsMode=Default&TimeZoneMode=Implicit&PartitionMode=Interactive&WindowsEditionMode=Interactive&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&ShowFileExtensions=true&LaunchToThisPC=true&TaskbarSearch=Hide&TaskbarIconsMode=Empty&DisableWidgets=true&LeftTaskbar=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableFastStartup=true&EnableLongPaths=true&DisableLastAccess=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&MakeEdgeUninstallable=true&DisablePointerPrecision=true&DeleteWindowsOld=true&EffectsMode=Default&WifiMode=Interactive&ExpressSettings=DisableAll&KeysMode=Configure&CapsLockInitial=Off&CapsLockBehavior=Toggle&NumLockInitial=On&NumLockBehavior=Toggle&ScrollLockInitial=Off&ScrollLockBehavior=Toggle&ColorMode=Default&WallpaperMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveRdpClient=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWordPad=true&RemoveYourPhone=true&SystemScript0=%EF%BB%BFWindows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Ccurrent%5Cdevice%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5CExcludeWUDriversInQualityUpdate%5D%0D%0A%22value%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDevice+Metadata%5D%0D%0A%22PreventDeviceMetadataFromNetwork%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDriverSearching%5D%0D%0A%22SearchOrderConfig%22%3Ddword%3A00000000%0D%0A%22DontSearchWindowsUpdate%22%3Ddword%3A00000001&SystemScriptType0=Reg&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&CompactOsMode=Never&TimeZoneMode=Implicit&PartitionMode=Interactive&WindowsEditionMode=Interactive&UserAccountMode=InteractiveLocal&PasswordExpirationMode=Unlimited&LockoutMode=Default&HideFiles=Hidden&ShowFileExtensions=true&LaunchToThisPC=true&TaskbarSearch=Hide&TaskbarIconsMode=Empty&DisableWidgets=true&LeftTaskbar=true&HideTaskViewButton=true&DisableBingResults=true&StartTilesMode=Empty&StartPinsMode=Empty&DisableFastStartup=true&EnableLongPaths=true&DisableLastAccess=true&DisableAppSuggestions=true&PreventDeviceEncryption=true&HideEdgeFre=true&MakeEdgeUninstallable=true&DisablePointerPrecision=true&DeleteWindowsOld=true&EffectsMode=Default&WifiMode=Interactive&ExpressSettings=DisableAll&KeysMode=Configure&CapsLockInitial=Off&CapsLockBehavior=Toggle&NumLockInitial=On&NumLockBehavior=Toggle&ScrollLockInitial=Off&ScrollLockBehavior=Toggle&ColorMode=Default&WallpaperMode=Default&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveInternetExplorer=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveMixedReality=true&RemoveZuneVideo=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOneSync=true&RemoveOutlook=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemovePowerShellISE=true&RemoveQuickAssist=true&RemoveRecall=true&RemoveRdpClient=true&RemoveSkype=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWallet=true&RemoveWeather=true&RemoveFaxAndScan=true&RemoveWindowsMediaPlayer=true&RemoveZuneMusic=true&RemoveWordPad=true&RemoveYourPhone=true&SystemScript0=%EF%BB%BFWindows+Registry+Editor+Version+5.00%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Ccurrent%5Cdevice%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindowsUpdate%5D%0D%0A%22ExcludeWUDriversInQualityUpdate%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CUpdate%5CExcludeWUDriversInQualityUpdate%5D%0D%0A%22value%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDevice+Metadata%5D%0D%0A%22PreventDeviceMetadataFromNetwork%22%3Ddword%3A00000001%0D%0A%0D%0A%5BHKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDriverSearching%5D%0D%0A%22SearchOrderConfig%22%3Ddword%3A00000000%0D%0A%22DontSearchWindowsUpdate%22%3Ddword%3A00000001&SystemScriptType0=Reg&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<ImageInstall>
+				<OSImage>
+					<Compact>false</Compact>
+				</OSImage>
+			</ImageInstall>
 			<UserData>
 				<ProductKey>
 					<Key>00000-00000-00000-00000-00000</Key>
@@ -79,24 +84,18 @@ param(
 );
 
 foreach( $file in $Document.unattend.Extensions.File ) {
-    $path = [System.Environment]::ExpandEnvironmentVariables(
-        $file.GetAttribute( 'path' )
-    );
+    $path = [System.Environment]::ExpandEnvironmentVariables( $file.GetAttribute( 'path' ) );
     mkdir -Path( $path | Split-Path -Parent ) -ErrorAction 'SilentlyContinue';
-    $content = $file.InnerText.Trim();
-    if( $file.GetAttribute( 'transformation' ) -ieq 'Base64' ) {
-        [System.IO.File]::WriteAllBytes( $path, [System.Convert]::FromBase64String( $content ) );
-    } else {
-        $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
-            { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
-            { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
-            default { [System.Text.Encoding]::Default; }
-        };
-        [System.IO.File]::WriteAllBytes( $path, ( $encoding.GetPreamble() + $encoding.GetBytes( $content ) ) );
-    }
+    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
+        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
+        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
+        default { [System.Text.Encoding]::Default; }
+    };
+    $bytes = $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() );
+    [System.IO.File]::WriteAllBytes( $path, $bytes );
 }
 		</ExtractScript>
-		<File path="C:\Windows\Setup\Scripts\RemovePackages.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\RemovePackages.ps1">
 $selectors = @(
 	'Microsoft.Microsoft3DViewer';
 	'Microsoft.BingSearch';
@@ -171,7 +170,7 @@ $logfile = 'C:\Windows\Setup\Scripts\RemovePackages.log';
 	}
 } *&gt;&amp;1 &gt;&gt; $logfile;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\RemoveCapabilities.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\RemoveCapabilities.ps1">
 $selectors = @(
 	'Print.Fax.Scan';
 	'Browser.InternetExplorer';
@@ -226,7 +225,7 @@ $logfile = 'C:\Windows\Setup\Scripts\RemoveCapabilities.log';
 	}
 } *&gt;&amp;1 &gt;&gt; $logfile;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\RemoveFeatures.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\RemoveFeatures.ps1">
 $selectors = @(
 	'Microsoft-RemoteDesktopConnection';
 	'Recall';
@@ -274,7 +273,7 @@ $logfile = 'C:\Windows\Setup\Scripts\RemoveFeatures.log';
 	}
 } *&gt;&amp;1 &gt;&gt; $logfile;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\TaskbarLayoutModification.xml" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\TaskbarLayoutModification.xml">
 &lt;LayoutModificationTemplate xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification" xmlns:defaultlayout="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" xmlns:start="http://schemas.microsoft.com/Start/2014/StartLayout" xmlns:taskbar="http://schemas.microsoft.com/Start/2014/TaskbarLayout" Version="1"&gt;
 	&lt;CustomTaskbarLayoutCollection PinListPlacement="Replace"&gt;
 		&lt;defaultlayout:TaskbarLayout&gt;
@@ -285,7 +284,7 @@ $logfile = 'C:\Windows\Setup\Scripts\RemoveFeatures.log';
 	&lt;/CustomTaskbarLayoutCollection&gt;
 &lt;/LayoutModificationTemplate&gt;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.vbs" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.vbs">
 HKU = &amp;H80000003
 Set reg = GetObject("winmgmts://./root/default:StdRegProv")
 Set fso = CreateObject("Scripting.FileSystemObject")
@@ -302,7 +301,7 @@ If reg.EnumKey(HKU, "", sids) = 0 Then
 	End If
 End If
 		</File>
-		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.xml" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\UnlockStartLayout.xml">
 &lt;Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"&gt;
 	&lt;Triggers&gt;
 		&lt;EventTrigger&gt;
@@ -343,7 +342,7 @@ End If
 	&lt;/Actions&gt;
 &lt;/Task&gt;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\MakeEdgeUninstallable.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\MakeEdgeUninstallable.ps1">
 $ErrorActionPreference = 'Stop';
 &amp; {
 	try {
@@ -363,7 +362,7 @@ $ErrorActionPreference = 'Stop';
 	}
 } *&gt;&amp;1 &gt;&gt; 'C:\Windows\Setup\Scripts\MakeEdgeUninstallable.log';
 		</File>
-		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\SetStartPins.ps1">
 $json = '{"pinnedList":[]}';
 if( [System.Environment]::OSVersion.Version.Build -lt 20000 ) {
 	return;
@@ -372,7 +371,7 @@ $key = 'Registry::HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start';
 New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
 Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
 		</File>
-		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml" transformation="Text">
+		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml">
 &lt;LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification"&gt;
 	&lt;LayoutOptions StartTileGroupCellWidth="6" /&gt;
 	&lt;DefaultLayoutOverride&gt;
@@ -382,7 +381,7 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 	&lt;/DefaultLayoutOverride&gt;
 &lt;/LayoutModificationTemplate&gt;
 		</File>
-		<File path="C:\Windows\Setup\Scripts\unattend-01.reg" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\unattend-01.reg">
 &#xFEFF;Windows Registry Editor Version 5.00
 
 [HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PolicyManager\current\device\Update]
@@ -407,7 +406,7 @@ Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type
 "SearchOrderConfig"=dword:00000000
 "DontSearchWindowsUpdate"=dword:00000001
 		</File>
-		<File path="C:\Windows\Setup\Scripts\Specialize.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
 $scripts = @(
 	{
 		reg.exe add "HKLM\SYSTEM\Setup\MoSetup" /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f;
@@ -488,7 +487,7 @@ $scripts = @(
 	}
 } *&gt;&amp;1 &gt;&gt; "C:\Windows\Setup\Scripts\Specialize.log";
 		</File>
-		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1">
 $scripts = @(
 	{
 		Get-AppxPackage -Name 'Microsoft.Windows.Ai.Copilot.Provider' | Remove-AppxPackage;
@@ -514,7 +513,7 @@ $scripts = @(
 	}
 } *&gt;&amp;1 &gt;&gt; "$env:TEMP\UserOnce.log";
 		</File>
-		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\DefaultUser.ps1">
 $scripts = @(
 	{
 		reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f;
@@ -592,7 +591,7 @@ $scripts = @(
 	}
 } *&gt;&amp;1 &gt;&gt; "C:\Windows\Setup\Scripts\DefaultUser.log";
 		</File>
-		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1" transformation="Text">
+		<File path="C:\Windows\Setup\Scripts\FirstLogon.ps1">
 $scripts = @(
 	{
 		cmd.exe /c "rmdir C:\Windows.old";
