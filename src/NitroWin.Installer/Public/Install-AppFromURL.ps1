@@ -8,11 +8,14 @@
 .PARAMETER name
     The name of the app
 
+.PARAMETER filetype
+    The file type of the app installer
+
 .PARAMETER arguments
     Arguments to give to the installer
 
 .EXAMPLE
-    Install-AppFromURL -url "https://example.com/program.exe" -name "Example" -arguments "/quiet"
+    Install-AppFromURL -url "https://example.com/program.exe" -name "Example" -filetype ".exe" -arguments "/quiet"
 #>
 
 function Install-AppFromURL {
@@ -23,12 +26,15 @@ function Install-AppFromURL {
         [Parameter(Mandatory=$true)]
         [string]$name,
 
+        [Parameter(Mandatory=$true)]
+        [string]$filetype,
+
         [string]$arguments
     )
 
     try {
         Write-Host "Installing $name..."
-        $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder)
+        $download = Get-FileFromURL -url $url -outpath $(Get-DownloadFolder) -filetype $filetype
         Start-Process $download -ArgumentList $arguments -Wait
     }
     catch {
