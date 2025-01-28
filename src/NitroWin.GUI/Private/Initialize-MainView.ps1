@@ -27,6 +27,7 @@ function Initialize-MainView {
     # Give buttons some functionality
     $MainViewContinueCurrentSystemButton.Add_Click({
         Invoke-Tweaks
+        Show-Prompt -message "If you want to use the Ultimate Power Plan, enable it in the Control Panel. If you have multiple instances of the Ultimate Power Plan, delete all except one and use that." -title "Ultimate Power Plan" -buttons OK -icon Information
         if ($MainViewBraveCheckBox.isChecked) {
             Install-Brave
         }
