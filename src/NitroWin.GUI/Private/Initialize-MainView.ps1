@@ -31,7 +31,7 @@ function Initialize-MainView {
             Install-Brave
         }
         if ($MainViewFirefoxCheckBox.isChecked) {
-            Install-Firefox
+            Install-AppFromWinGet -id "Mozilla.Firefox"
         }
         if ($MainView7ZipCheckBox.isChecked) {
             Install-AppFromWinGet -id "7zip.7zip"
