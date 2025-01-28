@@ -53,6 +53,10 @@ This is the most obvious one, I don't think I have to say anything about that on
 
 4. The GUI will open up and is ready for you to use.
 
+### Some tweaks fail to import
+
+All tweaks ending with "Extended" will fail to import, because you need TrustedInstaller privileges to import them. If you want to import them (which is still recommended), run the [ti-tweaks.bat](ti-tweaks.bat) script with TrustedInstaller privileges. You can do this using [ExecTI](https://winaero.com/downloads/ExecTI.zip).
+
 ### Create minimal ISO
 
 If you want to build a minimal ISO, check out [my fork of WinUtil](https://github.com/Nitro4542/winutil). Create an ISO with MicroWin, just as you would with the regular WinUtil. The ISO will automatically contain the answer file and a copy of NitroWin. Note that the automatic user creation doesn't work because I had to remove the answer file from the original repo.
