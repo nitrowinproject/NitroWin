@@ -46,6 +46,18 @@ function Initialize-MainView {
         if ($MainViewVLCCheckBox.isChecked) {
             Install-AppFromWinGet -id "VideoLAN.VLC"
         }
+        if ($MainViewDiscordCheckBox.isChecked) {
+            Install-AppFromWinGet -id "Discord.Discord"
+        }
+        if ($MainViewWhatsAppCheckBox.isChecked) {
+            Start-Process "https://www.microsoft.com/store/productid/9NKSQGP7F2NH"
+        }
+        if ($MainViewSteamCheckBox.isChecked) {
+            Install-AppFromWinGet -id "Valve.Steam"
+        }
+        if ($MainViewEpicGamesCheckBox.isChecked) {
+            Install-AppFromWinGet -id "EpicGames.EpicGamesLauncher"
+        }
 
         if ($MainViewWinUtilCheckBox.isChecked) {
             Add-WinUtilShortcut

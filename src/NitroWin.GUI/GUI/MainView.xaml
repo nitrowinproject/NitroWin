@@ -65,6 +65,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <CheckBox x:Name="MainViewBraveCheckBox" Content="Brave" Grid.Row="0" Grid.Column="0" Margin="0,0,0,2"/>
@@ -75,6 +77,12 @@
 
                 <CheckBox x:Name="MainViewKLCPCheckBox" Content="K-Lite Codec Pack Mega" Grid.Row="0" Grid.Column="2" Margin="0,0,0,2"/>
                 <CheckBox x:Name="MainViewVLCCheckBox" Content="VLC media player" Grid.Row="1" Grid.Column="2" Margin="0,0,0,2"/>
+
+                <CheckBox x:Name="MainViewDiscordCheckBox" Content="Discord" Grid.Row="0" Grid.Column="3" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewWhatsAppCheckBox" Content="WhatsApp" Grid.Row="1" Grid.Column="3" Margin="0,0,0,2"/>
+
+                <CheckBox x:Name="MainViewSteamCheckBox" Content="Steam" Grid.Row="0" Grid.Column="4" Margin="0,0,0,2"/>
+                <CheckBox x:Name="MainViewEpicGamesCheckBox" Content="Epic Games Launcher" Grid.Row="1" Grid.Column="4" Margin="0,0,0,2"/>
             </Grid>
 
             <Label Content="Tools" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="18" FontWeight="Bold"/>
