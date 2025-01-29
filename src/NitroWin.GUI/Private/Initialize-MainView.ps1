@@ -65,6 +65,12 @@ function Initialize-MainView {
         if ($MainViewPowerShell7CheckBox.isChecked) {
             Install-AppFromWinGet -id "Microsoft.PowerShell"
         }
+        if ($MainViewMSIAfterburnerCheckBox.isChecked) {
+            Install-AppFromWinGet -id "Guru3D.Afterburner"
+        }
+        if ($MainViewStartAllBackCheckBox.isChecked) {
+            Install-AppFromWinGet -id "StartIsBack.StartAllBack"
+        }
 
         if ($MainViewGPUOptionComboBox.SelectedIndex -eq 1) {
             Start-Process "https://github.com/GSDragoon/RadeonSoftwareSlimmer/releases/latest"
