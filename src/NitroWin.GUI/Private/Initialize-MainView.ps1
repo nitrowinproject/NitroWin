@@ -65,6 +65,13 @@ function Initialize-MainView {
         if ($MainViewPowerShell7CheckBox.isChecked) {
             Install-AppFromWinGet -id "Microsoft.PowerShell"
         }
+
+        if ($MainViewGPUOptionComboBox.SelectedIndex -eq 1) {
+            Start-Process "https://github.com/GSDragoon/RadeonSoftwareSlimmer/releases/latest"
+        }
+        elseif ($MainViewGPUOptionComboBox.SelectedIndex -eq 2) {
+            Start-Process "https://www.techpowerup.com/download/techpowerup-nvcleanstall/"
+        }
     })
 
     $MainViewContinueInstallMediaButton.Add_Click({
