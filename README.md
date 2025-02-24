@@ -55,7 +55,7 @@ This is the most obvious one, I don't think I have to say anything about that on
 
 ### Some tweaks fail to import
 
-All tweaks ending with "Extended" will fail to import, because you need TrustedInstaller privileges to import them. If you want to import them (which is still recommended), run the [ti-tweaks.bat](ti-tweaks.bat) script with TrustedInstaller privileges. You can do this using [ExecTI](https://winaero.com/downloads/ExecTI.zip).
+All tweaks ending with "Extended" will fail to import, because you need TrustedInstaller privileges to import them. If you want to import them (which is still recommended), run the [ti-tweaks.bat](ti-tweaks.bat) script with TrustedInstaller privileges. You can do this using [ExecTI](https://winaero.com/download-execti-run-as-trustedinstaller/).
 
 ### Create a minimal ISO
 
