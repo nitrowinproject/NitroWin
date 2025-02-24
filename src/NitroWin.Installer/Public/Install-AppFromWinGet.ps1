@@ -16,5 +16,5 @@ function Install-AppFromWinGet {
     )
 
     Write-Host "Installing $id..."
-    Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -ArgumentList "install --id $($id) --exact --scope machine --architecture x64 --accept-package-agreements --accept-source-agreements --interactive"
+    Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -ArgumentList "install --id $($id) --exact --scope machine --accept-package-agreements --accept-source-agreements --interactive"
 }
