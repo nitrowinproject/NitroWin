@@ -18,3 +18,6 @@ Windows Registry Editor Version 5.00
 
 [HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer]
 "DisableSearchBoxSuggestions"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows Search\Gather\Windows\SystemIndex]
+"RespectPowerModes"=dword:00000001
