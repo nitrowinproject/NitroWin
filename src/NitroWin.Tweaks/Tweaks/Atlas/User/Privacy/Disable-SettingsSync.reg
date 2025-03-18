@@ -1,11 +1,5 @@
 Windows Registry Editor Version 5.00
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\SettingSync]
-"DisableSettingSync"=dword:00000002
-"DisableSettingSyncUserOverride"=dword:00000001
-"DisableSyncOnPaidNetwork"=dword:00000001
-"DisableWindowsSettingSync"=dword:00000002
-
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\SettingSync\Groups\Personalization]
 "Enabled"=dword:00000000
 

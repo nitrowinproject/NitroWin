@@ -10,17 +10,8 @@ Windows Registry Editor Version 5.00
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Personalization\Settings]
 "AcceptedPrivacyPolicy"=dword:00000000
 
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\TabletPC]
-"PreventHandwritingDataSharing"=dword:00000001
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports]
-"PreventHandwritingErrorReports"=dword:00000001
-
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\Settings]
 "InsightsEnabled"=dword:00000000
 
 [HKEY_CURRENT_USER\SOFTWARE\Microsoft\Input\TIPC]
-"Enabled"=dword:00000000
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Input\TIPC]
 "Enabled"=dword:00000000
