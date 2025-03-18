@@ -1,0 +1,4 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\Software\NVIDIA Corporation\NVControlPanel2\Client]
+"OptInOrOutPreference"=dword:00000000
