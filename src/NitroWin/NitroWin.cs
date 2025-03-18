@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NitroWin {
+﻿namespace NitroWin {
     public class NitroWin {
         public static void Main() {
             Console.Title = "NitroWin";
