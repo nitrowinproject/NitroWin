@@ -1,0 +1,8 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Microsoft\TabletTip\1.7]
+"EnableAutocorrection"="0"
+"EnableDoubleTapSpace"="0"
+"EnablePredictionSpaceInsertion"="0"
+"EnableSpellchecking"="0"
+"EnableTextPrediction"="0"
