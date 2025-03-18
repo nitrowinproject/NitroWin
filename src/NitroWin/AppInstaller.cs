@@ -38,5 +38,24 @@ namespace NitroWin {
 
             await DownloadFile(oosuUrl, desktopPath, "OOSU10.exe");
         }
+        public static void InstallWinUtilShortcut() {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string shortcutPath = Path.Combine(desktopPath, "WinUtil.lnk");
+
+            string targetPath = Environment.ExpandEnvironmentVariables(@"%windir%\System32\WindowsPowerShell\v1.0\powershell.exe");
+            string arguments = "-Command \"irm 'https://christitus.com/win' | iex\"";
+
+            Type shellType = Type.GetTypeFromProgID("WScript.Shell")!;
+            dynamic wshShell = Activator.CreateInstance(shellType);
+            dynamic shortcut = wshShell.CreateShortcut(shortcutPath);
+
+            shortcut.TargetPath = targetPath;
+            shortcut.Arguments = arguments;
+            shortcut.Save();
+
+            byte[] bytes = File.ReadAllBytes(shortcutPath);
+            bytes[0x15] |= 0x20;
+            File.WriteAllBytes(shortcutPath, bytes);
+        }
     }
 }
