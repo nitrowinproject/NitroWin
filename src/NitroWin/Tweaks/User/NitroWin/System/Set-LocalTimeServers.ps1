@@ -1,15 +1,11 @@
 <#
-.SYNOPSIS
-    Sets your time servers to a pool of local time servers from ntppool.org
-
-.EXAMPLE
-    Set-LocalTimeServers
+The basis of this tweak comes from Atlas, but I modified it to give me more local time servers.
 #>
 
 function Set-LocalTimeServers {
-    $lang = Get-LangWithoutRegion
+    $region = ((Get-WinSystemLocale).Name).Split("-")[1].ToLower()
 
-    $servers = "0.$lang.pool.ntp.org 1.$lang.pool.ntp.org 2.$lang.pool.ntp.org 3.$lang.pool.ntp.org"
+    $servers = "0.$region.pool.ntp.org 1.$region.pool.ntp.org 2.$region.pool.ntp.org 3.$region.pool.ntp.org"
 
     Start-Process -wait -FilePath "w32tm.exe" -ArgumentList "/config /syncfromflags:manual /manualpeerlist:`"$servers`""
     Start-Process -wait -FilePath "w32tm.exe" -ArgumentList "/config /update"
