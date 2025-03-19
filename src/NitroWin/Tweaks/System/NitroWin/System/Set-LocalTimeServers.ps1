@@ -1,6 +1,4 @@
-<#
-The base idea of this tweak comes from Atlas, but I modified it to give me more local time servers.
-#>
+# The base idea of this tweak comes from Atlas, but I modified it to give me more local time servers.
 
 $region = ((Get-WinSystemLocale).Name).Split("-")[1].ToLower()
 
