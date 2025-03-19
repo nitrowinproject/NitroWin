@@ -3,10 +3,10 @@
         public static void Main() {
             Console.Title = "NitroWin";
 
-            bool installTweaks = Prompt("Install tweaks?");
+            bool mergeResult = Prompt("Merge tweaks?");
 
-            if (installTweaks) {
-                Tweaks.Apply();
+            if (mergeResult) {
+                Tweaks.Merge();
             }
         }
         public static bool Prompt(string message) {

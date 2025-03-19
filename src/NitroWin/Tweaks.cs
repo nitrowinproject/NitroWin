@@ -1,35 +1,47 @@
-using System.Diagnostics;
-
 namespace NitroWin {
     public class Tweaks {
-        public static void Apply() {
+        public static void Merge() {
             if (Directory.Exists("Tweaks")) {
-                Import();
-                Invoke();
+                String mergeDirectory = "Tweaks";
+                
+                String mergedRegistryFile = "NitroWin.Tweaks.reg";
+                String mergedBatchFile = "NitroWin.Tweaks.bat";
+                String mergedPowerShellFile = "NitroWin.Tweaks.ps1";
+
+                MergeRegistryFiles(mergedRegistryFile, mergeDirectory);
+                MergeFiles(mergedBatchFile, mergeDirectory, "bat");
+                MergeFiles(mergedPowerShellFile, mergeDirectory, "ps1");
             }
             else {
-                Download();
-                Import();
-                Invoke();
+                Console.WriteLine("Download comming soon. Please download the Tweaks folder manually.");
             }
         }
-        private static void Download() {
-            Console.WriteLine("Download comming soon. Please download the Tweaks folder manually.");
-        }
-        private static void Import() {
-            foreach (string file in Directory.EnumerateFiles("Tweaks", "*.reg", SearchOption.AllDirectories)) {
-                Console.WriteLine($"Importing {file}...");
-                Process.Start("reg.exe", $"import \"{file}\"");
+        private static void MergeRegistryFiles(String mergedFile, String registryDirectory) {
+            if (File.Exists(mergedFile))
+            {
+                File.Delete(mergedFile);
+            }
+
+            File.WriteAllText(mergedFile, "Windows Registry Editor Version 5.00" + Environment.NewLine);
+
+            var registryFiles = Directory.GetFiles(registryDirectory, "*.reg", SearchOption.AllDirectories);
+
+            foreach (var file in registryFiles) {
+                var lines = File.ReadLines(file).Skip(1);
+                File.AppendAllLines(mergedFile, lines);
             }
         }
-        private static void Invoke() {
-            foreach (string file in Directory.EnumerateFiles("Tweaks", "*.bat", SearchOption.AllDirectories)) {
-                Console.WriteLine($"Invoking {file}...");
-                Process.Start("cmd.exe", $"/c \"{file}\"");
+        private static void MergeFiles(String mergedFile, String fileDirectory, string fileExtension) {
+            if (File.Exists(mergedFile))
+            {
+                File.Delete(mergedFile);
             }
-            foreach (string file in Directory.EnumerateFiles("Tweaks", "*.ps1", SearchOption.AllDirectories)) {
-                Console.WriteLine($"Invoking {file}...");
-                Process.Start("powershell.exe", $"-Command \"Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted -Force; & '{file}'\"");
+
+            var mergeFiles = Directory.GetFiles(fileDirectory, $"*.{fileExtension}", SearchOption.AllDirectories);
+
+            foreach (var file in mergeFiles) {
+                var lines = File.ReadLines(file);
+                File.AppendAllLines(mergedFile, lines);
             }
         }
     }
