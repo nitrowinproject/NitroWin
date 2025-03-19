@@ -4,19 +4,19 @@ namespace NitroWin {
     public class Tweaks {
         public static void Import() {
             if (Directory.Exists("Tweaks")) {
-                Merge();
+                Apply();
                 Invoke();
             }
             else {
                 Download();
-                Merge();
+                Apply();
                 Invoke();
             }
         }
         private static void Download() {
             Console.WriteLine("Download comming soon. Please download the Tweaks folder manually.");
         }
-        private static void Merge() {
+        private static void Apply() {
             foreach (string file in Directory.EnumerateFiles("Tweaks", "*.reg", SearchOption.AllDirectories)) {
                 Console.WriteLine($"Importing {file}...");
                 Process.Start("reg.exe", $"import \"{file}\"");
