@@ -2,21 +2,21 @@ using System.Diagnostics;
 
 namespace NitroWin {
     public class Tweaks {
-        public static void Import() {
+        public static void Apply() {
             if (Directory.Exists("Tweaks")) {
-                Apply();
+                Import();
                 Invoke();
             }
             else {
                 Download();
-                Apply();
+                Import();
                 Invoke();
             }
         }
         private static void Download() {
             Console.WriteLine("Download comming soon. Please download the Tweaks folder manually.");
         }
-        private static void Apply() {
+        private static void Import() {
             foreach (string file in Directory.EnumerateFiles("Tweaks", "*.reg", SearchOption.AllDirectories)) {
                 Console.WriteLine($"Importing {file}...");
                 Process.Start("reg.exe", $"import \"{file}\"");

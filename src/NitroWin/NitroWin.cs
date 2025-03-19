@@ -6,7 +6,7 @@
             bool installTweaks = Prompt("Install tweaks?");
 
             if (installTweaks) {
-                Tweaks.Import();
+                Tweaks.Apply();
             }
         }
         public static bool Prompt(string message) {
