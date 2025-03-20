@@ -1,0 +1,1 @@
+Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -ArgumentList "install --id StartIsBack.StartAllBack --exact --scope machine --accept-package-agreements --accept-source-agreements --interactive"
