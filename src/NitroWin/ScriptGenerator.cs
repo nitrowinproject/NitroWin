@@ -1,76 +1,76 @@
 namespace NitroWin {
     public class ScriptGenerator {
         public static async Task<string> GenerateAppInstallScript(ConfigFile configFile) {
-            List<string> appInstallScriptContent = new List<string>();
+            var appInstallScriptContent = string.Empty;
             Dictionary<string,string> scriptUrls = ScriptUrls();
 
             if (configFile.Apps.Browser.Contains("brave")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["brave"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["brave"]);
             }
             if (configFile.Apps.Browser.Contains("librewolf")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["librewolf"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["librewolf"]);
             }
             if (configFile.Apps.Browser.Contains("firefox")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["firefox"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["firefox"]);
             }
 
             if (configFile.Apps.Archiving.Contains("7zip")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["7zip"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["7zip"]);
             }
             if (configFile.Apps.Archiving.Contains("winrar")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["winrar"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["winrar"]);
             }
 
             if (configFile.Apps.Multimedia.Contains("vlc")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["vlc"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["vlc"]);
             }
             if (configFile.Apps.Multimedia.Contains("klcp")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["klcp"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["klcp"]);
             }
 
             if (configFile.Apps.Communication.Contains("discord")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["discord"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["discord"]);
             }
 
             if (configFile.Apps.Gaming.Contains("steam")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["steam"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["steam"]);
             }
             if (configFile.Apps.Gaming.Contains("epicgames")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["epicgames"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["epicgames"]);
             }
 
             if (configFile.Apps.Tools.Contains("winutil")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["winutil"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["winutil"]);
             }
             if (configFile.Apps.Tools.Contains("oosu")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["oosu"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["oosu"]);
             }
             if (configFile.Apps.Tools.Contains("msiafterburner")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["msiafterburner"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["msiafterburner"]);
             }
             if (configFile.Apps.Tools.Contains("unigetui")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["unigetui"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["unigetui"]);
             }
             if (configFile.Apps.Tools.Contains("notepadplusplus")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["notepadplusplus"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["notepadplusplus"]);
             }
             if (configFile.Apps.Tools.Contains("startallback")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["startallback"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["startallback"]);
             }
             if (configFile.Apps.Tools.Contains("keepassxc")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["keepassxc"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["keepassxc"]);
             }
             if (configFile.Apps.Tools.Contains("powershell7")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["powershell7"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["powershell7"]);
             }
 
             if (configFile.Gpu.Contains("amd")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["amd"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["amd"]);
             }
             if (configFile.Gpu.Contains("nvidia")) {
-                appInstallScriptContent.Add(await Helper.DownloadFileToString(scriptUrls["nvidia"]));
+                appInstallScriptContent += await Helper.DownloadFileToString(scriptUrls["nvidia"]);
             }
-            return appInstallScriptContent.ToString();
+            return appInstallScriptContent;
         }
         private static Dictionary<string, string> ScriptUrls() {
             Dictionary<string, string> urls = new Dictionary<string, string>();
