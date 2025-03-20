@@ -403,3 +403,5 @@ FodyWeavers.xsd
 NitroWin.Tweaks.bat
 NitroWin.Tweaks.ps1
 NitroWin.Tweaks.reg
+
+NitroWin.AppInstallScript.ps1

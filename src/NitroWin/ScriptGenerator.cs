@@ -1,5 +1,9 @@
 namespace NitroWin {
     public class ScriptGenerator {
+        public async static Task WriteToFile(String filePath) {
+            ConfigFile config = Config.ParseConfig();
+            File.WriteAllText(filePath, await ScriptGenerator.GenerateAppInstallScript(config));
+        }
         public static async Task<string> GenerateAppInstallScript(ConfigFile configFile) {
             var appInstallScriptContent = string.Empty;
             Dictionary<string,string> scriptUrls = ScriptUrls();
