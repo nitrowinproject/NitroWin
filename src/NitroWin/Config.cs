@@ -18,7 +18,7 @@ namespace NitroWin {
             String yml = File.ReadAllText("config.yml");
             
             var deserializer = new DeserializerBuilder()
-                .WithNamingConvention(UnderscoredNamingConvention.Instance)  // see height_in_inches in sample yml 
+                .WithNamingConvention(UnderscoredNamingConvention.Instance)
                 .Build();
             
             var config = deserializer.Deserialize<ConfigFile>(yml);
