@@ -3,7 +3,6 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace NitroWin {
     public class Config {
-        public ConfigFile parsedConfig = ParseConfig();
         public static async Task Initialize() {
             if (!File.Exists("config.yml")) {
                 String configUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/src/NitroWin/Assets/Configuration/config.yml";
@@ -15,7 +14,7 @@ namespace NitroWin {
                 Environment.Exit(0);
             }
         }
-        private static ConfigFile ParseConfig() {
+        public static ConfigFile ParseConfig() {
             String yml = File.ReadAllText("config.yml");
             
             var deserializer = new DeserializerBuilder()

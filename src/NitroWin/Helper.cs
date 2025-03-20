@@ -16,6 +16,19 @@ namespace NitroWin {
                 }
             }
         }
+        public async static Task<string> DownloadFileToString(string fileUrl) {
+            using HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(fileUrl);
+            
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                throw new Exception($"Error while fetching content from {fileUrl}. Status code: {response.StatusCode}");
+            }
+        }
         public static bool Prompt(string message) {
             Console.WriteLine(message);
             Console.WriteLine("[y|N]");
