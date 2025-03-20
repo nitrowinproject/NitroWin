@@ -1,1 +1,0 @@
-Get-AppxPackage -AllUsers Microsoft.Copilot* | Remove-AppxPackage -AllUsers

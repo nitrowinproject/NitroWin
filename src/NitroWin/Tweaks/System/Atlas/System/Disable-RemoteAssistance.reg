@@ -1,5 +1,0 @@
-Windows Registry Editor 5.00
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Remote Assistance]
-"fAllowFullControl"=dword:00000000
-"fAllowToGetHelp"=dword:00000000
