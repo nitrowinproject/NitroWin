@@ -5,7 +5,7 @@ namespace NitroWin {
     public class Config {
         public static async Task Initialize() {
             if (!File.Exists("config.yml")) {
-                String configUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/Assets/Configuration/config.yml";
+                String configUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/assets/Configuration/config.yml";
                 String workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 await Helper.DownloadFile(configUrl, workingDirectory, "config.yml");
 

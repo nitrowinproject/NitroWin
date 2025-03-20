@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="Assets/Images/NitroWin.png" alt="NitroWin" width="200">
+   <img src="assets/Images/NitroWin.png" alt="NitroWin" width="200">
 
    <h1>NitroWin</h1>
 
