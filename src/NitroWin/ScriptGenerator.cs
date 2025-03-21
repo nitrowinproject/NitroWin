@@ -19,14 +19,35 @@ namespace NitroWin {
                     }
                 }
             }
-
-            AddScriptTasks(configFile.Apps.Browser);
-            AddScriptTasks(configFile.Apps.Archiving);
-            AddScriptTasks(configFile.Apps.Multimedia);
-            AddScriptTasks(configFile.Apps.Communication);
-            AddScriptTasks(configFile.Apps.Gaming);
-            AddScriptTasks(configFile.Apps.Tools);
-            AddScriptTasks(configFile.Gpu);
+            
+            try {
+                AddScriptTasks(configFile.Apps.Browser);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Apps.Archiving);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Apps.Multimedia);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Apps.Communication);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Apps.Gaming);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Apps.Tools);
+            }
+            catch {}
+            try {
+                AddScriptTasks(configFile.Gpu);
+            }
+            catch {}
 
             var scriptContents = await Task.WhenAll(scriptTasks);
             return string.Join(Environment.NewLine, scriptContents);
