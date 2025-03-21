@@ -1,5 +1,6 @@
 namespace NitroWin {
     public class Helper {
+        public static string WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
         public async static Task DownloadFile(string fileUrl, string downloadPath, string fileName) {
             string savePath = Path.Combine(downloadPath, fileName);
 

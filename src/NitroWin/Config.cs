@@ -1,21 +1,22 @@
+using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
 namespace NitroWin {
     public class Config {
+        private const string ConfigFileName = "config.yml";
+        private const string ConfigUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/assets/Configuration/config.yml";
         public static async Task Initialize() {
-            if (!File.Exists("config.yml")) {
-                String configUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/assets/Configuration/config.yml";
-                String workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                await Helper.DownloadFile(configUrl, workingDirectory, "config.yml");
+            if (!File.Exists(ConfigFileName)) {
+                await Helper.DownloadFile(ConfigUrl, Helper.WorkingDirectory, ConfigFileName);
 
                 Console.WriteLine("Please configure your config file and re-run this executable again.");
                 Console.ReadKey();
-                Environment.Exit(0);
+                return;
             }
         }
-        public static ConfigFile ParseConfig() {
-            String yml = File.ReadAllText("config.yml");
+        public static async Task<ConfigFile> ParseConfig() {
+            string yml = await File.ReadAllTextAsync(ConfigFileName);
             
             var deserializer = new DeserializerBuilder()
                 .WithNamingConvention(UnderscoredNamingConvention.Instance)
