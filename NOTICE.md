@@ -1,4 +1,4 @@
-# This project uses parts of other projects licensed under the MIT License
+# This project uses parts of other projects, which are licensed under the MIT License
 
 The project's code is still licensed under the Unlicense.
 
