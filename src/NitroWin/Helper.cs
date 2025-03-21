@@ -12,7 +12,7 @@ namespace NitroWin {
                     }
                 }
                 else {
-                    throw new Exception($"Error while downloading {fileUrl}.");
+                    throw new Exception($"Error while downloading {fileUrl}. Status code: {response.StatusCode}.");
                 }
             }
         }
@@ -26,7 +26,7 @@ namespace NitroWin {
             }
             else
             {
-                throw new Exception($"Error while fetching content from {fileUrl}. Status code: {response.StatusCode}");
+                throw new Exception($"Error while fetching content from {fileUrl}. Status code: {response.StatusCode}.");
             }
         }
         public static bool Prompt(string message) {
