@@ -22,6 +22,12 @@ Compared to other Windows modifications, NitroWin has:
 
 ## How do I use this?
 
+> [!IMPORTANT]
+> Install the [.NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if you haven't already.
+
+> [!NOTE]
+> You only need the desktop or the normal runtime, not both.
+
 Go to the [latest GitHub release page](https://github.com/Nitro4542/NitroWin/releases/latest) and download NitroWin.exe from there and run it.
 
 ### Some tweaks fail to import
