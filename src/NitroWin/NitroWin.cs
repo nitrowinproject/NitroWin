@@ -3,17 +3,10 @@
         public static async Task Main() {
             Console.Title = "NitroWin";
 
-            bool tweakResult = Helper.Prompt("Download tweaks?");
+            bool unattendResult = Helper.Prompt("Create autounattend.xml?");
 
-            if (tweakResult) {
-                Tweaks.Download();
-            }
-
-            bool appInstallScriptResult = Helper.Prompt("Create app install script?");
-
-            if (appInstallScriptResult) {
-                await Config.Initialize();
-                await ScriptGenerator.WriteToFile("NitroWin.AppInstallScript.ps1");
+            if (unattendResult) {
+                await AnswerFile.WriteToFile("autounattend.xml");
             }
         }
     }

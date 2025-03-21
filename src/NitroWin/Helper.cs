@@ -42,5 +42,11 @@ namespace NitroWin {
                 _ => false
             };
         }
+        public static void InsertIntoFile(string filePath, string textToInsert, string insertPoint) {
+            string text = File.ReadAllText(filePath);
+            int index = text.IndexOf(insertPoint) + insertPoint.Length;
+            text = text.Insert(index, Environment.NewLine + textToInsert);
+            File.WriteAllText(filePath, text);
+        }
     }
 }
