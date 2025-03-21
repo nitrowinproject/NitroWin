@@ -10,9 +10,9 @@ namespace NitroWin {
             if (!File.Exists(ConfigFileName)) {
                 await Helper.DownloadFile(ConfigUrl, Helper.WorkingDirectory, ConfigFileName);
 
-                Console.WriteLine("Please configure your config file and re-run this executable again.");
+                Console.WriteLine("Please configure your config file and re-run this executable again.\nPress any key to quit.");
                 Console.ReadKey();
-                return;
+                Environment.Exit(0);
             }
         }
         public static async Task<ConfigFile> ParseConfig() {
