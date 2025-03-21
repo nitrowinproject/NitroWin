@@ -30,18 +30,6 @@ namespace NitroWin {
                 throw new Exception($"Error while fetching content from {fileUrl}. Status code: {response.StatusCode}.");
             }
         }
-        public static bool Prompt(string message) {
-            Console.WriteLine(message);
-            Console.WriteLine("[y|N]");
-
-            string? result = Console.ReadLine();
-
-            return result switch {
-                "y" => true,
-                "n" => false,
-                _ => false
-            };
-        }
         public static void InsertIntoFile(string filePath, string textToInsert, string insertPoint) {
             string text = File.ReadAllText(filePath);
             int index = text.IndexOf(insertPoint) + insertPoint.Length;

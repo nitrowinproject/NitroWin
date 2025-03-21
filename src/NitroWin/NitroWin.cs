@@ -4,11 +4,8 @@
             Console.Title = "NitroWin";
             await Config.Initialize();
 
-            bool unattendResult = Helper.Prompt("Create autounattend.xml?");
-
-            if (unattendResult) {
-                await AnswerFile.WriteToFile();
-            }
+            Console.WriteLine("Creating answer file...");
+            await AnswerFile.WriteToFile();
         }
     }
 }
