@@ -3,10 +3,10 @@
         public static async Task Main() {
             Console.Title = "NitroWin";
 
-            bool mergeResult = Helper.Prompt("Merge tweaks?");
+            bool tweakResult = Helper.Prompt("Download tweaks?");
 
-            if (mergeResult) {
-                Tweaks.Merge();
+            if (tweakResult) {
+                Tweaks.Download();
             }
 
             bool appInstallScriptResult = Helper.Prompt("Create app install script?");

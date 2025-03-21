@@ -1,48 +1,36 @@
 namespace NitroWin {
     public class Tweaks {
-        public static void Merge() {
-            if (Directory.Exists("Tweaks")) {
-                String mergeDirectory = "Tweaks";
-                
-                String mergedRegistryFile = "NitroWin.Tweaks.reg";
-                String mergedBatchFile = "NitroWin.Tweaks.bat";
-                String mergedPowerShellFile = "NitroWin.Tweaks.ps1";
+        public static async Task Download() {
+            string registryUserUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.reg";
+            string powershellUserUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.ps1";
+            
+            string registrySystemUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.System.reg";
+            string powershellSystemUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.System.ps1";
 
-                MergeRegistryFiles(mergedRegistryFile, mergeDirectory);
-                MergeFiles(mergedBatchFile, mergeDirectory, "bat");
-                MergeFiles(mergedPowerShellFile, mergeDirectory, "ps1");
-            }
-            else {
-                Console.WriteLine("Download comming soon. Please download the Tweaks folder manually.");
-            }
-        }
-        private static void MergeRegistryFiles(String mergedFile, String registryDirectory) {
-            if (File.Exists(mergedFile))
-            {
-                File.Delete(mergedFile);
+            String workingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            if (File.Exists("NitroWin.Tweaks.User.reg")) {
+                File.Delete("NitroWin.Tweaks.User.reg");
             }
 
-            File.WriteAllText(mergedFile, "Windows Registry Editor Version 5.00" + Environment.NewLine);
-
-            var registryFiles = Directory.GetFiles(registryDirectory, "*.reg", SearchOption.AllDirectories);
-
-            foreach (var file in registryFiles) {
-                var lines = File.ReadLines(file).Skip(1);
-                File.AppendAllLines(mergedFile, lines);
-            }
-        }
-        private static void MergeFiles(String mergedFile, String fileDirectory, string fileExtension) {
-            if (File.Exists(mergedFile))
-            {
-                File.Delete(mergedFile);
+            if (File.Exists("NitroWin.Tweaks.User.ps1")) {
+                File.Delete("NitroWin.Tweaks.User.ps1");
             }
 
-            var mergeFiles = Directory.GetFiles(fileDirectory, $"*.{fileExtension}", SearchOption.AllDirectories);
-
-            foreach (var file in mergeFiles) {
-                var lines = File.ReadLines(file);
-                File.AppendAllLines(mergedFile, lines);
+            if (File.Exists("NitroWin.Tweaks.System.reg")) {
+                File.Delete("NitroWin.Tweaks.System.reg");
             }
+
+            if (File.Exists("NitroWin.Tweaks.System.ps1")) {
+                File.Delete("NitroWin.Tweaks.System.ps1");
+            }
+
+            await Task.WhenAll(
+                Helper.DownloadFile(registryUserUrl, workingDirectory, "NitroWin.Tweaks.User.reg"),
+                Helper.DownloadFile(powershellUserUrl, workingDirectory, "NitroWin.Tweaks.User.ps1"),
+                Helper.DownloadFile(registrySystemUrl, workingDirectory, "NitroWin.Tweaks.System.reg"),
+                Helper.DownloadFile(powershellSystemUrl, workingDirectory, "NitroWin.Tweaks.System.ps1")
+            );
         }
     }
 }
