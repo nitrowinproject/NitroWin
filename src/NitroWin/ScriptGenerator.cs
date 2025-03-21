@@ -9,7 +9,7 @@ namespace NitroWin {
             var scriptUrls = ScriptUrls();
             var scriptTasks = new List<Task<string>>();
             
-            void AddScriptTasks(IEnumerable<string> apps, string category)
+            void AddScriptTasks(IEnumerable<string> apps)
             {
                 foreach (var app in apps)
                 {
@@ -20,13 +20,13 @@ namespace NitroWin {
                 }
             }
 
-            AddScriptTasks(configFile.Apps.Browser, "Browser");
-            AddScriptTasks(configFile.Apps.Archiving, "Archiving");
-            AddScriptTasks(configFile.Apps.Multimedia, "Multimedia");
-            AddScriptTasks(configFile.Apps.Communication, "Communication");
-            AddScriptTasks(configFile.Apps.Gaming, "Gaming");
-            AddScriptTasks(configFile.Apps.Tools, "Tools");
-            AddScriptTasks(configFile.Gpu, "GPU");
+            AddScriptTasks(configFile.Apps.Browser);
+            AddScriptTasks(configFile.Apps.Archiving);
+            AddScriptTasks(configFile.Apps.Multimedia);
+            AddScriptTasks(configFile.Apps.Communication);
+            AddScriptTasks(configFile.Apps.Gaming);
+            AddScriptTasks(configFile.Apps.Tools);
+            AddScriptTasks(configFile.Gpu);
 
             var scriptContents = await Task.WhenAll(scriptTasks);
             return string.Join(Environment.NewLine, scriptContents);
