@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace NitroWin {
     public class AnswerFile {
         private const string AnswerFileName = "autounattend.xml";
