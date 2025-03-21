@@ -2,7 +2,7 @@ namespace NitroWin {
     public class AnswerFile {
         private const string AnswerFileName = "autounattend.xml";
         private const string AnswerFileUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/assets/AnswerFiles/autounattend.xml";
-        public static async Task WriteToFile(string filePath) {
+        public static async Task WriteToFile() {
             var tweaks = await GetTweaks();
 
             if (!File.Exists(AnswerFileName)) {

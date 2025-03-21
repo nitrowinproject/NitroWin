@@ -7,7 +7,7 @@
             bool unattendResult = Helper.Prompt("Create autounattend.xml?");
 
             if (unattendResult) {
-                await AnswerFile.WriteToFile("autounattend.xml");
+                await AnswerFile.WriteToFile();
             }
         }
     }
