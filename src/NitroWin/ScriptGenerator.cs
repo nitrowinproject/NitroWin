@@ -53,7 +53,7 @@ namespace NitroWin {
             return string.Join(Environment.NewLine, scriptContents);
         }
         private static Dictionary<string, string> ScriptUrls() {
-            const string baseUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/src/NitroWin.InstallScripts/";
+            const string baseUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/main/src/NitroWin.InstallScripts/";
 
             return new Dictionary<string, string> {
                 { "brave", $"{baseUrl}Browsers/Brave.ps1" },
