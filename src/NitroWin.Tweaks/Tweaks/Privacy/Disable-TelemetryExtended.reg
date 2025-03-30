@@ -1,6 +1,0 @@
-Windows Registry Editor Version 5.00
-
-; Needs TrustedInstaller privileges
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Diagnostics\Performance]
-"DisableDiagnosticTracing"=dword:00000001

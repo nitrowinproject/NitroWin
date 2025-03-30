@@ -1,0 +1,35 @@
+# NitroWin configuration
+# This configuration is designed to work for most people, but feel free to change anything you want!
+
+# Uncomment everything you want to install.
+apps:
+  browser:
+    - brave
+    #- librewolf
+    #- firefox
+  archiving:
+    - 7zip
+    #- winrar
+  multimedia:
+    - vlc
+    #- klcp
+  communication:
+    #- discord
+  gaming:
+    #- steam
+    #- epicgames
+  tools:
+    - winutil
+    - oosu
+    #- msiafterburner
+    #- unigetui
+    #- notepadplusplus
+    #- startallback
+    #- keepassxc
+    #- powershell7
+
+# Uncomment your GPU manufacturer. If you have multiple GPUs (e.g. in a laptop), uncomment both.
+# This will help you to slim your GPU driver.
+gpu:
+  #- amd
+  #- nvidia

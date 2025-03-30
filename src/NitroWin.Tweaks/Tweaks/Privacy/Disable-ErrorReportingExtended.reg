@@ -1,6 +1,0 @@
-Windows Registry Editor Version 5.00
-
-; Needs TrustedInstaller privileges
-
-[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing]
-"DisableWerReporting"=dword:00000001
