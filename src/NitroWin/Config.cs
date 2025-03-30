@@ -4,7 +4,7 @@ using YamlDotNet.Serialization.NamingConventions;
 namespace NitroWin {
     public class Config {
         private const string ConfigFileName = "config.yml";
-        private const string ConfigUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/v2/assets/Configuration/config.yml";
+        private const string ConfigUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/main/assets/Configuration/config.yml";
         public static async Task Initialize() {
             if (!File.Exists(ConfigFileName)) {
                 await Helper.DownloadFile(ConfigUrl, Helper.WorkingDirectory, ConfigFileName);
