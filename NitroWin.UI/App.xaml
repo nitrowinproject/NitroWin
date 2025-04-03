@@ -1,0 +1,9 @@
+﻿<Application x:Class="NitroWin.UI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NitroWin.UI"
+             StartupUri="Views/Windows/MainWindow.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>
