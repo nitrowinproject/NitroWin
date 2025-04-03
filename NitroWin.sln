@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroWin", "src\NitroWin\NitroWin.csproj", "{64C37117-8C2A-49F2-8334-0D820B315A74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroWin.UI", "NitroWin.UI\NitroWin.UI.csproj", "{FD42E99A-5FB9-437F-9F63-44B87C22B962}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroWin.UI", "src\NitroWin.UI\NitroWin.UI.csproj", "{FD42E99A-5FB9-437F-9F63-44B87C22B962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

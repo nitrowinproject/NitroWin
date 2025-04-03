@@ -8,4 +8,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\NitroWin.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\NitroWin.png" />
+  </ItemGroup>
+
 </Project>

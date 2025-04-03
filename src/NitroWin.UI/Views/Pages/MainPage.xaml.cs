@@ -25,5 +25,9 @@ namespace NitroWin.UI.Views.Pages {
                 mainWindow.ContentFrame.Navigate(new AboutPage());
             }
         }
+        public void SelectConfigFileButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -1,0 +1,100 @@
+﻿<Page x:Class="NitroWin.UI.Views.Pages.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:NitroWin.UI.Views.Pages"
+      mc:Ignorable="d"
+      Title="Main">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="/Images/NitroWin.png" Width="30" Grid.Row="0" Grid.Column="0" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Label Content="NitroWin" Grid.Row="0" Grid.Column="1" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            <Button x:Name="AboutButton" Content="About" Click="AboutButtonClick" Grid.Row="0" Grid.Column="3" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Content="Apps" Margin="10" VerticalAlignment="Center"/>
+            
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="SelectConfigFileButton" Grid.Row="0" Grid.Column="0" Margin="10,10,10,0" Content="Select config file" Click="SelectConfigFileButtonClick"/>
+                <Label x:Name="ConfigFileLabel" Grid.Row="1" Grid.Column="0" Margin="10,0,10,10" Content="Selected file:"/>
+            </Grid>
+            
+            <Label Grid.Row="0" Grid.Column="1" Content="GPU" Margin="10" VerticalAlignment="Center"/>
+            
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <RadioButton x:Name="NvidiaGpuRadioButton" GroupName="GPU" Grid.Row="0" Grid.Column="0" Content="NVIDIA" Margin="10" VerticalAlignment="Center"/>
+                <RadioButton x:Name="AmdGpuRadioButton" GroupName="GPU" Grid.Row="1" Grid.Column="0" Content="AMD" Margin="10" VerticalAlignment="Center"/>
+                <RadioButton x:Name="OtherGpuRadioButton" GroupName="GPU" Grid.Row="2" Grid.Column="0" Content="Other" Margin="10" VerticalAlignment="Center" IsChecked="True"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="InstallOptionComboBox" Grid.Row="0" Grid.Column="0" SelectedIndex="0" Width="200" Margin="10" VerticalAlignment="Center">
+                <ComboBoxItem Content="Current system"/>
+                <ComboBoxItem Content="Create install media"/>
+            </ComboBox>
+
+            <Button Grid.Row="0" Grid.Column="2" Content="Start" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>

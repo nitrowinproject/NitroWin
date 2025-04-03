@@ -8,6 +8,6 @@
       Title="About">
 
     <Grid>
-        <Label Content="TSCHÜSS"/>
+        
     </Grid>
 </Page>
