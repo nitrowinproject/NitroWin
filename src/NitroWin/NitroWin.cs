@@ -2,10 +2,14 @@
     public class NitroWin {
         public static async Task Main() {
             Console.Title = "NitroWin";
-            await Config.Initialize();
 
-            Console.WriteLine("Creating answer file...");
+            Helper.CreateNitroWinDirectory();
+
+            Console.WriteLine("Downloading answer file...");
             await AnswerFile.WriteToFile();
+
+            Console.WriteLine("Downloading tweaks...");
+            await Tweaks.Download();
         }
     }
 }
