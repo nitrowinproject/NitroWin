@@ -8,14 +8,14 @@ namespace NitroWin {
                 ("NitroWin.Tweaks.System.ps1", "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.System.ps1")
             };
 
-            foreach (var file in files) {
-                string filePath = Path.Combine(Helper.NitroWinDirectory, file.Name);
+            foreach (var (name, url) in files) {
+                string filePath = Path.Combine(Helper.NitroWinDirectory, name);
 
                 if (File.Exists(filePath)) {
                     File.Delete(filePath);
                 }
 
-                await Helper.DownloadFile(file.Url, Helper.NitroWinDirectory, file.Name);
+                await Helper.DownloadFile(url, Helper.NitroWinDirectory, name);
             }
         }
         public static async Task DownloadAnswerFile() {
