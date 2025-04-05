@@ -53,6 +53,7 @@ namespace NitroWin.Installer {
                         FileName = psexecPath,
                         Arguments = $"-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File \"{file}\"",
                         UseShellExecute = true,
+                        WindowStyle = ProcessWindowStyle.Minimized,
                         Verb = "runas"
                     });
                 }
@@ -61,6 +62,7 @@ namespace NitroWin.Installer {
                         FileName = psexecPath,
                         Arguments = $"-accepteula -s -i reg.exe import \"{file}\"",
                         UseShellExecute = true,
+                        WindowStyle = ProcessWindowStyle.Minimized,
                         Verb = "runas"
                     });
                 }
@@ -73,6 +75,7 @@ namespace NitroWin.Installer {
                         FileName = "powershell.exe",
                         Arguments = $"-ExecutionPolicy Bypass -File \"{file}\"",
                         UseShellExecute = true,
+                        WindowStyle = ProcessWindowStyle.Minimized,
                         Verb = "runas"
                     });
                 }
@@ -81,6 +84,7 @@ namespace NitroWin.Installer {
                         FileName = "reg.exe",
                         Arguments = $"import \"{file}\"",
                         UseShellExecute = true,
+                        WindowStyle = ProcessWindowStyle.Minimized,
                         Verb = "runas"
                     });
                 }
