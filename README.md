@@ -35,7 +35,7 @@ Create a normal Windows 11 installation media as usual, but place the autounatte
 
 ## :scroll: · License
 
-This project is licensed under the [Unlicense](LICENSE).
+This project is licensed under the [Zero-Clause-BSD license](LICENSE).
 
 It also contains files from different repositories, which are licensed under their individual licenses.
 

@@ -1,6 +1,6 @@
 # This project uses parts of other projects, which are licensed under the MIT License
 
-The project's code is still licensed under the Unlicense.
+The project's code is still licensed under the [Zero-Clause-BSD license](LICENSE).
 
 ## MIT License from WinUtil
 
