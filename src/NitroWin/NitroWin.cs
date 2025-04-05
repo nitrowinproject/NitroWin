@@ -3,8 +3,6 @@
         public static async Task Main() {
             Console.Title = "NitroWin";
 
-            Helper.CreateNitroWinDirectory();
-
             Console.WriteLine("Downloading answer file...");
             await Tweaks.DownloadAnswerFile();
 

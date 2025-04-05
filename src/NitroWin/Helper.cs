@@ -1,10 +1,8 @@
 namespace NitroWin {
     public class Helper {
         public static string NitroWinDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NitroWin");
-        public static void CreateNitroWinDirectory() {
-            Directory.CreateDirectory(NitroWinDirectory);
-        }
         public async static Task DownloadFile(string fileUrl, string downloadPath, string fileName) {
+            Directory.CreateDirectory(downloadPath);
             string savePath = Path.Combine(downloadPath, fileName);
 
             using (HttpClient client = new HttpClient()) {
