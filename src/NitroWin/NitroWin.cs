@@ -4,10 +4,16 @@
             Console.Title = "NitroWin";
 
             Console.WriteLine("Downloading answer file...");
-            await Tweaks.DownloadAnswerFile();
+            await Downloader.DownloadAnswerFile();
 
             Console.WriteLine("Downloading tweaks...");
-            await Tweaks.DownloadTweaks();
+            await Downloader.DownloadTweaks();
+
+            Console.WriteLine("Deploying to installation media...");
+            InstallMedia.Deploy();
+
+            Console.WriteLine("Finished. Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
