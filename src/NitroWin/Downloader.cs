@@ -1,6 +1,12 @@
 namespace NitroWin {
     public class Downloader {
-        public static async Task DownloadTweaks() {
+        public static async Task DownloadFiles() {
+            await DownloadTweaks();
+            await DownloadAnswerFile();
+            await DownloadConfigFile();
+            await DownloadPsExec();
+        }
+        private static async Task DownloadTweaks() {
             var files = new (string Name, string Url)[] {
                 ("NitroWin.Tweaks.User.reg", "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.reg"),
                 ("NitroWin.Tweaks.User.ps1", "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.ps1"),
@@ -12,19 +18,19 @@ namespace NitroWin {
                 await Helper.DownloadFile(url, Helper.NitroWinDirectory, name);
             }
         }
-        public static async Task DownloadAnswerFile() {
+        private static async Task DownloadAnswerFile() {
             const string answerFileName = "autounattend.xml";
             const string answerFileUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/main/assets/AnswerFiles/autounattend.xml";
 
             await Helper.DownloadFile(answerFileUrl, Helper.NitroWinDirectory, answerFileName);
         }
-        public static async Task DownloadConfigFile() {
+        private static async Task DownloadConfigFile() {
             const string configFileName = "Apps.txt";
             const string configFileUrl = "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/Apps.txt";
             
             await Helper.DownloadFile(configFileUrl, Helper.NitroWinDirectory, configFileName);
         }
-        public static async Task DownloadPsExec() {
+        private static async Task DownloadPsExec() {
             const string psexecFileName = "PsExec64.exe";
             const string psexecFileUrl = "https://live.sysinternals.com/PsExec64.exe";
 

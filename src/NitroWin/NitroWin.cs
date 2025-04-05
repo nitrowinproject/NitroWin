@@ -3,11 +3,8 @@
         public static async Task Main() {
             Console.Title = "NitroWin";
 
-            Console.WriteLine("Downloading answer file...");
-            await Downloader.DownloadAnswerFile();
-
-            Console.WriteLine("Downloading tweaks...");
-            await Downloader.DownloadTweaks();
+            Console.WriteLine("Downloading required files...");
+            await Downloader.DownloadFiles();
 
             Console.WriteLine("Deploying to installation media...");
             InstallMedia.Deploy();
