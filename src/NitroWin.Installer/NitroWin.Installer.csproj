@@ -5,9 +5,8 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <OutputPath>$(SolutionDir)/bin/$(Configuration)/$(Platform)/</OutputPath>
+    <OutputPath>$(SolutionDir)/bin/$(Configuration)/</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-    <Platforms>ARM64;x64</Platforms>
     <ApplicationIcon>$(SolutionDir)/assets/Images/NitroWin.ico</ApplicationIcon>
   </PropertyGroup>
 
