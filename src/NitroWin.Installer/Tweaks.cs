@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace NitroWin.Installer {
     public class Tweaks {
-        private static string tweakPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tweaks");
+        private static readonly string tweakPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tweaks");
         private enum TweakType {
             User,
             System
