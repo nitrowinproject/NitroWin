@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace NitroWin {
     public class InstallMedia {
         public static void Deploy() {
@@ -18,6 +20,12 @@ namespace NitroWin {
                     throw new Exception($"Failed to create directory {Path.Combine(driveLetter, "NitroWin", folder)}", ex);
                 }
             }
+
+            Process.Start(new ProcessStartInfo {
+                FileName = "winget.exe",
+                Arguments = $"download --id Microsoft.DotNet.Runtime.8 --exact --skip-license --accept-source-agreements --accept-package-agreements --download-directory {Path.Combine(driveLetter, "NitroWin")}",
+                UseShellExecute = true
+            })?.WaitForExit();
 
             var files = new (string file, string destination)[] {
                 (Path.Combine(Helper.NitroWinDirectory, "autounattend.xml"), Path.Combine(driveLetter, "autounattend.xml")),
