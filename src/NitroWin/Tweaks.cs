@@ -1,6 +1,6 @@
 namespace NitroWin {
     public class Tweaks {
-        public static async Task Download() {
+        public static async Task DownloadTweaks() {
             var files = new (string Name, string Url)[] {
                 ("NitroWin.Tweaks.User.reg", "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.reg"),
                 ("NitroWin.Tweaks.User.ps1", "https://raw.githubusercontent.com/Nitro4542/NitroWin.Tweaks/main/NitroWin.Tweaks.User.ps1"),
@@ -17,6 +17,17 @@ namespace NitroWin {
 
                 await Helper.DownloadFile(file.Url, Helper.NitroWinDirectory, file.Name);
             }
+        }
+        public static async Task DownloadAnswerFile() {
+            const string answerFileName = "autounattend.xml";
+            const string answerFileUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/main/assets/AnswerFiles/autounattend.xml";
+            string answerFilePath = Path.Combine(Helper.NitroWinDirectory, answerFileName);
+
+            if (File.Exists(answerFilePath)) {
+                File.Delete(answerFilePath);
+            }
+
+            await Helper.DownloadFile(answerFileUrl, Helper.NitroWinDirectory, answerFileName);
         }
     }
 }

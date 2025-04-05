@@ -6,10 +6,10 @@
             Helper.CreateNitroWinDirectory();
 
             Console.WriteLine("Downloading answer file...");
-            await AnswerFile.WriteToFile();
+            await Tweaks.DownloadAnswerFile();
 
             Console.WriteLine("Downloading tweaks...");
-            await Tweaks.Download();
+            await Tweaks.DownloadTweaks();
         }
     }
 }
