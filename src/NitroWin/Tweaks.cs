@@ -11,7 +11,9 @@ namespace NitroWin {
             foreach (var file in files) {
                 string filePath = Path.Combine(Helper.NitroWinDirectory, file.Name);
 
-                File.Delete(filePath);
+                if (File.Exists(filePath)) {
+                    File.Delete(filePath);
+                }
 
                 await Helper.DownloadFile(file.Url, Helper.NitroWinDirectory, file.Name);
             }
@@ -21,7 +23,9 @@ namespace NitroWin {
             const string answerFileUrl = "https://raw.githubusercontent.com/Nitro4542/NitroWin/main/assets/AnswerFiles/autounattend.xml";
             string answerFilePath = Path.Combine(Helper.NitroWinDirectory, answerFileName);
 
-            File.Delete(answerFilePath);
+            if (File.Exists(answerFilePath)) {
+                File.Delete(answerFilePath);
+            }
 
             await Helper.DownloadFile(answerFileUrl, Helper.NitroWinDirectory, answerFileName);
         }
