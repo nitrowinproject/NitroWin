@@ -16,6 +16,12 @@
             
             Console.WriteLine("Installing runtimes...");
             await AppInstaller.InstallRuntimes();
+
+            Console.WriteLine("Installing apps...");
+            AppInstaller.InstallApps();
+
+            Console.WriteLine("Finished installing. Press any key to exit.");
+            Console.ReadKey();
         }
     }
 }
