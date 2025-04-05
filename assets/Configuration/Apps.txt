@@ -1,0 +1,5 @@
+7-Zip
+Brave
+OOSU
+VLC
+WinUtil
