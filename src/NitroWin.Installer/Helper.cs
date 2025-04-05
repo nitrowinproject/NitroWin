@@ -29,5 +29,18 @@ namespace NitroWin.Installer {
         {
             return SHGetKnownFolderPath(DownloadsFolderGuid, 0);
         }
+        public static void NetworkConnectionPrompt()
+        {
+            while (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                Console.WriteLine("No network connection available. Please connect to the internet and press any key to continue...");
+                Console.ReadKey(true);
+            }
+        }
+        public static bool Prompt(string message) {
+            Console.WriteLine($"{message} (y/n)");
+            string input = Console.ReadLine()?.ToLower();
+            return input == "y";
+        }
     }
 }
