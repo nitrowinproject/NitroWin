@@ -5,6 +5,10 @@ namespace NitroWin {
             Directory.CreateDirectory(downloadPath);
             string savePath = Path.Combine(downloadPath, fileName);
 
+            if (File.Exists(savePath)) {
+                File.Delete(savePath);
+            }
+
             using (HttpClient client = new HttpClient()) {
                 HttpResponseMessage response = await client.GetAsync(fileUrl);
 
