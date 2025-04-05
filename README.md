@@ -5,7 +5,7 @@
 
    <div>
       <a href="https://dotnet.microsoft.com/en-us/"><img alt=".NET" src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=ffffff&color=000000"></a>
-      <a href="https://github.com/Nitro4542/NitroWin/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Nitro4542/NitroWin?style=for-the-badge&logo=unlicense&logoColor=ffffff&color=000000&label"></a>
+      <a href="https://github.com/Nitro4542/NitroWin/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/nitrowinproject/NitroWin?style=for-the-badge&logo=github&logoColor=ffffff&color=000000&label"></a>
       <a href="https://github.com/Nitro4542/NitroWin/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Nitro4542/NitroWin?style=for-the-badge&logo=githubactions&logoColor=ffffff&color=000000&label"></a>
    </div>
 </div>

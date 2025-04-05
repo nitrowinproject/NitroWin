@@ -4,22 +4,22 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroWin", "src\NitroWin\NitroWin.csproj", "{64C37117-8C2A-49F2-8334-0D820B315A74}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NitroWin.Installer", "src\NitroWin.Installer\NitroWin.Installer.csproj", "{209E8B41-8F7B-4EB3-BC5B-E347E8A91FA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|ARM64 = Debug|ARM64
-		Debug|x64 = Debug|x64
-		Release|ARM64 = Release|ARM64
-		Release|x64 = Release|x64
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|ARM64.Build.0 = Debug|ARM64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|x64.ActiveCfg = Debug|x64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|x64.Build.0 = Debug|x64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|ARM64.ActiveCfg = Release|ARM64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|ARM64.Build.0 = Release|ARM64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|x64.ActiveCfg = Release|x64
-		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|x64.Build.0 = Release|x64
+		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64C37117-8C2A-49F2-8334-0D820B315A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64C37117-8C2A-49F2-8334-0D820B315A74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{209E8B41-8F7B-4EB3-BC5B-E347E8A91FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{209E8B41-8F7B-4EB3-BC5B-E347E8A91FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{209E8B41-8F7B-4EB3-BC5B-E347E8A91FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{209E8B41-8F7B-4EB3-BC5B-E347E8A91FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
