@@ -29,7 +29,7 @@ Compared to other Windows modifications, NitroWin has:
 > [!IMPORTANT]
 > Install the [.NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if you haven't already. You only need the desktop or the normal runtime, not both.
 
-Go to the [latest GitHub release page](https://github.com/Nitro4542/NitroWin/releases/latest) and download NitroWin.zip from there and extract it.
+Go to the [latest GitHub release page](https://github.com/nitrowinproject/NitroWin/releases/latest) and download NitroWin.zip from there and extract it.
 
 Create your Windows installation media as you usually would. Run the NitroWin executable and put in the drive letter of your installation media when prompted.
 
@@ -51,7 +51,7 @@ For more details, see [NOTICE.md](NOTICE.md).
 
 ### :wrench: · Tweaks
 
-My tweaks are licensed under the [Zero-Clause-BSD license](https://github.com/Nitro4542/NitroWin.Tweaks/blob/main/LICENSE). But note that most tweaks that are used in this project were made by AtlasOS. Although they have been converted into a more standard format, I decided to keep the [GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE). For more details, check out the [NitroWin.Tweaks repository](https://github.com/Nitro4542/NitroWin.Tweaks).
+My tweaks are licensed under the [Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE). But note that most tweaks that are used in this project were made by AtlasOS. Although they have been converted into a more standard format, I decided to keep the [GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE). For more details, check out the [Tweaks repository](https://github.com/nitrowinproject/Tweaks).
 
 ### :heavy_exclamation_mark: · Disclaimer
 
