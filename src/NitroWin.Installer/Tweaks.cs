@@ -11,14 +11,13 @@ namespace NitroWin.Installer {
             { TweakType.User, new string[] { Path.Combine(tweakPath, "NitroWin.Tweaks.User.ps1"), Path.Combine(tweakPath, "NitroWin.Tweaks.User.reg") } },
             { TweakType.System, new string[] { Path.Combine(tweakPath, "NitroWin.Tweaks.System.ps1"), Path.Combine(tweakPath, "NitroWin.Tweaks.System.reg") } }
         };
-        public static void ApplyUserTweaks() {
-            CheckTweaks();
-            
-            ApplyTweaks(tweakFiles[TweakType.User]);
-        }
-        public static void ApplySystemTweaks() {
+        public static void Apply() { 
             CheckTweaks();
 
+            ApplyTweaks(tweakFiles[TweakType.User]);
+            ApplySystemTweaks();
+        }
+        private static void ApplySystemTweaks() {
             if (Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") == "AMD64") {
                 ApplySystemTweaksPsExec();
             }
