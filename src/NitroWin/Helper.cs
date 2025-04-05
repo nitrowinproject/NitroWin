@@ -29,6 +29,7 @@ namespace NitroWin {
                 ConsoleKey.N => "n",
                 _ => "n"
             };
+            Console.WriteLine();
             return input == "y";
         }
     }
