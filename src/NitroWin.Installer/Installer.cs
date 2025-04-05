@@ -12,6 +12,8 @@
             Console.WriteLine("Applying tweaks...");
             Tweaks.Apply();
 
+            Helper.NetworkConnectionPrompt();
+            
             Console.WriteLine("Installing runtimes...");
             await AppInstaller.InstallRuntimes();
         }
