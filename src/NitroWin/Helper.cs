@@ -22,5 +22,14 @@ namespace NitroWin {
                 }
             }
         }
+        public static bool Prompt(string message) {
+            Console.WriteLine($"{message} (y/n)");
+            string input = Console.ReadKey(false).Key switch {
+                ConsoleKey.Y => "y",
+                ConsoleKey.N => "n",
+                _ => "n"
+            };
+            return input == "y";
+        }
     }
 }
