@@ -1,6 +1,6 @@
 # :hammer: · Building NitroWin
 
-Currently, NitroWin supports Windows and Linux.
+Currently, NitroWin supports building for or on Windows and Linux.
 
 ## :window: · Windows build instructions
 
@@ -9,7 +9,7 @@ Currently, NitroWin supports Windows and Linux.
 2. Clone this repository and navigate into it:
 
     ```cmd
-    git clone https://github.com/Nitro4542/NitroWin.git
+    git clone https://github.com/nitrowinproject/NitroWin.git
     cd NitroWin
     ```
 
@@ -19,16 +19,22 @@ Currently, NitroWin supports Windows and Linux.
     dotnet publish -c Release -r win-x64
     ```
 
-    or if you have an arm-based cpu:
+    or if you have an arm-based CPU:
 
     ```cmd
     dotnet publish -c Release -r win-arm64
     ```
 
-The compiled executable can be found in:
-`bin/Release/x64/publish/NitroWin.exe`
+The compiled executables can be found in:  
+`bin/Release/win-x64/publish/`
+
+...or arm builds:  
+`bin/Release/win-arm64/publish/`
 
 ## :penguin: · Linux build instructions
+
+> [!TIP]
+> It is not recommended, nor does it make sense, to compile NitroWin for Linux since it is a Windows modification. However, you can compile it for Windows on Linux.
 
 1. Install the .NET 8 SDK. Here is the install command for Arch-based distributions:
 
@@ -39,7 +45,7 @@ The compiled executable can be found in:
 2. Clone this repository and navigate into it:
 
     ```bash
-    git clone https://github.com/Nitro4542/NitroWin.git
+    git clone https://github.com/nitrowinproject/NitroWin.git
     cd NitroWin
     ```
 
@@ -49,11 +55,14 @@ The compiled executable can be found in:
     dotnet publish -c Release -r linux-x64
     ```
 
-    or if you have an arm-based cpu:
+    or if you have an arm-based CPU:
 
     ```cmd
     dotnet publish -c Release -r linux-arm64
     ```
 
-The compiled executable can be found in:
-`bin/Release/x64/publish/NitroWin`
+The compiled executables can be found in:  
+`bin/Release/linux-x64/publish/`
+
+...or arm builds:  
+`bin/Release/linux-arm64/publish/`
