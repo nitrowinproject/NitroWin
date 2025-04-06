@@ -31,7 +31,7 @@ Compared to other Windows modifications, NitroWin has:
 
 Go to the [latest GitHub release page](https://github.com/nitrowinproject/NitroWin/releases/latest) and download NitroWin.zip from there and extract it.
 
-Create your Windows installation media as you usually would. Run the NitroWin executable and put in the drive letter of your installation media when prompted.
+Create your Windows installation media as you usually would. Run the NitroWin executable and answer all prompts.
 
 Open the new NitroWin folder in your installation media and open the Apps.txt file. Customize it to your liking, using [this guide](docs/config.md).
 
