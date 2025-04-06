@@ -7,6 +7,10 @@ namespace NitroWin {
 
             Directory.CreateDirectory(Path.Combine(driveLetter, "NitroWin"));
 
+            if (File.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NitroWin.Installer.exe"))) {
+                File.Move(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "NitroWin.Installer.exe"), Path.Combine(Helper.NitroWinDirectory, "NitroWin.Installer.exe"), true);
+            }
+
             var folders = new[] {
                 "Tools",
                 "Tweaks"
