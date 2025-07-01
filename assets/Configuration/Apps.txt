@@ -1,3 +1,5 @@
-7-Zip
-Brave
-VLC
+web;https://aka.ms/vs/17/release/vc_redist.x64.exe
+web;https://aka.ms/vs/17/release/vc_redist.x86.exe
+web;https://laptop-updates.brave.com/latest/winx64
+winget;M2Team.NanaZip
+winget;VideoLAN.VLC
