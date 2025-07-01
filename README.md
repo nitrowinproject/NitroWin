@@ -45,7 +45,9 @@ It is recommended to use WinUtil and OOSU after installing.
 
 This project is licensed under the [Zero-Clause-BSD license](LICENSE).
 
-It also contains files from different repositories, which are licensed under their individual licenses.
+It also contains files from different repositories that are licensed under their respective licenses.
+
+By using NitroWin, you agree to the terms and conditions of those repositories.
 
 For more details, see [NOTICE.md](NOTICE.md).
 
