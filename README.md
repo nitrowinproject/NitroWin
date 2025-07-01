@@ -4,7 +4,7 @@
    <h1>NitroWin</h1>
 
    <div>
-      <a href="https://dotnet.microsoft.com/en-us/"><img alt=".NET" src="https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=ffffff&color=000000"></a>
+      <a href="https://dotnet.microsoft.com/en-us/"><img alt="PowerShell" src="https://img.shields.io/badge/POWERSHELL-5C2D91?style=for-the-badge&color=000000"></a>
       <a href="https://github.com/nitrowinproject/NitroWin/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/nitrowinproject/NitroWin?style=for-the-badge&logo=github&logoColor=ffffff&color=000000&label"></a>
       <a href="https://github.com/nitrowinproject/NitroWin/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?style=for-the-badge&logo=githubactions&logoColor=ffffff&color=000000&label"></a>
    </div>
@@ -26,18 +26,21 @@ Compared to other Windows modifications, NitroWin has:
 
 ## :books: · How do I use this?
 
-> [!IMPORTANT]
-> Install the [.NET 8.0 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) if you haven't already. You only need the desktop or the normal runtime, not both.
+> [!WARNING]
+> The Pro or LTSC versions of Windows are recommended because I've had problems with the Home editions of Windows.
 
-Go to the [latest GitHub release page](https://github.com/nitrowinproject/NitroWin/releases/latest) and download NitroWin.zip from there and extract it.
+Go to the [latest GitHub release page](https://github.com/nitrowinproject/NitroWin/releases/latest) and download autounattend.xml.
 
-Create your Windows installation media as you usually would. Run the NitroWin executable and answer all prompts.
+Create your Windows installation media as you usually would.
 
-Open the new NitroWin folder in your installation media and open the Apps.txt file. Customize it to your liking, using [this guide](docs/config.md).
+Copy the autounattend.xml file to the root of your installation media.
 
-Install Windows as usual (Pro is recommended).
+> [!TIP]
+> Open the root folder in your installation media and create the NitroWin.Apps.txt file. Customize it to your liking, using [this guide](docs/config.md).
 
-After installing Windows, run the NitroWin.Installer executable and accept all UAC prompts.
+
+
+Install Windows as you usually would. NitroWin will then apply its tweaks automatically.
 
 It is recommended to use WinUtil and OOSU after installing.
 
