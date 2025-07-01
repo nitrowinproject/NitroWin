@@ -1,4 +1,9 @@
 function Show-InstallError {
+    <#
+    .SYNOPSIS
+        Throws an error if something fails to install.
+    #>
+    
     param (
         [Parameter(Mandatory=$true)]
         [string]$name

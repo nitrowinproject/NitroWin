@@ -1,10 +1,10 @@
 function Get-FileFromURL {
     <#
     .SYNOPSIS
-        Downloads a file from the Internet and returns its path after downloading
+        Downloads a file from the Internet and returns its path after downloading.
 
     .PARAMETER url
-        The URL of the file to be downloaded
+        The URL of the file to be downloaded.
 
     .EXAMPLE
         Get-FileFromURL -url "https://example.com/example.txt"

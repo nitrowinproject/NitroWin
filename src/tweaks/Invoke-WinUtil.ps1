@@ -1,4 +1,9 @@
 function Invoke-WinUtil {
+    <#
+    .SYNOPSIS
+        Runs WinUtil with an automatic configuration for either laptops or desktops.
+    #>
+
     $chassis = Get-CimInstance -ClassName Win32_SystemEnclosure
     $laptopTypes = @(8, 9, 10, 14, 30, 31)
 

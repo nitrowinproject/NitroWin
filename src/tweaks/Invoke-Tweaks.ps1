@@ -1,4 +1,9 @@
 function Invoke-Tweaks {
+    <#
+    .SYNOPSIS
+        Downloads and invokes all tweaks from NitroWin.
+    #>
+    
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.ps1",

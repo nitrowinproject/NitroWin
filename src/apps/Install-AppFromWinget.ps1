@@ -1,10 +1,10 @@
 function Install-AppFromWinGet {
     <#
     .SYNOPSIS
-        Installs an app via WinGet
+        Installs an app using WinGet.
 
     .PARAMETER id
-        The package ID of the desired app
+        The package ID of the desired app.
 
     .EXAMPLE
         Install-AppFromWinGet -id "Example.Example"
