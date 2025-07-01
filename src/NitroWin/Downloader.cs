@@ -34,12 +34,6 @@ namespace NitroWin {
             const string psexecFileName = "PsExec64.exe";
             const string psexecFileUrl = "https://live.sysinternals.com/PsExec64.exe";
 
-            bool result = Helper.Prompt("Do you want to download PsExec?");
-            if (!result) {
-                Console.WriteLine("PsExec will not be downloaded. NitroWin will not work without it.");
-                Environment.Exit(0);
-            }
-
             await Helper.DownloadFile(psexecFileUrl, Helper.NitroWinDirectory, psexecFileName);
         }
     }
