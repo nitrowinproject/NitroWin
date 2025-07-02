@@ -1,3 +1,6 @@
+Write-Host "Initializing environment..."
+Initialize-Environment
+
 Write-Host "Checking network connection..."
 Request-Network
 
