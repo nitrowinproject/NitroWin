@@ -1,0 +1,18 @@
+name: Compile
+run-name: Compile
+on: [push]
+jobs:
+  Compile:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Compile
+        run: cd src; ./compile.ps1
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add --force .
+          git commit -m "Compile" || echo "No changes to commit"
+          git push
