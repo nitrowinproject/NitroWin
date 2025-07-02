@@ -1,7 +1,9 @@
 function Install-Apps {
     <#
     .SYNOPSIS
-        Installs all apps that were previously selected in the config file.
+        Installs applications based on the configuration defined in "NitroWin.Apps.txt".
+        The configuration file is searched on all local drives. If not found locally,
+        it will be downloaded from the NitroWin GitHub repository.
     #>
 
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
