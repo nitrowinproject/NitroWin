@@ -2,7 +2,7 @@ name: Compile
 run-name: Compile
 on: [push]
 jobs:
-  Merge-Tweaks:
+  Compile:
     runs-on: windows-latest
     steps:
       - name: Check out repository code
