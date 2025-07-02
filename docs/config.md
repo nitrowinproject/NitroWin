@@ -26,6 +26,11 @@ Here's the default/recommended configuration:
 web;https://aka.ms/vs/17/release/vc_redist.x64.exe
 web;https://aka.ms/vs/17/release/vc_redist.x86.exe
 web;https://laptop-updates.brave.com/latest/winx64
+web;https://github.com/marticliment/UniGetUI/releases/latest/download/UniGetUI.Installer.exe
+winget;Greenshot.Greenshot
+winget;KeePassXCTeam.KeePassXC
 winget;M2Team.NanaZip
+winget;Microsoft.WindowsTerminal
+winget;StartIsBack.StartAllBack
 winget;VideoLAN.VLC
 ```
