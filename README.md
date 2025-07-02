@@ -38,8 +38,6 @@ Copy the autounattend.xml file to the root of your installation media.
 > [!TIP]
 > Open the root folder in your installation media and create the NitroWin.Apps.txt file. Customize it to your liking, using [this guide](docs/config.md).
 
-
-
 Install Windows as you usually would. NitroWin will then apply its tweaks automatically.
 
 It is recommended to use WinUtil and OOSU after installing.
