@@ -153,7 +153,7 @@ function Initialize-Environment {
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec64.exe"
 }
 function Request-Network {
-    while (Test-Connection -ComputerName github.com -Count 1 -Quiet) {
+    while (-Not (Test-Connection -ComputerName https://github.com -Count 1 -Quiet)) {
         Show-Prompt -message "NitroWin requires an active and unblocked network connection. Please connect to the internet and press OK to retry." -title "No network connection" -buttons OK -icon Error 
     }
 }
@@ -275,6 +275,9 @@ function Invoke-WinUtil {
         Show-InstallError -name "WinUtil"
     }
 }
+Write-Host "Initializing environment..."
+Initialize-Environment
+
 Write-Host "Checking network connection..."
 Request-Network
 
