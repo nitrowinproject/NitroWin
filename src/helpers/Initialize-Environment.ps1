@@ -12,9 +12,9 @@ function Initialize-Environment {
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
 
     Add-Type -AssemblyName "System.Net.Http"
-    $httpClient = [System.Net.Http.HttpClient]::new()
+    $global:httpClient = [System.Net.Http.HttpClient]::new()
 
-    $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
         "ARM64" { "64" }
@@ -23,7 +23,7 @@ function Initialize-Environment {
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
 
-    $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "x64" }
         "x86"   { "x86" }
         "ARM64" { "arm64" }

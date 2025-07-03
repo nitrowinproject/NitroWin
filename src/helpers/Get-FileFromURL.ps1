@@ -29,6 +29,6 @@ function Get-FileFromURL {
         return $destinationPath
     }
     catch {
-        Show-InstallError -name $fileName
+        Show-InstallError -name $global:fileName
     }
 }
