@@ -19,6 +19,8 @@ function Get-FileFromURL {
         $filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
+        Write-Host "Downloading: $fileName..."
+        
         $response = $httpClient.GetAsync($url).Result
         [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
 
