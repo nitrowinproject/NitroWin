@@ -12,7 +12,7 @@ function Show-InstallError {
     $message = "Error while installing $name. Continue without installing?"
     $title = "Error while installing $name"
 
-    Write-Error "Error while installing $name."
+    Write-Host "Error while installing $name."
 
     $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
     if ($prompt -eq 'No') {
