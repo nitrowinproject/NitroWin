@@ -13,10 +13,10 @@ function Install-App {
     )
 
     try {
-        Get-FileFromURL -url $url
-        
+        $destinationPath = Get-FileFromURL -url $url
+
         Write-Host "Installing..."
-        Start-Process -FilePath $destinationPath -Wait -NoNewWindow -Verb RunAs
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
         Write-Host "Installed!"
     }
     catch {
@@ -42,7 +42,7 @@ function Install-AppFromWinGet {
 
     try {
         Write-Host "Installing $id via WinGet..."
-        Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -Verb RunAs -ArgumentList "install --id $($id) --exact --skip-license --scope machine --accept-package-agreements --accept-source-agreements"
+        Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --scope machine --accept-package-agreements --accept-source-agreements"
         Write-Host "Installed $id!"
     }
     catch {
@@ -167,11 +167,11 @@ function Get-FileFromURL {
     )
 
     try {
-        $filename = [System.IO.Path]::GetFileName($url)
+        $global:filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
         Write-Host "Downloading: $fileName..."
-        
+
         $response = $httpClient.GetAsync($url).Result
         [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
 
@@ -189,7 +189,7 @@ function Initialize-Environment {
         Initializes the PowerShell environment for NitroWin.
     #>
 
-    [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+    Add-Type -AssemblyName "System.Windows.Forms"
     [System.Windows.Forms.Application]::EnableVisualStyles();
 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -197,18 +197,18 @@ function Initialize-Environment {
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
 
     Add-Type -AssemblyName "System.Net.Http"
-    $httpClient = [System.Net.Http.HttpClient]::new()
+    $global:httpClient = [System.Net.Http.HttpClient]::new()
 
-    $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
         "ARM64" { "64" }
         "ARM"   { "" }
         default { "" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
+    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe" | Out-Null
 
-    $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "x64" }
         "x86"   { "x86" }
         "ARM64" { "arm64" }
@@ -230,14 +230,14 @@ function Show-InstallError {
     $message = "Error while installing $name. Continue without installing?"
     $title = "Error while installing $name"
 
-    Write-Error "Error while installing $name."
+    Write-Host "Error while installing $name."
 
     $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
     if ($prompt -eq 'No') {
         Write-Host "Quitting..."
         Exit 0
     }
-    
+
     Write-Host "Continuing..."
 }
 function Show-Prompt {
