@@ -13,7 +13,7 @@ function Install-App {
     )
 
     try {
-        Get-FileFromURL -url $url
+        $destinationPath = Get-FileFromURL -url $url
         
         Write-Host "Installing..."
         Start-Process -FilePath $destinationPath -Wait -NoNewWindow -Verb RunAs
