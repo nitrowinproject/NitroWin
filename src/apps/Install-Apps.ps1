@@ -15,7 +15,7 @@ function Install-Apps {
     }
 
     if (-Not $config) {
-        $config = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Content
+        $config = (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt") 
     }
 
     foreach ($app in $config) {
