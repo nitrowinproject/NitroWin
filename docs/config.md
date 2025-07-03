@@ -10,6 +10,9 @@ When you run NitroWin, it looks for the file NitroWin.Apps.txt in the root folde
 
 2. Add applications to it.
 
+    > [!WARNING]
+    > For a URL to work, it needs to end in .exe.
+
     I. For applications that require a download from the internet:
 
         web;URL
