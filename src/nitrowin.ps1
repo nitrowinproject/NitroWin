@@ -14,7 +14,10 @@ function Install-App {
 
     try {
         Get-FileFromURL -url $url
-        Start-Process $destinationPath
+        
+        Write-Host "Installing..."
+        Start-Process -FilePath $destinationPath -Wait -NoNewWindow -Verb RunAs
+        Write-Host "Installed!"
     }
     catch {
         Show-InstallError -name $fileName
@@ -37,7 +40,14 @@ function Install-AppFromWinGet {
         [string]$id
     )
 
-    Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -Verb RunAs -ArgumentList "download --id $($id) --exact --skip-license --scope machine --accept-package-agreements --accept-source-agreements --interactive"
+    try {
+        Write-Host "Installing $id via WinGet..."
+        Start-Process -FilePath "winget.exe" -Wait -NoNewWindow -Verb RunAs -ArgumentList "install --id $($id) --exact --skip-license --scope machine --accept-package-agreements --accept-source-agreements"
+        Write-Host "Installed $id!"
+    }
+    catch {
+        Show-InstallError -name $id
+    }
 }
 function Install-Apps {
     <#
@@ -83,27 +93,43 @@ function Install-WinGet {
     #>
 
     if (-Not (Get-Command winget -ErrorAction SilentlyContinue)) {
-        $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
-            "AMD64" { "x64" }
-            "x86"   { "x86" }
-            "ARM64" { "arm64" }
-            "ARM"   { "arm" }
-            default { "unknown" }
-        }
-
         $dependencies = "https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip"
         $dependenciesArchive = Get-FileFromURL -url $dependencies
 
-        Expand-Archive -Path $dependenciesArchive -DestinationPath (Get-DownloadFolder)
+        try {
+            Write-Host "Extracting WinGet dependencies..."
+            Expand-Archive -Path $dependenciesArchive -DestinationPath (Get-DownloadFolder)
+            Write-Host "Extracted WinGet dependencies!"
+        }
+        catch {
+            Show-InstallError -name "WinGet dependencies"
+        }
+
         $files = Get-ChildItem (Join-Path -Path (Get-DownloadFolder) -ChildPath $arch)
         foreach ($file in $files) {
-            Add-AppxPackage -Path $file
+            try {
+                Write-Host "Installing $file..."
+                Add-AppxPackage -Path $file
+                Write-Host "Installed $file!"
+            }
+            catch {
+                Show-InstallError -name "WinGet dependencies"
+            }
         }
+
+        Write-Host "Installed WinGet dependencies!"
 
         $winget = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
         $wingetInstaller = Get-FileFromURL -url $winget
 
-        Add-AppxPackage $wingetInstaller
+        try {
+            Write-Host "Installing WinGet..."
+            Add-AppxPackage $wingetInstaller
+            Write-Host "Installed WinGet!"
+        }
+        catch {
+            Show-InstallError -name "WinGet"
+        }
     }
 }
 function Clear-DownloadFolder {
@@ -112,7 +138,7 @@ function Clear-DownloadFolder {
         This deletes everything in the current user's download folder.
     #>
 
-    Get-ChildItem -Path (Get-DownloadFolder) -Include *.* -File -Recurse | ForEach-Object { $_.Delete() }
+    Get-ChildItem -Path (Get-DownloadFolder) -File -Recurse | Remove-Item -ErrorAction SilentlyContinue
 }
 function Get-DownloadFolder {
     <#
@@ -144,6 +170,8 @@ function Get-FileFromURL {
         $filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
+        Write-Host "Downloading: $fileName..."
+        
         $response = $httpClient.GetAsync($url).Result
         [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
 
@@ -168,6 +196,9 @@ function Initialize-Environment {
 
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
 
+    Add-Type -AssemblyName "System.Net.Http"
+    $httpClient = [System.Net.Http.HttpClient]::new()
+
     $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
@@ -177,8 +208,13 @@ function Initialize-Environment {
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
 
-    Add-Type -AssemblyName "System.Net.Http"
-    $httpClient = [System.Net.Http.HttpClient]::new()
+    $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
+        "AMD64" { "x64" }
+        "x86"   { "x86" }
+        "ARM64" { "arm64" }
+        "ARM"   { "arm" }
+        default { "unknown" }
+    }
 }
 function Show-InstallError {
     <#
