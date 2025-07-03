@@ -19,7 +19,7 @@ function Get-FileFromURL {
         $filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
-        Invoke-WebRequest -Uri $url -OutFile $destinationPath
+        (New-Object Net.WebClient).DownloadFile($url, $destinationPath)
         Write-Host "Downloaded: $fileName..."
 
         return $destinationPath    
