@@ -8,14 +8,17 @@ function Install-Apps {
 
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
         $configPath = Join-Path -Path "$($drive.Name):" -ChildPath "NitroWin.Apps.txt"
-        if (Test-Path -Path $configPath -PathType Leaf) { 
+        if (Test-Path -Path $configPath -PathType Leaf) {
+            Write-Host "Found config under $configPath! Continuing with this configuration..."
             $config = Get-Content -Path $configPath
             break
         }
     }
 
     if (-Not $config) {
-        $config = (New-Object Net.WebClient).DownloadString("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt") 
+        Write-Host "No configuration found. Downloading from GitHub..."
+        $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result
+        Write-Host "The configuration was downloaded successfully!"
     }
 
     foreach ($app in $config) {
