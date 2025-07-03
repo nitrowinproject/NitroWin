@@ -7,20 +7,23 @@ function Invoke-WinUtil {
     $chassis = Get-CimInstance -ClassName Win32_SystemEnclosure
     $laptopTypes = @(8, 9, 10, 14, 30, 31)
 
+    $isLaptop = $false
     foreach ($type in $chassis.ChassisTypes) {
         if ($laptopTypes -contains $type) {
-            try {
-                Invoke-Expression "& { $(Invoke-RestMethod "https://christitus.com/win") } -Config $(Get-FileFromURL -url "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/WinUtil_Laptop.json") -Run"
-            }
-            catch {
-                Show-InstallError -name "WinUtil"
-            }
-            return
+            $isLaptop = $true
+            break
         }
     }
 
+    $configUrl = if ($isLaptop) {
+        "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/WinUtil_Laptop.json"
+    } else {
+        "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/WinUtil_Desktop.json"
+    }
+
     try {
-        Invoke-Expression "& { $(Invoke-RestMethod "https://christitus.com/win") } -Config $(Get-FileFromURL -url "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/WinUtil_Desktop.json") -Run"
+        $configPath = Get-FileFromURL -url $configUrl
+        Invoke-Expression "& { $(Invoke-RestMethod 'https://christitus.com/win') } -Config `"$configPath`" -Run"
     }
     catch {
         Show-InstallError -name "WinUtil"
