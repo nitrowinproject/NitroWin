@@ -8,5 +8,13 @@ function Initialize-Environment {
     [System.Windows.Forms.Application]::EnableVisualStyles();
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec64.exe"
+    
+    $bitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+        "AMD64" { "64" }
+        "x86"   { "" }
+        "ARM64" { "64" }
+        "ARM"   { "" }
+        default { "" }
+    }
+    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$bitness.exe"
 }
