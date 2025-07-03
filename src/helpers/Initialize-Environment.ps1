@@ -22,4 +22,12 @@ function Initialize-Environment {
         default { "" }
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
+
+    $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
+        "AMD64" { "x64" }
+        "x86"   { "x86" }
+        "ARM64" { "arm64" }
+        "ARM"   { "arm" }
+        default { "unknown" }
+    }
 }
