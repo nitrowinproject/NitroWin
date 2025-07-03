@@ -58,8 +58,13 @@ function Install-Apps {
 
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
-        $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result
-        Write-Host "The configuration was downloaded successfully!"
+        try {
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result -split "`r?`n"
+            Write-Host "The configuration was downloaded successfully!"
+        }
+        catch {
+            Show-InstallError -name "NitroWin.Apps.txt"
+        }
     }
 
     foreach ($app in $config) {
@@ -172,6 +177,7 @@ function Initialize-Environment {
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
 
+    Add-Type -AssemblyName "System.Net.Http"
     $httpClient = [System.Net.Http.HttpClient]::new()
 }
 function Show-InstallError {
@@ -188,10 +194,15 @@ function Show-InstallError {
     $message = "Error while installing $name. Continue without installing?"
     $title = "Error while installing $name"
 
+    Write-Error "Error while installing $name."
+
     $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
     if ($prompt -eq 'No') {
+        Write-Host "Quitting..."
         Exit 0
     }
+    
+    Write-Host "Continuing..."
 }
 function Show-Prompt {
     <#
