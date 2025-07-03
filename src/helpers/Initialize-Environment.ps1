@@ -20,5 +20,6 @@ function Initialize-Environment {
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
 
+    Add-Type -AssemblyName "System.Net.Http"
     $httpClient = [System.Net.Http.HttpClient]::new()
 }
