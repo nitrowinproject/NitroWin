@@ -11,12 +11,12 @@ function Initialize-Environment {
     
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
     
-    $bitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
         "ARM64" { "64" }
         "ARM"   { "" }
         default { "" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$bitness.exe"
+    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
 }
