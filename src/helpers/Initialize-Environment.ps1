@@ -4,7 +4,7 @@ function Initialize-Environment {
         Initializes the PowerShell environment for NitroWin.
     #>
 
-    [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
+    Add-Type -AssemblyName "System.Windows.Forms"
     [System.Windows.Forms.Application]::EnableVisualStyles();
 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -21,7 +21,7 @@ function Initialize-Environment {
         "ARM"   { "" }
         default { "" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
+    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe" | Out-Null
 
     $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "x64" }
