@@ -11,6 +11,9 @@ function Initialize-Environment {
 
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
 
+    Add-Type -AssemblyName "System.Net.Http"
+    $httpClient = [System.Net.Http.HttpClient]::new()
+
     $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
@@ -19,7 +22,4 @@ function Initialize-Environment {
         default { "" }
     }
     Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
-
-    Add-Type -AssemblyName "System.Net.Http"
-    $httpClient = [System.Net.Http.HttpClient]::new()
 }
