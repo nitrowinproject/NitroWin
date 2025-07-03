@@ -17,8 +17,13 @@ function Install-Apps {
 
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
-        $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result
-        Write-Host "The configuration was downloaded successfully!"
+        try {
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result
+            Write-Host "The configuration was downloaded successfully!"
+        }
+        catch {
+            Show-InstallError -name "NitroWin.Apps.txt"
+        }
     }
 
     foreach ($app in $config) {
