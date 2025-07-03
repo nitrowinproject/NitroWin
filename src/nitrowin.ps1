@@ -6,7 +6,7 @@ function Install-App {
     .PARAMETER url
         The URL of the installer for the desired app.
     #>
-    
+
     param (
         [Parameter(Mandatory=$true)]
         [string]$url
@@ -49,14 +49,17 @@ function Install-Apps {
 
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
         $configPath = Join-Path -Path "$($drive.Name):" -ChildPath "NitroWin.Apps.txt"
-        if (Test-Path -Path $configPath -PathType Leaf) { 
+        if (Test-Path -Path $configPath -PathType Leaf) {
+            Write-Host "Found config under $configPath! Continuing with this configuration..."
             $config = Get-Content -Path $configPath
             break
         }
     }
 
     if (-Not $config) {
-        $config = (Invoke-WebRequest -Uri "https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Content
+        Write-Host "No configuration found. Downloading from GitHub..."
+        $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result
+        Write-Host "The configuration was downloaded successfully!"
     }
 
     foreach ($app in $config) {
@@ -73,7 +76,7 @@ function Install-WinGet {
     .SYNOPSIS
         It installs WinGet, if it isn't already installed.
     #>
-    
+
     if (-Not (Get-Command winget -ErrorAction SilentlyContinue)) {
         $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
             "AMD64" { "x64" }
@@ -99,6 +102,11 @@ function Install-WinGet {
     }
 }
 function Clear-DownloadFolder {
+    <#
+    .SYNOPSIS
+        This deletes everything in the current user's download folder.
+    #>
+
     Get-ChildItem -Path (Get-DownloadFolder) -Include *.* -File -Recurse | ForEach-Object { $_.Delete() }
 }
 function Get-DownloadFolder {
@@ -106,7 +114,7 @@ function Get-DownloadFolder {
     .SYNOPSIS
         This returns the current user's download folder.
     #>
-    
+
     $value = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path
     return $value
 }
@@ -131,10 +139,12 @@ function Get-FileFromURL {
         $filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
-        (New-Object Net.WebClient).DownloadFile($url, $destinationPath)
+        $response = $httpClient.GetAsync($url).Result
+        [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
+
         Write-Host "Downloaded: $fileName..."
 
-        return $destinationPath    
+        return $destinationPath
     }
     catch {
         Show-InstallError -name $fileName
@@ -145,29 +155,31 @@ function Initialize-Environment {
     .SYNOPSIS
         Initializes the PowerShell environment for NitroWin.
     #>
-    
+
     [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms")
     [System.Windows.Forms.Application]::EnableVisualStyles();
 
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-    
+
     Set-ExecutionPolicy Unrestricted -Scope Process -Force
-    
-    $bitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+
+    $psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
         "x86"   { "" }
         "ARM64" { "64" }
         "ARM"   { "" }
         default { "" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$bitness.exe"
+    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe"
+
+    $httpClient = [System.Net.Http.HttpClient]::new()
 }
 function Show-InstallError {
     <#
     .SYNOPSIS
         Throws an error if something fails to install.
     #>
-    
+
     param (
         [Parameter(Mandatory=$true)]
         [string]$name
@@ -223,7 +235,7 @@ function Invoke-Tweaks {
     .SYNOPSIS
         Downloads and invokes all tweaks from NitroWin.
     #>
-    
+
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.ps1",
@@ -235,10 +247,10 @@ function Invoke-Tweaks {
         try {
             $file = Get-FileFromURL -url $url
             if ($file.EndsWith("System.reg")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec64.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow -Wait
             }
             elseif ($file.EndsWith("System.ps1")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec64.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow -Wait
             }
             elseif ($file.EndsWith(".reg")) {
                 Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow
