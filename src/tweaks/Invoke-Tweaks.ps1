@@ -15,10 +15,10 @@ function Invoke-Tweaks {
         try {
             $file = Get-FileFromURL -url $url
             if ($file.EndsWith("System.reg")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec64.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$bitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow
             }
             elseif ($file.EndsWith("System.ps1")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec64.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$bitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow
             }
             elseif ($file.EndsWith(".reg")) {
                 Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow
