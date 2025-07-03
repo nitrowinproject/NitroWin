@@ -16,7 +16,7 @@ function Get-FileFromURL {
     )
 
     try {
-        $filename = [System.IO.Path]::GetFileName($url)
+        $global:filename = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
         Write-Host "Downloading: $fileName..."
@@ -29,6 +29,6 @@ function Get-FileFromURL {
         return $destinationPath
     }
     catch {
-        Show-InstallError -name $global:fileName
+        Show-InstallError -name $fileName
     }
 }
