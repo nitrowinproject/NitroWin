@@ -3,7 +3,7 @@ function Install-WinGet {
     .SYNOPSIS
         It installs WinGet, if it isn't already installed.
     #>
-    
+
     if (-Not (Get-Command winget -ErrorAction SilentlyContinue)) {
         $arch = switch ($env:PROCESSOR_ARCHITECTURE) {
             "AMD64" { "x64" }

@@ -13,7 +13,7 @@ When you run NitroWin, it looks for the file NitroWin.Apps.txt in the root folde
     I. For applications that require a download from the internet:
 
         web;URL
-    
+
     II. For applications that can be downloaded with WinGet:
 
         winget;ID

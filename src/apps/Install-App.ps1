@@ -6,7 +6,7 @@ function Install-App {
     .PARAMETER url
         The URL of the installer for the desired app.
     #>
-    
+
     param (
         [Parameter(Mandatory=$true)]
         [string]$url
