@@ -7,6 +7,9 @@ Invoke-WinUtil
 Write-Host "Applying tweaks..."
 Invoke-Tweaks
 
+Write-Host "Installing WinGet..."
+Install-WinGet
+
 Write-Host "Installing Apps..."
 Install-Apps
 
