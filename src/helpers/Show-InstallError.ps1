@@ -19,5 +19,6 @@ function Show-InstallError {
         Write-Host "Quitting..."
         Exit 0
     }
+    
     Write-Host "Continuing..."
 }
