@@ -138,7 +138,11 @@ function Clear-DownloadFolder {
         This deletes everything in the current user's download folder.
     #>
 
-    Get-ChildItem -Path (Get-DownloadFolder) -File -Recurse | Remove-Item -ErrorAction SilentlyContinue
+    Get-ChildItem -Path (Get-DownloadFolder) -File -Recurse | Remove-Item -ErrorAction SilentlyContinue -Force
+
+    Get-ChildItem -Path (Get-DownloadFolder) -Directory -Recurse |
+    Where-Object { !(Get-ChildItem -Path $_.FullName -Force) } |
+    Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
 }
 function Get-DownloadFolder {
     <#
@@ -336,7 +340,7 @@ function Invoke-WinUtil {
 
     try {
         $configPath = Get-FileFromURL -url $configUrl
-        $command = "Invoke-Expression '& { $(Invoke-RestMethod https://christitus.com/win) } -Config `"$configPath`" -Run'"
+        $command = 'Invoke-Expression "& { $(Invoke-RestMethod ''https://christitus.com/win'') } -Config "' + $configPath + '" -Run"'
         Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", $command -Wait -Verb RunAs
     }
     catch {
