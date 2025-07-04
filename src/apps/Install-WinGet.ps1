@@ -11,7 +11,7 @@ function Install-WinGet {
         try {
             Write-Host "Extracting WinGet dependencies..."
             Expand-Archive -Path $dependenciesArchive -DestinationPath (Get-DownloadFolder)
-            Write-Host "Extracted WinGet dependencies!"
+            Write-Host "Extracted WinGet dependencies!" -ForegroundColor Green
         }
         catch {
             Show-InstallError -name "WinGet dependencies"
@@ -22,14 +22,14 @@ function Install-WinGet {
             try {
                 Write-Host "Installing $file..."
                 Add-AppxPackage -Path $file
-                Write-Host "Installed $file!"
+                Write-Host "Installed $file!" -ForegroundColor Green
             }
             catch {
                 Show-InstallError -name "WinGet dependencies"
             }
         }
 
-        Write-Host "Installed WinGet dependencies!"
+        Write-Host "Installed WinGet dependencies!" -ForegroundColor Green
 
         $winget = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
         $wingetInstaller = Get-FileFromURL -url $winget
@@ -37,7 +37,7 @@ function Install-WinGet {
         try {
             Write-Host "Installing WinGet..."
             Add-AppxPackage $wingetInstaller
-            Write-Host "Installed WinGet!"
+            Write-Host "Installed WinGet!" -ForegroundColor Green
         }
         catch {
             Show-InstallError -name "WinGet"
