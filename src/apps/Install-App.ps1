@@ -21,9 +21,9 @@ function Install-App {
     try {
         $destinationPath = Get-FileFromURL -url $url
 
-        Write-Host "Installing..."
+        Write-Host "Installing $fileName..."
         Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-        Write-Host "Installed!"
+        Write-Host "Installed $fileName!" -ForegroundColor Green
     }
     catch {
         Show-InstallError -name $fileName
