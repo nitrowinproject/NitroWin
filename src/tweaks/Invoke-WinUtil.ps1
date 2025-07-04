@@ -23,7 +23,7 @@ function Invoke-WinUtil {
 
     try {
         $configPath = Get-FileFromURL -url $configUrl
-        $command = 'Invoke-Expression "& { $(Invoke-RestMethod ''https://christitus.com/win'') } -Config "' + $configPath + '" -Run"'
+        $command = 'Invoke-Expression "& { $(Invoke-RestMethod ''https://christitus.com/win'') } -Config `"' + $configPath + '`" -Run"'
         Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", $command -Wait -Verb RunAs
     }
     catch {
