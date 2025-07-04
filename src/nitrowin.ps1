@@ -5,18 +5,24 @@ function Install-App {
 
     .PARAMETER url
         The URL of the installer for the desired app.
+
+    .PARAMETER arguments
+        Optional arguments to pass to the installer.
     #>
 
     param (
         [Parameter(Mandatory=$true)]
-        [string]$url
+        [string]$url,
+
+        [Parameter(Mandatory=$false)]
+        [string]$arguments
     )
 
     try {
         $destinationPath = Get-FileFromURL -url $url
 
         Write-Host "Installing..."
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
         Write-Host "Installed!"
     }
     catch {
@@ -37,12 +43,15 @@ function Install-AppFromWinGet {
 
     param (
         [Parameter(Mandatory=$true)]
-        [string]$id
+        [string]$id,
+
+        [Parameter(Mandatory=$false)]
+        [string]$arguments
     )
 
     try {
         Write-Host "Installing $id via WinGet..."
-        Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --scope machine --accept-package-agreements --accept-source-agreements"
+        Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
         Write-Host "Installed $id!"
     }
     catch {
@@ -52,16 +61,18 @@ function Install-AppFromWinGet {
 function Install-Apps {
     <#
     .SYNOPSIS
-        Installs applications based on the configuration defined in "NitroWin.Apps.txt".
+        Installs applications based on the configuration defined in "NitroWin.Apps.json".
         The configuration file is searched on all local drives. If not found locally,
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
+    $jsonFileName = "NitroWin.Apps.json"
+
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath "NitroWin.Apps.txt"
+        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
         if (Test-Path -Path $configPath -PathType Leaf) {
             Write-Host "Found config under $configPath! Continuing with this configuration..."
-            $config = Get-Content -Path $configPath
+            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
             break
         }
     }
@@ -69,20 +80,26 @@ function Install-Apps {
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
         try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.txt").Result -split "`r?`n"
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | Convert-FromJson
             Write-Host "The configuration was downloaded successfully!"
         }
         catch {
-            Show-InstallError -name "NitroWin.Apps.txt"
+            Show-InstallError -name $jsonFileName
         }
     }
 
-    foreach ($app in $config) {
-        if ($app.Split(";")[0] -eq "web") {
-            Install-App -url $app.Split(";")[1]
-        }
-        elseif ($app.Split(";")[0] -eq "winget") {
-            Install-AppFromWinGet -id $app.Split(";")[1]
+    foreach ($app in $config.apps) {
+        if ($app.arch -notcontains $arch) { continue }
+
+        switch ($app.source) {
+            "web" {
+                $arguments = $app.args -join " "
+                Install-App -url $app.url -arguments $arguments
+            }
+            "winget" {
+                $arguments = if ($app.args) { "$($app.args)" } else { "" }
+                Install-AppFromWinGet -id $app.id -arguments $arguments
+            }
         }
     }
 }
@@ -340,7 +357,7 @@ function Invoke-WinUtil {
 
     try {
         $configPath = Get-FileFromURL -url $configUrl
-        $command = 'Invoke-Expression "& { $(Invoke-RestMethod ''https://christitus.com/win'') } -Config "' + $configPath + '" -Run"'
+        $command = 'Invoke-Expression "& { $(Invoke-RestMethod ''https://christitus.com/win'') } -Config `"' + $configPath + '`" -Run"'
         Start-Process -FilePath "powershell.exe" -ArgumentList "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", $command -Wait -Verb RunAs
     }
     catch {
