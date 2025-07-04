@@ -1,0 +1,68 @@
+{
+  "apps": [
+    {
+      "source": "web",
+      "url": "https://aka.ms/vs/17/release/vc_redist.x64.exe",
+      "args": ["/install", "/passive", "/norestart"],
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "web",
+      "url": "https://aka.ms/vs/17/release/vc_redist.x86.exe",
+      "args": ["/install", "/passive", "/norestart"],
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "web",
+      "url": "https://aka.ms/vs/17/release/vc_redist.arm64.exe",
+      "args": ["/install", "/passive", "/norestart"],
+      "arch": ["arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "Brave.Brave",
+      "args": "--scope machine",
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "MartiCliment.UniGetUI",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "Greenshot.Greenshot",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "KeePassXCTeam.KeePassXC",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "M2Team.NanaZip",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "Microsoft.WindowsTerminal",
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "StartIsBack.StartAllBack",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "VideoLAN.VLC",
+      "args": "--scope machine",
+      "arch": ["x64", "x86", "arm64"]
+    }
+  ]
+}
