@@ -12,13 +12,13 @@ function Show-InstallError {
     $message = "Error while installing $name. Continue without installing?"
     $title = "Error while installing $name"
 
-    Write-Host "Error while installing $name."
+    Write-Host "Error while installing $name." -ForegroundColor Red
 
     $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
     if ($prompt -eq 'No') {
-        Write-Host "Quitting..."
+        Write-Host "Quitting..." -ForegroundColor Red
         Exit 0
     }
 
-    Write-Host "Continuing..."
+    Write-Host "Continuing..." -ForegroundColor Yellow
 }
