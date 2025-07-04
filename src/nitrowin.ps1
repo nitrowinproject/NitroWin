@@ -80,7 +80,7 @@ function Install-Apps {
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
         try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | Convert-FromJson
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | ConvertFrom-Json
             Write-Host "The configuration was downloaded successfully!"
         }
         catch {
