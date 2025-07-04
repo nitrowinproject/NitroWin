@@ -24,7 +24,7 @@ function Get-FileFromURL {
         $response = $httpClient.GetAsync($url).Result
         [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
 
-        Write-Host "Downloaded: $fileName..."
+        Write-Host "Downloaded: $fileName!"
 
         return $destinationPath
     }
