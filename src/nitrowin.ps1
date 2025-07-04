@@ -21,9 +21,9 @@ function Install-App {
     try {
         $destinationPath = Get-FileFromURL -url $url
 
-        Write-Host "Installing..."
+        Write-Host "Installing $fileName..."
         Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-        Write-Host "Installed!"
+        Write-Host "Installed $fileName!" -ForegroundColor Green
     }
     catch {
         Show-InstallError -name $fileName
@@ -52,7 +52,7 @@ function Install-AppFromWinGet {
     try {
         Write-Host "Installing $id via WinGet..."
         Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
-        Write-Host "Installed $id!"
+        Write-Host "Installed $id!" -ForegroundColor Green
     }
     catch {
         Show-InstallError -name $id
@@ -71,7 +71,7 @@ function Install-Apps {
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
         $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
         if (Test-Path -Path $configPath -PathType Leaf) {
-            Write-Host "Found config under $configPath! Continuing with this configuration..."
+            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
             $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
             break
         }
@@ -81,7 +81,7 @@ function Install-Apps {
         Write-Host "No configuration found. Downloading from GitHub..."
         try {
             $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | ConvertFrom-Json
-            Write-Host "The configuration was downloaded successfully!"
+            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
         }
         catch {
             Show-InstallError -name $jsonFileName
@@ -116,7 +116,7 @@ function Install-WinGet {
         try {
             Write-Host "Extracting WinGet dependencies..."
             Expand-Archive -Path $dependenciesArchive -DestinationPath (Get-DownloadFolder)
-            Write-Host "Extracted WinGet dependencies!"
+            Write-Host "Extracted WinGet dependencies!" -ForegroundColor Green
         }
         catch {
             Show-InstallError -name "WinGet dependencies"
@@ -127,14 +127,14 @@ function Install-WinGet {
             try {
                 Write-Host "Installing $file..."
                 Add-AppxPackage -Path $file
-                Write-Host "Installed $file!"
+                Write-Host "Installed $file!" -ForegroundColor Green
             }
             catch {
                 Show-InstallError -name "WinGet dependencies"
             }
         }
 
-        Write-Host "Installed WinGet dependencies!"
+        Write-Host "Installed WinGet dependencies!" -ForegroundColor Green
 
         $winget = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
         $wingetInstaller = Get-FileFromURL -url $winget
@@ -142,7 +142,7 @@ function Install-WinGet {
         try {
             Write-Host "Installing WinGet..."
             Add-AppxPackage $wingetInstaller
-            Write-Host "Installed WinGet!"
+            Write-Host "Installed WinGet!" -ForegroundColor Green
         }
         catch {
             Show-InstallError -name "WinGet"
@@ -188,7 +188,7 @@ function Get-FileFromURL {
     )
 
     try {
-        $global:filename = [System.IO.Path]::GetFileName($url)
+        $global:fileName = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
         Write-Host "Downloading: $fileName..."
@@ -196,7 +196,7 @@ function Get-FileFromURL {
         $response = $httpClient.GetAsync($url).Result
         [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
 
-        Write-Host "Downloaded: $fileName!"
+        Write-Host "Downloaded: $fileName!" -ForegroundColor Green
 
         return $destinationPath
     }
@@ -251,15 +251,15 @@ function Show-InstallError {
     $message = "Error while installing $name. Continue without installing?"
     $title = "Error while installing $name"
 
-    Write-Host "Error while installing $name."
+    Write-Host "Error while installing $name." -ForegroundColor Red
 
     $prompt = Show-Prompt -message $message -title $title -buttons YesNo -icon Error
     if ($prompt -eq 'No') {
-        Write-Host "Quitting..."
+        Write-Host "Quitting..." -ForegroundColor Red
         Exit 0
     }
 
-    Write-Host "Continuing..."
+    Write-Host "Continuing..." -ForegroundColor Yellow
 }
 function Show-Prompt {
     <#
@@ -314,17 +314,27 @@ function Invoke-Tweaks {
     foreach ($url in $urls) {
         try {
             $file = Get-FileFromURL -url $url
-            if ($file.EndsWith("System.reg")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow -Wait
-            }
-            elseif ($file.EndsWith("System.ps1")) {
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow -Wait
-            }
-            elseif ($file.EndsWith(".reg")) {
-                Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow
-            }
-            elseif ($file.EndsWith(".ps1")) {
-                Invoke-Expression $file
+            switch ($file) {
+                { $_.EndsWith("User.reg") } {
+                    Write-Host "Importing user registry tweaks from $file..."
+                    Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow -Wait
+                    Write-Host "User registry tweaks imported successfully!" -ForegroundColor Green
+                }
+                { $_.EndsWith("User.ps1") } {
+                    Write-Host "Executing user PowerShell script from $file..."
+                    Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$file`"" -NoNewWindow -Wait
+                    Write-Host "User PowerShell script executed successfully!" -ForegroundColor Green
+                }
+                { $_.EndsWith("System.reg") } {
+                    Write-Host "Importing system registry tweaks from $file..."
+                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow -Wait
+                    Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
+                }
+                { $_.EndsWith("System.ps1") } {
+                    Write-Host "Executing system PowerShell script from $file..."
+                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow -Wait
+                    Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
+                }
             }
         }
         catch {
@@ -364,20 +374,31 @@ function Invoke-WinUtil {
         Show-InstallError -name "WinUtil"
     }
 }
-Write-Host "Initializing environment..."
+Clear-Host
+
+Write-Host ""
+Write-Host " _   _ _ _          __        ___       "
+Write-Host "| \ | (_) |_ _ __ __\ \      / (_)_ __  "
+Write-Host "|  \| | | __| '__/ _ \ \ /\ / /| | '_ \ "
+Write-Host "| |\  | | |_| | | (_) \ V  V / | | | | |"
+Write-Host "|_| \_|_|\__|_|  \___/ \_/\_/  |_|_| |_|"
+Write-Host "`n"
+Write-Host "Watch how this script will heavily modify your Windows installation..."
+
+Write-Host "`n[1/6] Initializing environment..." -ForegroundColor Cyan
 Initialize-Environment
 
-Write-Host "Running WinUtil..."
+Write-Host "`n[2/6] Running WinUtil..." -ForegroundColor Cyan
 Invoke-WinUtil
 
-Write-Host "Applying tweaks..."
+Write-Host "`n[3/6] Applying tweaks..." -ForegroundColor Cyan
 Invoke-Tweaks
 
-Write-Host "Installing WinGet..."
+Write-Host "`n[4/6] Installing WinGet..." -ForegroundColor Cyan
 Install-WinGet
 
-Write-Host "Installing Apps..."
+Write-Host "`n[5/6] Installing Apps..." -ForegroundColor Cyan
 Install-Apps
 
-Write-Host "Cleaning up..."
+Write-Host "`n[6/6] Cleaning up..." -ForegroundColor Cyan
 Clear-DownloadFolder
