@@ -16,7 +16,7 @@ function Get-FileFromURL {
     )
 
     try {
-        $global:filename = [System.IO.Path]::GetFileName($url)
+        $global:fileName = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
         Write-Host "Downloading: $fileName..."
