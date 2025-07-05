@@ -27,8 +27,7 @@ function Get-FileFromURL {
         Write-Host "Downloaded: $fileName!" -ForegroundColor Green
 
         return $destinationPath
-    }
-    catch {
+    } catch {
         Show-InstallError -name $fileName
     }
 }

@@ -24,8 +24,7 @@ function Install-App {
         Write-Host "Installing $fileName..."
         Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
         Write-Host "Installed $fileName!" -ForegroundColor Green
-    }
-    catch {
+    } catch {
         Show-InstallError -name $fileName
     }
 }
