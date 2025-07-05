@@ -36,7 +36,8 @@ function Invoke-Tweaks {
                     Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
                 }
             }
-        } catch {
+        }
+        catch {
             Show-InstallError -name $file
         }
     }
