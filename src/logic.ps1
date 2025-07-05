@@ -1,3 +1,4 @@
+#Requires -RunAsAdministrator
 Clear-Host
 
 Write-Host ""
