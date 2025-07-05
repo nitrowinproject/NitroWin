@@ -11,10 +11,10 @@ function Install-App {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$url,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string]$arguments
     )
 
@@ -22,7 +22,14 @@ function Install-App {
         $destinationPath = Get-FileFromURL -url $url
 
         Write-Host "Installing $fileName..."
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
+
+        if ($arguments) {
+            Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
+        }
+        else {
+            Start-Process -FilePath $destinationPath -Wait -Verb RunAs
+        }
+        
         Write-Host "Installed $fileName!" -ForegroundColor Green
     }
     catch {
@@ -42,10 +49,10 @@ function Install-AppFromWinGet {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$id,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string]$arguments
     )
 
@@ -183,7 +190,7 @@ function Get-FileFromURL {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$url
     )
 
@@ -244,7 +251,7 @@ function Show-InstallError {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$name
     )
 
@@ -283,13 +290,13 @@ function Show-Prompt {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$title,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$message,
 
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [System.Windows.Forms.MessageBoxButtons]$buttons,
 
         [System.Windows.Forms.MessageBoxIcon]$icon
@@ -336,8 +343,7 @@ function Invoke-Tweaks {
                     Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
                 }
             }
-        }
-        catch {
+        } catch {
             Show-InstallError -name $file
         }
     }
