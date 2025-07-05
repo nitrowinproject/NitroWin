@@ -11,10 +11,10 @@ function Install-App {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$url,
 
-        [Parameter(Mandatory=$false)]
+        [Parameter(Mandatory = $false)]
         [string]$arguments
     )
 
@@ -31,7 +31,8 @@ function Install-App {
         }
         
         Write-Host "Installed $fileName!" -ForegroundColor Green
-    } catch {
+    }
+    catch {
         Show-InstallError -name $fileName
     }
 }

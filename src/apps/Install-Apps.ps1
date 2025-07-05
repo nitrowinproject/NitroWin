@@ -22,7 +22,8 @@ function Install-Apps {
         try {
             $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | ConvertFrom-Json
             Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
-        } catch {
+        }
+        catch {
             Show-InstallError -name $jsonFileName
         }
     }

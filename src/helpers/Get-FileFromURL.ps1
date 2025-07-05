@@ -11,7 +11,7 @@ function Get-FileFromURL {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$url
     )
 
@@ -27,7 +27,8 @@ function Get-FileFromURL {
         Write-Host "Downloaded: $fileName!" -ForegroundColor Green
 
         return $destinationPath
-    } catch {
+    }
+    catch {
         Show-InstallError -name $fileName
     }
 }

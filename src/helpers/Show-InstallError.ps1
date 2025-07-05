@@ -5,7 +5,7 @@ function Show-InstallError {
     #>
 
     param (
-        [Parameter(Mandatory=$true)]
+        [Parameter(Mandatory = $true)]
         [string]$name
     )
 

@@ -12,7 +12,8 @@ function Install-WinGet {
             Write-Host "Extracting WinGet dependencies..."
             Expand-Archive -Path $dependenciesArchive -DestinationPath (Get-DownloadFolder)
             Write-Host "Extracted WinGet dependencies!" -ForegroundColor Green
-        } catch {
+        }
+        catch {
             Show-InstallError -name "WinGet dependencies"
         }
 
@@ -22,7 +23,8 @@ function Install-WinGet {
                 Write-Host "Installing $file..."
                 Add-AppxPackage -Path $file
                 Write-Host "Installed $file!" -ForegroundColor Green
-            } catch {
+            }
+            catch {
                 Show-InstallError -name "WinGet dependencies"
             }
         }
@@ -36,7 +38,8 @@ function Install-WinGet {
             Write-Host "Installing WinGet..."
             Add-AppxPackage $wingetInstaller
             Write-Host "Installed WinGet!" -ForegroundColor Green
-        } catch {
+        }
+        catch {
             Show-InstallError -name "WinGet"
         }
     }
