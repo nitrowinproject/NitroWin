@@ -18,21 +18,14 @@ function Install-App {
         [string]$arguments
     )
 
-    try {
-        $destinationPath = Get-FileFromURL -url $url
+    $destinationPath = Get-FileFromURL -url $url
 
-        Write-Host "Installing $fileName..."
+    Write-Host "Installing $fileName..."
 
-        if ($arguments) {
-            Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-        }
-        else {
-            Start-Process -FilePath $destinationPath -Wait -Verb RunAs
-        }
-
-        Write-Host "Installed $fileName!" -ForegroundColor Green
+    if ($arguments) {
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
     }
-    catch {
-        Show-InstallError -name $fileName
+    else {
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
     }
 }
