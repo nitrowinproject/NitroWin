@@ -29,7 +29,7 @@ function Install-App {
         else {
             Start-Process -FilePath $destinationPath -Wait -Verb RunAs
         }
-        
+
         Write-Host "Installed $fileName!" -ForegroundColor Green
     }
     catch {
