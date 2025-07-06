@@ -18,22 +18,15 @@ function Install-App {
         [string]$arguments
     )
 
-    try {
-        $destinationPath = Get-FileFromURL -url $url
+    $destinationPath = Get-FileFromURL -url $url
 
-        Write-Host "Installing $fileName..."
+    Write-Host "Installing $fileName..."
 
-        if ($arguments) {
-            Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-        }
-        else {
-            Start-Process -FilePath $destinationPath -Wait -Verb RunAs
-        }
-        
-        Write-Host "Installed $fileName!" -ForegroundColor Green
+    if ($arguments) {
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
     }
-    catch {
-        Show-InstallError -name $fileName
+    else {
+        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
     }
 }
 function Install-AppFromWinGet {
@@ -56,14 +49,8 @@ function Install-AppFromWinGet {
         [string]$arguments
     )
 
-    try {
-        Write-Host "Installing $id via WinGet..."
-        Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
-        Write-Host "Installed $id!" -ForegroundColor Green
-    }
-    catch {
-        Show-InstallError -name $id
-    }
+    Write-Host "Installing $id via WinGet..."
+    Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
 }
 function Install-Apps {
     <#
@@ -227,14 +214,14 @@ function Initialize-Environment {
     Add-Type -AssemblyName "System.Net.Http"
     $global:httpClient = [System.Net.Http.HttpClient]::new()
 
-    $global:psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:runAsTIBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
-        "x86"   { "" }
+        "x86"   { "32" }
         "ARM64" { "64" }
-        "ARM"   { "" }
-        default { "" }
+        "ARM"   { "32" }
+        default { "32" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe" | Out-Null
+    Get-FileFromURL -url "https://github.com/fafalone/RunAsTrustedInstaller/releases/latest/download/RunAsTI$runAsTIBitness.exe" | Out-Null
 
     $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "x64" }
@@ -319,32 +306,28 @@ function Invoke-Tweaks {
     )
 
     foreach ($url in $urls) {
-        try {
-            $file = Get-FileFromURL -url $url
-            switch ($file) {
-                { $_.EndsWith("User.reg") } {
-                    Write-Host "Importing user registry tweaks from $file..."
-                    Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow -Wait
-                    Write-Host "User registry tweaks imported successfully!" -ForegroundColor Green
-                }
-                { $_.EndsWith("User.ps1") } {
-                    Write-Host "Executing user PowerShell script from $file..."
-                    Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$file`"" -NoNewWindow -Wait
-                    Write-Host "User PowerShell script executed successfully!" -ForegroundColor Green
-                }
-                { $_.EndsWith("System.reg") } {
-                    Write-Host "Importing system registry tweaks from $file..."
-                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow -Wait
-                    Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
-                }
-                { $_.EndsWith("System.ps1") } {
-                    Write-Host "Executing system PowerShell script from $file..."
-                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow -Wait
-                    Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
-                }
+        $file = Get-FileFromURL -url $url
+        switch ($file) {
+            { $_.EndsWith("User.reg") } {
+                Write-Host "Importing user registry tweaks from $file..."
+                Start-Process -FilePath "reg" -ArgumentList "import `"$file`"" -NoNewWindow -Wait
+                Write-Host "User registry tweaks imported successfully!" -ForegroundColor Green
             }
-        } catch {
-            Show-InstallError -name $file
+            { $_.EndsWith("User.ps1") } {
+                Write-Host "Executing user PowerShell script from $file..."
+                Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$file`"" -NoNewWindow -Wait
+                Write-Host "User PowerShell script executed successfully!" -ForegroundColor Green
+            }
+            { $_.EndsWith("System.reg") } {
+                Write-Host "Importing system registry tweaks from $file..."
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\reg.exe import ""$file""" -NoNewWindow -Wait
+                Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
+            }
+            { $_.EndsWith("System.ps1") } {
+                Write-Host "Executing system PowerShell script from $file..."
+                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File ""$file""" -NoNewWindow -Wait
+                Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
+            }
         }
     }
 }
