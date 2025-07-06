@@ -27,12 +27,12 @@ function Invoke-Tweaks {
                 }
                 { $_.EndsWith("System.reg") } {
                     Write-Host "Importing system registry tweaks from $file..."
-                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i reg.exe import $file" -NoNewWindow -Wait
+                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\reg.exe import ""$file""" -NoNewWindow -Wait
                     Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
                 }
                 { $_.EndsWith("System.ps1") } {
                     Write-Host "Executing system PowerShell script from $file..."
-                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "PsExec$psExecBitness.exe") -ArgumentList "-accepteula -s -i powershell.exe -ExecutionPolicy Bypass -File $file" -NoNewWindow -Wait
+                    Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File ""$file""" -NoNewWindow -Wait
                     Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
                 }
             }

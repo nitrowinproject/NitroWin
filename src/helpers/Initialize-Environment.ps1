@@ -14,14 +14,14 @@ function Initialize-Environment {
     Add-Type -AssemblyName "System.Net.Http"
     $global:httpClient = [System.Net.Http.HttpClient]::new()
 
-    $global:psExecBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
+    $global:runAsTIBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "64" }
-        "x86"   { "" }
+        "x86"   { "32" }
         "ARM64" { "64" }
-        "ARM"   { "" }
-        default { "" }
+        "ARM"   { "32" }
+        default { "32" }
     }
-    Get-FileFromURL -url "https://live.sysinternals.com/PsExec$psExecBitness.exe" | Out-Null
+    Get-FileFromURL -url "https://github.com/fafalone/RunAsTrustedInstaller/releases/latest/download/RunAsTI$runAsTIBitness.exe" | Out-Null
 
     $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
         "AMD64" { "x64" }
