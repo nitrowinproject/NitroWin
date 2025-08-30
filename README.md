@@ -4,7 +4,7 @@
    ---
 
    <img src="https://img.shields.io/github/license/nitrowinproject/NitroWin?logo=github&logoColor=D6CFCB&color=D6CFCB&label=License&labelColor=565264" alt="License">
-   <img src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?logo=githubactions&logoColor=D6CFCB&color=D6CFCB&label=Release&labelColor=565264" alt="Latest release">
+   <img src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?logo=githubactions&logoColor=D6CFCB&color=D6CFCB&label=Release&labelColor=565264" alt="Release">
 </div>
 
 ## :white_check_mark: Features
@@ -27,15 +27,18 @@ Compared to **other Windows modifications**, **NitroWin** has:
 > The **Pro** and **Enterprise** versions of Windows are recommended because **the Home editions of Windows don't support Group Policies**.
 
 > [!NOTE]
-> If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using [**this guide**](docs/config.md).
+> If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using **[this guide](docs/config.md)**.
 
-1. Download the [latest version of the **answer file**](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
+1. **Download** the [latest version of the **answer file**](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
-2. Copy it to the **root** of your **installation media**.
+2. **Copy** it to the **root** of your **installation media**.
 
 3. Install **Windows** as **usual**.
 
-4. (**optional**, but **highly recommended**) Use [**WinUtil**](https://github.com/ChrisTitusTech/winutil) and [**OOSU**](https://www.oo-software.com/en/shutup10) for even **better privacy**.
+4. (**optional**, but **highly recommended**) Use **[WinUtil](https://github.com/ChrisTitusTech/winutil)** and **[OOSU](https://www.oo-software.com/en/shutup10)** for even **better privacy**.
+
+> [!TIP]
+> Check out **[this guide](docs/vm.md)** for running NitroWin inside a **virtual machine**.
 
 ## :scroll: License
 
@@ -49,7 +52,7 @@ For **more details**, see **[NOTICE.md](NOTICE.md)**.
 
 ### :wrench: Tweaks
 
-**My tweaks** are licensed under the **[Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE).** But note that **most tweaks** that are used in this project were **made by AtlasOS**. Although they have been converted into a more **standard format**, I decided to **keep** the **[GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE)**. For more details, **check out** the **[Tweaks repository](https://github.com/nitrowinproject/Tweaks).**
+**My tweaks** are licensed under the **[Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE)**. But note that **most tweaks** that are used in this project were **made by AtlasOS**. Although they have been converted into a more **standard format**, I decided to **keep** the **[GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE)**. For more details, **check out** the **[Tweaks repository](https://github.com/nitrowinproject/Tweaks).**
 
 ### :heavy_exclamation_mark: Disclaimer
 
