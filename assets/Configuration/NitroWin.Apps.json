@@ -51,6 +51,12 @@
       "id": "VideoLAN.VLC",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "DuongDieuPhap.ImageGlass",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
     }
   ]
 }
