@@ -4,6 +4,4 @@ Here are some common problems that I encountered:
 
 ## :interrobang: · Some tweaks fail to import
 
-Some tweaks (in the System folder only) require you to import them with TrustedInstaller privileges. You can do this with [ExecTI](https://winaero.com/download-execti-run-as-trustedinstaller/).
-
-However, this shouldn't be a problem if you're using the answer file, as there, they are run in a system context there.
+Some system-wide tweaks require special privileges. We use RunAsTrustedInstaller to circumvent this. If you find that some tweaks are not importing correctly, please open an issue.
