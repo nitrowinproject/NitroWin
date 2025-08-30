@@ -55,12 +55,6 @@
     },
     {
       "source": "winget",
-      "id": "StartIsBack.StartAllBack",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
-    },
-    {
-      "source": "winget",
       "id": "VideoLAN.VLC",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64"]
