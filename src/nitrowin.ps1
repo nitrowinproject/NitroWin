@@ -143,6 +143,20 @@ function Install-WinGet {
         }
     }
 }
+function Clear-DesktopFolders {
+    <#
+    .SYNOPSIS
+        This deletes everything in the current user's and the public desktop folder.
+    #>
+
+    foreach ($path in @((Get-DesktopFolder), (Get-PublicDesktopFolder))) {
+        Get-ChildItem -Path $path -File -Recurse | Remove-Item -ErrorAction SilentlyContinue -Force
+
+        Get-ChildItem -Path $path -Directory -Recurse |
+        Where-Object { !(Get-ChildItem -Path $_.FullName -Force) } |
+        Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
+    }
+}
 function Clear-DownloadFolder {
     <#
     .SYNOPSIS
@@ -154,6 +168,15 @@ function Clear-DownloadFolder {
     Get-ChildItem -Path (Get-DownloadFolder) -Directory -Recurse |
     Where-Object { !(Get-ChildItem -Path $_.FullName -Force) } |
     Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
+}
+function Get-DesktopFolder {
+    <#
+    .SYNOPSIS
+        This returns the current user's desktop folder.
+    #>
+
+    $value = (New-Object -ComObject Shell.Application).NameSpace('shell:Desktop').Self.Path
+    return $value
 }
 function Get-DownloadFolder {
     <#
@@ -197,6 +220,15 @@ function Get-FileFromURL {
     catch {
         Show-InstallError -name $fileName
     }
+}
+function Get-PublicDesktopFolder {
+    <#
+    .SYNOPSIS
+        This returns the public desktop folder.
+    #>
+
+    $value = [Environment]::GetFolderPath("CommonDesktopDirectory")
+    return $value
 }
 function Initialize-Environment {
     <#
@@ -357,3 +389,4 @@ Install-Apps
 
 Write-Host "`n[5/5] Cleaning up..." -ForegroundColor Cyan
 Clear-DownloadFolder
+Clear-DesktopFolders
