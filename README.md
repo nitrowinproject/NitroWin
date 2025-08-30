@@ -1,63 +1,61 @@
 <div align="center">
-   <img src="assets/Images/NitroWin.png" alt="NitroWin" width="200">
+   <img src="assets/Images/NitroWin_Wide.png" alt="NitroWin" width="800">
 
-   <h1>NitroWin</h1>
+   ---
 
-   <div>
-      <a href="https://dotnet.microsoft.com/en-us/"><img alt="PowerShell" src="https://img.shields.io/badge/POWERSHELL-5C2D91?style=for-the-badge&color=000000"></a>
-      <a href="https://github.com/nitrowinproject/NitroWin/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/nitrowinproject/NitroWin?style=for-the-badge&logo=github&logoColor=ffffff&color=000000&label"></a>
-      <a href="https://github.com/nitrowinproject/NitroWin/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?style=for-the-badge&logo=githubactions&logoColor=ffffff&color=000000&label"></a>
-   </div>
+   <img src="https://img.shields.io/github/license/nitrowinproject/NitroWin?logo=github&logoColor=D6CFCB&color=D6CFCB&label=License&labelColor=565264" alt="License">
+   <img src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?logo=githubactions&logoColor=D6CFCB&color=D6CFCB&label=Release&labelColor=565264" alt="Latest release">
 </div>
 
-## :white_check_mark: · Features
+## :white_check_mark: Features
 
-Here are some features compared to a stock Windows installation:
+Compared to a **stock Windows installation**, **NitroWin** has:
 
-* :lock: - Better privacy
-* :scissors: - Less bloat
-* :rocket: - More FPS
+* :lock: Better privacy
+* :scissors: Less bloat
+* :rocket: More FPS
 
-Compared to other Windows modifications, NitroWin has:
+Compared to **other Windows modifications**, **NitroWin** has:
 
-* :shield: - No disabled security features
-* :do_not_litter: - No custom branding
-* :no_entry_sign: - No AME playbook
+* :shield: No disabled security features
+* :do_not_litter: No custom branding
+* :no_entry_sign: No AME playbook
 
-## :books: · How do I use this?
+## :books: How do I use this?
 
-> [!WARNING]
-> The Pro or LTSC versions of Windows are recommended because I've had problems with the Home editions of Windows.
+> [!CAUTION]
+> The **Pro** and **Enterprise** versions of Windows are recommended because **the Home editions of Windows don't support Group Policies**.
 
-Go to the [latest GitHub release page](https://github.com/nitrowinproject/NitroWin/releases/latest) and download autounattend.xml.
+1. Download the [latest version of the **answer file**](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
-Create your Windows installation media as you usually would.
+2. Copy it to the **root** of your **installation media**.
 
-Copy the autounattend.xml file to the root of your installation media.
+   > [!NOTE]
+   > If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using [**this guide**](docs/config.md).
 
-> [!TIP]
-> Open the root folder in your installation media and create the NitroWin.Apps.json file. Customize it to your liking, using [this guide](docs/config.md).
+3. Install **Windows** as **usual**.
 
-Install Windows as you usually would. NitroWin will then apply its tweaks automatically.
+4. (**optional**, but **highly recommended**) Use [**WinUtil**](https://github.com/ChrisTitusTech/winutil) and [**OOSU**](https://www.oo-software.com/en/shutup10) for even **better privacy**.
 
-It is recommended to use WinUtil and OOSU after installing.
+   > [!TIP]
+   > Open up an **elevated PowerShell prompt** and **paste `irm "https://christitus.com/win" | iex` inside.**
 
-## :scroll: · License
+## :scroll: License
 
-This project is licensed under the [Zero-Clause-BSD license](LICENSE).
+**All files this repository contains** are licensed under the **[Zero-Clause-BSD license](LICENSE)**.
 
-It also contains and/or links to files from different repositories/sources that are licensed under their respective licenses.
+It also uses files from **different projects**. These projects are licensed under **their respective licenses**.
 
-By using NitroWin, you agree to the terms and conditions of those repositories/sources.
+By using **NitroWin**, you **agree** to the **terms and conditions** of those **projects**.
 
-For more details, see [NOTICE.md](NOTICE.md).
+For **more details**, see **[NOTICE.md](NOTICE.md)**.
 
-### :wrench: · Tweaks
+### :wrench: Tweaks
 
-My tweaks are licensed under the [Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE). But note that most tweaks that are used in this project were made by AtlasOS. Although they have been converted into a more standard format, I decided to keep the [GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE). For more details, check out the [Tweaks repository](https://github.com/nitrowinproject/Tweaks).
+**My tweaks** are licensed under the **[Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE).** But note that **most tweaks** that are used in this project were **made by AtlasOS**. Although they have been converted into a more **standard format**, I decided to **keep** the **[GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE)**. For more details, **check out** the **[Tweaks repository](https://github.com/nitrowinproject/Tweaks).**
 
-### :heavy_exclamation_mark: · Disclaimer
+### :heavy_exclamation_mark: Disclaimer
 
-This project is not affiliated with Microsoft or any other third-party project this repository uses.
+This project is **not affiliated with Microsoft** or **any other third-party project** this repository uses.
 
-This project does not distribute modified Windows ISOs.
+This project does **not distribute modified Windows ISOs.**
