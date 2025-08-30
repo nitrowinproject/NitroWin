@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="assets/Images/NitroWin_Wide.png" alt="NitroWin" width="800">
+   <img src="assets/Images/NitroWin_Wide.png" alt="NitroWin" width="600">
 
    ---
 
@@ -26,19 +26,16 @@ Compared to **other Windows modifications**, **NitroWin** has:
 > [!CAUTION]
 > The **Pro** and **Enterprise** versions of Windows are recommended because **the Home editions of Windows don't support Group Policies**.
 
+> [!NOTE]
+> If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using [**this guide**](docs/config.md).
+
 1. Download the [latest version of the **answer file**](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
 2. Copy it to the **root** of your **installation media**.
 
-   > [!NOTE]
-   > If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using [**this guide**](docs/config.md).
-
 3. Install **Windows** as **usual**.
 
 4. (**optional**, but **highly recommended**) Use [**WinUtil**](https://github.com/ChrisTitusTech/winutil) and [**OOSU**](https://www.oo-software.com/en/shutup10) for even **better privacy**.
-
-   > [!TIP]
-   > Open up an **elevated PowerShell prompt** and **paste `irm "https://christitus.com/win" | iex` inside.**
 
 ## :scroll: License
 
