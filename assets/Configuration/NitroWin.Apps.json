@@ -44,8 +44,8 @@
     },
     {
       "source": "winget",
-      "id": "M2Team.NanaZip",
-      "arch": ["x64", "arm64"]
+      "id": "7zip.7zip",
+      "arch": ["x64", "x86", "arm64", "arm"]
     },
     {
       "source": "winget",
