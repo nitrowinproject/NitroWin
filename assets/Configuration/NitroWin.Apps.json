@@ -32,12 +32,6 @@
     },
     {
       "source": "winget",
-      "id": "Greenshot.Greenshot",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
-    },
-    {
-      "source": "winget",
       "id": "KeePassXCTeam.KeePassXC",
       "args": "--scope machine",
       "arch": ["x64", "arm64"]
