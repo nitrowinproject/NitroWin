@@ -32,6 +32,11 @@
     },
     {
       "source": "winget",
+      "id": "9MZ95KL8MR0L",
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "winget",
       "id": "7zip.7zip",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64", "arm"]
