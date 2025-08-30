@@ -24,3 +24,4 @@ Install-Apps
 
 Write-Host "`n[5/5] Cleaning up..." -ForegroundColor Cyan
 Clear-DownloadFolder
+Clear-DesktopFolders
