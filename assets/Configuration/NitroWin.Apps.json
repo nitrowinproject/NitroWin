@@ -20,15 +20,9 @@
     },
     {
       "source": "winget",
-      "id": "Brave.Brave",
+      "id": "7zip.7zip",
       "args": "--scope machine",
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "source": "winget",
-      "id": "MartiCliment.UniGetUI",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
+      "arch": ["x64", "x86", "arm64", "arm"]
     },
     {
       "source": "winget",
@@ -37,9 +31,21 @@
     },
     {
       "source": "winget",
-      "id": "7zip.7zip",
+      "id": "Brave.Brave",
       "args": "--scope machine",
-      "arch": ["x64", "x86", "arm64", "arm"]
+      "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "DuongDieuPhap.ImageGlass",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
+    },
+    {
+      "source": "winget",
+      "id": "MartiCliment.UniGetUI",
+      "args": "--scope machine",
+      "arch": ["x64", "arm64"]
     },
     {
       "source": "winget",
@@ -51,12 +57,6 @@
       "id": "VideoLAN.VLC",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "source": "winget",
-      "id": "DuongDieuPhap.ImageGlass",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
     }
   ]
 }
