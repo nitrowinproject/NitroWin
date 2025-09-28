@@ -1,58 +1,53 @@
 {
   "apps": [
     {
+      "name": "Microsoft Visual C++ Redistributable 2015-2022 (x64)",
       "source": "web",
       "url": "https://aka.ms/vs/17/release/vc_redist.x64.exe",
       "args": ["/install", "/passive", "/norestart"],
       "arch": ["x64", "x86", "arm64"]
     },
     {
+      "name": "Microsoft Visual C++ Redistributable 2015-2022 (x86)",
       "source": "web",
       "url": "https://aka.ms/vs/17/release/vc_redist.x86.exe",
       "args": ["/install", "/passive", "/norestart"],
       "arch": ["x64", "x86", "arm64"]
     },
     {
+      "name": "Microsoft Visual C++ Redistributable 2015-2022 (arm64)",
       "source": "web",
       "url": "https://aka.ms/vs/17/release/vc_redist.arm64.exe",
       "args": ["/install", "/passive", "/norestart"],
       "arch": ["arm64"]
     },
     {
+      "name": "7-Zip",
       "source": "winget",
       "id": "7zip.7zip",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64", "arm"]
     },
     {
+      "name": "Snipping Tool",
       "source": "winget",
       "id": "9MZ95KL8MR0L",
       "arch": ["x64", "x86", "arm64"]
     },
     {
+      "name": "Microsoft Photos",
       "source": "winget",
-      "id": "Brave.Brave",
-      "args": "--scope machine",
+      "id": "9WZDNCRFJBH4",
       "arch": ["x64", "x86", "arm64"]
     },
     {
-      "source": "winget",
-      "id": "DuongDieuPhap.ImageGlass",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
-    },
-    {
-      "source": "winget",
-      "id": "MartiCliment.UniGetUI",
-      "args": "--scope machine",
-      "arch": ["x64", "arm64"]
-    },
-    {
+      "name": "Windows Terminal",
       "source": "winget",
       "id": "Microsoft.WindowsTerminal",
       "arch": ["x64", "x86", "arm64"]
     },
     {
+      "name": "VLC media player",
       "source": "winget",
       "id": "VideoLAN.VLC",
       "args": "--scope machine",

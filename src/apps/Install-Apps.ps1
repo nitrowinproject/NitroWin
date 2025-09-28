@@ -1,12 +1,12 @@
 function Install-Apps {
     <#
     .SYNOPSIS
-        Installs applications based on the configuration defined in "NitroWin.Apps.json".
+        Installs applications based on the configuration defined in "NitroWin.json".
         The configuration file is searched on all local drives. If not found locally,
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
-    $jsonFileName = "NitroWin.Apps.json"
+    $jsonFileName = "NitroWin.json"
 
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
         $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
@@ -20,7 +20,7 @@ function Install-Apps {
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
         try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | ConvertFrom-Json
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
             Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
         }
         catch {
@@ -34,11 +34,11 @@ function Install-Apps {
         switch ($app.source) {
             "web" {
                 $arguments = $app.args -join " "
-                Install-App -url $app.url -arguments $arguments
+                Install-App -name $app.name -url $app.url -arguments $arguments
             }
             "winget" {
                 $arguments = if ($app.args) { "$($app.args)" } else { "" }
-                Install-AppFromWinGet -id $app.id -arguments $arguments
+                Install-AppFromWinGet -name $app.name -id $app.id -arguments $arguments
             }
         }
     }

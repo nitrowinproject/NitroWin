@@ -3,6 +3,9 @@ function Install-App {
     .SYNOPSIS
         Installs an app from a given URL.
 
+    .PARAMETER name
+        The name of the app which should be installed.
+
     .PARAMETER url
         The URL of the installer for the desired app.
 
@@ -12,6 +15,9 @@ function Install-App {
 
     param (
         [Parameter(Mandatory = $true)]
+        [string]$name,
+
+        [Parameter(Mandatory = $true)]
         [string]$url,
 
         [Parameter(Mandatory = $false)]
@@ -20,7 +26,7 @@ function Install-App {
 
     $destinationPath = Get-FileFromURL -url $url
 
-    Write-Host "Installing $fileName..."
+    Write-Host "Installing $name..."
 
     if ($arguments) {
         Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
