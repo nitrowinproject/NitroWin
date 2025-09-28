@@ -1,4 +1,5 @@
 #Requires -RunAsAdministrator
+$host.ui.RawUI.WindowTitle = "NitroWin"
 Clear-Host
 
 Write-Host ""
