@@ -1,8 +1,30 @@
 function Invoke-Tweaks {
     <#
     .SYNOPSIS
-        Downloads and invokes all tweaks from NitroWin.
+        Downloads and invokes all tweaks from NitroWin. Also checks config for extra tweaks.
     #>
+
+    $jsonFileName = "NitroWin.json"
+
+    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
+        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
+        if (Test-Path -Path $configPath -PathType Leaf) {
+            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
+            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
+            break
+        }
+    }
+
+    if (-Not $config) {
+        Write-Host "No configuration found. Downloading from GitHub..."
+        try {
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
+            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
+        }
+        catch {
+            Show-InstallError -name $jsonFileName
+        }
+    }
 
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
@@ -35,5 +57,13 @@ function Invoke-Tweaks {
                 Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
             }
         }
+    }
+
+    if ($config.drivers) {
+        Enable-AutomaticDriverInstallation
+    }
+
+    if ($config.store) {
+        Install-MicrosoftStore
     }
 }

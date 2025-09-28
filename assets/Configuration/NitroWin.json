@@ -5,7 +5,7 @@
       "source": "web",
       "url": "https://aka.ms/vs/17/release/vc_redist.x64.exe",
       "args": ["/install", "/passive", "/norestart"],
-      "arch": ["x64", "x86", "arm64"]
+      "arch": ["x64", "arm64"]
     },
     {
       "name": "Microsoft Visual C++ Redistributable 2015-2022 (x86)",
@@ -29,9 +29,10 @@
       "arch": ["x64", "x86", "arm64", "arm"]
     },
     {
-      "name": "Snipping Tool",
+      "name": "Brave",
       "source": "winget",
-      "id": "9MZ95KL8MR0L",
+      "id": "Brave.Brave",
+      "args": "--scope machine",
       "arch": ["x64", "x86", "arm64"]
     },
     {
@@ -41,9 +42,9 @@
       "arch": ["x64", "x86", "arm64"]
     },
     {
-      "name": "Windows Terminal",
+      "name": "Snipping Tool",
       "source": "winget",
-      "id": "Microsoft.WindowsTerminal",
+      "id": "9MZ95KL8MR0L",
       "arch": ["x64", "x86", "arm64"]
     },
     {
@@ -52,6 +53,14 @@
       "id": "VideoLAN.VLC",
       "args": "--scope machine",
       "arch": ["x64", "x86", "arm64"]
+    },
+    {
+      "name": "Windows Terminal",
+      "source": "winget",
+      "id": "Microsoft.WindowsTerminal",
+      "arch": ["x64", "x86", "arm64"]
     }
-  ]
+  ],
+  "drivers": false,
+  "store": false
 }
