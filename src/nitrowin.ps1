@@ -3,6 +3,9 @@ function Install-App {
     .SYNOPSIS
         Installs an app from a given URL.
 
+    .PARAMETER name
+        The name of the app which should be installed.
+
     .PARAMETER url
         The URL of the installer for the desired app.
 
@@ -12,6 +15,9 @@ function Install-App {
 
     param (
         [Parameter(Mandatory = $true)]
+        [string]$name,
+
+        [Parameter(Mandatory = $true)]
         [string]$url,
 
         [Parameter(Mandatory = $false)]
@@ -20,7 +26,7 @@ function Install-App {
 
     $destinationPath = Get-FileFromURL -url $url
 
-    Write-Host "Installing $fileName..."
+    Write-Host "Installing $name..."
 
     if ($arguments) {
         Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
@@ -34,6 +40,9 @@ function Install-AppFromWinGet {
     .SYNOPSIS
         Installs an app using WinGet.
 
+    .PARAMETER name
+    The name of the app which should be installed.
+
     .PARAMETER id
         The package ID of the desired app.
 
@@ -43,24 +52,27 @@ function Install-AppFromWinGet {
 
     param (
         [Parameter(Mandatory = $true)]
+        [string]$name,
+
+        [Parameter(Mandatory = $true)]
         [string]$id,
 
         [Parameter(Mandatory = $false)]
         [string]$arguments
     )
 
-    Write-Host "Installing $id via WinGet..."
+    Write-Host "Installing $name via WinGet..."
     Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
 }
 function Install-Apps {
     <#
     .SYNOPSIS
-        Installs applications based on the configuration defined in "NitroWin.Apps.json".
+        Installs applications based on the configuration defined in "NitroWin.json".
         The configuration file is searched on all local drives. If not found locally,
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
-    $jsonFileName = "NitroWin.Apps.json"
+    $jsonFileName = "NitroWin.json"
 
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
         $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
@@ -74,7 +86,7 @@ function Install-Apps {
     if (-Not $config) {
         Write-Host "No configuration found. Downloading from GitHub..."
         try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.Apps.json").Result | ConvertFrom-Json
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
             Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
         }
         catch {
@@ -88,11 +100,11 @@ function Install-Apps {
         switch ($app.source) {
             "web" {
                 $arguments = $app.args -join " "
-                Install-App -url $app.url -arguments $arguments
+                Install-App -name $app.name -url $app.url -arguments $arguments
             }
             "winget" {
                 $arguments = if ($app.args) { "$($app.args)" } else { "" }
-                Install-AppFromWinGet -id $app.id -arguments $arguments
+                Install-AppFromWinGet -name $app.name -id $app.id -arguments $arguments
             }
         }
     }
@@ -263,6 +275,37 @@ function Initialize-Environment {
         default { "unknown" }
     }
 }
+function Set-RegistryValue {
+    <#
+    .SYNOPSIS
+        Sets a specific registry value.
+
+    .PARAMETER Path
+        Path to the registry value
+
+    .PARAMETER Name
+        Name of the registry value
+
+    .PARAMETER Value
+        Registry value
+    #>
+
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$Path,
+
+        [Parameter(Mandatory = $true)]
+        [string]$Name,
+
+        [Parameter(Mandatory = $true)]
+        [UInt32]$Value
+    )
+
+    if (-not (Test-Path $Path)) {
+        New-Item -Path $Path -Force | Out-Null
+    }
+    Set-ItemProperty -Path $Path -Name $Name -Value $Value -Type DWord
+}
 function Show-InstallError {
     <#
     .SYNOPSIS
@@ -324,11 +367,71 @@ function Show-Prompt {
     $result = [System.Windows.Forms.MessageBox]::Show($message, $title, $buttons, $icon)
     return $result
 }
+function Enable-AutomaticDriverInstallation {
+    <#
+    .SYNOPSIS
+        Enables the automatic installation of drivers via Windows Update.
+    #>
+    try {
+        Write-Host "Enabling automatic driver installation..."
+
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\PolicyManager\current\device\Update" "ExcludeWUDriversInQualityUpdate" 0
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Update" "ExcludeWUDriversInQualityUpdate" 0
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" "ExcludeWUDriversInQualityUpdate" 0
+        Set-RegistryValue "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" "ExcludeWUDriversInQualityUpdate" 0
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate" "value" 0
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" "PreventDeviceMetadataFromNetwork" 0
+
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" "SearchOrderConfig" 1
+        Set-RegistryValue "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" "DontSearchWindowsUpdate" 0
+
+        Write-Host "Enabled automatic driver installation successfully!" -ForegroundColor Green
+    }
+    catch {
+        Show-InstallError -name "automatic driver installation"
+    }
+}
+function Install-MicrosoftStore {
+    <#
+    .SYNOPSIS
+        Installs the Microsoft Store.
+    #>
+    try {
+        Write-Host "Starting Microsoft Store installation..."
+        Start-Process -FilePath "wsreset.exe" -Verb RunAs -ArgumentList "-i"
+        Write-Host "Started Microsoft Store installation successfully!" -ForegroundColor Green
+    }
+    catch {
+        Show-InstallError -name "Microsoft Store"
+    }
+}
 function Invoke-Tweaks {
     <#
     .SYNOPSIS
-        Downloads and invokes all tweaks from NitroWin.
+        Downloads and invokes all tweaks from NitroWin. Also checks config for extra tweaks.
     #>
+
+    $jsonFileName = "NitroWin.json"
+
+    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
+        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
+        if (Test-Path -Path $configPath -PathType Leaf) {
+            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
+            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
+            break
+        }
+    }
+
+    if (-Not $config) {
+        Write-Host "No configuration found. Downloading from GitHub..."
+        try {
+            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
+            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
+        }
+        catch {
+            Show-InstallError -name $jsonFileName
+        }
+    }
 
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
@@ -362,8 +465,17 @@ function Invoke-Tweaks {
             }
         }
     }
+
+    if ($config.drivers) {
+        Enable-AutomaticDriverInstallation
+    }
+
+    if ($config.store) {
+        Install-MicrosoftStore
+    }
 }
 #Requires -RunAsAdministrator
+$host.ui.RawUI.WindowTitle = "NitroWin"
 Clear-Host
 
 Write-Host ""
