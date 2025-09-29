@@ -1,7 +1,7 @@
 <div align="center">
    <img src="assets/Images/NitroWin_Wide.png" alt="NitroWin" width="600">
 
-   ---
+---
 
    <img src="https://img.shields.io/github/license/nitrowinproject/NitroWin?logo=github&logoColor=D6CFCB&color=D6CFCB&label=License&labelColor=565264" alt="License">
    <img src="https://img.shields.io/github/v/release/nitrowinproject/NitroWin?logo=githubactions&logoColor=D6CFCB&color=D6CFCB&label=Release&labelColor=565264" alt="Release">
@@ -11,15 +11,15 @@
 
 Compared to a **stock Windows installation**, **NitroWin** has:
 
-* :lock: Better privacy
-* :scissors: Less bloat
-* :rocket: More FPS
+- :lock: Better privacy
+- :scissors: Less bloat
+- :rocket: More FPS
 
 Compared to **other Windows modifications**, **NitroWin** has:
 
-* :shield: No disabled security features
-* :do_not_litter: No custom branding
-* :no_entry_sign: No AME playbook
+- :shield: No disabled security features
+- :do_not_litter: No custom branding
+- :no_entry_sign: No AME playbook
 
 ## :books: How do I use this?
 
@@ -27,7 +27,7 @@ Compared to **other Windows modifications**, **NitroWin** has:
 > The **Pro** and **Enterprise** versions of Windows are recommended because **the Home editions of Windows don't support Group Policies**.
 
 > [!NOTE]
-> If **no app configuration set** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using **[this guide](docs/config.md)**.
+> If **configuration** is found, NitroWin will use the **default** one. If you **don't like it**, **customize it** to your liking using **[the configurator on my Codeberg page](https://niitroo.codeberg.page)**.
 
 1. **Download** the [latest version of the **answer file**](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
