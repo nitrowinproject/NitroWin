@@ -1,9 +1,14 @@
-# This project uses parts of other projects, which are licensed under the MIT License
+# Third-party projects
 
-The project's code is still licensed under the [Zero-Clause-BSD license](LICENSE).
+## [Tweaks](https://github.com/nitrowinproject/Tweaks)
 
-## MIT License from unattend-generator
+My tweaks are licensed under the [Zero-Clause-BSD license](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE).
 
+However, note that most tweaks used in this project were originally created by AtlasOS. Although they have been converted into a more standard format, I decided to keep the [GPL-3.0 license](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE). For more details, check out the [Tweaks repository](https://github.com/nitrowinproject/Tweaks).
+
+## [unattend-generator](https://github.com/cschneegans/unattend-generator/)
+
+```text
 MIT License
 
 Copyright (c) 2024 Christoph Schneegans
@@ -25,9 +30,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
 
-## License for RunAsTrustedInstaller
+## [RunAsTrustedInstaller](https://github.com/fafalone/RunAsTrustedInstaller)
 
+```text
 MIT License
 
 Copyright (c) 2022 fafalone
@@ -49,3 +56,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
