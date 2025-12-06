@@ -1,66 +1,95 @@
 {
-  "apps": [
-    {
-      "name": "Microsoft Visual C++ Redistributable 2015-2022 (x64)",
-      "source": "web",
-      "url": "https://aka.ms/vs/17/release/vc_redist.x64.exe",
-      "args": ["/install", "/passive", "/norestart"],
-      "arch": ["x64", "arm64"]
-    },
-    {
-      "name": "Microsoft Visual C++ Redistributable 2015-2022 (x86)",
-      "source": "web",
-      "url": "https://aka.ms/vs/17/release/vc_redist.x86.exe",
-      "args": ["/install", "/passive", "/norestart"],
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "name": "Microsoft Visual C++ Redistributable 2015-2022 (arm64)",
-      "source": "web",
-      "url": "https://aka.ms/vs/17/release/vc_redist.arm64.exe",
-      "args": ["/install", "/passive", "/norestart"],
-      "arch": ["arm64"]
-    },
-    {
-      "name": "7-Zip",
-      "source": "winget",
-      "id": "7zip.7zip",
-      "args": "--scope machine",
-      "arch": ["x64", "x86", "arm64", "arm"]
-    },
-    {
-      "name": "Brave",
-      "source": "winget",
-      "id": "Brave.Brave",
-      "args": "--scope machine",
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "name": "Microsoft Photos",
-      "source": "winget",
-      "id": "9WZDNCRFJBH4",
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "name": "Snipping Tool",
-      "source": "winget",
-      "id": "9MZ95KL8MR0L",
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "name": "VLC media player",
-      "source": "winget",
-      "id": "VideoLAN.VLC",
-      "args": "--scope machine",
-      "arch": ["x64", "x86", "arm64"]
-    },
-    {
-      "name": "Windows Terminal",
-      "source": "winget",
-      "id": "Microsoft.WindowsTerminal",
-      "arch": ["x64", "x86", "arm64"]
-    }
-  ],
-  "drivers": false,
-  "store": false
+    "apps": [
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "args": [
+                "/install",
+                "/passive",
+                "/norestart"
+            ],
+            "name": "Microsoft Visual C++ v14 Redistributable (x64)",
+            "source": "web",
+            "url": "https://aka.ms/vc14/vc_redist.x64.exe"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "args": [
+                "/install",
+                "/passive",
+                "/norestart"
+            ],
+            "name": "Microsoft Visual C++ v14 Redistributable (x86)",
+            "source": "web",
+            "url": "https://aka.ms/vc14/vc_redist.x86.exe"
+        },
+        {
+            "arch": [
+                "arm64"
+            ],
+            "args": [
+                "/install",
+                "/passive",
+                "/norestart"
+            ],
+            "name": "Microsoft Visual C++ v14 Redistributable (arm64)",
+            "source": "web",
+            "url": "https://aka.ms/vc14/vc_redist.arm64.exe"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "args": "--scope machine",
+            "id": "7zip.7zip",
+            "name": "7-Zip",
+            "source": "winget"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "args": "--scope machine",
+            "id": "Brave.Brave",
+            "name": "Brave",
+            "source": "winget"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "id": "9WZDNCRFJBH4",
+            "name": "Microsoft Photos",
+            "source": "winget"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "id": "9MZ95KL8MR0L",
+            "name": "Snipping Tool",
+            "source": "winget"
+        },
+        {
+            "arch": [
+                "x64",
+                "arm64"
+            ],
+            "args": "--scope machine",
+            "id": "VideoLAN.VLC",
+            "name": "VLC media player",
+            "source": "winget"
+        }
+    ],
+    "drivers": false,
+    "store": false
 }
