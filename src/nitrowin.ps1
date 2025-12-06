@@ -95,7 +95,7 @@ function Install-Apps {
     }
 
     foreach ($app in $config.apps) {
-        if ($app.arch -notcontains $arch) { continue }
+        if ($app.arch -And (app.arch -notcontains $arch)) { continue }
 
         switch ($app.source) {
             "web" {
@@ -153,6 +153,9 @@ function Install-WinGet {
         catch {
             Show-InstallError -name "WinGet"
         }
+    }
+    else {
+        Write-Host "WinGet is already installed..." -ForegroundColor Gray
     }
 }
 function Clear-DesktopFolders {
@@ -372,6 +375,7 @@ function Enable-AutomaticDriverInstallation {
     .SYNOPSIS
         Enables the automatic installation of drivers via Windows Update.
     #>
+
     try {
         Write-Host "Enabling automatic driver installation..."
 
@@ -396,6 +400,7 @@ function Install-MicrosoftStore {
     .SYNOPSIS
         Installs the Microsoft Store.
     #>
+
     try {
         Write-Host "Starting Microsoft Store installation..."
         Start-Process -FilePath "wsreset.exe" -Verb RunAs -ArgumentList "-i"
@@ -485,7 +490,7 @@ Write-Host "|  \| | | __| '__/ _ \ \ /\ / /| | '_ \ "
 Write-Host "| |\  | | |_| | | (_) \ V  V / | | | | |"
 Write-Host "|_| \_|_|\__|_|  \___/ \_/\_/  |_|_| |_|"
 Write-Host "`n"
-Write-Host "Watch how this script will heavily modify your Windows installation..."
+Write-Host "Watch how this script will improve your Windows installation..."
 
 Write-Host "`n[1/5] Initializing environment..." -ForegroundColor Cyan
 Initialize-Environment
