@@ -29,7 +29,7 @@ function Install-Apps {
     }
 
     foreach ($app in $config.apps) {
-        if ($app.arch -And (app.arch -notcontains $arch)) { continue }
+        if (app.arch -notcontains $arch) { continue }
 
         switch ($app.source) {
             "web" {
