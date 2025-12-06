@@ -3,6 +3,7 @@ function Enable-AutomaticDriverInstallation {
     .SYNOPSIS
         Enables the automatic installation of drivers via Windows Update.
     #>
+
     try {
         Write-Host "Enabling automatic driver installation..."
 

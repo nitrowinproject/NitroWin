@@ -3,6 +3,7 @@ function Install-MicrosoftStore {
     .SYNOPSIS
         Installs the Microsoft Store.
     #>
+
     try {
         Write-Host "Starting Microsoft Store installation..."
         Start-Process -FilePath "wsreset.exe" -Verb RunAs -ArgumentList "-i"

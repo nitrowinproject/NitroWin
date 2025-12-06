@@ -9,7 +9,7 @@ Write-Host "|  \| | | __| '__/ _ \ \ /\ / /| | '_ \ "
 Write-Host "| |\  | | |_| | | (_) \ V  V / | | | | |"
 Write-Host "|_| \_|_|\__|_|  \___/ \_/\_/  |_|_| |_|"
 Write-Host "`n"
-Write-Host "Watch how this script will heavily modify your Windows installation..."
+Write-Host "Watch how this script will improve your Windows installation..."
 
 Write-Host "`n[1/5] Initializing environment..." -ForegroundColor Cyan
 Initialize-Environment

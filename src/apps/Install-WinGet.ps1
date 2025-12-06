@@ -43,4 +43,7 @@ function Install-WinGet {
             Show-InstallError -name "WinGet"
         }
     }
+    else {
+        Write-Host "WinGet is already installed..." -ForegroundColor Gray
+    }
 }
