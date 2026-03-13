@@ -52,6 +52,7 @@
     },
     "config": {
         "drivers": false,
-        "store": false
+        "store": false,
+        "winget": true
     }
 }

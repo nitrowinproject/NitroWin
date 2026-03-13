@@ -15,4 +15,10 @@ function Initialize-Environment {
     $global:httpClient = [System.Net.Http.HttpClient]::new()
 
     Get-FileFromURL -url "https://github.com/fafalone/RunAsTrustedInstaller/releases/latest/download/RunAsTI64.exe" | Out-Null
+
+    $global:config = Get-NitroWinConfig
+    if (-Not $config) {
+        Show-Prompt -message "Config could not be loaded. Please connect to the internet and rerun NitroWin." -title "Could not load config" -buttons Ok -icon Error
+        exit 1
+    }
 }

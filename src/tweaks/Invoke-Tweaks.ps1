@@ -41,9 +41,6 @@ function Invoke-Tweaks {
         }
     }
 
-    $config = Get-NitroWinConfig
-    if (-Not $config) { return }
-
     if ($config.config.drivers) {
         Enable-AutomaticDriverInstallation
     }

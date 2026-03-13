@@ -6,9 +6,6 @@ function Install-Apps {
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
-    $config = Get-NitroWinConfig
-    if (-Not $config) { return }
-
     foreach ($app in $config.apps.web) {
         if (-Not (Confirm-ProcessorArchitecture($app.arch))) { continue }
 

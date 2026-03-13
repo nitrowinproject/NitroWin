@@ -18,7 +18,12 @@ Write-Host "`n[2/5] Applying tweaks..." -ForegroundColor Cyan
 Invoke-Tweaks
 
 Write-Host "`n[3/5] Installing WinGet..." -ForegroundColor Cyan
-Install-WinGet
+if ($config.config.winget) {
+    Install-WinGet
+}
+else {
+    Write-Host "Not installing WinGet, as it was disabled in the config file..." -ForegroundColor Gray
+}
 
 Write-Host "`n[4/5] Installing Apps..." -ForegroundColor Cyan
 Install-Apps
