@@ -21,48 +21,37 @@ function Install-App {
         [string]$url,
 
         [Parameter(Mandatory = $false)]
-        [string]$arguments
+        [string]$arguments = ""
     )
 
     $destinationPath = Get-FileFromURL -url $url
 
     Write-Host "Installing $name..."
 
-    if ($arguments) {
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-    }
-    else {
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
-    }
+    Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
 }
 function Install-AppFromWinGet {
     <#
     .SYNOPSIS
         Installs an app using WinGet.
 
-    .PARAMETER name
-    The name of the app which should be installed.
-
     .PARAMETER id
         The package ID of the desired app.
 
-    .EXAMPLE
-        Install-AppFromWinGet -id "Example.Example"
+    .PARAMETER arguments
+        Optional arguments to pass to WinGet.
     #>
 
     param (
         [Parameter(Mandatory = $true)]
-        [string]$name,
-
-        [Parameter(Mandatory = $true)]
         [string]$id,
 
         [Parameter(Mandatory = $false)]
-        [string]$arguments
+        [string]$arguments = ""
     )
 
-    Write-Host "Installing $name via WinGet..."
-    Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
+    Write-Host "Installing $id via WinGet..."
+    Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $id --exact --accept-package-agreements --accept-source-agreements $arguments"
 }
 function Install-Apps {
     <#
@@ -72,41 +61,16 @@ function Install-Apps {
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
-    $jsonFileName = "NitroWin.json"
+    foreach ($app in $config.apps.web) {
+        if (-Not (Confirm-ProcessorArchitecture($app.arch))) { continue }
 
-    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
-        if (Test-Path -Path $configPath -PathType Leaf) {
-            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
-            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
-            break
-        }
+        $arguments = if ($app.args) { $app.args -join " " } else { "" }
+        Install-App -name $app.name -url $app.url -arguments $arguments
     }
 
-    if (-Not $config) {
-        Write-Host "No configuration found. Downloading from GitHub..."
-        try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
-            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
-        }
-        catch {
-            Show-InstallError -name $jsonFileName
-        }
-    }
-
-    foreach ($app in $config.apps) {
-        if ($app.arch -notcontains $arch) { continue }
-
-        switch ($app.source) {
-            "web" {
-                $arguments = $app.args -join " "
-                Install-App -name $app.name -url $app.url -arguments $arguments
-            }
-            "winget" {
-                $arguments = if ($app.args) { "$($app.args)" } else { "" }
-                Install-AppFromWinGet -name $app.name -id $app.id -arguments $arguments
-            }
-        }
+    foreach ($app in $config.apps.winget) {
+        $arguments = if ($app.args) { $app.args -join " " } else { "" }
+        Install-AppFromWinGet -id $app.id -arguments $arguments
     }
 }
 function Install-WinGet {
@@ -128,7 +92,16 @@ function Install-WinGet {
             Show-InstallError -name "WinGet dependencies"
         }
 
-        $files = Get-ChildItem (Join-Path -Path (Get-DownloadFolder) -ChildPath $arch)
+        switch ($env:PROCESSOR_ARCHITECTURE) {
+            "ARM64" {
+                $wingetDepsArch = "arm64"
+            }
+            default {
+                $wingetDepsArch = "x64"
+            }
+        }
+
+        $files = Get-ChildItem (Join-Path -Path (Get-DownloadFolder) -ChildPath $wingetDepsArch)
         foreach ($file in $files) {
             try {
                 Write-Host "Installing $file..."
@@ -158,13 +131,141 @@ function Install-WinGet {
         Write-Host "WinGet is already installed..." -ForegroundColor Gray
     }
 }
+function Get-DownloadFolder {
+    <#
+    .SYNOPSIS
+        This returns the current user's download folder.
+    #>
+
+    $value = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path
+    return $value
+}
+function Get-FileFromURL {
+    <#
+    .SYNOPSIS
+        Downloads a file from the Internet and returns its path after downloading.
+
+    .PARAMETER url
+        The URL of the file to be downloaded.
+    #>
+
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$url
+    )
+
+    try {
+        $fileName = [System.IO.Path]::GetFileName($url)
+        $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
+
+        Write-Host "Downloading: $fileName..."
+
+        $response = $httpClient.GetAsync($url).Result
+        [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
+
+        Write-Host "Downloaded: $fileName!" -ForegroundColor Green
+
+        return $destinationPath
+    }
+    catch {
+        Show-InstallError -name $fileName
+    }
+}
+function Get-NitroWinConfig {
+    <#
+    .SYNOPSIS
+        Loads the NitroWin JSON configuration from local disk or downloads it from GitHub.
+        Returns the parsed configuration object.
+    #>
+
+    $jsonFileName = "NitroWin.json"
+
+    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
+        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
+        if (Test-Path -Path $configPath -PathType Leaf) {
+            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
+            return Get-Content -Path $configPath -Raw | ConvertFrom-Json
+        }
+    }
+
+    Write-Host "No configuration found. Downloading from GitHub..."
+    try {
+        $config = $global:httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
+        Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
+        return $config
+    }
+    catch {
+        Show-InstallError -name $jsonFileName
+        return $null
+    }
+}
+function Initialize-Environment {
+    <#
+    .SYNOPSIS
+        Initializes the PowerShell environment for NitroWin.
+    #>
+
+    Add-Type -AssemblyName "System.Windows.Forms"
+    [System.Windows.Forms.Application]::EnableVisualStyles();
+
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+    Set-ExecutionPolicy Unrestricted -Scope Process -Force
+
+    Add-Type -AssemblyName "System.Net.Http"
+    $global:httpClient = [System.Net.Http.HttpClient]::new()
+
+    Get-FileFromURL -url "https://github.com/fafalone/RunAsTrustedInstaller/releases/latest/download/RunAsTI64.exe" | Out-Null
+
+    $global:config = Get-NitroWinConfig
+    if (-Not $config) {
+        Show-Prompt -message "Config could not be loaded. Please connect to the internet and rerun NitroWin." -title "Could not load config" -buttons Ok -icon Error
+        exit 1
+    }
+}
+function Confirm-ProcessorArchitecture {
+    <#
+    .SYNOPSIS
+        Checks if an app should be installed based on the processor architecture
+    #>
+
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$architectures
+    )
+
+    switch ($env:PROCESSOR_ARCHITECTURE) {
+        "AMD64" {
+            if ($null -ne $architectures.x64) {
+                return $architectures.x64
+            }
+            else {
+                return $true
+            }
+        }
+        "ARM64" {
+            if ($null -ne $architectures.arm64) {
+                return $architectures.arm64
+            }
+            else {
+                return $true
+            }
+        }
+        default {
+            return $true
+        }
+    }
+}
 function Clear-DesktopFolders {
     <#
     .SYNOPSIS
         This deletes everything in the current user's and the public desktop folder.
     #>
 
-    foreach ($path in @((Get-DesktopFolder), (Get-PublicDesktopFolder))) {
+    $desktopFolder = (New-Object -ComObject Shell.Application).NameSpace('shell:Desktop').Self.Path
+    $publicDesktopFolder = [Environment]::GetFolderPath("CommonDesktopDirectory")
+
+    foreach ($path in @($desktopFolder, $publicDesktopFolder)) {
         Get-ChildItem -Path $path -File -Recurse | Remove-Item -ErrorAction SilentlyContinue -Force
 
         Get-ChildItem -Path $path -Directory -Recurse |
@@ -183,100 +284,6 @@ function Clear-DownloadFolder {
     Get-ChildItem -Path (Get-DownloadFolder) -Directory -Recurse |
     Where-Object { !(Get-ChildItem -Path $_.FullName -Force) } |
     Remove-Item -Force -Recurse -ErrorAction SilentlyContinue
-}
-function Get-DesktopFolder {
-    <#
-    .SYNOPSIS
-        This returns the current user's desktop folder.
-    #>
-
-    $value = (New-Object -ComObject Shell.Application).NameSpace('shell:Desktop').Self.Path
-    return $value
-}
-function Get-DownloadFolder {
-    <#
-    .SYNOPSIS
-        This returns the current user's download folder.
-    #>
-
-    $value = (New-Object -ComObject Shell.Application).NameSpace('shell:Downloads').Self.Path
-    return $value
-}
-function Get-FileFromURL {
-    <#
-    .SYNOPSIS
-        Downloads a file from the Internet and returns its path after downloading.
-
-    .PARAMETER url
-        The URL of the file to be downloaded.
-
-    .EXAMPLE
-        Get-FileFromURL -url "https://example.com/example.txt"
-    #>
-
-    param (
-        [Parameter(Mandatory = $true)]
-        [string]$url
-    )
-
-    try {
-        $global:fileName = [System.IO.Path]::GetFileName($url)
-        $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
-
-        Write-Host "Downloading: $fileName..."
-
-        $response = $httpClient.GetAsync($url).Result
-        [System.IO.File]::WriteAllBytes($destinationPath, $response.Content.ReadAsByteArrayAsync().Result)
-
-        Write-Host "Downloaded: $fileName!" -ForegroundColor Green
-
-        return $destinationPath
-    }
-    catch {
-        Show-InstallError -name $fileName
-    }
-}
-function Get-PublicDesktopFolder {
-    <#
-    .SYNOPSIS
-        This returns the public desktop folder.
-    #>
-
-    $value = [Environment]::GetFolderPath("CommonDesktopDirectory")
-    return $value
-}
-function Initialize-Environment {
-    <#
-    .SYNOPSIS
-        Initializes the PowerShell environment for NitroWin.
-    #>
-
-    Add-Type -AssemblyName "System.Windows.Forms"
-    [System.Windows.Forms.Application]::EnableVisualStyles();
-
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-
-    Set-ExecutionPolicy Unrestricted -Scope Process -Force
-
-    Add-Type -AssemblyName "System.Net.Http"
-    $global:httpClient = [System.Net.Http.HttpClient]::new()
-
-    $global:runAsTIBitness = switch ($env:PROCESSOR_ARCHITECTURE) {
-        "AMD64" { "64" }
-        "x86"   { "32" }
-        "ARM64" { "64" }
-        "ARM"   { "32" }
-        default { "32" }
-    }
-    Get-FileFromURL -url "https://github.com/fafalone/RunAsTrustedInstaller/releases/latest/download/RunAsTI$runAsTIBitness.exe" | Out-Null
-
-    $global:arch = switch ($env:PROCESSOR_ARCHITECTURE) {
-        "AMD64" { "x64" }
-        "x86"   { "x86" }
-        "ARM64" { "arm64" }
-        "ARM"   { "arm" }
-        default { "unknown" }
-    }
 }
 function Set-RegistryValue {
     <#
@@ -349,9 +356,6 @@ function Show-Prompt {
 
     .PARAMETER icon
         The message box icon.
-
-    .EXAMPLE
-        Show-Prompt -message "Hello World" -title "Test" -buttons OK -icon Information
     #>
 
     param (
@@ -416,28 +420,6 @@ function Invoke-Tweaks {
         Downloads and invokes all tweaks from NitroWin. Also checks config for extra tweaks.
     #>
 
-    $jsonFileName = "NitroWin.json"
-
-    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
-        if (Test-Path -Path $configPath -PathType Leaf) {
-            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
-            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
-            break
-        }
-    }
-
-    if (-Not $config) {
-        Write-Host "No configuration found. Downloading from GitHub..."
-        try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
-            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
-        }
-        catch {
-            Show-InstallError -name $jsonFileName
-        }
-    }
-
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.ps1",
@@ -460,22 +442,26 @@ function Invoke-Tweaks {
             }
             { $_.EndsWith("System.reg") } {
                 Write-Host "Importing system registry tweaks from $file..."
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\reg.exe import ""$file""" -NoNewWindow -Wait
+                $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
+                $regArgs = "$env:windir\System32\reg.exe import \"$file\""
+                Start-Process -FilePath $runAsTIExe -ArgumentList $regArgs -NoNewWindow -Wait
                 Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
             }
             { $_.EndsWith("System.ps1") } {
                 Write-Host "Executing system PowerShell script from $file..."
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File ""$file""" -NoNewWindow -Wait
+                $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
+                $psArgs = "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File \"$file\""
+                Start-Process -FilePath $runAsTIExe -ArgumentList $psArgs -NoNewWindow -Wait
                 Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
             }
         }
     }
 
-    if ($config.drivers) {
+    if ($config.config.drivers) {
         Enable-AutomaticDriverInstallation
     }
 
-    if ($config.store) {
+    if ($config.config.store) {
         Install-MicrosoftStore
     }
 }
@@ -499,7 +485,12 @@ Write-Host "`n[2/5] Applying tweaks..." -ForegroundColor Cyan
 Invoke-Tweaks
 
 Write-Host "`n[3/5] Installing WinGet..." -ForegroundColor Cyan
-Install-WinGet
+if ($config.config.winget) {
+    Install-WinGet
+}
+else {
+    Write-Host "Not installing WinGet, as it was disabled in the config file..." -ForegroundColor Gray
+}
 
 Write-Host "`n[4/5] Installing Apps..." -ForegroundColor Cyan
 Install-Apps
