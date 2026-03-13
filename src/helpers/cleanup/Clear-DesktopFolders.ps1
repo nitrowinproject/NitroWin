@@ -4,7 +4,10 @@ function Clear-DesktopFolders {
         This deletes everything in the current user's and the public desktop folder.
     #>
 
-    foreach ($path in @((Get-DesktopFolder), (Get-PublicDesktopFolder))) {
+    $desktopFolder = (New-Object -ComObject Shell.Application).NameSpace('shell:Desktop').Self.Path
+    $publicDesktopFolder = [Environment]::GetFolderPath("CommonDesktopDirectory")
+
+    foreach ($path in @($desktopFolder, $publicDesktopFolder)) {
         Get-ChildItem -Path $path -File -Recurse | Remove-Item -ErrorAction SilentlyContinue -Force
 
         Get-ChildItem -Path $path -Directory -Recurse |
