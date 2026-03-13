@@ -20,7 +20,7 @@ function Install-App {
         [Parameter(Mandatory = $true)]
         [string]$url,
 
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [string]$arguments
     )
 
@@ -28,10 +28,5 @@ function Install-App {
 
     Write-Host "Installing $name..."
 
-    if ($arguments) {
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
-    }
-    else {
-        Start-Process -FilePath $destinationPath -Wait -Verb RunAs
-    }
+    Start-Process -FilePath $destinationPath -Wait -Verb RunAs -ArgumentList $arguments
 }

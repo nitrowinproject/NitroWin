@@ -1,95 +1,57 @@
 {
-    "apps": [
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "args": [
-                "/install",
-                "/passive",
-                "/norestart"
-            ],
-            "name": "Microsoft Visual C++ v14 Redistributable (x64)",
-            "source": "web",
-            "url": "https://aka.ms/vc14/vc_redist.x64.exe"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "args": [
-                "/install",
-                "/passive",
-                "/norestart"
-            ],
-            "name": "Microsoft Visual C++ v14 Redistributable (x86)",
-            "source": "web",
-            "url": "https://aka.ms/vc14/vc_redist.x86.exe"
-        },
-        {
-            "arch": [
-                "arm64"
-            ],
-            "args": [
-                "/install",
-                "/passive",
-                "/norestart"
-            ],
-            "name": "Microsoft Visual C++ v14 Redistributable (arm64)",
-            "source": "web",
-            "url": "https://aka.ms/vc14/vc_redist.arm64.exe"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "args": "--scope machine",
-            "id": "7zip.7zip",
-            "name": "7-Zip",
-            "source": "winget"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "args": "--scope machine",
-            "id": "Brave.Brave",
-            "name": "Brave",
-            "source": "winget"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "id": "9WZDNCRFJBH4",
-            "name": "Microsoft Photos",
-            "source": "winget"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "id": "9MZ95KL8MR0L",
-            "name": "Snipping Tool",
-            "source": "winget"
-        },
-        {
-            "arch": [
-                "x64",
-                "arm64"
-            ],
-            "args": "--scope machine",
-            "id": "VideoLAN.VLC",
-            "name": "VLC media player",
-            "source": "winget"
-        }
-    ],
-    "drivers": false,
-    "store": false
+    "apps": {
+        "web": [
+            {
+                "arch": {
+                    "arm64": true,
+                    "x64": true
+                },
+                "args": [
+                    "/install",
+                    "/passive",
+                    "/norestart"
+                ],
+                "name": "Microsoft Visual C++ v14 Redistributable (x64)",
+                "url": "https://aka.ms/vc14/vc_redist.x64.exe"
+            },
+            {
+                "arch": {
+                    "arm64": true,
+                    "x64": true
+                },
+                "args": [
+                    "/install",
+                    "/passive",
+                    "/norestart"
+                ],
+                "name": "Microsoft Visual C++ v14 Redistributable (x86)",
+                "url": "https://aka.ms/vc14/vc_redist.x86.exe"
+            },
+            {
+                "arch": {
+                    "arm64": true,
+                    "x64": false
+                },
+                "args": [
+                    "/install",
+                    "/passive",
+                    "/norestart"
+                ],
+                "name": "Microsoft Visual C++ v14 Redistributable (arm64)",
+                "url": "https://aka.ms/vc14/vc_redist.arm64.exe"
+            }
+        ],
+        "winget": [
+            {
+                "args": [
+                    "--scope machine"
+                ],
+                "id": "7zip.7zip"
+            }
+        ]
+    },
+    "config": {
+        "drivers": false,
+        "store": false
+    }
 }

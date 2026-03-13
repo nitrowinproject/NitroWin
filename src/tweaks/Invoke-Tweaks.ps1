@@ -59,11 +59,11 @@ function Invoke-Tweaks {
         }
     }
 
-    if ($config.drivers) {
+    if ($config.config.drivers) {
         Enable-AutomaticDriverInstallation
     }
 
-    if ($config.store) {
+    if ($config.config.store) {
         Install-MicrosoftStore
     }
 }

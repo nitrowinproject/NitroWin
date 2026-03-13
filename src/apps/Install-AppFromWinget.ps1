@@ -3,27 +3,21 @@ function Install-AppFromWinGet {
     .SYNOPSIS
         Installs an app using WinGet.
 
-    .PARAMETER name
-    The name of the app which should be installed.
-
     .PARAMETER id
         The package ID of the desired app.
 
-    .EXAMPLE
-        Install-AppFromWinGet -id "Example.Example"
+    .PARAMETER arguments
+        The arguments passed to WinGet.
     #>
 
     param (
         [Parameter(Mandatory = $true)]
-        [string]$name,
-
-        [Parameter(Mandatory = $true)]
         [string]$id,
 
-        [Parameter(Mandatory = $false)]
+        [Parameter(Mandatory = $true)]
         [string]$arguments
     )
 
-    Write-Host "Installing $name via WinGet..."
-    Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $($id) --exact --accept-package-agreements --accept-source-agreements $($arguments)"
+    Write-Host "Installing $id via WinGet..."
+    Start-Process -FilePath "winget.exe" -Wait -Verb RunAs -ArgumentList "install --id $id --exact --accept-package-agreements --accept-source-agreements $arguments"
 }

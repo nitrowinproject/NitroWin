@@ -17,7 +17,16 @@ function Install-WinGet {
             Show-InstallError -name "WinGet dependencies"
         }
 
-        $files = Get-ChildItem (Join-Path -Path (Get-DownloadFolder) -ChildPath $arch)
+        switch ($env:PROCESSOR_ARCHITECTURE) {
+            "AMD64" {
+                $wingetDepsArch = "x64"
+            }
+            "ARM64" {
+                $wingetDepsArch = "arm64"
+            }
+        }
+
+        $files = Get-ChildItem (Join-Path -Path (Get-DownloadFolder) -ChildPath $wingetDepsArch)
         foreach ($file in $files) {
             try {
                 Write-Host "Installing $file..."

@@ -28,18 +28,15 @@ function Install-Apps {
         }
     }
 
-    foreach ($app in $config.apps) {
-        if ($app.arch -notcontains $arch) { continue }
+    foreach ($app in $config.apps.web) {
+        if (-Not (Confirm-ProcessorArchitecture($app.arch))) { continue }
 
-        switch ($app.source) {
-            "web" {
-                $arguments = $app.args -join " "
-                Install-App -name $app.name -url $app.url -arguments $arguments
-            }
-            "winget" {
-                $arguments = if ($app.args) { "$($app.args)" } else { "" }
-                Install-AppFromWinGet -name $app.name -id $app.id -arguments $arguments
-            }
-        }
+        $arguments = if ($app.args) { $app.args -join " " } else { "" }
+        Install-App -name $app.name -url $app.url -arguments $arguments
+    }
+
+    foreach ($app in $config.apps.winget) {
+        $arguments = if ($app.args) { $app.args -join " " } else { "" }
+        Install-AppFromWinGet -id $app.id -arguments $arguments
     }
 }
