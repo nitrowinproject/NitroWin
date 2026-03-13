@@ -7,15 +7,15 @@ function Install-AppFromWinGet {
         The package ID of the desired app.
 
     .PARAMETER arguments
-        The arguments passed to WinGet.
+        Optional arguments to pass to WinGet.
     #>
 
     param (
         [Parameter(Mandatory = $true)]
         [string]$id,
 
-        [Parameter(Mandatory = $true)]
-        [string]$arguments
+        [Parameter(Mandatory = $false)]
+        [string]$arguments = ""
     )
 
     Write-Host "Installing $id via WinGet..."

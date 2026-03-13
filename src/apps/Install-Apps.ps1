@@ -6,27 +6,8 @@ function Install-Apps {
         it will be downloaded from the NitroWin GitHub repository.
     #>
 
-    $jsonFileName = "NitroWin.json"
-
-    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
-        if (Test-Path -Path $configPath -PathType Leaf) {
-            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
-            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
-            break
-        }
-    }
-
-    if (-Not $config) {
-        Write-Host "No configuration found. Downloading from GitHub..."
-        try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
-            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
-        }
-        catch {
-            Show-InstallError -name $jsonFileName
-        }
-    }
+    $config = Get-NitroWinConfig
+    if (-Not $config) { return }
 
     foreach ($app in $config.apps.web) {
         if (-Not (Confirm-ProcessorArchitecture($app.arch))) { continue }

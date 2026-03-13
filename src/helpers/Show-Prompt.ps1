@@ -14,9 +14,6 @@ function Show-Prompt {
 
     .PARAMETER icon
         The message box icon.
-
-    .EXAMPLE
-        Show-Prompt -message "Hello World" -title "Test" -buttons OK -icon Information
     #>
 
     param (

@@ -5,9 +5,6 @@ function Get-FileFromURL {
 
     .PARAMETER url
         The URL of the file to be downloaded.
-
-    .EXAMPLE
-        Get-FileFromURL -url "https://example.com/example.txt"
     #>
 
     param (
@@ -16,7 +13,7 @@ function Get-FileFromURL {
     )
 
     try {
-        $global:fileName = [System.IO.Path]::GetFileName($url)
+        $fileName = [System.IO.Path]::GetFileName($url)
         $destinationPath = Join-Path -Path (Get-DownloadFolder) -ChildPath $fileName
 
         Write-Host "Downloading: $fileName..."

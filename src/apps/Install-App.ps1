@@ -20,8 +20,8 @@ function Install-App {
         [Parameter(Mandatory = $true)]
         [string]$url,
 
-        [Parameter(Mandatory = $true)]
-        [string]$arguments
+        [Parameter(Mandatory = $false)]
+        [string]$arguments = ""
     )
 
     $destinationPath = Get-FileFromURL -url $url

@@ -4,28 +4,6 @@ function Invoke-Tweaks {
         Downloads and invokes all tweaks from NitroWin. Also checks config for extra tweaks.
     #>
 
-    $jsonFileName = "NitroWin.json"
-
-    foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $configPath = Join-Path -Path "$($drive.Name):" -ChildPath $jsonFileName
-        if (Test-Path -Path $configPath -PathType Leaf) {
-            Write-Host "Found config under $configPath! Continuing with this configuration..." -ForegroundColor Green
-            $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
-            break
-        }
-    }
-
-    if (-Not $config) {
-        Write-Host "No configuration found. Downloading from GitHub..."
-        try {
-            $config = $httpClient.GetStringAsync("https://raw.githubusercontent.com/nitrowinproject/NitroWin/main/assets/Configuration/NitroWin.json").Result | ConvertFrom-Json
-            Write-Host "The configuration was downloaded successfully!" -ForegroundColor Green
-        }
-        catch {
-            Show-InstallError -name $jsonFileName
-        }
-    }
-
     $urls = @(
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.reg",
         "https://raw.githubusercontent.com/nitrowinproject/Tweaks/main/NitroWin.Tweaks.User.ps1",
@@ -48,16 +26,23 @@ function Invoke-Tweaks {
             }
             { $_.EndsWith("System.reg") } {
                 Write-Host "Importing system registry tweaks from $file..."
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\reg.exe import ""$file""" -NoNewWindow -Wait
+                $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
+                $regArgs = "$env:windir\System32\reg.exe import \"$file\""
+                Start-Process -FilePath $runAsTIExe -ArgumentList $regArgs -NoNewWindow -Wait
                 Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
             }
             { $_.EndsWith("System.ps1") } {
                 Write-Host "Executing system PowerShell script from $file..."
-                Start-Process -FilePath (Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI$runAsTIBitness.exe") -ArgumentList "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File ""$file""" -NoNewWindow -Wait
+                $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
+                $psArgs = "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File \"$file\""
+                Start-Process -FilePath $runAsTIExe -ArgumentList $psArgs -NoNewWindow -Wait
                 Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
             }
         }
     }
+
+    $config = Get-NitroWinConfig
+    if (-Not $config) { return }
 
     if ($config.config.drivers) {
         Enable-AutomaticDriverInstallation
