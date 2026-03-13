@@ -1,6 +1,6 @@
 name: Compile
 run-name: Compile
-on: [push]
+on: push
 jobs:
   Compile:
     runs-on: windows-latest
