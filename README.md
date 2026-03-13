@@ -9,8 +9,8 @@
 
 ## :white_check_mark: Features
 
-Feature | NitroWin | Stock Windows | Other Windows modifications
---------|----------|---------|----------------------------
+Feature | NitroWin | Stock Windows 11 | Other Windows modifications
+--------|----------|------------------|----------------------------
 :lock: Better Privacy | :white_check_mark: | :no_entry_sign: | :white_check_mark:
 :scissors: Less bloat | :white_check_mark: | :no_entry_sign: | :white_check_mark:
 :rocket: More FPS | :white_check_mark: | :no_entry_sign: | :white_check_mark:
@@ -21,13 +21,13 @@ Feature | NitroWin | Stock Windows | Other Windows modifications
 ## :books: How do I use this?
 
 > [!CAUTION]
-> The Pro and Enterprise versions of Windows are recommended because the Home editions of Windows do not support Group Policies.
+> Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies.
 
 > [!NOTE]
-> If no configuration is found, NitroWin will use the default one. If you do not like it, customize it to your liking using the [Configuration Page](https://niitroo.codeberg.page/).
+> If no configuration is found, NitroWin is going to use the [default one](assets/Configuration/NitroWin.json). If you do not like it, customize it to your liking using the [Configuration Page](https://niitroo.codeberg.page/).
 
 > [!TIP]
-> Check out [this guide](docs/vm.md) for running NitroWin inside a virtual machine.
+> Check out the [FAQ](docs/faq.md) if you have any questions.
 
 1. Download the [latest version of the answer file](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
