@@ -18,11 +18,11 @@ function Install-WinGet {
         }
 
         switch ($env:PROCESSOR_ARCHITECTURE) {
-            "AMD64" {
-                $wingetDepsArch = "x64"
-            }
             "ARM64" {
                 $wingetDepsArch = "arm64"
+            }
+            default {
+                $wingetDepsArch = "x64"
             }
         }
 
