@@ -1,5 +1,5 @@
 <div align="center">
-   <img src="assets/Images/NitroWin_Wide.png" alt="NitroWin" width="600">
+   <img src="Assets/Images/NitroWin_Wide.png" alt="NitroWin" width="600">
 
 ---
 
@@ -24,10 +24,10 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 > Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies.
 
 > [!NOTE]
-> If no configuration is found, NitroWin is going to use the [default one](assets/Configuration/NitroWin.json). If you do not like it, customize it to your liking using the [Configuration Page](https://niitroo.codeberg.page/).
+> If no configuration is found, NitroWin is going to use the [default one](Assets/Configuration/NitroWin.json). If you do not like it, customize it to your liking using the [Configuration Page](https://niitroo.codeberg.page/).
 
 > [!TIP]
-> Check out the [FAQ](docs/faq.md) if you have any questions.
+> Check out the [FAQ](Documentation/FrequentlyAskedQuestions.md) if you have any questions.
 
 1. Download the [latest version of the answer file](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
@@ -41,7 +41,7 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 
 This project is licensed under the [Zero-Clause BSD License](LICENSE).
 
-This project also uses other projects which are licensed under their respective licenses. By using NitroWin, you agree to the terms and conditions of all of those projects. For more details, see [NOTICE.md](NOTICE.md).
+This project also uses other projects which are licensed under their respective licenses. By using NitroWin, you agree to the terms and conditions of all of those projects. For more details, see [OtherProjects.md](Documentation/OtherProjects.md).
 
 ### :heavy_exclamation_mark: Disclaimer
 
