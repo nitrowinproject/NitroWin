@@ -27,14 +27,14 @@ function Invoke-Tweaks {
             { $_.EndsWith("System.reg") } {
                 Write-Host "Importing system registry tweaks from $file..."
                 $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
-                $regArgs = "$env:windir\System32\reg.exe import \"$file\""
+                $regArgs = "$env:windir\System32\reg.exe import `"$file`""
                 Start-Process -FilePath $runAsTIExe -ArgumentList $regArgs -NoNewWindow -Wait
                 Write-Host "System registry tweaks imported successfully!" -ForegroundColor Green
             }
             { $_.EndsWith("System.ps1") } {
                 Write-Host "Executing system PowerShell script from $file..."
                 $runAsTIExe = Join-Path -Path (Get-DownloadFolder) -ChildPath "RunAsTI64.exe"
-                $psArgs = "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File \"$file\""
+                $psArgs = "$env:windir\System32\WindowsPowerShell\v1.0\powershell.exe -ExecutionPolicy Bypass -NoProfile -File `"$file`""
                 Start-Process -FilePath $runAsTIExe -ArgumentList $psArgs -NoNewWindow -Wait
                 Write-Host "System PowerShell script executed successfully!" -ForegroundColor Green
             }
