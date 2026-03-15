@@ -20,7 +20,7 @@ namespace NitroWin.AppInstaller
 
             if (process == null)
             {
-                ConsoleHelper.WriteError("Error while installing " + app.Id + " via WinGet.");
+                ConsoleHelper.WriteError(Globals.ResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.ResourceManager.GetString("Strings.AppInstaller_ViaWinget"));
                 return;
             }
 
@@ -34,9 +34,7 @@ namespace NitroWin.AppInstaller
                 return;
             }
 
-            string downloadFolder = "Downloads";
-
-            var download = await FileDownloader.DownloadFileAsync(app.Url, downloadFolder);
+            var download = await FileDownloader.DownloadFileAsync(app.Url, Globals.DownloadFolder);
 
             var startInfo = new ProcessStartInfo()
             {
@@ -50,7 +48,7 @@ namespace NitroWin.AppInstaller
 
             if (process == null)
             {
-                ConsoleHelper.WriteError("Error while installing " + app.Name + ".");
+                ConsoleHelper.WriteError(Globals.ResourceManager.GetString("AppInstaller_InstallError") + app.Name + ".");
                 return;
             }
 
