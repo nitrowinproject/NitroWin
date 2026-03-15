@@ -11,9 +11,9 @@ namespace NitroWin.Helpers
         public const string DownloadFolder = "Downloads";
         public static readonly ResourceManager StringsResourceManager = new("NitroWin.Resources.Strings", Assembly.GetExecutingAssembly());
 
-        public static AppInstallerConfig AppInstallerConfig { get; } = LoadConfig();
+        public static AppInstallerConfig? AppInstallerConfig { get; } = LoadConfig();
 
-        private static AppInstallerConfig LoadConfig()
+        private static AppInstallerConfig? LoadConfig()
         {
             try
             {
@@ -27,11 +27,8 @@ namespace NitroWin.Helpers
             }
             catch
             {
-                ConsoleHelper.WriteWarning(
-                    StringsResourceManager.GetString("Globals_NoAppConfigFound")!
-                );
-
-                return new AppInstallerConfig();
+                ConsoleHelper.WriteWarning(StringsResourceManager.GetString("Globals_NoAppConfigFound")!);
+                return null;
             }
         }
     }

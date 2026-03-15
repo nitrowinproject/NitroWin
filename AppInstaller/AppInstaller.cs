@@ -20,7 +20,7 @@ namespace NitroWin.AppInstaller
 
             if (process == null)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("Strings.AppInstaller_ViaWinget"));
+                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget"));
                 return;
             }
 
