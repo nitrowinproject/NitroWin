@@ -1,4 +1,5 @@
-﻿using NitroWin.Helpers.Downloader;
+﻿using NitroWin.Helpers;
+using NitroWin.Helpers.Downloader;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -11,11 +12,17 @@ namespace NitroWin.AppInstaller
             var startInfo = new ProcessStartInfo()
             {
                 FileName = "winget.exe",
-                Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? Array.Empty<string>())}",
+                Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}",
                 Verb = "RunAs"
             };
 
             var process = Process.Start(startInfo);
+
+            if (process == null)
+            {
+                ConsoleHelper.WriteError("Error while installing " + app.Id + " via WinGet.");
+                return;
+            }
 
             await process.WaitForExitAsync();
         }
@@ -40,6 +47,12 @@ namespace NitroWin.AppInstaller
             };
 
             var process = Process.Start(startInfo);
+
+            if (process == null)
+            {
+                ConsoleHelper.WriteError("Error while installing " + app.Name + ".");
+                return;
+            }
 
             await process.WaitForExitAsync();
         }
