@@ -6,7 +6,7 @@ namespace NitroWin
     {
         public static async Task Main()
         {
-            Console.Title = Globals.StringsResourceManager.GetString("NitroWin_ConsoleTitle")!;
+            ConsoleHelper.WriteBranding();
 
             if (Globals.AppInstallerConfig != null)
             {
