@@ -138,4 +138,10 @@
   <data name="NitroWin_InstallingApps" xml:space="preserve">
     <value>Installing Apps...</value>
   </data>
+  <data name="WingetInstaller_InstallingWinGet" xml:space="preserve">
+    <value>Installing WinGet...</value>
+  </data>
+  <data name="WingetInstaller_InstallingWinGetDependencies" xml:space="preserve">
+    <value>Installing WinGet dependencies...</value>
+  </data>
 </root>

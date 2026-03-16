@@ -8,6 +8,8 @@ namespace NitroWin
         {
             ConsoleHelper.WriteBranding();
 
+            await WingetInstaller.InstallWinget();
+
             if (Globals.AppInstallerConfig != null)
             {
                 Console.WriteLine(Globals.StringsResourceManager.GetString("NitroWin_InstallingApps"));
