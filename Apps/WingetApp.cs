@@ -1,4 +1,4 @@
-﻿namespace NitroWin.AppInstaller
+﻿namespace NitroWin.Apps
 {
     public class WingetApp
     {

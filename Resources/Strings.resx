@@ -132,10 +132,10 @@
   <data name="Globals_NoAppConfigFound" xml:space="preserve">
     <value>No app config file found. Not installing any apps...</value>
   </data>
-  <data name="NitroWin_ConsoleTitle" xml:space="preserve">
+  <data name="ConsoleHelper_ConsoleTitle" xml:space="preserve">
     <value>NitroWin</value>
   </data>
-  <data name="NitroWin_InstallingApps" xml:space="preserve">
+  <data name="AppInstaller_InstallingApps" xml:space="preserve">
     <value>Installing Apps...</value>
   </data>
   <data name="WingetInstaller_InstallingWinGet" xml:space="preserve">

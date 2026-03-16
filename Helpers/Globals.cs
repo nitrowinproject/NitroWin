@@ -1,4 +1,4 @@
-﻿using NitroWin.AppInstaller;
+﻿using NitroWin.Apps;
 using System.Reflection;
 using System.Resources;
 using YamlDotNet.Serialization;
