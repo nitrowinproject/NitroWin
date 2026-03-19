@@ -27,7 +27,7 @@ namespace NitroWin.Helpers
             }
             catch
             {
-                ConsoleHelper.WriteWarning(StringsResourceManager.GetString("Globals_NoAppConfigFound")!);
+                ConsoleHelper.WriteWarning(StringsResourceManager.GetString("Globals_NoAppConfigFound"));
                 return null;
             }
         }

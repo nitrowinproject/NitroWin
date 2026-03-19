@@ -16,14 +16,14 @@
             );
         }
 
-        public static void WriteError(string message)
+        public static void WriteError(string? message)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Error.WriteLine(Globals.StringsResourceManager.GetString("ConsoleHelper_ErrorPrefix") + message);
             Console.ForegroundColor = ConsoleColor.White;
         }
 
-        public static void WriteWarning(string message)
+        public static void WriteWarning(string? message)
         {
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(Globals.StringsResourceManager.GetString("ConsoleHelper_WarningPrefix") + message);
