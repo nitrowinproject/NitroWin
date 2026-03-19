@@ -4,7 +4,7 @@ namespace NitroWin.Helpers
 {
     public static class RunAsTiDownloader
     {
-        public static async Task Download()
+        public static async Task DownloadAsync()
         {
             Console.WriteLine(Globals.StringsResourceManager.GetString("RunAsTiDownloader_Downloading"));
             try
