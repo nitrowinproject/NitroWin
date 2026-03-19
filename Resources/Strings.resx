@@ -123,12 +123,6 @@
   <data name="AppInstaller_ViaWinget" xml:space="preserve">
     <value> via WinGet: </value>
   </data>
-  <data name="ConsoleHelper_ErrorPrefix" xml:space="preserve">
-    <value>[ERROR] </value>
-  </data>
-  <data name="ConsoleHelper_WarningPrefix" xml:space="preserve">
-    <value>[WARNING] </value>
-  </data>
   <data name="Globals_NoAppConfigFound" xml:space="preserve">
     <value>No app config file found. Not installing any apps...</value>
   </data>
