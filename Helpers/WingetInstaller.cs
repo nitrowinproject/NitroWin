@@ -34,7 +34,7 @@ namespace NitroWin.Helpers
 
         private static async Task InstallWingetDependenciesAsync()
         {
-            string depsPath = Path.Join("Downloads", "DesktopAppInstaller_Dependencies");
+            string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
 
             string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath);
 
@@ -86,7 +86,7 @@ namespace NitroWin.Helpers
             await InstallWingetDependenciesAsync();
 
             Log.Information(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGet")!);
-            string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", "Downloads");
+            string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
             await InstallAppxPackageAsync(winget);
         }
     }
