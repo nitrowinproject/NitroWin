@@ -4,6 +4,8 @@
     {
         public static async Task<string> DownloadFileAsync(string url, string outputFolder)
         {
+            Directory.CreateDirectory(outputFolder);
+
             using var response = await HttpClientProvider.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
             response.EnsureSuccessStatusCode();
 
