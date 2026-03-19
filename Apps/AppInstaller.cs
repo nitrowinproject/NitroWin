@@ -54,7 +54,7 @@ namespace NitroWin.Apps
             await process.WaitForExitAsync();
         }
 
-        public static async Task InstallApps()
+        public static async Task InstallAppsAsync()
         {
             if (Globals.AppInstallerConfig != null)
             {

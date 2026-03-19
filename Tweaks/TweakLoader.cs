@@ -6,7 +6,7 @@ namespace NitroWin.Tweaks
 {
     public static class TweakLoader
     {
-        private static List<Tweak> _tweaks = [
+        private static readonly List<Tweak> _tweaks = [
             new Tweak(){
                 Url = "https://raw.githubusercontent.com/nitrowinproject/Tweaks/v3/Generated/NitroWin.Tweaks.User.reg",
                 Scope = TweakScope.User,
@@ -29,7 +29,7 @@ namespace NitroWin.Tweaks
             }
         ];
 
-        private static async Task ApplyScript(Tweak tweak)
+        private static async Task ApplyScriptAsync(Tweak tweak)
         {
             var tweakPath = Path.Join("Tweaks", tweak.FileName);
 
@@ -44,12 +44,16 @@ namespace NitroWin.Tweaks
 
             var process = Process.Start(startInfo);
 
-            if (process == null) { return; }
+            if (process == null)
+            {
+                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
+                return;
+            }
 
             await process.WaitForExitAsync();
         }
 
-        private static async Task ApplyRegistry(Tweak tweak)
+        private static async Task ApplyRegistryAsync(Tweak tweak)
         {
             var tweakPath = Path.Join("Tweaks", tweak.FileName);
 
@@ -64,25 +68,29 @@ namespace NitroWin.Tweaks
 
             var process = Process.Start(startInfo);
 
-            if (process == null) { return; }
+            if (process == null)
+            {
+                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
+                return;
+            }
 
             await process.WaitForExitAsync();
         }
 
-        private static async Task ApplyTweak(Tweak tweak)
+        private static async Task ApplyTweakAsync(Tweak tweak)
         {
             switch (tweak.Type)
             {
                 case TweakType.Script:
-                    await ApplyScript(tweak);
+                    await ApplyScriptAsync(tweak);
                     break;
                 case TweakType.Registry:
-                    await ApplyRegistry(tweak);
+                    await ApplyRegistryAsync(tweak);
                     break;
             }
         }
 
-        private static async Task DownloadTweaks()
+        private static async Task DownloadTweaksAsync()
         {
             Console.WriteLine(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks"));
             try
@@ -95,16 +103,16 @@ namespace NitroWin.Tweaks
             }
         }
 
-        public static async Task ApplyTweaks()
+        public static async Task ApplyTweaksAsync()
         {
-            await DownloadTweaks();
+            await DownloadTweaksAsync();
 
             Console.WriteLine(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweaks"));
             foreach (var tweak in _tweaks)
             {
                 try
                 {
-                    await ApplyTweak(tweak);
+                    await ApplyTweakAsync(tweak);
                 }
                 catch (Exception ex)
                 {

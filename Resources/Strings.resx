@@ -156,4 +156,7 @@
   <data name="TweakLoader_ApplyError" xml:space="preserve">
     <value>Error while applying tweaks: </value>
   </data>
+  <data name="General_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
 </root>
