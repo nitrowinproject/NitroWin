@@ -147,4 +147,13 @@
   <data name="TweakLoader_DownloadError" xml:space="preserve">
     <value>Error while downloading tweaks: </value>
   </data>
+  <data name="TweakLoader_DownloadingTweaks" xml:space="preserve">
+    <value>Downloading tweaks...</value>
+  </data>
+  <data name="TweakLoader_ApplyingTweaks" xml:space="preserve">
+    <value>Applying tweaks...</value>
+  </data>
+  <data name="TweakLoader_ApplyError" xml:space="preserve">
+    <value>Error while applying tweaks: </value>
+  </data>
 </root>
