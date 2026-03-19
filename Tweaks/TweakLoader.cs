@@ -35,6 +35,11 @@ namespace NitroWin.Tweaks
 
             var startInfo = tweak.Scope switch
             {
+                TweakScope.System => new ProcessStartInfo()
+                {
+                    FileName = Path.Join("Downloads", "RunAsTI64.exe"),
+                    Arguments = Path.Join(Environment.GetEnvironmentVariable("windir"), "System32", "WindowsPowerShell", "v1.0", "powershell.exe") + $"-NoProfile -ExecutionPolicy Bypass -Command \"{tweakPath}\""
+                },
                 _ => new ProcessStartInfo()
                 {
                     FileName = "powershell.exe",
@@ -59,10 +64,15 @@ namespace NitroWin.Tweaks
 
             var startInfo = tweak.Scope switch
             {
+                TweakScope.System => new ProcessStartInfo()
+                {
+                    FileName = Path.Join("Downloads", "RunAsTI64.exe"),
+                    Arguments = Path.Join(Environment.GetEnvironmentVariable("windir"), "System32", "reg.exe") + $"import \"{tweakPath}\""
+                },
                 _ => new ProcessStartInfo()
                 {
                     FileName = "reg.exe",
-                    Arguments = $"import {tweakPath}"
+                    Arguments = $"import \"{tweakPath}\""
                 }
             };
 
