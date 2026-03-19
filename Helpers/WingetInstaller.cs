@@ -11,10 +11,7 @@ namespace NitroWin.Helpers
                 ProcessStartInfo startInfo = new()
                 {
                     FileName = "winget.exe",
-                    Arguments = "--version",
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
+                    Arguments = "--version"
                 };
 
                 using var process = Process.Start(startInfo);
@@ -61,10 +58,7 @@ namespace NitroWin.Helpers
                 var startInfo = new ProcessStartInfo()
                 {
                     FileName = "powershell.exe",
-                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\"",
-                    RedirectStandardOutput = true,
-                    RedirectStandardError = true,
-                    CreateNoWindow = true
+                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\""
                 };
 
                 using var process = Process.Start(startInfo);

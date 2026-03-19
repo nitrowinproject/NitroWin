@@ -12,10 +12,7 @@ namespace NitroWin.Apps
             var startInfo = new ProcessStartInfo()
             {
                 FileName = "winget.exe",
-                Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}",
-                RedirectStandardError = true,
-                RedirectStandardOutput = true,
-                CreateNoWindow = true
+                Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}"
             };
 
             using var process = Process.Start(startInfo);
