@@ -10,8 +10,6 @@ namespace NitroWin
         {
             ConsoleHelper.WriteBranding();
 
-            await RunAsTiDownloader.DownloadAsync();
-
             await TweakLoader.ApplyTweaksAsync();
 
             await WingetInstaller.InstallWingetAsync();

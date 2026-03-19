@@ -159,10 +159,4 @@
   <data name="General_Unknown" xml:space="preserve">
     <value>Unknown</value>
   </data>
-  <data name="RunAsTiDownloader_DownloadError" xml:space="preserve">
-    <value>Error while downloading RunAsTI64: </value>
-  </data>
-  <data name="RunAsTiDownloader_Downloading" xml:space="preserve">
-    <value>Downloading RunAsTI64...</value>
-  </data>
 </root>
