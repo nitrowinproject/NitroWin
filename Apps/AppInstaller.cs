@@ -69,9 +69,9 @@ namespace NitroWin.Apps
                     {
                         await InstallWebAppAsync(app);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ".");
+                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ": " + ex.Message);
                     }
                 }
 
@@ -81,9 +81,9 @@ namespace NitroWin.Apps
                     {
                         await InstallWingetAppAsync(app);
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget"));
+                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ex.Message);
                     }
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using NitroWin.Apps;
 using NitroWin.Helpers;
+using NitroWin.Tweaks;
 
 namespace NitroWin
 {
@@ -12,6 +13,8 @@ namespace NitroWin
             await WingetInstaller.InstallWinget();
 
             await AppInstaller.InstallApps();
+
+            await TweakLoader.ApplyTweaks();
         }
     }
 }

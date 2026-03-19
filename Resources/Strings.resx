@@ -121,7 +121,7 @@
     <value>Error while installing </value>
   </data>
   <data name="AppInstaller_ViaWinget" xml:space="preserve">
-    <value> via WinGet.</value>
+    <value> via WinGet: </value>
   </data>
   <data name="ConsoleHelper_ErrorPrefix" xml:space="preserve">
     <value>[ERROR] </value>
@@ -143,5 +143,8 @@
   </data>
   <data name="WingetInstaller_InstallingWinGetDependencies" xml:space="preserve">
     <value>Installing WinGet dependencies...</value>
+  </data>
+  <data name="TweakLoader_DownloadError" xml:space="preserve">
+    <value>Error while downloading tweaks: </value>
   </data>
 </root>
