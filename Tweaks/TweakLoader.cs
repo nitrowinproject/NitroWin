@@ -1,5 +1,6 @@
 ﻿using NitroWin.Helpers;
 using NitroWin.Helpers.Downloader;
+using Serilog;
 using System.Diagnostics;
 
 namespace NitroWin.Tweaks
@@ -43,7 +44,7 @@ namespace NitroWin.Tweaks
 
             if (process == null)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
+                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
                 return;
             }
 
@@ -64,7 +65,7 @@ namespace NitroWin.Tweaks
 
             if (process == null)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
+                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + Globals.StringsResourceManager.GetString("General_Unknown"));
                 return;
             }
 
@@ -86,14 +87,14 @@ namespace NitroWin.Tweaks
 
         private static async Task DownloadTweaksAsync()
         {
-            Console.WriteLine(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks"));
+            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks")!);
             try
             {
                 await Task.WhenAll(_tweaks.Select(tweak => FileDownloader.DownloadFileAsync(tweak.Url, "Tweaks")));
             }
             catch (Exception ex)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_DownloadError") + ex.Message);
+                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_DownloadError") + ex.Message);
             }
         }
 
@@ -101,7 +102,7 @@ namespace NitroWin.Tweaks
         {
             await DownloadTweaksAsync();
 
-            Console.WriteLine(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweaks"));
+            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweaks")!);
             foreach (var tweak in _tweaks)
             {
                 try
@@ -110,7 +111,7 @@ namespace NitroWin.Tweaks
                 }
                 catch (Exception ex)
                 {
-                    ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + ex.Message);
+                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + ex.Message);
                 }
             }
         }

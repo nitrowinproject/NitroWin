@@ -1,4 +1,5 @@
 ﻿using NitroWin.Apps;
+using Serilog;
 using System.Reflection;
 using System.Resources;
 using YamlDotNet.Serialization;
@@ -27,7 +28,7 @@ namespace NitroWin.Helpers
             }
             catch
             {
-                ConsoleHelper.WriteWarning(StringsResourceManager.GetString("Globals_NoAppConfigFound"));
+                Log.Warning(StringsResourceManager.GetString("Globals_NoAppConfigFound")!);
                 return null;
             }
         }

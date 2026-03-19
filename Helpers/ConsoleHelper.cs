@@ -15,19 +15,5 @@
                 + "\nVP   V8P Y888888P    YP    88   YD  `Y88P'   `8b8' `8d8'  Y888888P VP   V8P"
             );
         }
-
-        public static void WriteError(string? message)
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.Error.WriteLine(Globals.StringsResourceManager.GetString("ConsoleHelper_ErrorPrefix") + message);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-
-        public static void WriteWarning(string? message)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(Globals.StringsResourceManager.GetString("ConsoleHelper_WarningPrefix") + message);
-            Console.ForegroundColor = ConsoleColor.White;
-        }
     }
 }

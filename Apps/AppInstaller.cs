@@ -1,5 +1,6 @@
 ﻿using NitroWin.Helpers;
 using NitroWin.Helpers.Downloader;
+using Serilog;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -19,7 +20,7 @@ namespace NitroWin.Apps
 
             if (process == null)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget"));
+                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget"));
                 return;
             }
 
@@ -47,7 +48,7 @@ namespace NitroWin.Apps
 
             if (process == null)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ".");
+                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ".");
                 return;
             }
 
@@ -58,7 +59,7 @@ namespace NitroWin.Apps
         {
             if (Globals.AppInstallerConfig != null)
             {
-                Console.WriteLine(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApps"));
+                Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApps")!);
 
                 foreach (var app in Globals.AppInstallerConfig.Web)
                 {
@@ -68,7 +69,7 @@ namespace NitroWin.Apps
                     }
                     catch (Exception ex)
                     {
-                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ": " + ex.Message);
+                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ": " + ex.Message);
                     }
                 }
 
@@ -80,7 +81,7 @@ namespace NitroWin.Apps
                     }
                     catch (Exception ex)
                     {
-                        ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ex.Message);
+                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ex.Message);
                     }
                 }
             }

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Serilog;
+using System.Diagnostics;
 
 namespace NitroWin.Helpers
 {
@@ -65,7 +66,7 @@ namespace NitroWin.Helpers
 
                 if (process == null)
                 {
-                    ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ".");
+                    Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ".");
                     return;
                 }
 
@@ -73,7 +74,7 @@ namespace NitroWin.Helpers
             }
             catch (Exception ex)
             {
-                ConsoleHelper.WriteError(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ": " + ex.Message);
+                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ": " + ex.Message);
             }
         }
 
@@ -81,10 +82,10 @@ namespace NitroWin.Helpers
         {
             if (await IsWingetInstalledAsync()) { return; }
 
-            Console.WriteLine(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGetDependencies"));
+            Log.Information(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGetDependencies")!);
             await InstallWingetDependenciesAsync();
 
-            Console.WriteLine(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGet"));
+            Log.Information(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGet")!);
             string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", "Downloads");
             await InstallAppxPackageAsync(winget);
         }
