@@ -10,6 +10,8 @@ namespace NitroWin.Apps
     {
         private static async Task InstallWingetAppAsync(WingetApp app)
         {
+            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + "...");
+
             var startInfo = new ProcessStartInfo()
             {
                 FileName = "winget.exe",
@@ -20,8 +22,7 @@ namespace NitroWin.Apps
 
             if (process == null)
             {
-                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget"));
-                return;
+                throw new NullReferenceException();
             }
 
             await process.WaitForExitAsync();
@@ -31,8 +32,11 @@ namespace NitroWin.Apps
         {
             if (!(RuntimeInformation.ProcessArchitecture == Architecture.X64 && app.Architectures.X64 || RuntimeInformation.ProcessArchitecture == Architecture.Arm64 && app.Architectures.Arm64))
             {
+                Log.Debug(Globals.StringsResourceManager.GetString("AppInstaller_NotInstallingApp") + app.Name + Globals.StringsResourceManager.GetString("AppInstaller_UnsupportedArchitecture"));
                 return;
             }
+
+            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Name + "...");
 
             var download = await FileDownloader.DownloadFileAsync(app.Url, Globals.DownloadFolder);
 
@@ -48,8 +52,7 @@ namespace NitroWin.Apps
 
             if (process == null)
             {
-                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ".");
-                return;
+                throw new NullReferenceException();
             }
 
             await process.WaitForExitAsync();
@@ -81,7 +84,7 @@ namespace NitroWin.Apps
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ex.Message);
+                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ": " + ex.Message);
                     }
                 }
             }

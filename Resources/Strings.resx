@@ -121,7 +121,7 @@
     <value>Error while installing </value>
   </data>
   <data name="AppInstaller_ViaWinget" xml:space="preserve">
-    <value> via WinGet: </value>
+    <value> via WinGet</value>
   </data>
   <data name="Globals_NoAppConfigFound" xml:space="preserve">
     <value>No app config file found. Not installing any apps...</value>
@@ -155,5 +155,14 @@
   </data>
   <data name="TweakLoader_ParseError" xml:space="preserve">
     <value>Error while parsing tweak </value>
+  </data>
+  <data name="AppInstaller_InstallingApp" xml:space="preserve">
+    <value>Installing </value>
+  </data>
+  <data name="AppInstaller_NotInstallingApp" xml:space="preserve">
+    <value>Not installing </value>
+  </data>
+  <data name="AppInstaller_UnsupportedArchitecture" xml:space="preserve">
+    <value> because it is not supported on the current CPU architecture.</value>
   </data>
 </root>
