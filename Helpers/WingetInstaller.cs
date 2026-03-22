@@ -1,5 +1,4 @@
 ﻿using Serilog;
-using System.Diagnostics;
 
 namespace NitroWin.Helpers
 {
@@ -9,20 +8,8 @@ namespace NitroWin.Helpers
         {
             try
             {
-                ProcessStartInfo startInfo = new()
-                {
-                    FileName = "winget.exe",
-                    Arguments = "--version",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                };
-
-                using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
-                await process.WaitForExitAsync();
-
-                return process.ExitCode == 0;
+                var exitCode = await ProcessHelper.StartProcessAsync("winget.exe", "--version", false);
+                return exitCode == 0;
             }
             catch
             {
@@ -30,9 +17,19 @@ namespace NitroWin.Helpers
             }
         }
 
+        private static string GetArchitectureFolder()
+        {
+            return Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
+            {
+                "ARM64" => "arm64",
+                _ => "x64"
+            };
+        }
+
         private static async Task InstallWingetDependenciesAsync()
         {
             string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
+            string depsArchitecture = GetArchitectureFolder();
 
             try
             {
@@ -45,12 +42,6 @@ namespace NitroWin.Helpers
                 Log.Error(Globals.StringsResourceManager.GetString("WingetInstaller_DownloadError") + Globals.StringsResourceManager.GetString("WingetInstaller_WingetDependencies") + ": " + ex.Message);
             }
 
-            string depsArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
-            {
-                "ARM64" => "arm64",
-                _ => "x64"
-            };
-
             foreach (string file in Directory.GetFiles(Path.Join(depsPath, depsArchitecture)))
             {
                 await InstallAppxPackageAsync(file);
@@ -61,18 +52,7 @@ namespace NitroWin.Helpers
         {
             try
             {
-                var startInfo = new ProcessStartInfo()
-                {
-                    FileName = "powershell.exe",
-                    Arguments = $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\"",
-                    WindowStyle = ProcessWindowStyle.Hidden,
-                    RedirectStandardError = true,
-                    RedirectStandardOutput = true,
-                    CreateNoWindow = true
-                };
-
-                using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
-                await process.WaitForExitAsync();
+                await ProcessHelper.StartProcessAsync("powershell.exe", $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\"", false);
             }
             catch (Exception ex)
             {
@@ -90,9 +70,9 @@ namespace NitroWin.Helpers
             Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + "WinGet...");
             try
             {
-                string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
+                string wingetPath = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
 
-                await InstallAppxPackageAsync(winget);
+                await InstallAppxPackageAsync(wingetPath);
             }
             catch (Exception ex)
             {

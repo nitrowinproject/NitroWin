@@ -1,7 +1,6 @@
 ﻿using NitroWin.Helpers;
 using NitroWin.Helpers.Downloader;
 using Serilog;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace NitroWin.Apps
@@ -12,14 +11,7 @@ namespace NitroWin.Apps
         {
             Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + "...");
 
-            var startInfo = new ProcessStartInfo()
-            {
-                FileName = "winget.exe",
-                Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}"
-            };
-
-            using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
-            await process.WaitForExitAsync();
+            await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}");
         }
 
         private static async Task InstallWebAppAsync(WebApp app)
@@ -34,16 +26,7 @@ namespace NitroWin.Apps
 
             var download = await FileDownloader.DownloadFileAsync(app.Url, Globals.DownloadFolder);
 
-            var startInfo = new ProcessStartInfo()
-            {
-                FileName = download,
-                Arguments = string.Join(" ", app.Arguments ?? []),
-                UseShellExecute = true,
-                Verb = "RunAs"
-            };
-
-            using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
-            await process.WaitForExitAsync();
+            await ProcessHelper.StartProcessAsync(download, string.Join(" ", app.Arguments ?? []));
         }
 
         public static async Task InstallAppsAsync()
