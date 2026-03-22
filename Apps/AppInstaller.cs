@@ -9,7 +9,7 @@ namespace NitroWin.Apps
     {
         private static async Task InstallWingetAppAsync(WingetApp app)
         {
-            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + "...");
+            LogHelper.InstallingApp(app);
 
             await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}");
         }
@@ -22,7 +22,7 @@ namespace NitroWin.Apps
                 return;
             }
 
-            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Name ?? app.Url + "...");
+            LogHelper.InstallingApp(app);
 
             var download = await FileDownloader.DownloadFileAsync(app.Url, Globals.DownloadFolder);
 
@@ -46,10 +46,11 @@ namespace NitroWin.Apps
                             }
                             catch (Exception ex)
                             {
-                                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + webApp.Name ?? webApp.Url + ": " + ex.Message);
+                                LogHelper.AppInstallError(webApp, ex);
                             }
 
                             break;
+
                         case WingetApp wingetApp:
                             try
                             {
@@ -57,7 +58,7 @@ namespace NitroWin.Apps
                             }
                             catch (Exception ex)
                             {
-                                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + wingetApp.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ": " + ex.Message);
+                                LogHelper.AppInstallError(wingetApp, ex);
                             }
 
                             break;

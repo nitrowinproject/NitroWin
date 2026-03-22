@@ -120,9 +120,6 @@
   <data name="AppInstaller_InstallError" xml:space="preserve">
     <value>Error while installing </value>
   </data>
-  <data name="AppInstaller_ViaWinget" xml:space="preserve">
-    <value> via WinGet</value>
-  </data>
   <data name="Globals_NoAppConfigFound" xml:space="preserve">
     <value>No app config file found. Not installing any apps...</value>
   </data>
@@ -153,9 +150,6 @@
   <data name="TweakLoader_ParseError" xml:space="preserve">
     <value>Error while parsing tweak </value>
   </data>
-  <data name="AppInstaller_InstallingApp" xml:space="preserve">
-    <value>Installing </value>
-  </data>
   <data name="AppInstaller_NotInstallingApp" xml:space="preserve">
     <value>Not installing </value>
   </data>
@@ -164,5 +158,17 @@
   </data>
   <data name="WingetInstaller_DownloadError" xml:space="preserve">
     <value>Error while downloading </value>
+  </data>
+  <data name="Log_InstallingApp" xml:space="preserve">
+    <value>Installing {0} via {1}...</value>
+  </data>
+  <data name="AppSource_Web" xml:space="preserve">
+    <value>the Internet</value>
+  </data>
+  <data name="AppSource_Winget" xml:space="preserve">
+    <value>WinGet</value>
+  </data>
+  <data name="Log_AppInstallError" xml:space="preserve">
+    <value>Error while installing {0} via {1}: {2}</value>
   </data>
 </root>
