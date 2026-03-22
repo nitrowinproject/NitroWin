@@ -58,7 +58,10 @@ namespace NitroWin.Tweaks
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + "'" + item.TweakTitle + "': " + ex.Message);
+                    if (!item.Action.IgnoreErrors)
+                    {
+                        Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + "'" + item.TweakTitle + "': " + ex.Message);
+                    }
                 }
             });
         }
