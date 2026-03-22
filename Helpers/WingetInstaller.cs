@@ -35,10 +35,9 @@ namespace NitroWin.Helpers
             string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
             await ExtractionHelper.ExtractZipFile(depsArchive, depsPath);
 
-            foreach (var file in Directory.GetFiles(Path.Join(depsPath, depsArchitecture)))
+            foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
+                .Select(file => new AppxApp { Path = file }))
             {
-                var app = new AppxApp() { Path = file };
-
                 await app.InstallAsync();
             }
         }
