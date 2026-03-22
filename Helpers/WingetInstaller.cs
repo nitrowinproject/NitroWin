@@ -38,7 +38,7 @@ namespace NitroWin.Helpers
 
             string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath);
 
-            await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(depsArchive, depsPath);
+            await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(depsArchive, depsPath, overwriteFiles: true);
 
             string depsArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
             {
