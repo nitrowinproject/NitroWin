@@ -34,9 +34,16 @@ namespace NitroWin.Helpers
         {
             string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
 
-            string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath);
+            try
+            {
+                string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath);
 
-            await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(depsArchive, depsPath, overwriteFiles: true);
+                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(depsArchive, depsPath, overwriteFiles: true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(Globals.StringsResourceManager.GetString("WingetInstaller_DownloadError") + Globals.StringsResourceManager.GetString("WingetInstaller_WingetDependencies") + ": " + ex.Message);
+            }
 
             string depsArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
             {
@@ -77,12 +84,21 @@ namespace NitroWin.Helpers
         {
             if (await IsWingetInstalledAsync()) { return; }
 
-            Log.Information(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGetDependencies")!);
+            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + Globals.StringsResourceManager.GetString("WingetInstaller_WingetDependencies") + "...");
             await InstallWingetDependenciesAsync();
 
-            Log.Information(Globals.StringsResourceManager.GetString("WingetInstaller_InstallingWinGet")!);
-            string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
-            await InstallAppxPackageAsync(winget);
+            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + "WinGet...");
+            try
+            {
+                string winget = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
+
+                await InstallAppxPackageAsync(winget);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + "WinGet: " + ex.Message);
+                return;
+            }
         }
     }
 }

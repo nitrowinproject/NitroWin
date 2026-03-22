@@ -132,11 +132,8 @@
   <data name="AppInstaller_InstallingApps" xml:space="preserve">
     <value>Installing Apps...</value>
   </data>
-  <data name="WingetInstaller_InstallingWinGet" xml:space="preserve">
-    <value>Installing WinGet...</value>
-  </data>
-  <data name="WingetInstaller_InstallingWinGetDependencies" xml:space="preserve">
-    <value>Installing WinGet dependencies...</value>
+  <data name="WingetInstaller_WingetDependencies" xml:space="preserve">
+    <value>WinGet dependencies...</value>
   </data>
   <data name="TweakLoader_DownloadError" xml:space="preserve">
     <value>Error while downloading tweaks: </value>
@@ -164,5 +161,8 @@
   </data>
   <data name="AppInstaller_UnsupportedArchitecture" xml:space="preserve">
     <value> because it is not supported on the current CPU architecture.</value>
+  </data>
+  <data name="WingetInstaller_DownloadError" xml:space="preserve">
+    <value>Error while downloading </value>
   </data>
 </root>
