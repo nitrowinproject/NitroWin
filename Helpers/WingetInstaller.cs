@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using NitroWin.Apps;
+using Serilog;
 
 namespace NitroWin.Helpers
 {
@@ -31,32 +32,14 @@ namespace NitroWin.Helpers
             string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
             string depsArchitecture = GetArchitectureFolder();
 
-            try
-            {
-                string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath);
+            string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
+            await ExtractionHelper.ExtractZipFile(depsArchive, depsPath);
 
-                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(depsArchive, depsPath, overwriteFiles: true);
-            }
-            catch (Exception ex)
+            foreach (var file in Directory.GetFiles(Path.Join(depsPath, depsArchitecture)))
             {
-                Log.Error(Globals.StringsResourceManager.GetString("WingetInstaller_DownloadError") + Globals.StringsResourceManager.GetString("WingetInstaller_WingetDependencies") + ": " + ex.Message);
-            }
+                var app = new AppxApp() { Path = file };
 
-            foreach (string file in Directory.GetFiles(Path.Join(depsPath, depsArchitecture)))
-            {
-                await InstallAppxPackageAsync(file);
-            }
-        }
-
-        private static async Task InstallAppxPackageAsync(string path)
-        {
-            try
-            {
-                await ProcessHelper.StartProcessAsync("powershell.exe", $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\"", false);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ": " + ex.Message);
+                await app.InstallAsync();
             }
         }
 
@@ -64,21 +47,15 @@ namespace NitroWin.Helpers
         {
             if (await IsWingetInstalledAsync()) { return; }
 
-            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + Globals.StringsResourceManager.GetString("WingetInstaller_WingetDependencies") + "...");
+            Log.Information(Globals.StringsResourceManager.GetString("WinGetInstaller_InstallingDependencies")!);
             await InstallWingetDependenciesAsync();
 
-            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + "WinGet...");
-            try
+            var app = new AppxWebApp()
             {
-                string wingetPath = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle", Globals.DownloadFolder);
+                Url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+            };
 
-                await InstallAppxPackageAsync(wingetPath);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + "WinGet: " + ex.Message);
-                return;
-            }
+            await app.InstallAsync();
         }
     }
 }

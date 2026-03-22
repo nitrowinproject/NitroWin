@@ -10,7 +10,9 @@ namespace NitroWin.Helpers
         {
             string[] parameters = app switch
             {
-                WebApp webApp => [webApp.Name ?? webApp.Url, Globals.StringsResourceManager.GetString("AppSource_Web")!],
+                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
+                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
+                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
                 WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
                 _ => throw new NotImplementedException()
             };
@@ -24,11 +26,33 @@ namespace NitroWin.Helpers
             Log.Information(message);
         }
 
+        public static void NotInstallingApp(AppBase app)
+        {
+            string[] parameters = app switch
+            {
+                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
+                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
+                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
+                WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
+                _ => throw new NotImplementedException()
+            };
+
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString("Log_NotInstallingApp")!,
+                parameters[0],
+                parameters[1]
+            );
+
+            Log.Debug(message);
+        }
+
         public static void AppInstallError(AppBase app, Exception exception)
         {
             string[] parameters = app switch
             {
-                WebApp webApp => [webApp.Name ?? webApp.Url, Globals.StringsResourceManager.GetString("AppSource_Web")!],
+                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
+                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
+                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
                 WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
                 _ => throw new NotImplementedException()
             };
@@ -54,10 +78,32 @@ namespace NitroWin.Helpers
             Log.Error(message);
         }
 
-        public static void TweakParseError(string filePath, Exception exception)
+        public static void TweakReadError(string filePath, Exception exception)
         {
             var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_TweakParseError")!,
+                Globals.StringsResourceManager.GetString("Log_TweakReadError")!,
+                Path.GetFileName(filePath),
+                exception.Message
+            );
+
+            Log.Error(message);
+        }
+
+        public static void DownloadError(string url, Exception exception)
+        {
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString("Log_DownloadError")!,
+                Path.GetFileName(url),
+                exception.Message
+            );
+
+            Log.Error(message);
+        }
+
+        public static void ExtractionError(string filePath, Exception exception)
+        {
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString("Log_ExtractionError")!,
                 Path.GetFileName(filePath),
                 exception.Message
             );

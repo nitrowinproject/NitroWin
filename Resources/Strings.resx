@@ -127,13 +127,10 @@
     <value>NitroWin</value>
   </data>
   <data name="AppInstaller_InstallingApps" xml:space="preserve">
-    <value>Installing Apps...</value>
+    <value>Installing apps...</value>
   </data>
-  <data name="WingetInstaller_WingetDependencies" xml:space="preserve">
-    <value>WinGet dependencies...</value>
-  </data>
-  <data name="TweakLoader_DownloadError" xml:space="preserve">
-    <value>Error while downloading tweaks: </value>
+  <data name="WinGetInstaller_InstallingDependencies" xml:space="preserve">
+    <value>Installing WinGet dependencies...</value>
   </data>
   <data name="TweakLoader_DownloadingTweaks" xml:space="preserve">
     <value>Downloading tweaks...</value>
@@ -141,34 +138,37 @@
   <data name="TweakLoader_ApplyingTweaks" xml:space="preserve">
     <value>Applying tweaks...</value>
   </data>
-  <data name="TweakLoader_ApplyingTweak" xml:space="preserve">
-    <value>Applying tweak </value>
-  </data>
-  <data name="AppInstaller_NotInstallingApp" xml:space="preserve">
-    <value>Not installing </value>
-  </data>
-  <data name="AppInstaller_UnsupportedArchitecture" xml:space="preserve">
-    <value> because it is not supported on the current CPU architecture.</value>
-  </data>
-  <data name="WingetInstaller_DownloadError" xml:space="preserve">
-    <value>Error while downloading </value>
-  </data>
   <data name="Log_InstallingApp" xml:space="preserve">
     <value>Installing {0} via {1}...</value>
   </data>
   <data name="AppSource_Web" xml:space="preserve">
-    <value>the Internet</value>
+    <value>the internet</value>
   </data>
   <data name="AppSource_Winget" xml:space="preserve">
     <value>WinGet</value>
   </data>
   <data name="Log_AppInstallError" xml:space="preserve">
-    <value>Error while installing {0} via {1}: {2}</value>
+    <value>Error while installing '{0}' via {1}: {2}</value>
   </data>
   <data name="Log_TweakApplyError" xml:space="preserve">
     <value>Error while applying tweak '{0}': {1}</value>
   </data>
-  <data name="Log_TweakParseError" xml:space="preserve">
-    <value>Error while parsing tweak '{0}': {1}</value>
+  <data name="Log_TweakReadError" xml:space="preserve">
+    <value>Error while reading tweak '{0}': {1}</value>
+  </data>
+  <data name="AppSource_AppxWeb" xml:space="preserve">
+    <value>the internet (App Installer)</value>
+  </data>
+  <data name="Log_NotInstallingApp" xml:space="preserve">
+    <value>Not installing '{0}' via {1} because it does not support the current CPU architecture...</value>
+  </data>
+  <data name="Log_DownloadError" xml:space="preserve">
+    <value>Error while downloading '{0}': {1}</value>
+  </data>
+  <data name="Log_ExtractionError" xml:space="preserve">
+    <value>Error while extracting '{0}': {1}</value>
+  </data>
+  <data name="AppSource_Appx" xml:space="preserve">
+    <value>App Installer</value>
   </data>
 </root>

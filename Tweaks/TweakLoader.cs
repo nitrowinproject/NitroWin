@@ -11,16 +11,8 @@ namespace NitroWin.Tweaks
         private const string tweakPath = "Tweaks";
         private static async Task DownloadTweaksAsync()
         {
-            try
-            {
-                string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder);
-
-                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(tweaksArchive, tweakPath, overwriteFiles: true);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_DownloadError") + ex.Message);
-            }
+            string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder) ?? throw new NullReferenceException();
+            await ExtractionHelper.ExtractZipFile(tweaksArchive, tweakPath);
         }
 
         private static async Task<List<Tweak>> ParseTweaksAsync()
@@ -36,7 +28,7 @@ namespace NitroWin.Tweaks
                 }
                 catch (Exception ex)
                 {
-                    LogHelper.TweakParseError(file, ex);
+                    LogHelper.TweakReadError(file, ex);
                 }
             }
 
