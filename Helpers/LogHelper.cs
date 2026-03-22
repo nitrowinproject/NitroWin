@@ -1,5 +1,6 @@
 ﻿using NitroWin.Apps;
 using Serilog;
+using TweakLib.Models;
 
 namespace NitroWin.Helpers
 {
@@ -36,6 +37,28 @@ namespace NitroWin.Helpers
                 Globals.StringsResourceManager.GetString("Log_AppInstallError")!,
                 parameters[0],
                 parameters[1],
+                exception.Message
+            );
+
+            Log.Error(message);
+        }
+
+        public static void TweakApplyError(Tweak tweak, Exception exception)
+        {
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString("Log_TweakApplyError")!,
+                tweak.Title,
+                exception.Message
+            );
+
+            Log.Error(message);
+        }
+
+        public static void TweakParseError(string filePath, Exception exception)
+        {
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString("Log_TweakParseError")!,
+                Path.GetFileName(filePath),
                 exception.Message
             );
 

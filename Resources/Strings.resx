@@ -141,14 +141,8 @@
   <data name="TweakLoader_ApplyingTweaks" xml:space="preserve">
     <value>Applying tweaks...</value>
   </data>
-  <data name="TweakLoader_ApplyError" xml:space="preserve">
-    <value>Error while applying tweak </value>
-  </data>
   <data name="TweakLoader_ApplyingTweak" xml:space="preserve">
     <value>Applying tweak </value>
-  </data>
-  <data name="TweakLoader_ParseError" xml:space="preserve">
-    <value>Error while parsing tweak </value>
   </data>
   <data name="AppInstaller_NotInstallingApp" xml:space="preserve">
     <value>Not installing </value>
@@ -170,5 +164,11 @@
   </data>
   <data name="Log_AppInstallError" xml:space="preserve">
     <value>Error while installing {0} via {1}: {2}</value>
+  </data>
+  <data name="Log_TweakApplyError" xml:space="preserve">
+    <value>Error while applying tweak '{0}': {1}</value>
+  </data>
+  <data name="Log_TweakParseError" xml:space="preserve">
+    <value>Error while parsing tweak '{0}': {1}</value>
   </data>
 </root>

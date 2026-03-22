@@ -8,15 +8,14 @@ namespace NitroWin.Tweaks
 {
     public static class TweakLoader
     {
+        private const string tweakPath = "Tweaks";
         private static async Task DownloadTweaksAsync()
         {
-            string tweaksPath = "Tweaks";
-
             try
             {
                 string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder);
 
-                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(tweaksArchive, tweaksPath, overwriteFiles: true);
+                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(tweaksArchive, tweakPath, overwriteFiles: true);
             }
             catch (Exception ex)
             {
@@ -28,7 +27,7 @@ namespace NitroWin.Tweaks
         {
             var tweaks = new List<Tweak>();
 
-            foreach (string file in Directory.EnumerateFiles(Path.Join("Tweaks", "Tweaks-3", "Tweaks"), "*.yml", SearchOption.AllDirectories))
+            foreach (string file in Directory.EnumerateFiles(Path.Join(tweakPath, "Tweaks-3", "Tweaks"), "*.yml", SearchOption.AllDirectories))
             {
                 try
                 {
@@ -37,7 +36,7 @@ namespace NitroWin.Tweaks
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ParseError") + Path.GetFileName(file) + ": " + ex.Message);
+                    LogHelper.TweakParseError(file, ex);
                 }
             }
 
@@ -48,14 +47,13 @@ namespace NitroWin.Tweaks
         {
             try
             {
-                Log.Debug(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweak") + "'" + tweak.Title + "'...");
                 await action.ApplyAsync();
             }
             catch (Exception ex)
             {
                 if (!action.IgnoreErrors)
                 {
-                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + "'" + tweak.Title + "': " + ex.Message);
+                    LogHelper.TweakApplyError(tweak, ex);
                 }
             }
         }
