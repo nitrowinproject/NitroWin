@@ -19,13 +19,7 @@ namespace NitroWin.Helpers
                     CreateNoWindow = true
                 };
 
-                using var process = Process.Start(startInfo);
-
-                if (process == null)
-                {
-                    return false;
-                }
-
+                using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
                 await process.WaitForExitAsync();
 
                 return process.ExitCode == 0;
@@ -70,14 +64,7 @@ namespace NitroWin.Helpers
                     CreateNoWindow = true
                 };
 
-                using var process = Process.Start(startInfo);
-
-                if (process == null)
-                {
-                    Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + Path.GetFileName(path) + ".");
-                    return;
-                }
-
+                using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
                 await process.WaitForExitAsync();
             }
             catch (Exception ex)

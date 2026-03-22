@@ -18,13 +18,7 @@ namespace NitroWin.Apps
                 Arguments = $"install --id {app.Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", app.Arguments ?? [])}"
             };
 
-            using var process = Process.Start(startInfo);
-
-            if (process == null)
-            {
-                throw new NullReferenceException();
-            }
-
+            using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
             await process.WaitForExitAsync();
         }
 
@@ -48,13 +42,7 @@ namespace NitroWin.Apps
                 Verb = "RunAs"
             };
 
-            using var process = Process.Start(startInfo);
-
-            if (process == null)
-            {
-                throw new NullReferenceException();
-            }
-
+            using var process = Process.Start(startInfo) ?? throw new NullReferenceException();
             await process.WaitForExitAsync();
         }
 
