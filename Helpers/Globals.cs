@@ -1,9 +1,8 @@
 ﻿using NitroWin.Apps;
+using NitroWin.Parser;
 using Serilog;
 using System.Reflection;
 using System.Resources;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace NitroWin.Helpers
 {
@@ -12,19 +11,15 @@ namespace NitroWin.Helpers
         public const string DownloadFolder = "Downloads";
         public static readonly ResourceManager StringsResourceManager = new("NitroWin.Resources.Strings", Assembly.GetExecutingAssembly());
 
-        public static AppInstallerConfig? AppInstallerConfig { get; } = LoadAppInstallerConfig();
+        public static AppConfig? AppConfig { get; } = LoadAppConfig();
 
-        private static AppInstallerConfig? LoadAppInstallerConfig()
+        private static AppConfig? LoadAppConfig()
         {
             try
             {
                 var yaml = File.ReadAllText(Path.Combine("Configuration", "Apps.yml"));
 
-                var deserializer = new DeserializerBuilder()
-                    .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                    .Build();
-
-                return deserializer.Deserialize<AppInstallerConfig>(yaml);
+                return AppParser.Deserializer.Deserialize<AppConfig>(yaml);
             }
             catch
             {

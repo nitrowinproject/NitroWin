@@ -1,8 +1,7 @@
 ﻿namespace NitroWin.Apps
 {
-    public class WingetApp
+    public class WingetApp : AppBase
     {
-        public List<string>? Arguments { get; set; }
         public required string Id { get; set; }
     }
 }

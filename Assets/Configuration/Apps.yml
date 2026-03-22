@@ -1,6 +1,10 @@
 ---
-web:
-  - architectures:
+name: Default apps
+description: The default apps included with NitroWin
+author: nitrowinproject
+apps:
+  - !web:
+    architectures:
       arm64: true
       x64: true
     arguments:
@@ -9,7 +13,9 @@ web:
       - "/norestart"
     name: Microsoft Visual C++ v14 Redistributable (x64)
     url: https://aka.ms/vc14/vc_redist.x64.exe
-  - architectures:
+
+  - !web:
+    architectures:
       arm64: true
       x64: true
     arguments:
@@ -18,7 +24,9 @@ web:
       - "/norestart"
     name: Microsoft Visual C++ v14 Redistributable (x86)
     url: https://aka.ms/vc14/vc_redist.x86.exe
-  - architectures:
+
+  - !web:
+    architectures:
       arm64: true
       x64: false
     arguments:
@@ -27,8 +35,9 @@ web:
       - "/norestart"
     name: Microsoft Visual C++ v14 Redistributable (arm64)
     url: https://aka.ms/vc14/vc_redist.arm64.exe
-winget:
-  - arguments:
+
+  - !winget:
+    arguments:
       - "--scope"
       - "user"
     id: M2Team.NanaZip

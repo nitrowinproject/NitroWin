@@ -18,11 +18,11 @@ namespace NitroWin.Apps
         {
             if (!(RuntimeInformation.ProcessArchitecture == Architecture.X64 && app.Architectures.X64 || RuntimeInformation.ProcessArchitecture == Architecture.Arm64 && app.Architectures.Arm64))
             {
-                Log.Debug(Globals.StringsResourceManager.GetString("AppInstaller_NotInstallingApp") + app.Name + Globals.StringsResourceManager.GetString("AppInstaller_UnsupportedArchitecture"));
+                Log.Debug(Globals.StringsResourceManager.GetString("AppInstaller_NotInstallingApp") + app.Name ?? app.Url + Globals.StringsResourceManager.GetString("AppInstaller_UnsupportedArchitecture"));
                 return;
             }
 
-            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Name + "...");
+            Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApp") + app.Name ?? app.Url + "...");
 
             var download = await FileDownloader.DownloadFileAsync(app.Url, Globals.DownloadFolder);
 
@@ -31,31 +31,36 @@ namespace NitroWin.Apps
 
         public static async Task InstallAppsAsync()
         {
-            if (Globals.AppInstallerConfig != null)
+            if (Globals.AppConfig != null)
             {
                 Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApps")!);
 
-                foreach (var app in Globals.AppInstallerConfig.Web)
+                foreach (var app in Globals.AppConfig.Apps)
                 {
-                    try
+                    switch (app)
                     {
-                        await InstallWebAppAsync(app);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Name + ": " + ex.Message);
-                    }
-                }
+                        case WebApp webApp:
+                            try
+                            {
+                                await InstallWebAppAsync(webApp);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + webApp.Name ?? webApp.Url + ": " + ex.Message);
+                            }
 
-                foreach (var app in Globals.AppInstallerConfig.Winget)
-                {
-                    try
-                    {
-                        await InstallWingetAppAsync(app);
-                    }
-                    catch (Exception ex)
-                    {
-                        Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + app.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ": " + ex.Message);
+                            break;
+                        case WingetApp wingetApp:
+                            try
+                            {
+                                await InstallWingetAppAsync(wingetApp);
+                            }
+                            catch (Exception ex)
+                            {
+                                Log.Error(Globals.StringsResourceManager.GetString("AppInstaller_InstallError") + wingetApp.Id + Globals.StringsResourceManager.GetString("AppInstaller_ViaWinget") + ": " + ex.Message);
+                            }
+
+                            break;
                     }
                 }
             }
