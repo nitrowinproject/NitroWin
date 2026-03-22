@@ -1,114 +1,77 @@
 ﻿using NitroWin.Apps;
 using Serilog;
+using Serilog.Events;
 using TweakLib.Models;
 
 namespace NitroWin.Helpers
 {
     public static class LogHelper
     {
-        public static void InstallingApp(AppBase app)
+        public static void InstallingApp(AppBase app) => LogMessage(
+            LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
+
+        public static void NotInstallingApp(AppBase app) => LogMessage(
+            LogEventLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
+
+        public static void AppInstallError(AppBase app, Exception exception) => LogMessage(
+            LogEventLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
+                exception.Message]);
+
+        public static void TweakApplyError(Tweak tweak, Exception exception) => LogMessage(
+            LogEventLevel.Error, "Log_TweakApplyError", tweak.Title,
+            exception.Message);
+
+        public static void TweakReadError(string filePath, Exception exception) => LogMessage(
+            LogEventLevel.Error, "Log_TweakReadError", Path.GetFileName(filePath),
+            exception.Message);
+
+        public static void DownloadError(string url, Exception exception) => LogMessage(
+            LogEventLevel.Error, "Log_DownloadError", Path.GetFileName(url),
+            exception.Message);
+
+        public static void ExtractionError(string filePath, Exception exception) => LogMessage(
+            LogEventLevel.Error, "Log_ExtractionError", Path.GetFileName(filePath),
+            exception.Message);
+
+        private static string[] GetAppParameters(AppBase app) => app switch
         {
-            string[] parameters = app switch
+            AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
+            AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
+            WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
+            WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
+            _ => throw new NotImplementedException()
+        };
+
+        private static void LogMessage(LogEventLevel level, string resourceName, params string[] parameters)
+        {
+            var message = string.Format(
+                Globals.StringsResourceManager.GetString(resourceName) ?? throw new NullReferenceException(),
+                parameters
+            );
+
+            switch (level)
             {
-                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
-                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
-                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
-                WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
-                _ => throw new NotImplementedException()
-            };
-
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_InstallingApp")!,
-                parameters[0],
-                parameters[1]
-            );
-
-            Log.Information(message);
-        }
-
-        public static void NotInstallingApp(AppBase app)
-        {
-            string[] parameters = app switch
-            {
-                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
-                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
-                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
-                WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
-                _ => throw new NotImplementedException()
-            };
-
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_NotInstallingApp")!,
-                parameters[0],
-                parameters[1]
-            );
-
-            Log.Debug(message);
-        }
-
-        public static void AppInstallError(AppBase app, Exception exception)
-        {
-            string[] parameters = app switch
-            {
-                AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
-                AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
-                WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
-                WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
-                _ => throw new NotImplementedException()
-            };
-
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_AppInstallError")!,
-                parameters[0],
-                parameters[1],
-                exception.Message
-            );
-
-            Log.Error(message);
-        }
-
-        public static void TweakApplyError(Tweak tweak, Exception exception)
-        {
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_TweakApplyError")!,
-                tweak.Title,
-                exception.Message
-            );
-
-            Log.Error(message);
-        }
-
-        public static void TweakReadError(string filePath, Exception exception)
-        {
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_TweakReadError")!,
-                Path.GetFileName(filePath),
-                exception.Message
-            );
-
-            Log.Error(message);
-        }
-
-        public static void DownloadError(string url, Exception exception)
-        {
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_DownloadError")!,
-                Path.GetFileName(url),
-                exception.Message
-            );
-
-            Log.Error(message);
-        }
-
-        public static void ExtractionError(string filePath, Exception exception)
-        {
-            var message = string.Format(
-                Globals.StringsResourceManager.GetString("Log_ExtractionError")!,
-                Path.GetFileName(filePath),
-                exception.Message
-            );
-
-            Log.Error(message);
+                case LogEventLevel.Debug:
+                    Log.Debug(message);
+                    break;
+                case LogEventLevel.Error:
+                    Log.Error(message);
+                    break;
+                case LogEventLevel.Fatal:
+                    Log.Fatal(message);
+                    break;
+                case LogEventLevel.Information:
+                    Log.Information(message);
+                    break;
+                case LogEventLevel.Verbose:
+                    Log.Verbose(message);
+                    break;
+                case LogEventLevel.Warning:
+                    Log.Warning(message);
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }
