@@ -12,9 +12,9 @@ namespace NitroWin.Helpers
         public const string DownloadFolder = "Downloads";
         public static readonly ResourceManager StringsResourceManager = new("NitroWin.Resources.Strings", Assembly.GetExecutingAssembly());
 
-        public static AppInstallerConfig? AppInstallerConfig { get; } = LoadConfig();
+        public static AppInstallerConfig? AppInstallerConfig { get; } = LoadAppInstallerConfig();
 
-        private static AppInstallerConfig? LoadConfig()
+        private static AppInstallerConfig? LoadAppInstallerConfig()
         {
             try
             {

@@ -150,10 +150,10 @@
   <data name="TweakLoader_ApplyError" xml:space="preserve">
     <value>Error while applying tweak </value>
   </data>
-  <data name="General_Unknown" xml:space="preserve">
-    <value>Unknown</value>
-  </data>
   <data name="TweakLoader_ApplyingTweak" xml:space="preserve">
     <value>Applying tweak </value>
+  </data>
+  <data name="TweakLoader_ParseError" xml:space="preserve">
+    <value>Error while parsing tweak </value>
   </data>
 </root>

@@ -2,6 +2,7 @@
 using NitroWin.Helpers;
 using NitroWin.Tweaks;
 using Serilog;
+using Serilog.Events;
 
 namespace NitroWin
 {
@@ -11,7 +12,7 @@ namespace NitroWin
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console(outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}")
-                .WriteTo.File(Path.Join("Logs", "NitroWin.txt"), rollingInterval: RollingInterval.Day)
+                .WriteTo.File(Path.Join("Logs", "NitroWin.txt"), rollingInterval: RollingInterval.Day, restrictedToMinimumLevel: LogEventLevel.Debug)
                 .CreateLogger();
 
             ConsoleHelper.WriteBranding();

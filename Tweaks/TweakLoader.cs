@@ -11,9 +11,17 @@ namespace NitroWin.Tweaks
         private static async Task DownloadTweaksAsync()
         {
             string tweaksPath = "Tweaks";
-            string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder);
 
-            await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(tweaksArchive, tweaksPath, overwriteFiles: true);
+            try
+            {
+                string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder);
+
+                await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(tweaksArchive, tweaksPath, overwriteFiles: true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_DownloadError") + ex.Message);
+            }
         }
 
         private static async Task<List<Tweak>> ParseTweaksAsync()
@@ -22,48 +30,52 @@ namespace NitroWin.Tweaks
 
             foreach (string file in Directory.EnumerateFiles(Path.Join("Tweaks", "Tweaks-3", "Tweaks"), "*.yml", SearchOption.AllDirectories))
             {
-                var content = await File.ReadAllTextAsync(file);
-                tweaks.Add(TweakParser.Deserializer.Deserialize<Tweak>(content));
+                try
+                {
+                    var content = await File.ReadAllTextAsync(file);
+                    tweaks.Add(TweakParser.Deserializer.Deserialize<Tweak>(content));
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ParseError") + Path.GetFileName(file) + ": " + ex.Message);
+                }
             }
 
             return tweaks;
         }
 
-        public static async Task ApplyTweaksAsync()
+        private static async Task ApplyActionAsync(Tweak tweak, ActionBase action)
         {
-            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks")!);
             try
             {
-                await DownloadTweaksAsync();
+                Log.Debug(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweak") + "'" + tweak.Title + "'...");
+                await action.ApplyAsync();
             }
             catch (Exception ex)
             {
-                Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_DownloadError") + ex.Message);
+                if (!action.IgnoreErrors)
+                {
+                    Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + "'" + tweak.Title + "': " + ex.Message);
+                }
             }
+        }
 
+        public static async Task ApplyTweaksAsync()
+        {
+            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks")!);
+            await DownloadTweaksAsync();
+
+            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweaks")!);
             var tweaks = await ParseTweaksAsync();
 
-            var actionsWithNames = tweaks
-                .SelectMany(t => t.Actions.Select(a => new { TweakTitle = t.Title, Action = a }));
+            var parallelData = tweaks
+                .SelectMany(tweak => tweak.Actions.Select(action => (tweak, action)));
 
-            await Parallel.ForEachAsync(actionsWithNames, new ParallelOptions
-            {
-                MaxDegreeOfParallelism = 16
-            },
-            async (item, _) =>
-            {
-                try
+            await Parallel.ForEachAsync(parallelData, new ParallelOptions { MaxDegreeOfParallelism = 16 },
+                async (item, _) =>
                 {
-                    await item.Action.ApplyAsync();
-                }
-                catch (Exception ex)
-                {
-                    if (!item.Action.IgnoreErrors)
-                    {
-                        Log.Error(Globals.StringsResourceManager.GetString("TweakLoader_ApplyError") + "'" + item.TweakTitle + "': " + ex.Message);
-                    }
-                }
-            });
+                    await ApplyActionAsync(item.tweak, item.action);
+                });
         }
     }
 }
