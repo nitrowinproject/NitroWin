@@ -8,6 +8,7 @@ namespace NitroWin.Parser
     {
         public static IDeserializer Deserializer { get; } = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .WithTagMapping("!choco:", typeof(ChocolateyApp))
             .WithTagMapping("!web:", typeof(WebApp))
             .WithTagMapping("!winget:", typeof(WingetApp))
             .Build();

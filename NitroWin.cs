@@ -19,6 +19,8 @@ namespace NitroWin
 
             await TweakLoader.ApplyTweaksAsync();
 
+            await ChocolateyInstaller.InstallChocolateyAsync();
+
             await WingetInstaller.InstallWingetAsync();
 
             await AppInstaller.InstallAppsAsync();

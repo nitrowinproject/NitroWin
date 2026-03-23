@@ -10,7 +10,8 @@ namespace NitroWin.Apps
         protected async override Task InstallCoreAsync()
         {
             await ProcessHelper.StartProcessAsync(
-                "powershell.exe", $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{Path}'\" " + string.Join(" ", Arguments ?? []),
+                "powershell.exe",
+                $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{Path}'\" " + string.Join(" ", Arguments ?? []),
                 false
             );
         }

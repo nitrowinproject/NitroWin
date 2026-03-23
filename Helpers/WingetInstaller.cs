@@ -5,19 +5,6 @@ namespace NitroWin.Helpers
 {
     public static class WingetInstaller
     {
-        private static async Task<bool> IsWingetInstalledAsync()
-        {
-            try
-            {
-                var exitCode = await ProcessHelper.StartProcessAsync("winget.exe", "--version", false);
-                return exitCode == 0;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         private static string GetArchitectureFolder()
         {
             return Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
@@ -44,7 +31,7 @@ namespace NitroWin.Helpers
 
         public static async Task InstallWingetAsync()
         {
-            if (await IsWingetInstalledAsync()) { return; }
+            if (await ProcessHelper.IsAppAvailable("winget.exe", "--version")) { return; }
 
             Log.Information(Globals.StringsResourceManager.GetString("WinGetInstaller_InstallingDependencies")!);
             await InstallWingetDependenciesAsync();

@@ -7,29 +7,29 @@ namespace NitroWin.Helpers
 {
     public static class LogHelper
     {
-        public static void InstallingApp(AppBase app) => LogMessage(
+        public static void InstallingApp(AppBase app) => LogResource(
             LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
-        public static void NotInstallingApp(AppBase app) => LogMessage(
+        public static void NotInstallingApp(AppBase app) => LogResource(
             LogEventLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
 
-        public static void AppInstallError(AppBase app, Exception exception) => LogMessage(
+        public static void AppInstallError(AppBase app, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
                 exception.Message]);
 
-        public static void TweakApplyError(Tweak tweak, Exception exception) => LogMessage(
+        public static void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_TweakApplyError", tweak.Title,
             exception.Message);
 
-        public static void TweakReadError(string filePath, Exception exception) => LogMessage(
+        public static void TweakReadError(string filePath, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_TweakReadError", Path.GetFileName(filePath),
             exception.Message);
 
-        public static void DownloadError(string url, Exception exception) => LogMessage(
+        public static void DownloadError(string url, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_DownloadError", Path.GetFileName(url),
             exception.Message);
 
-        public static void ExtractionError(string filePath, Exception exception) => LogMessage(
+        public static void ExtractionError(string filePath, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_ExtractionError", Path.GetFileName(filePath),
             exception.Message);
 
@@ -37,12 +37,14 @@ namespace NitroWin.Helpers
         {
             AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
             AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
+            ChocolateyApp chocolateyApp => [chocolateyApp.Id, Globals.StringsResourceManager.GetString("AppSource_Chocolatey")!],
+            ChocolateyInstaller.ChocolateyInstallerApp chocolateyInstallerApp => [Globals.StringsResourceManager.GetString("AppSource_Chocolatey")!, Globals.StringsResourceManager.GetString("AppSource_Web")!],
             WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
             WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
             _ => throw new NotImplementedException()
         };
 
-        private static void LogMessage(LogEventLevel level, string resourceName, params string[] parameters)
+        private static void LogResource(LogEventLevel level, string resourceName, params string[] parameters)
         {
             var message = string.Format(
                 Globals.StringsResourceManager.GetString(resourceName) ?? throw new NullReferenceException(),

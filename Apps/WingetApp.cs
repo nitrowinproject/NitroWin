@@ -9,7 +9,8 @@ namespace NitroWin.Apps
         protected async override Task InstallCoreAsync()
         {
             await ProcessHelper.StartProcessAsync(
-                "winget.exe", $"install --id {Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", Arguments ?? [])}"
+                "winget.exe",
+                $"install --id {Id} --exact --accept-package-agreements --accept-source-agreements {string.Join(" ", Arguments ?? [])}"
             );
         }
     }

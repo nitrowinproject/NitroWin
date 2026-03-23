@@ -26,5 +26,18 @@ namespace NitroWin.Helpers
 
             return process.ExitCode;
         }
+
+        public static async Task<bool> IsAppAvailable(string fileName, string? arguments = null)
+        {
+            try
+            {
+                var exitCode = await StartProcessAsync(fileName, arguments, false);
+                return exitCode == 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

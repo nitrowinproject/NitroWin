@@ -171,4 +171,7 @@
   <data name="AppSource_Appx" xml:space="preserve">
     <value>App Installer</value>
   </data>
+  <data name="AppSource_Chocolatey" xml:space="preserve">
+    <value>Chocolatey</value>
+  </data>
 </root>
