@@ -38,7 +38,6 @@ namespace NitroWin.Helpers
             AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
             AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
             ChocolateyApp chocolateyApp => [chocolateyApp.Id, Globals.StringsResourceManager.GetString("AppSource_Chocolatey")!],
-            ChocolateyInstaller.ChocolateyInstallerApp chocolateyInstallerApp => [Globals.StringsResourceManager.GetString("AppSource_Chocolatey")!, Globals.StringsResourceManager.GetString("AppSource_Web")!],
             WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
             WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
             _ => throw new NotImplementedException()

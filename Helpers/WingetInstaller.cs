@@ -1,31 +1,35 @@
 ﻿using NitroWin.Apps;
-using Serilog;
 
 namespace NitroWin.Helpers
 {
     public static class WingetInstaller
     {
-        private static string GetArchitectureFolder()
+        private class WingetInstallerApp : AppxWebApp
         {
-            return Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
+            private static async Task InstallDependenciesAsync()
             {
-                "ARM64" => "arm64",
-                _ => "x64"
-            };
-        }
+                string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
+                string depsArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
+                {
+                    "ARM64" => "arm64",
+                    _ => "x64"
+                };
 
-        private static async Task InstallWingetDependenciesAsync()
-        {
-            string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
-            string depsArchitecture = GetArchitectureFolder();
+                string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
+                await ExtractionHelper.ExtractZipFile(depsArchive, depsPath);
 
-            string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
-            await ExtractionHelper.ExtractZipFile(depsArchive, depsPath);
+                foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
+                    .Select(file => new AppxApp { Path = file }))
+                {
+                    await app.InstallAsync();
+                }
+            }
 
-            foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
-                .Select(file => new AppxApp { Path = file }))
+            protected override async Task InstallCoreAsync()
             {
-                await app.InstallAsync();
+                await InstallDependenciesAsync();
+
+                await base.InstallCoreAsync();
             }
         }
 
@@ -33,15 +37,13 @@ namespace NitroWin.Helpers
         {
             if (await ProcessHelper.IsAppAvailable("winget.exe", "--version")) { return; }
 
-            Log.Information(Globals.StringsResourceManager.GetString("WinGetInstaller_InstallingDependencies")!);
-            await InstallWingetDependenciesAsync();
-
-            var app = new AppxWebApp()
+            var wingetInstallerApp = new WingetInstallerApp()
             {
+                Name = "WinGet",
                 Url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
             };
 
-            await app.InstallAsync();
+            await wingetInstallerApp.InstallAsync();
         }
     }
 }

@@ -117,20 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AppInstaller_InstallError" xml:space="preserve">
-    <value>Error while installing </value>
-  </data>
   <data name="Globals_NoAppConfigFound" xml:space="preserve">
     <value>No app config file found. Not installing any apps...</value>
   </data>
-  <data name="ConsoleHelper_ConsoleTitle" xml:space="preserve">
-    <value>NitroWin</value>
-  </data>
   <data name="AppInstaller_InstallingApps" xml:space="preserve">
     <value>Installing apps...</value>
-  </data>
-  <data name="WinGetInstaller_InstallingDependencies" xml:space="preserve">
-    <value>Installing WinGet dependencies...</value>
   </data>
   <data name="TweakLoader_DownloadingTweaks" xml:space="preserve">
     <value>Downloading tweaks...</value>
@@ -139,7 +130,7 @@
     <value>Applying tweaks...</value>
   </data>
   <data name="Log_InstallingApp" xml:space="preserve">
-    <value>Installing {0} via {1}...</value>
+    <value>Installing '{0}' via {1}...</value>
   </data>
   <data name="AppSource_Web" xml:space="preserve">
     <value>the internet</value>

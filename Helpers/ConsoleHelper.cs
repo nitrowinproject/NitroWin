@@ -4,7 +4,7 @@
     {
         public static void WriteBranding()
         {
-            Console.Title = Globals.StringsResourceManager.GetString("ConsoleHelper_ConsoleTitle")!;
+            Console.Title = Globals.StringsResourceManager.GetString("NitroWin")!;
 
             Console.WriteLine(
                 "\nd8b   db d888888b d888888b d8888b.  .d88b.  db   d8b   db d888888b d8b   db"
