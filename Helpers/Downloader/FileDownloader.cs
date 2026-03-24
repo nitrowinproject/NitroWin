@@ -1,8 +1,8 @@
 ﻿namespace NitroWin.Helpers.Downloader
 {
-    public static class FileDownloader
+    internal static class FileDownloader
     {
-        public static async Task<string?> DownloadFileAsync(string url, string outputFolder)
+        internal static async Task<string?> DownloadFileAsync(string url, string outputFolder)
         {
             try
             {

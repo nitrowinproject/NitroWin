@@ -1,8 +1,8 @@
 ﻿namespace NitroWin.Helpers
 {
-    public static class ConsoleHelper
+    internal static class ConsoleHelper
     {
-        public static void WriteBranding()
+        internal static void WriteBranding()
         {
             Console.Title = "NitroWin";
 

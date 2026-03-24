@@ -1,8 +1,8 @@
 ﻿namespace NitroWin.Helpers
 {
-    public static class ExtractionHelper
+    internal static class ExtractionHelper
     {
-        public static async Task ExtractZipFile(string filePath, string outputPath)
+        internal static async Task ExtractZipFile(string filePath, string outputPath)
         {
             try
             {

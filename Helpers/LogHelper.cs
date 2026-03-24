@@ -5,31 +5,31 @@ using TweakLib.Models;
 
 namespace NitroWin.Helpers
 {
-    public static class LogHelper
+    internal static class LogHelper
     {
-        public static void InstallingApp(AppBase app) => LogResource(
+        internal static void InstallingApp(AppBase app) => LogResource(
             LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
-        public static void NotInstallingApp(AppBase app) => LogResource(
+        internal static void NotInstallingApp(AppBase app) => LogResource(
             LogEventLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
 
-        public static void AppInstallError(AppBase app, Exception exception) => LogResource(
+        internal static void AppInstallError(AppBase app, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
                 exception.Message]);
 
-        public static void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
+        internal static void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_TweakApplyError", tweak.Title,
             exception.Message);
 
-        public static void TweakReadError(string filePath, Exception exception) => LogResource(
+        internal static void TweakReadError(string filePath, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_TweakReadError", Path.GetFileName(filePath),
             exception.Message);
 
-        public static void DownloadError(string url, Exception exception) => LogResource(
+        internal static void DownloadError(string url, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_DownloadError", Path.GetFileName(url),
             exception.Message);
 
-        public static void ExtractionError(string filePath, Exception exception) => LogResource(
+        internal static void ExtractionError(string filePath, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_ExtractionError", Path.GetFileName(filePath),
             exception.Message);
 

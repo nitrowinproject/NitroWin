@@ -2,7 +2,7 @@
 
 namespace NitroWin.Helpers
 {
-    public static class ChocolateyInstaller
+    internal static class ChocolateyInstaller
     {
         private class ChocolateyInstallerApp : WebApp
         {
@@ -15,7 +15,7 @@ namespace NitroWin.Helpers
             }
         }
 
-        public static async Task InstallChocolateyAsync()
+        internal static async Task InstallChocolateyAsync()
         {
             if (await ProcessHelper.IsAppAvailable("choco.exe", "--version")) { return; }
 

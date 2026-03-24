@@ -4,11 +4,11 @@ using Serilog;
 
 namespace NitroWin.Helpers
 {
-    public static class Globals
+    internal static class Globals
     {
-        public const string DownloadFolder = "Downloads";
+        internal const string DownloadFolder = "Downloads";
 
-        public static AppConfig? AppConfig { get; } = LoadAppInstallerConfig();
+        internal static AppConfig? AppConfig { get; } = LoadAppInstallerConfig();
 
         private static AppConfig? LoadAppInstallerConfig()
         {

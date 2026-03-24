@@ -6,9 +6,9 @@ using Serilog.Events;
 
 namespace NitroWin
 {
-    public class NitroWin
+    internal class NitroWin
     {
-        public static async Task Main()
+        internal static async Task Main()
         {
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Console(outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}")

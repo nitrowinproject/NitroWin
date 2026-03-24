@@ -2,7 +2,7 @@
 
 namespace NitroWin.Helpers
 {
-    public static class WingetInstaller
+    internal static class WingetInstaller
     {
         private class WingetInstallerApp : AppxWebApp
         {
@@ -33,7 +33,7 @@ namespace NitroWin.Helpers
             }
         }
 
-        public static async Task InstallWingetAsync()
+        internal static async Task InstallWingetAsync()
         {
             if (await ProcessHelper.IsAppAvailable("winget.exe", "--version")) { return; }
 

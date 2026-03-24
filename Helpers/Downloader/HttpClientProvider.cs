@@ -1,7 +1,7 @@
 ﻿namespace NitroWin.Helpers.Downloader
 {
-    public static class HttpClientProvider
+    internal static class HttpClientProvider
     {
-        public static readonly HttpClient Client = new();
+        internal static readonly HttpClient Client = new();
     }
 }

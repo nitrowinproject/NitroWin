@@ -6,7 +6,7 @@ using TweakLib.Parser;
 
 namespace NitroWin.Tweaks
 {
-    public static class TweakLoader
+    internal static class TweakLoader
     {
         private const string tweakPath = "Tweaks";
         private static async Task DownloadTweaksAsync()
@@ -50,7 +50,7 @@ namespace NitroWin.Tweaks
             }
         }
 
-        public static async Task ApplyTweaksAsync()
+        internal static async Task ApplyTweaksAsync()
         {
             Log.Information(ResourceHelper.GetString("TweakLoader_DownloadingTweaks"));
             await DownloadTweaksAsync();

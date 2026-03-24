@@ -2,9 +2,9 @@
 
 namespace NitroWin.Helpers
 {
-    public static class ProcessHelper
+    internal static class ProcessHelper
     {
-        public static async Task<int> StartProcessAsync(string fileName, string? arguments = null, bool visible = true)
+        internal static async Task<int> StartProcessAsync(string fileName, string? arguments = null, bool visible = true)
         {
             var startInfo = new ProcessStartInfo()
             {
@@ -27,7 +27,7 @@ namespace NitroWin.Helpers
             return process.ExitCode;
         }
 
-        public static async Task<bool> IsAppAvailable(string fileName, string? arguments = null)
+        internal static async Task<bool> IsAppAvailable(string fileName, string? arguments = null)
         {
             try
             {
