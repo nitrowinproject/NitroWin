@@ -7,7 +7,6 @@
 ![GitHub License](https://img.shields.io/github/license/nitrowinproject/NitroWin?logo=github&logoColor=bcafb6&label=License&labelColor=2d222e&color=7d7688)
 ![GitHub Release](https://img.shields.io/github/v/release/nitrowinproject/NitroWin?logo=github&logoColor=bcafb6&label=Release&labelColor=2d222e&color=7d7688)
 
-
 A clean, debloated, optimized and privacy-friendly Windows modification.
 
 </div>
