@@ -9,7 +9,7 @@ namespace NitroWin.Apps
         {
             if (Globals.AppConfig != null)
             {
-                Log.Information(Globals.StringsResourceManager.GetString("AppInstaller_InstallingApps")!);
+                Log.Information(ResourceHelper.GetString("AppInstaller_InstallingApps"));
 
                 foreach (var app in Globals.AppConfig.Apps)
                 {

@@ -52,10 +52,10 @@ namespace NitroWin.Tweaks
 
         public static async Task ApplyTweaksAsync()
         {
-            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_DownloadingTweaks")!);
+            Log.Information(ResourceHelper.GetString("TweakLoader_DownloadingTweaks"));
             await DownloadTweaksAsync();
 
-            Log.Information(Globals.StringsResourceManager.GetString("TweakLoader_ApplyingTweaks")!);
+            Log.Information(ResourceHelper.GetString("TweakLoader_ApplyingTweaks"));
             var tweaks = await ParseTweaksAsync();
 
             var parallelData = tweaks

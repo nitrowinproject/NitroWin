@@ -35,18 +35,18 @@ namespace NitroWin.Helpers
 
         private static string[] GetAppParameters(AppBase app) => app switch
         {
-            AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), Globals.StringsResourceManager.GetString("AppSource_Appx")!],
-            AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), Globals.StringsResourceManager.GetString("AppSource_AppxWeb")!],
-            ChocolateyApp chocolateyApp => [chocolateyApp.Id, Globals.StringsResourceManager.GetString("AppSource_Chocolatey")!],
-            WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), Globals.StringsResourceManager.GetString("AppSource_Web")!],
-            WingetApp wingetApp => [wingetApp.Id, Globals.StringsResourceManager.GetString("AppSource_Winget")!],
+            AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), ResourceHelper.GetString("AppSource_Appx")],
+            AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), ResourceHelper.GetString("AppSource_AppxWeb")],
+            ChocolateyApp chocolateyApp => [chocolateyApp.Id, ResourceHelper.GetString("AppSource_Chocolatey")],
+            WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), ResourceHelper.GetString("AppSource_Web")],
+            WingetApp wingetApp => [wingetApp.Id, ResourceHelper.GetString("AppSource_Winget")],
             _ => throw new NotImplementedException()
         };
 
         private static void LogResource(LogEventLevel level, string resourceName, params string[] parameters)
         {
             var message = string.Format(
-                Globals.StringsResourceManager.GetString(resourceName) ?? throw new NullReferenceException(),
+                ResourceHelper.GetString(resourceName),
                 parameters
             );
 
