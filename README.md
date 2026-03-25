@@ -28,7 +28,7 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 > Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies.
 
 > [!TIP]
-> Check out the [Documentation](Documentation) if you have any questions.
+> Check out the [documentation](docs) if you have any questions.
 
 1. Download the [latest version of the answer file](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
 
@@ -42,7 +42,7 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 
 This project is licensed under the [Zero-Clause BSD License](LICENSE).
 
-NitroWin also uses parts of other projects which are licensed under their respective licenses. For more details, see [OtherProjects.md](Documentation/OtherProjects.md).
+NitroWin also uses parts of other projects which are licensed under their respective licenses. See [this document](docs/other-projects.md) for more details.
 
 ### :heavy_exclamation_mark: Disclaimer
 

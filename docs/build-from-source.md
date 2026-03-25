@@ -9,7 +9,7 @@
 1. Clone the NitroWin repository:
 
     ```bash
-    git clone https://github.com/nitrowinproject/NitroWin.git
+    git clone --recurse-submodules https://github.com/nitrowinproject/NitroWin.git
     ```
 
 2. Start the building process:
