@@ -1,6 +1,6 @@
 ﻿using NitroWin.Apps;
 
-namespace NitroWin.Helpers
+namespace NitroWin.Helpers.PackageManagers
 {
     internal static class ChocolateyInstaller
     {

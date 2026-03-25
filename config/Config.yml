@@ -1,0 +1,6 @@
+---
+name: Default Config
+author: nitrowinproject
+options:
+  installWinget: ifNeeded
+  installChocolatey: ifNeeded

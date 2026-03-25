@@ -1,7 +1,7 @@
 ﻿using NitroWin.Apps;
 using System.Runtime.InteropServices;
 
-namespace NitroWin.Helpers
+namespace NitroWin.Helpers.PackageManagers
 {
     internal static class WingetInstaller
     {

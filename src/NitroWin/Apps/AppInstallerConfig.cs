@@ -1,6 +1,6 @@
 ﻿namespace NitroWin.Apps
 {
-    public class AppConfig
+    public class AppInstallerConfig
     {
         public string? Name { get; set; }
         public string? Author { get; set; }

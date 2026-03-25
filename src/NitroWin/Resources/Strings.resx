@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Globals_NoAppConfigFound" xml:space="preserve">
-    <value>No app config file found. Not installing any apps...</value>
+  <data name="Globals_NoAppInstallerConfigFound" xml:space="preserve">
+    <value>No app installer config file found. Not installing any apps...</value>
   </data>
   <data name="AppInstaller_InstallingApps" xml:space="preserve">
     <value>Installing apps...</value>
@@ -164,5 +164,8 @@
   </data>
   <data name="AppSource_Chocolatey" xml:space="preserve">
     <value>Chocolatey</value>
+  </data>
+  <data name="Globals_NoConfigFound" xml:space="preserve">
+    <value>No config found. Will use default options...</value>
   </data>
 </root>
