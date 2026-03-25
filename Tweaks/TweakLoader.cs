@@ -9,6 +9,7 @@ namespace NitroWin.Tweaks
     internal static class TweakLoader
     {
         private const string tweakPath = "Tweaks";
+
         private static async Task DownloadTweaksAsync()
         {
             string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder) ?? throw new NullReferenceException();
@@ -61,7 +62,7 @@ namespace NitroWin.Tweaks
             var parallelData = tweaks
                 .SelectMany(tweak => tweak.Actions.Select(action => (tweak, action)));
 
-            await Parallel.ForEachAsync(parallelData, new ParallelOptions { MaxDegreeOfParallelism = 16 },
+            await Parallel.ForEachAsync(parallelData, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
                 async (item, _) =>
                 {
                     await ApplyActionAsync(item.tweak, item.action);

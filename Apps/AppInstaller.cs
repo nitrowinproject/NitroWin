@@ -3,9 +3,9 @@ using Serilog;
 
 namespace NitroWin.Apps
 {
-    public static class AppInstaller
+    internal static class AppInstaller
     {
-        public static async Task InstallAppsAsync()
+        internal static async Task InstallAppsAsync()
         {
             if (Globals.AppConfig != null)
             {

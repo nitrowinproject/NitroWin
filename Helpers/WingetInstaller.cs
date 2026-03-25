@@ -1,4 +1,5 @@
 ﻿using NitroWin.Apps;
+using System.Runtime.InteropServices;
 
 namespace NitroWin.Helpers
 {
@@ -9,10 +10,11 @@ namespace NitroWin.Helpers
             private static async Task InstallDependenciesAsync()
             {
                 string depsPath = Path.Join(Globals.DownloadFolder, "DesktopAppInstaller_Dependencies");
-                string depsArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") switch
+                string depsArchitecture = RuntimeInformation.ProcessArchitecture switch
                 {
-                    "ARM64" => "arm64",
-                    _ => "x64"
+                    Architecture.Arm64 => "arm64",
+                    Architecture.X64 => "x64",
+                    _ => throw new NotImplementedException()
                 };
 
                 string depsArchive = await Downloader.FileDownloader.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
