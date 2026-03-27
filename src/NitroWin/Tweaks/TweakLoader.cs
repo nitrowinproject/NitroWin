@@ -1,6 +1,7 @@
 ﻿using NitroWin.Helpers;
 using NitroWin.Helpers.Downloader;
 using Serilog;
+using TweakLib.Actions;
 using TweakLib.Models;
 using TweakLib.Parser;
 
@@ -40,7 +41,10 @@ namespace NitroWin.Tweaks
         {
             try
             {
-                await action.ApplyAsync();
+                if (await action.ApplyAsync() != 0)
+                {
+                    throw new InvalidOperationException();
+                }
             }
             catch (Exception ex)
             {

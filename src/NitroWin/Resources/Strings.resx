@@ -166,6 +166,6 @@
     <value>Chocolatey</value>
   </data>
   <data name="Globals_NoConfigFound" xml:space="preserve">
-    <value>No config found. Will use default options...</value>
+    <value>No config file found. Using default config...</value>
   </data>
 </root>
