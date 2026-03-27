@@ -1,5 +1,6 @@
 ﻿using NitroWin.Apps;
 using NitroWin.Helpers;
+using NitroWin.Helpers.PackageManagers;
 using NitroWin.Tweaks;
 using Serilog;
 using Serilog.Events;
@@ -17,9 +18,11 @@ namespace NitroWin
 
             ConsoleHelper.WriteBranding();
 
-            await TweakLoader.ApplyTweaksAsync();
+            await InstallHelper.InstallAsync();
 
             await AppInstaller.InstallAppsAsync();
+
+            await TweakLoader.ApplyTweaksAsync();
 
             await Log.CloseAndFlushAsync();
         }
