@@ -13,7 +13,7 @@ namespace NitroWin.Tweaks
 
         private static async Task DownloadTweaksAsync()
         {
-            string tweaksArchive = await FileDownloader.DownloadFileAsync("https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip", Globals.DownloadFolder) ?? throw new NullReferenceException();
+            string tweaksArchive = await FileDownloader.DownloadFileAsync(Globals.Config.Options.TweakUrl, Globals.DownloadFolder) ?? throw new NullReferenceException();
             await ExtractionHelper.ExtractZipFile(tweaksArchive, tweakPath);
         }
 
