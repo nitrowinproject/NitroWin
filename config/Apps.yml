@@ -3,9 +3,6 @@ name: Default Apps
 author: nitrowinproject
 apps:
   - !web:
-    architectures:
-      arm64: true
-      x64: true
     arguments:
       - "/install"
       - "/passive"
@@ -14,9 +11,6 @@ apps:
     url: https://aka.ms/vc14/vc_redist.x64.exe
 
   - !web:
-    architectures:
-      arm64: true
-      x64: true
     arguments:
       - "/install"
       - "/passive"
@@ -26,7 +20,6 @@ apps:
 
   - !web:
     architectures:
-      arm64: true
       x64: false
     arguments:
       - "/install"
@@ -35,8 +28,5 @@ apps:
     name: Microsoft Visual C++ v14 Redistributable (arm64)
     url: https://aka.ms/vc14/vc_redist.arm64.exe
 
-  - !winget:
-    arguments:
-      - "--scope"
-      - "user"
-    id: M2Team.NanaZip
+  - !choco:
+    id: nanazip
