@@ -45,6 +45,8 @@ namespace NitroWin.Tweaks
                 {
                     throw new InvalidOperationException();
                 }
+
+                LogHelper.AppliedTweak(tweak);
             }
             catch (Exception ex)
             {
@@ -52,6 +54,16 @@ namespace NitroWin.Tweaks
                 {
                     LogHelper.TweakApplyError(tweak, ex);
                 }
+            }
+        }
+
+        private static async Task ApplyTweakAsync(Tweak tweak)
+        {
+            LogHelper.ApplyingTweak(tweak);
+
+            foreach (var action in tweak.Actions)
+            {
+                await ApplyActionAsync(tweak, action);
             }
         }
 
@@ -63,13 +75,10 @@ namespace NitroWin.Tweaks
             Log.Information(ResourceHelper.GetString("TweakLoader_ApplyingTweaks"));
             var tweaks = await ParseTweaksAsync();
 
-            var parallelData = tweaks
-                .SelectMany(tweak => tweak.Actions.Select(action => (tweak, action)));
-
-            await Parallel.ForEachAsync(parallelData, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount },
-                async (item, _) =>
+            await Parallel.ForEachAsync(tweaks, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount / 2 <= 1 ? 1 : Environment.ProcessorCount / 2 },
+                async (tweak, _) =>
                 {
-                    await ApplyActionAsync(item.tweak, item.action);
+                    await ApplyTweakAsync(tweak);
                 });
         }
     }

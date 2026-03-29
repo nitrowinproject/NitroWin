@@ -17,6 +17,12 @@ namespace NitroWin.Helpers
             LogEventLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
                 exception.Message]);
 
+        internal static void ApplyingTweak(Tweak tweak) => LogResource(
+            LogEventLevel.Debug, "Log_ApplyingTweak", tweak.Title);
+
+        internal static void AppliedTweak(Tweak tweak) => LogResource(
+            LogEventLevel.Debug, "Log_AppliedTweak", tweak.Title);
+
         internal static void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
             LogEventLevel.Error, "Log_TweakApplyError", tweak.Title,
             exception.Message);
