@@ -1,5 +1,6 @@
 ﻿using NitroWin.Apps;
 using NitroWin.Helpers;
+using NitroWin.Helpers.CommandLine;
 using NitroWin.Helpers.PackageManagers;
 using NitroWin.Tweaks;
 using Serilog;
@@ -9,7 +10,7 @@ namespace NitroWin
 {
     internal class NitroWin
     {
-        internal static async Task Main()
+        internal static async Task Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
 #if DEBUG
@@ -19,13 +20,25 @@ namespace NitroWin
                 .WriteTo.File(Path.Join("Logs", "NitroWin.txt"), rollingInterval: RollingInterval.Day, restrictedToMinimumLevel: LogEventLevel.Debug)
                 .CreateLogger();
 
-            ConsoleHelper.WriteBranding();
+            CommandLineHelper.WriteBranding();
 
-            await InstallHelper.InstallAsync();
+            var options = CommandLineHelper.ParseArguments(args);
 
-            await AppInstaller.InstallAppsAsync();
+            if (args.Length > 0)
+            {
+                Log.Debug(string.Format(ResourceHelper.GetString("Log_CommandLineArguments"), string.Join(", ", args)));
+            }
 
-            await TweakLoader.ApplyTweaksAsync();
+            if (!options.NoApps)
+            {
+                await InstallHelper.InstallAsync();
+                await AppInstaller.InstallAppsAsync();
+            }
+
+            if (!options.NoTweaks)
+            {
+                await TweakLoader.ApplyTweaksAsync();
+            }
 
             await Log.CloseAndFlushAsync();
         }
