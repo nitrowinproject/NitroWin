@@ -2,7 +2,7 @@ $nitroWinExe = "NitroWin\NitroWin.exe"
 
 function Get-NitroWinPath {
     foreach ($drive in (Get-PsDrive -PsProvider FileSystem)) {
-        $nitroWinPath = Join-Path -Path $drive.Name -ChildPath $nitroWinExe
+        $nitroWinPath = Join-Path -Path ($drive.Name + ":\") -ChildPath $nitroWinExe
         if (Test-Path -Path $nitroWinPath -PathType Leaf) {
             return $nitroWinPath
         }
