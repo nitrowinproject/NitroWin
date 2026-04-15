@@ -28,5 +28,5 @@ apps:
     name: Microsoft Visual C++ v14 Redistributable (arm64)
     url: https://aka.ms/vc14/vc_redist.arm64.exe
 
-  - !choco:
-    id: nanazip
+  - !winget:
+    id: M2Team.NanaZip
