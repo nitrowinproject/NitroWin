@@ -53,7 +53,6 @@ namespace NitroWin.Helpers.CommandLine
 
         private static void WriteHelp()
         {
-            Console.WriteLine(ResourceHelper.GetString("App_Description") + Environment.NewLine);
             Console.WriteLine(ResourceHelper.GetString("CommandLine_Options"));
 
             string[] options = [
