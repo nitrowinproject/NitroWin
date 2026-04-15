@@ -5,6 +5,7 @@ using NitroWin.Helpers.PackageManagers;
 using NitroWin.Tweaks;
 using Serilog;
 using Serilog.Events;
+using System.Net.NetworkInformation;
 
 namespace NitroWin
 {
@@ -27,6 +28,12 @@ namespace NitroWin
             if (args.Length > 0)
             {
                 Log.Debug(string.Format(ResourceHelper.GetString("Log_CommandLineArguments"), string.Join(", ", args)));
+            }
+
+            while (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                Log.Error(ResourceHelper.GetString("Log_NoNetwork"));
+                Thread.Sleep(5000);
             }
 
             if (!options.NoApps)
