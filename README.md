@@ -30,9 +30,20 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 > [!TIP]
 > Check out the [documentation](docs) if you have any questions.
 
-1. Download the [latest version of the answer file](https://github.com/nitrowinproject/NitroWin/releases/latest/download/autounattend.xml).
+1. Download the [latest version of NitroWin](https://github.com/nitrowinproject/NitroWin/releases/latest).
 
-2. Copy it to the root of your installation media.
+2. Extract it to the root of your installation media. Your file structure should now look like this:
+
+```text
+D: (or whatever your installation media is)/
+├── (Windows setup files)
+├── autounattend.xml
+└── NitroWin/
+    ├── NitroWin.exe
+    └── Configuration/
+        ├── (optional, not included by default) Apps.yml
+        └── (optional, not included by default) Configuration.yml
+```
 
 3. Install Windows as usual.
 
