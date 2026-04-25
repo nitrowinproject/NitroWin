@@ -17,6 +17,6 @@ namespace NitroWin.Config
         [YamlMember(typeof(InstallOptions), Alias = "installChocolatey")]
         public InstallOptions InstallChocolatey { get; set; } = InstallOptions.IfNeeded;
 
-        public string TweakUrl { get; set; } = "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip";
+        public string TweakUrl { get; set; } = "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/main.zip";
     }
 }
