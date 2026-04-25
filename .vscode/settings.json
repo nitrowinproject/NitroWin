@@ -1,10 +1,13 @@
 {
-  "files.trimTrailingWhitespace": true,
-  "editor.tabSize": 4,
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
-  "editor.defaultFormatter": "ms-vscode.powershell",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  }
+    "[yaml]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "files.insertFinalNewline": true,
+        "files.trimTrailingWhitespace": true,
+        "prettier.trailingComma": "none"
+    },
+    "telemetry.editStats.enabled": false,
+    "telemetry.feedback.enabled": false
 }

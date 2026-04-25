@@ -1,0 +1,7 @@
+---
+name: Default Config
+author: nitrowinproject
+options:
+  installWinget: ifNeeded
+  installChocolatey: ifNeeded
+  tweakUrl: "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/v3.zip"

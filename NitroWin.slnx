@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/NitroWin/NitroWin.csproj" />
+  <Project Path="src/TweakLib/TweakLib.csproj" />
+</Solution>
