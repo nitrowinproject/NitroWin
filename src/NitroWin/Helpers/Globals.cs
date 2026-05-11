@@ -3,44 +3,34 @@ using NitroWin.Config;
 using NitroWin.Parser;
 using Serilog;
 
-namespace NitroWin.Helpers
-{
-    internal static class Globals
-    {
-        internal const string DownloadFolder = "Downloads";
+namespace NitroWin.Helpers;
 
-        internal static AppInstallerConfig? AppInstallerConfig { get; } = LoadAppInstallerConfig();
+internal static class Globals {
+    internal const string DownloadFolder = "Downloads";
 
-        private static AppInstallerConfig? LoadAppInstallerConfig()
-        {
-            try
-            {
-                var yaml = File.ReadAllText(Path.Combine("Configuration", "Apps.yml"));
+    internal static AppInstallerConfig? AppInstallerConfig { get; } = LoadAppInstallerConfig();
 
-                return AppParser.Deserializer.Deserialize<AppInstallerConfig>(yaml);
-            }
-            catch
-            {
-                Log.Warning(ResourceHelper.GetString("Globals_NoAppInstallerConfigFound"));
-                return null;
-            }
+    private static AppInstallerConfig? LoadAppInstallerConfig() {
+        try {
+            var yaml = File.ReadAllText(Path.Combine("Configuration", "Apps.yml"));
+
+            return AppParser.Deserializer.Deserialize<AppInstallerConfig>(yaml);
+        } catch {
+            Log.Warning(ResourceHelper.GetString("Globals_NoAppInstallerConfigFound"));
+            return null;
         }
+    }
 
-        internal static NitroWinConfig Config = LoadNitroWinConfig() ?? new();
+    internal static NitroWinConfig Config = LoadNitroWinConfig() ?? new();
 
-        private static NitroWinConfig? LoadNitroWinConfig()
-        {
-            try
-            {
-                var yaml = File.ReadAllText(Path.Combine("Configuration", "Config.yml"));
+    private static NitroWinConfig? LoadNitroWinConfig() {
+        try {
+            var yaml = File.ReadAllText(Path.Combine("Configuration", "Config.yml"));
 
-                return ConfigParser.Deserializer.Deserialize<NitroWinConfig>(yaml);
-            }
-            catch
-            {
-                Log.Warning(ResourceHelper.GetString("Globals_NoConfigFound"));
-                return null;
-            }
+            return ConfigParser.Deserializer.Deserialize<NitroWinConfig>(yaml);
+        } catch {
+            Log.Warning(ResourceHelper.GetString("Globals_NoConfigFound"));
+            return null;
         }
     }
 }

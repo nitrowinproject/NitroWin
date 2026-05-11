@@ -1,31 +1,25 @@
-﻿namespace NitroWin.Helpers.Downloader
-{
-    internal static class FileDownloader
-    {
-        internal static async Task<string?> DownloadFileAsync(string url, string outputFolder)
-        {
-            try
-            {
-                Directory.CreateDirectory(outputFolder);
+﻿namespace NitroWin.Helpers.Downloader;
 
-                using var response = await HttpClientProvider.Client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
-                response.EnsureSuccessStatusCode();
+internal static class FileDownloader {
+    internal static async Task<string?> DownloadFileAsync(string url, string outputFolder) {
+        try {
+            Directory.CreateDirectory(outputFolder);
 
-                string fileName = url.Split("/").Last();
-                string filePath = Path.Combine(outputFolder, fileName);
+            using var response = await HttpClientProvider.s_client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead);
+            response.EnsureSuccessStatusCode();
 
-                using var stream = await response.Content.ReadAsStreamAsync();
-                using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: true);
+            var fileName = url.Split("/").Last();
+            var filePath = Path.Combine(outputFolder, fileName);
 
-                await stream.CopyToAsync(fileStream);
+            using var stream = await response.Content.ReadAsStreamAsync();
+            using var fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: true);
 
-                return filePath;
-            }
-            catch (Exception ex)
-            {
-                LogHelper.DownloadError(url, ex);
-                return null;
-            }
+            await stream.CopyToAsync(fileStream);
+
+            return filePath;
+        } catch (Exception ex) {
+            LogHelper.DownloadError(url, ex);
+            return null;
         }
     }
 }
