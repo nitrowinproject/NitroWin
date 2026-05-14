@@ -3,11 +3,10 @@ using NitroWin.Models;
 using NitroWin.Models.Apps;
 using Serilog;
 using Serilog.Events;
-using TweakLib.Models;
 
 namespace NitroWin.Services;
 
-internal sealed class LogService(ResourceManager resourceManager) {
+public sealed class LogService(ResourceManager resourceManager) {
     internal void InstallingApp(AppBase app) => LogResource(
         LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
@@ -46,7 +45,7 @@ internal sealed class LogService(ResourceManager resourceManager) {
     internal void CommandLineArguments(string[] args) =>
         LogResource(LogEventLevel.Debug, "Log_CommandLineArguments", string.Join(", ", args));
 
-    internal void NoConfigFound<T>() where T : IConfig =>
+    internal void NoConfigFound<T>() where T : ConfigBase =>
         LogResource(LogEventLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
             ? "Log_NoAppInstallerConfigFound" : "Log_NoConfigFound");
 

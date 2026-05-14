@@ -2,7 +2,7 @@
 
 namespace NitroWin.Services;
 
-internal abstract class PackageManagerServiceBase {
+public abstract class PackageManagerServiceBase {
     internal abstract AppBase App { get; }
 
     internal abstract bool IsInstallationNeeded();

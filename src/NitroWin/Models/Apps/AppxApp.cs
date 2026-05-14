@@ -3,9 +3,9 @@ using NitroWin.Services;
 
 namespace NitroWin.Models.Apps;
 
-internal sealed class AppxApp(LogService logService) : AppBase(logService) {
-    internal string? Name { get; set; }
-    internal required string Path { get; set; }
+public sealed class AppxApp(LogService logService) : AppBase(logService) {
+    public string? Name { get; set; }
+    public required string Path { get; set; }
 
     protected override async Task InstallCoreAsync() {
         await ProcessHelper.StartProcessAsync(

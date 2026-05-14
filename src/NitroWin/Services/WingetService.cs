@@ -6,7 +6,7 @@ using NitroWin.Models.Apps;
 
 namespace NitroWin.Services;
 
-internal sealed class WingetService(ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
+public sealed class WingetService(ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class WingetInstallerApp(ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : AppxWebApp(logService, downloaderService) {
         private readonly ExtractionService _extractionService = extractionService;
         private readonly DownloaderService _downloaderService = downloaderService;

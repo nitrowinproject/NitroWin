@@ -10,23 +10,6 @@ The tweaks from WinUtil are licensed under the [MIT License](https://github.com/
 
 For more details, check out the [Tweaks repository](https://github.com/nitrowinproject/Tweaks).
 
-## [TweakLib](https://github.com/nitrowinproject/TweakLib)
-
-[TweakLib](https://github.com/nitrowinproject/TweakLib) is licensed under the [Zero-Clause BSD License](https://github.com/nitrowinproject/TweakLib/blob/main/LICENSE).
-
-```text
-Permission to use, copy, modify, and/or distribute this software for
-any purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED “AS IS” AND THE AUTHOR DISCLAIMS ALL
-WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES
-OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE
-FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY
-DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN
-AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
-OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-```
-
 ## [unattend-generator](https://github.com/cschneegans/unattend-generator/)
 
 > [!NOTE]

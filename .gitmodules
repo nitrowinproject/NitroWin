@@ -1,4 +1,0 @@
-[submodule "src/TweakLib"]
-	path = src/TweakLib
-	url = https://github.com/nitrowinproject/TweakLib
-	branch = main

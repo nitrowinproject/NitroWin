@@ -3,7 +3,7 @@ using YamlDotNet.Serialization;
 
 namespace NitroWin.Services;
 
-internal sealed class ConfigService(IDeserializer deserializer, LogService logService) {
+public sealed class ConfigService(IDeserializer deserializer, LogService logService) {
     private Config? _config;
     private AppInstallerConfig? _appInstallerConfig;
 

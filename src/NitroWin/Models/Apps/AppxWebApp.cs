@@ -3,9 +3,9 @@ using NitroWin.Services;
 
 namespace NitroWin.Models.Apps;
 
-internal class AppxWebApp(LogService logService, DownloaderService downloaderService) : AppBase(logService) {
-    internal string? Name { get; set; }
-    internal required string Url { get; set; }
+public class AppxWebApp(LogService logService, DownloaderService downloaderService) : AppBase(logService) {
+    public string? Name { get; set; }
+    public required string Url { get; set; }
 
     protected override async Task InstallCoreAsync() {
         var path = await downloaderService.DownloadFileAsync(Url, "Downloads");

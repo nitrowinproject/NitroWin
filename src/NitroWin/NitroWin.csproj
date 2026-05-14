@@ -30,6 +30,8 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="10.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
     <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="10.0.8" />
+    <PackageReference Include="TaskScheduler" Version="2.12.2" />
     <PackageReference Include="YamlDotNet" Version="17.1.0" />
   </ItemGroup>
 
@@ -37,10 +39,6 @@
     <EmbeddedResource Update="Resources\Strings.resx">
       <Generator></Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TweakLib\TweakLib.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,11 @@
 ﻿using Microsoft.Extensions.Hosting;
 using NitroWin.Models;
-using TweakLib.Actions;
-using TweakLib.Models;
-using TweakLib.Parser;
+using NitroWin.Models.Tweaks.Actions;
+using YamlDotNet.Serialization;
 
 namespace NitroWin.Services;
 
-internal sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService) : IHostedService {
+internal sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer) : IHostedService {
     private Config? _config;
 
     private const string TweakPath = "Tweaks";
@@ -35,7 +34,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         foreach (var file in Directory.EnumerateFiles(TweakPath, "*.yml", SearchOption.AllDirectories)) {
             try {
                 var content = await File.ReadAllTextAsync(file);
-                tweaks.Add(TweakParser.Deserializer.Deserialize<Tweak>(content));
+                tweaks.Add(deserializer.Deserialize<Tweak>(content));
             } catch (Exception ex) {
                 logService.TweakReadError(file, ex);
             }

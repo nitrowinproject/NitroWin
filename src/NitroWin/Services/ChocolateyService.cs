@@ -5,7 +5,7 @@ using NitroWin.Models.Apps;
 
 namespace NitroWin.Services;
 
-internal sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
+public sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class ChocolateyInstallerApp(LogService logService, DownloaderService downloaderService) : WebApp(logService, downloaderService) {
         protected override async Task InstallCoreAsync() {
             await ProcessHelper.StartProcessAsync(

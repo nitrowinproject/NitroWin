@@ -5,6 +5,7 @@ using System.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NitroWin.Models.Apps;
+using NitroWin.Models.Tweaks.Actions;
 using NitroWin.Services;
 using Serilog;
 using Serilog.Events;
@@ -30,6 +31,12 @@ var AppHost = Host.CreateDefaultBuilder()
             .WithTagMapping("!choco:", typeof(ChocolateyApp))
             .WithTagMapping("!web:", typeof(WebApp))
             .WithTagMapping("!winget:", typeof(WingetApp))
+            .WithTagMapping("!cmd:", typeof(CmdAction))
+            .WithTagMapping("!powerShell:", typeof(PowerShellAction))
+            .WithTagMapping("!registryValue:", typeof(RegistryValueAction))
+            .WithTagMapping("!run:", typeof(RunAction))
+            .WithTagMapping("!scheduledTask:", typeof(ScheduledTaskAction))
+            .WithTagMapping("!service:", typeof(ServiceAction))
             .Build());
 
         services.AddSingleton<ConfigService>();
