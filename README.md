@@ -51,7 +51,7 @@ D: (or whatever your installation media is)/
 
 ## :scroll: License
 
-This project is licensed under the [Zero-Clause BSD License](LICENSE).
+This project is licensed under the [GPL-3.0 License](LICENSE).
 
 NitroWin also uses parts of other projects which are licensed under their respective licenses. See [this document](docs/other-projects.md) for more details.
 
