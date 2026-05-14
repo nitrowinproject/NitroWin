@@ -55,21 +55,17 @@ var AppHost = Host.CreateDefaultBuilder()
     })
     .Build();
 
-await AppHost.StartAsync();
-
 try {
+    await AppHost.StartAsync();
+
     var configService = AppHost.Services.GetRequiredService<ConfigService>();
     var logService = AppHost.Services.GetRequiredService<LogService>();
     var commandLineService = AppHost.Services.GetRequiredService<CommandLineService>();
     var tweakService = AppHost.Services.GetRequiredService<TweakService>();
-
     var wingetService = AppHost.Services.GetRequiredService<WingetService>();
     var chocolateyService = AppHost.Services.GetRequiredService<ChocolateyService>();
 
-    var appInstallerConfig = await configService.GetAppInstallerAsync();
-
     commandLineService.WriteBranding();
-
     var options = commandLineService.ParseArguments(args);
 
     if (args.Length > 0)
@@ -77,8 +73,10 @@ try {
 
     while (!NetworkInterface.GetIsNetworkAvailable()) {
         logService.NoNetworkError();
-        Thread.Sleep(5000);
+        await Task.Delay(5000);
     }
+
+    var appInstallerConfig = await configService.GetAppInstallerAsync();
 
     if (!options.NoApps) {
         if (chocolateyService.IsInstallationNeeded() && !await chocolateyService.IsInstalledAsync())
@@ -87,18 +85,21 @@ try {
         if (wingetService.IsInstallationNeeded() && !await wingetService.IsInstalledAsync())
             await wingetService.App.InstallAsync();
 
-        if (appInstallerConfig != null) {
+        if (appInstallerConfig.Apps != null) {
             logService.InstallingApps();
 
-            foreach (var app in appInstallerConfig.Apps) {
+            foreach (var app in appInstallerConfig.Apps)
                 await app.InstallAsync();
-            }
         }
     }
 
     if (!options.NoTweaks)
         await tweakService.ApplyTweaksAsync();
+} catch (Exception ex) {
+    var logService = AppHost.Services.GetRequiredService<LogService>();
+    logService.CriticalError(ex);
+    Environment.Exit(1);
 } finally {
-    await AppHost!.StopAsync();
+    await AppHost.StopAsync();
     AppHost.Dispose();
 }

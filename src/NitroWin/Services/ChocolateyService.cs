@@ -38,11 +38,12 @@ internal sealed class ChocolateyService : PackageManagerServiceBase {
     };
 
     internal override bool IsInstallationNeeded() {
-        if (_config!.Options.InstallChocolatey == Options.InstallOptions.Always) {
+        if (_config!.Options.InstallChocolatey == Options.InstallOptions.Always)
             return true;
-        } else if (_appInstallerConfig != null && _config!.Options.InstallChocolatey == Options.InstallOptions.IfNeeded) {
-            foreach (var app in _appInstallerConfig!.Apps) {
-                if (app is WingetApp)
+
+        if (_appInstallerConfig!.Apps is not null && _config!.Options.InstallChocolatey == Options.InstallOptions.IfNeeded) {
+            foreach (var app in _appInstallerConfig.Apps) {
+                if (app is ChocolateyApp)
                     return true;
             }
         }

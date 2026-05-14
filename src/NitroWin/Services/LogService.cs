@@ -62,6 +62,9 @@ internal sealed class LogService(ResourceManager resourceManager) {
     internal void ApplyingTweaks() =>
         LogResource(LogEventLevel.Information, "Log_ApplyingTweaks");
 
+    internal void CriticalError(Exception exception) =>
+        LogResource(LogEventLevel.Fatal, "Log_CriticalError", exception.Message);
+
     private string[] GetAppParameters(AppBase app) => app switch {
         AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), resourceManager.GetString("AppSource_Appx")!],
         AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), resourceManager.GetString("AppSource_AppxWeb")!],

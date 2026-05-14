@@ -7,7 +7,7 @@ internal sealed class ConfigService(IDeserializer deserializer, LogService logSe
     private Config? _config;
     private AppInstallerConfig? _appInstallerConfig;
 
-    internal async Task<Config?> GetAsync() =>
+    internal async Task<Config> GetAsync() =>
         _config ??= await LoadAsync(Path.Combine("Configuration", "Config.yml"));
 
     private async Task<Config> LoadAsync(string path) {
@@ -25,7 +25,7 @@ internal sealed class ConfigService(IDeserializer deserializer, LogService logSe
         }
     }
 
-    internal async Task<AppInstallerConfig?> GetAppInstallerAsync() =>
+    internal async Task<AppInstallerConfig> GetAppInstallerAsync() =>
         _appInstallerConfig ??= await LoadAppInstallerAsync(Path.Combine("Configuration", "Apps.yml"));
 
     private async Task<AppInstallerConfig> LoadAppInstallerAsync(string path) {

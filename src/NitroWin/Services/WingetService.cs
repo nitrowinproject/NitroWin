@@ -61,10 +61,11 @@ internal sealed class WingetService : PackageManagerServiceBase {
     };
 
     internal override bool IsInstallationNeeded() {
-        if (_config!.Options.InstallWinget == Options.InstallOptions.Always) {
+        if (_config!.Options.InstallWinget == Options.InstallOptions.Always)
             return true;
-        } else if (_appInstallerConfig != null && _config!.Options.InstallWinget == Options.InstallOptions.IfNeeded) {
-            foreach (var app in _appInstallerConfig!.Apps) {
+
+        if (_appInstallerConfig!.Apps is not null && _config!.Options.InstallWinget == Options.InstallOptions.IfNeeded) {
+            foreach (var app in _appInstallerConfig.Apps) {
                 if (app is WingetApp)
                     return true;
             }
