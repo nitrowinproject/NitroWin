@@ -1,24 +1,24 @@
 ﻿using System.Runtime.InteropServices;
-using NitroWin.Helpers;
+using NitroWin.Services;
 
-namespace NitroWin.Apps;
+namespace NitroWin.Models.Apps;
 
-public abstract class AppBase {
-    public List<string>? Arguments { get; set; }
-    public Architectures Architectures { get; set; } = new();
+internal abstract class AppBase(LogService logService) {
+    internal List<string>? Arguments { get; set; }
+    internal Architectures Architectures { get; set; } = new();
 
-    public async Task InstallAsync() {
+    internal async Task InstallAsync() {
         if (!IsSupportedArchitecture()) {
-            LogHelper.NotInstallingApp(this);
+            logService.NotInstallingApp(this);
             return;
         }
 
-        LogHelper.InstallingApp(this);
+        logService.InstallingApp(this);
 
         try {
             await InstallCoreAsync();
         } catch (Exception ex) {
-            LogHelper.AppInstallError(this, ex);
+            logService.AppInstallError(this, ex);
         }
     }
 

@@ -1,4 +1,4 @@
-﻿namespace NitroWin.Helpers.CommandLine;
+﻿namespace NitroWin.Models;
 
 internal sealed class CommandLineOptions {
     internal bool NoApps { get; set; } = false;

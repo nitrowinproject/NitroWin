@@ -1,6 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 
-namespace NitroWin.Config;
+namespace NitroWin.Models;
 
 public sealed class Options {
     public enum InstallOptions {

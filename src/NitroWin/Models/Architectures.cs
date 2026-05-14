@@ -1,4 +1,4 @@
-﻿namespace NitroWin.Apps;
+﻿namespace NitroWin.Models;
 
 public sealed class Architectures {
     public bool Arm64 { get; set; } = true;
