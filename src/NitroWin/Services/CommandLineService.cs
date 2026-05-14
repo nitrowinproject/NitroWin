@@ -1,10 +1,11 @@
 ﻿using System.Reflection;
 using System.Resources;
+using Microsoft.Extensions.Hosting;
 using NitroWin.Models;
 
 namespace NitroWin.Services;
 
-internal sealed class CommandLineService(ResourceManager resourceManager, LogService logService) {
+internal sealed class CommandLineService(ResourceManager resourceManager, LogService logService, IHostApplicationLifetime lifetime) {
     private readonly string _version = Assembly.GetExecutingAssembly().GetName().Version!.ToString();
     private readonly string _name = resourceManager.GetString("App_Name")!;
 
@@ -33,12 +34,14 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
     internal CommandLineOptions ParseArguments(string[] args) {
         if (args.Contains("-h") || args.Contains("--help")) {
             WriteHelp();
-            Environment.Exit(0);
+            lifetime.StopApplication();
+            return new CommandLineOptions();
         }
 
         if (args.Contains("-v") || args.Contains("--version")) {
             Console.WriteLine(_version);
-            Environment.Exit(0);
+            lifetime.StopApplication();
+            return new CommandLineOptions();
         }
 
         return new CommandLineOptions() {

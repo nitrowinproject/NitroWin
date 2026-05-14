@@ -1,10 +1,11 @@
-﻿using NitroWin.Helpers;
+﻿using Microsoft.Extensions.Hosting;
+using NitroWin.Helpers;
 using NitroWin.Models;
 using NitroWin.Models.Apps;
 
 namespace NitroWin.Services;
 
-internal sealed class ChocolateyService : PackageManagerServiceBase {
+internal sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class ChocolateyInstallerApp(LogService logService, DownloaderService downloaderService) : WebApp(logService, downloaderService) {
         protected override async Task InstallCoreAsync() {
             await ProcessHelper.StartProcessAsync(
@@ -17,22 +18,7 @@ internal sealed class ChocolateyService : PackageManagerServiceBase {
     private Config? _config;
     private AppInstallerConfig? _appInstallerConfig;
 
-    private readonly DownloaderService _downloaderService;
-    private readonly LogService _logService;
-
-    public ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) {
-        _downloaderService = downloaderService;
-        _logService = logService;
-
-        _ = InitializeAsync(configService);
-    }
-
-    private async Task InitializeAsync(ConfigService configService) {
-        _config = await configService.GetAsync();
-        _appInstallerConfig = await configService.GetAppInstallerAsync();
-    }
-
-    internal override AppBase App => new ChocolateyInstallerApp(_logService, _downloaderService) {
+    internal override AppBase App => new ChocolateyInstallerApp(logService, downloaderService) {
         Name = "Chocolatey",
         Url = "https://community.chocolatey.org/install.ps1"
     };
@@ -56,4 +42,11 @@ internal sealed class ChocolateyService : PackageManagerServiceBase {
 
     internal override async Task InstallAppAsync(string id, string[]? args) =>
         await ProcessHelper.StartProcessAsync("choco.exe", $"install {id} --yes {string.Join(" ", args ?? [])}");
+
+    public async Task StartAsync(CancellationToken cancellationToken) {
+        _config = await configService.GetAsync();
+        _appInstallerConfig = await configService.GetAppInstallerAsync();
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

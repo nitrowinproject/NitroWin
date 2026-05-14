@@ -49,9 +49,13 @@ var AppHost = Host.CreateDefaultBuilder()
         services.AddSingleton<ExtractionService>();
 
         services.AddSingleton<TweakService>();
+        services.AddHostedService(sp => sp.GetRequiredService<TweakService>());
 
         services.AddSingleton<ChocolateyService>();
+        services.AddHostedService(sp => sp.GetRequiredService<ChocolateyService>());
+
         services.AddSingleton<WingetService>();
+        services.AddHostedService(sp => sp.GetRequiredService<WingetService>());
     })
     .Build();
 
@@ -67,6 +71,13 @@ try {
 
     commandLineService.WriteBranding();
     var options = commandLineService.ParseArguments(args);
+
+    if (AppHost.Services.GetRequiredService<IHostApplicationLifetime>()
+        .ApplicationStopping.IsCancellationRequested) {
+        await AppHost.StopAsync();
+        AppHost.Dispose();
+        return;
+    }
 
     if (args.Length > 0)
         logService.CommandLineArguments(args);

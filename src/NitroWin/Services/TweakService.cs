@@ -1,32 +1,21 @@
-﻿using NitroWin.Models;
+﻿using Microsoft.Extensions.Hosting;
+using NitroWin.Models;
 using TweakLib.Actions;
 using TweakLib.Models;
 using TweakLib.Parser;
 
 namespace NitroWin.Services;
 
-internal sealed class TweakService {
-    private readonly LogService _logService;
-    private readonly ExtractionService _extractionService;
-    private readonly DownloaderService _downloaderService;
-
+internal sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService) : IHostedService {
     private Config? _config;
 
     private const string TweakPath = "Tweaks";
 
-    public TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService) {
-        _logService = logService;
-        _extractionService = extractionService;
-        _downloaderService = downloaderService;
-
-        _ = InitializeAsync(configService);
-    }
-
     internal async Task ApplyTweaksAsync() {
-        _logService.DownloadingTweaks();
+        logService.DownloadingTweaks();
         await DownloadTweaksAsync();
 
-        _logService.ApplyingTweaks();
+        logService.ApplyingTweaks();
         var tweaks = await ParseTweaksAsync();
 
         await Parallel.ForEachAsync(tweaks, new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount / 2 },
@@ -35,13 +24,9 @@ internal sealed class TweakService {
             });
     }
 
-    private async Task InitializeAsync(ConfigService configService) {
-        _config = await configService.GetAsync();
-    }
-
     private async Task DownloadTweaksAsync() {
-        var tweaksArchive = await _downloaderService.DownloadFileAsync(_config!.Options.TweakUrl, "Downloads") ?? throw new NullReferenceException();
-        await _extractionService.ExtractZipFile(tweaksArchive, TweakPath);
+        var tweaksArchive = await downloaderService.DownloadFileAsync(_config!.Options.TweakUrl, "Downloads") ?? throw new NullReferenceException();
+        await extractionService.ExtractZipFile(tweaksArchive, TweakPath);
     }
 
     private async Task<List<Tweak>> ParseTweaksAsync() {
@@ -52,7 +37,7 @@ internal sealed class TweakService {
                 var content = await File.ReadAllTextAsync(file);
                 tweaks.Add(TweakParser.Deserializer.Deserialize<Tweak>(content));
             } catch (Exception ex) {
-                _logService.TweakReadError(file, ex);
+                logService.TweakReadError(file, ex);
             }
         }
 
@@ -60,7 +45,7 @@ internal sealed class TweakService {
     }
 
     private async Task ApplyTweakAsync(Tweak tweak) {
-        _logService.ApplyingTweak(tweak);
+        logService.ApplyingTweak(tweak);
 
         foreach (var action in tweak.Actions) {
             await ApplyActionAsync(tweak, action);
@@ -75,11 +60,16 @@ internal sealed class TweakService {
                 throw new InvalidOperationException(returnCode.ToString());
             }
 
-            _logService.AppliedTweak(tweak);
+            logService.AppliedTweak(tweak);
         } catch (Exception ex) {
             if (!action.IgnoreErrors) {
-                _logService.TweakApplyError(tweak, ex);
+                logService.TweakApplyError(tweak, ex);
             }
         }
     }
+
+    public async Task StartAsync(CancellationToken cancellationToken) =>
+        _config = await configService.GetAsync();
+
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

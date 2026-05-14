@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+using Microsoft.Extensions.Hosting;
 using NitroWin.Helpers;
 using NitroWin.Models;
 using NitroWin.Models.Apps;
 
 namespace NitroWin.Services;
 
-internal sealed class WingetService : PackageManagerServiceBase {
+internal sealed class WingetService(ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class WingetInstallerApp(ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : AppxWebApp(logService, downloaderService) {
         private readonly ExtractionService _extractionService = extractionService;
         private readonly DownloaderService _downloaderService = downloaderService;
@@ -19,7 +20,7 @@ internal sealed class WingetService : PackageManagerServiceBase {
                 _ => throw new NotImplementedException()
             };
 
-            var depsArchive = await _downloaderService.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new NullReferenceException();
+            var depsArchive = await _downloaderService.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath) ?? throw new InvalidOperationException();
             await _extractionService.ExtractZipFile(depsArchive, depsPath);
 
             foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
@@ -38,24 +39,7 @@ internal sealed class WingetService : PackageManagerServiceBase {
     private Config? _config;
     private AppInstallerConfig? _appInstallerConfig;
 
-    private readonly ExtractionService _extractionService;
-    private readonly DownloaderService _downloaderService;
-    private readonly LogService _logService;
-
-    public WingetService(ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, LogService logService) {
-        _extractionService = extractionService;
-        _downloaderService = downloaderService;
-        _logService = logService;
-
-        _ = InitializeAsync(configService);
-    }
-
-    private async Task InitializeAsync(ConfigService configService) {
-        _config = await configService.GetAsync();
-        _appInstallerConfig = await configService.GetAppInstallerAsync();
-    }
-
-    internal override AppBase App => new WingetInstallerApp(_extractionService, _downloaderService, _logService) {
+    internal override AppBase App => new WingetInstallerApp(extractionService, downloaderService, logService) {
         Name = "WinGet",
         Url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
     };
@@ -79,4 +63,11 @@ internal sealed class WingetService : PackageManagerServiceBase {
 
     internal override async Task InstallAppAsync(string id, string[]? args) =>
         await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {id} {string.Join(" ", args ?? [])} --accept-package-agreements --accept-source-agreements");
+
+    public async Task StartAsync(CancellationToken cancellationToken) {
+        _config = await configService.GetAsync();
+        _appInstallerConfig = await configService.GetAppInstallerAsync();
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

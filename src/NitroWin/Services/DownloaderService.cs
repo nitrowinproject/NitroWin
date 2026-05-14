@@ -3,7 +3,7 @@
 internal sealed class DownloaderService(LogService logService, HttpClient httpClient) {
     internal async Task<string?> DownloadFileAsync(string url, string downloadPath, string? fileName = null) {
         try {
-            var fullPath = Path.Combine(downloadPath, fileName ?? url.Split("/").Last());
+            var fullPath = Path.Combine(downloadPath, fileName ?? new Uri(url).Segments.Last());
 
             Directory.CreateDirectory(downloadPath);
 
