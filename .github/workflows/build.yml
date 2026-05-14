@@ -1,0 +1,43 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        runtime:
+          - win-x64
+          - win-arm64
+
+    env:
+      PUBLISH_DIR: publish
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish
+        run: >
+          dotnet publish NitroWin.slnx
+          --configuration Release
+          --runtime ${{ matrix.runtime }}
+          --output ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+
+      - name: Upload binaries
+        uses: actions/upload-artifact@v7
+        with:
+          name: NitroWin-${{ matrix.runtime }}
+          path: ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+          archive: false
