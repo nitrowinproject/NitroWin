@@ -40,4 +40,3 @@ jobs:
         with:
           name: NitroWin-${{ matrix.runtime }}
           path: ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
-          archive: false
