@@ -8,7 +8,8 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
     private AppInstallerConfig? _appInstallerConfig;
 
     internal async Task<Config> GetAsync() =>
-        _config ??= await LoadAsync(Path.Combine("Configuration", "Config.yml"));
+        _config ??= await LoadAsync(Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "Configuration", "Config.yml"));
 
     private async Task<Config> LoadAsync(string path) {
         if (!File.Exists(path)) {
@@ -26,7 +27,8 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
     }
 
     internal async Task<AppInstallerConfig> GetAppInstallerAsync() =>
-        _appInstallerConfig ??= await LoadAppInstallerAsync(Path.Combine("Configuration", "Apps.yml"));
+        _appInstallerConfig ??= await LoadAppInstallerAsync(Path.Combine(
+            AppDomain.CurrentDomain.BaseDirectory, "Configuration", "Apps.yml"));
 
     private async Task<AppInstallerConfig> LoadAppInstallerAsync(string path) {
         if (!File.Exists(path)) {
