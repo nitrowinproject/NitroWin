@@ -14,6 +14,9 @@ using YamlDotNet.Serialization.NamingConventions;
 
 var AppHost = Host.CreateDefaultBuilder()
     .ConfigureServices((hostContext, services) => {
+        services.AddLogging(loggingBuilder =>
+            loggingBuilder.AddSerilog(dispose: true));
+
         services.AddSerilog((ctx, lc) => lc
 #if DEBUG
             .MinimumLevel.Debug()

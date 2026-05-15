@@ -6,7 +6,7 @@ using Serilog.Events;
 
 namespace NitroWin.Services;
 
-public sealed class LogService(ResourceManager resourceManager) {
+public sealed class LogService(ResourceManager resourceManager, ILogger logger) {
     internal void InstallingApp(AppBase app) => LogResource(
         LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
@@ -81,22 +81,22 @@ public sealed class LogService(ResourceManager resourceManager) {
 
         switch (level) {
             case LogEventLevel.Debug:
-                Log.Debug(message);
+                logger.Debug(message);
                 break;
             case LogEventLevel.Error:
-                Log.Error(message);
+                logger.Error(message);
                 break;
             case LogEventLevel.Fatal:
-                Log.Fatal(message);
+                logger.Fatal(message);
                 break;
             case LogEventLevel.Information:
-                Log.Information(message);
+                logger.Information(message);
                 break;
             case LogEventLevel.Verbose:
-                Log.Verbose(message);
+                logger.Verbose(message);
                 break;
             case LogEventLevel.Warning:
-                Log.Warning(message);
+                logger.Warning(message);
                 break;
             default:
                 throw new NotImplementedException();
