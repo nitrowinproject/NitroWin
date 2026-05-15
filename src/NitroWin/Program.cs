@@ -89,8 +89,7 @@ try {
         return;
     }
 
-    if (args.Length > 0)
-        logService.CommandLineArguments(args);
+    logService.CommandLineArguments(args);
 
     while (!NetworkInterface.GetIsNetworkAvailable()) {
         logService.NoNetworkError();
