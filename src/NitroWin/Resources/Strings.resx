@@ -195,4 +195,7 @@
   <data name="Log_CriticalError" xml:space="preserve">
     <value>Critical error: {0}</value>
   </data>
+  <data name="CommandLine_Unknown" xml:space="preserve">
+    <value>Unknown</value>
+  </data>
 </root>

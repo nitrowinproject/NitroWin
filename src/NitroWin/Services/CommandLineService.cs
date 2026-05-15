@@ -6,7 +6,7 @@ using NitroWin.Models;
 namespace NitroWin.Services;
 
 internal sealed class CommandLineService(ResourceManager resourceManager, LogService logService, IHostApplicationLifetime lifetime) {
-    private readonly string _version = Assembly.GetExecutingAssembly().GetName().Version!.ToString();
+    private readonly string _version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? resourceManager.GetString("CommandLine_Unknown")!;
     private readonly string _name = resourceManager.GetString("App_Name")!;
 
     internal void WriteBranding() {
@@ -24,9 +24,8 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
             string.Empty
             ];
 
-        foreach (var line in branding) {
+        foreach (var line in branding)
             Console.WriteLine(line);
-        }
 
         logService.HelloFrom(_name, _version);
     }

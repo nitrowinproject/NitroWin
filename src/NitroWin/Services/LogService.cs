@@ -1,68 +1,67 @@
 ﻿using System.Resources;
+using Microsoft.Extensions.Logging;
 using NitroWin.Models;
 using NitroWin.Models.Apps;
-using Serilog;
-using Serilog.Events;
 
 namespace NitroWin.Services;
 
-public sealed class LogService(ResourceManager resourceManager, ILogger logger) {
+public sealed class LogService(ResourceManager resourceManager, ILogger<LogService> logger) {
     internal void InstallingApp(AppBase app) => LogResource(
-        LogEventLevel.Information, "Log_InstallingApp", GetAppParameters(app));
+        LogLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
     internal void NotInstallingApp(AppBase app) => LogResource(
-        LogEventLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
+        LogLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
 
     internal void AppInstallError(AppBase app, Exception exception) => LogResource(
-        LogEventLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
+        LogLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
             exception.Message]);
 
-    internal void ApplyingTweak(Tweak tweak) => LogResource(
-        LogEventLevel.Debug, "Log_ApplyingTweak", tweak.Title);
+    internal void ApplyingTweak(Tweak tweak) =>
+        LogResource(LogLevel.Debug, "Log_ApplyingTweak", tweak.Title);
 
-    internal void AppliedTweak(Tweak tweak) => LogResource(
-        LogEventLevel.Debug, "Log_AppliedTweak", tweak.Title);
+    internal void AppliedTweak(Tweak tweak) =>
+        LogResource(LogLevel.Debug, "Log_AppliedTweak", tweak.Title);
 
     internal void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
-        LogEventLevel.Error, "Log_TweakApplyError", tweak.Title,
+        LogLevel.Error, "Log_TweakApplyError", tweak.Title,
         exception.Message);
 
     internal void TweakReadError(string filePath, Exception exception) => LogResource(
-        LogEventLevel.Error, "Log_TweakReadError", Path.GetFileName(filePath),
+        LogLevel.Error, "Log_TweakReadError", Path.GetFileName(filePath),
         exception.Message);
 
     internal void DownloadError(string url, Exception exception) => LogResource(
-        LogEventLevel.Error, "Log_DownloadError", Path.GetFileName(url),
+        LogLevel.Error, "Log_DownloadError", Path.GetFileName(url),
         exception.Message);
 
     internal void ExtractionError(string filePath, Exception exception) => LogResource(
-        LogEventLevel.Error, "Log_ExtractionError", Path.GetFileName(filePath),
+        LogLevel.Error, "Log_ExtractionError", Path.GetFileName(filePath),
         exception.Message);
 
     internal void NoNetworkError() =>
-        LogResource(LogEventLevel.Error, "Log_NoNetwork");
+        LogResource(LogLevel.Error, "Log_NoNetwork");
 
     internal void CommandLineArguments(string[] args) =>
-        LogResource(LogEventLevel.Debug, "Log_CommandLineArguments", string.Join(", ", args));
+        LogResource(LogLevel.Debug, "Log_CommandLineArguments", string.Join(", ", args));
 
     internal void NoConfigFound<T>() where T : ConfigBase =>
-        LogResource(LogEventLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
+        LogResource(LogLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
             ? "Log_NoAppInstallerConfigFound" : "Log_NoConfigFound");
 
     internal void InstallingApps() =>
-        LogResource(LogEventLevel.Information, "Log_InstallingApps");
+        LogResource(LogLevel.Information, "Log_InstallingApps");
 
     internal void HelloFrom(string app, string version) =>
-        LogResource(LogEventLevel.Debug, "Log_HelloFrom", app, version);
+        LogResource(LogLevel.Debug, "Log_HelloFrom", app, version);
 
     internal void DownloadingTweaks() =>
-        LogResource(LogEventLevel.Information, "Log_DownloadingTweaks");
+        LogResource(LogLevel.Information, "Log_DownloadingTweaks");
 
     internal void ApplyingTweaks() =>
-        LogResource(LogEventLevel.Information, "Log_ApplyingTweaks");
+        LogResource(LogLevel.Information, "Log_ApplyingTweaks");
 
     internal void CriticalError(Exception exception) =>
-        LogResource(LogEventLevel.Fatal, "Log_CriticalError", exception.Message);
+        LogResource(LogLevel.Critical, "Log_CriticalError", exception.Message);
 
     private string[] GetAppParameters(AppBase app) => app switch {
         AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), resourceManager.GetString("AppSource_Appx")!],
@@ -73,33 +72,12 @@ public sealed class LogService(ResourceManager resourceManager, ILogger logger) 
         _ => throw new NotImplementedException()
     };
 
-    private void LogResource(LogEventLevel level, string resourceName, params string[] parameters) {
-        var message = string.Format(
-            resourceManager.GetString(resourceName)!,
-            parameters
-        );
+    private void LogResource(LogLevel level, string resourceName, params string[]? parameters) {
+        if (!logger.IsEnabled(level)) return;
 
-        switch (level) {
-            case LogEventLevel.Debug:
-                logger.Debug(message);
-                break;
-            case LogEventLevel.Error:
-                logger.Error(message);
-                break;
-            case LogEventLevel.Fatal:
-                logger.Fatal(message);
-                break;
-            case LogEventLevel.Information:
-                logger.Information(message);
-                break;
-            case LogEventLevel.Verbose:
-                logger.Verbose(message);
-                break;
-            case LogEventLevel.Warning:
-                logger.Warning(message);
-                break;
-            default:
-                throw new NotImplementedException();
-        }
+        var template = resourceManager.GetString(resourceName)!;
+        var message = parameters is not null ? string.Format(template, parameters) : template;
+
+        logger.Log(level, "{Message}", message);
     }
 }
