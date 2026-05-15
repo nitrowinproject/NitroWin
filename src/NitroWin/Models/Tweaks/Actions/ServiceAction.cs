@@ -59,7 +59,7 @@ public sealed class ServiceAction : ActionBase {
             _ => throw new NotImplementedException()
         };
 
-    internal ServiceAction() {
+    public ServiceAction() {
         if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
     }
 }

@@ -37,9 +37,8 @@ internal static class PlatformHelper {
     private static extern bool GetPwrCapabilities(out SYSTEM_POWER_CAPABILITIES systemPowerCapabilities);
 
     internal static bool IsMobile() {
-        if (GetPwrCapabilities(out var caps)) {
+        if (GetPwrCapabilities(out var caps))
             return caps.LidPresent;
-        }
 
         return false;
     }

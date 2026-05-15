@@ -24,9 +24,8 @@ public sealed class WingetService(ConfigService configService, ExtractionService
             await _extractionService.ExtractZipFile(depsArchive, depsPath);
 
             foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
-                .Select(file => new AppxApp(_logService) { Path = file })) {
+                .Select(file => new AppxApp(_logService) { Path = file }))
                 await app.InstallAsync();
-            }
         }
 
         protected override async Task InstallCoreAsync() {

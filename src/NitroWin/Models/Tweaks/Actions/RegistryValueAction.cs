@@ -52,7 +52,7 @@ public sealed class RegistryValueAction : ActionBase {
 
             case RegistryValueType.REG_MULTI_SZ:
                 var data = string.IsNullOrEmpty(Data)
-                    ? Array.Empty<string>()
+                    ? []
                     : Data.Split('\0');
 
                 Registry.SetValue(keyName, Value, data, (RegistryValueKind)Type);
@@ -101,9 +101,8 @@ public sealed class RegistryValueAction : ActionBase {
     }
 
     protected override async Task<int> ApplyAsyncCore() {
-        if (Operation == RegistryValueOperation.Delete && Type != null) {
+        if (Operation == RegistryValueOperation.Delete && Type != null)
             throw new NotImplementedException();
-        }
 
         switch (RunAs) {
             case Privilege.CurrentUserElevated:

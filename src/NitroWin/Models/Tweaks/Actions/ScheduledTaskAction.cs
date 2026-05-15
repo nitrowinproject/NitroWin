@@ -25,7 +25,7 @@ public sealed class ScheduledTaskAction : ActionBase {
         return System.Threading.Tasks.Task.FromResult(0);
     }
 
-    internal ScheduledTaskAction() {
+    public ScheduledTaskAction() {
         if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
     }
 }

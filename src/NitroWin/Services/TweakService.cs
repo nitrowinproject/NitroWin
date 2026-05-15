@@ -46,24 +46,21 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
     private async Task ApplyTweakAsync(Tweak tweak) {
         logService.ApplyingTweak(tweak);
 
-        foreach (var action in tweak.Actions) {
+        foreach (var action in tweak.Actions)
             await ApplyActionAsync(tweak, action);
-        }
     }
 
     private async Task ApplyActionAsync(Tweak tweak, ActionBase action) {
         try {
             var returnCode = await action.ApplyAsync();
 
-            if (returnCode != 0) {
+            if (returnCode != 0)
                 throw new InvalidOperationException(returnCode.ToString());
-            }
 
             logService.AppliedTweak(tweak);
         } catch (Exception ex) {
-            if (!action.IgnoreErrors) {
+            if (!action.IgnoreErrors)
                 logService.TweakApplyError(tweak, ex);
-            }
         }
     }
 

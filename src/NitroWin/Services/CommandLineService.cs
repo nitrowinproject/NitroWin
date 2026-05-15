@@ -63,8 +63,7 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
             $"-nt, --no-tweaks => {resourceManager.GetString("Options_NoTweaks")}"
             ];
 
-        foreach (var option in options) {
+        foreach (var option in options)
             logger.LogInformation("{Option}", option);
-        }
     }
 }
