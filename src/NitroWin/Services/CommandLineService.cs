@@ -57,10 +57,10 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
         logger.LogInformation("{Options}", resourceManager.GetString("CommandLine_Options"));
 
         string[] options = [
-            "-h, --help       => Print help",
-            "-v, --version    => Print version",
-            "-na, --no-apps   => Skip app installation",
-            "-nt, --no-tweaks => Skip tweaks"
+            $"-h, --help       => {resourceManager.GetString("Options_PrintHelp")}",
+            $"-v, --version    => {resourceManager.GetString("Options_PrintVersion")}",
+            $"-na, --no-apps   => {resourceManager.GetString("Options_NoApps")}",
+            $"-nt, --no-tweaks => {resourceManager.GetString("Options_NoTweaks")}"
             ];
 
         foreach (var option in options) {

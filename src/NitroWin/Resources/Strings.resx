@@ -198,4 +198,16 @@
   <data name="CommandLine_UnknownVersion" xml:space="preserve">
     <value>(Unknown Version)</value>
   </data>
+  <data name="Options_PrintHelp" xml:space="preserve">
+    <value>Print help</value>
+  </data>
+  <data name="Options_PrintVersion" xml:space="preserve">
+    <value>Print version</value>
+  </data>
+  <data name="Options_NoApps" xml:space="preserve">
+    <value>Skip app installation</value>
+  </data>
+  <data name="Options_NoTweaks" xml:space="preserve">
+    <value>Skip tweaks</value>
+  </data>
 </root>

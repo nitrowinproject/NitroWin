@@ -8,7 +8,7 @@ internal static class ServiceHelper {
 
         while (sc.Status != desiredStatus) {
             if (DateTime.UtcNow - startTime > timeout)
-                throw new System.TimeoutException($"Service did not reach status {desiredStatus}.");
+                throw new System.TimeoutException();
 
             await Task.Delay(500);
             sc.Refresh();
