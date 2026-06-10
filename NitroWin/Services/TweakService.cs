@@ -10,36 +10,36 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
 
     private const string TweakPath = "Tweaks";
 
-    internal async Task ApplyTweaksAsync() {
+    internal async Task ApplyTweaksAsync(CancellationToken cancellationToken = default) {
         logService.DownloadingTweaks();
-        await DownloadTweaksAsync();
+        await DownloadTweaksAsync(cancellationToken);
 
         logService.ApplyingTweaks();
-        var tweaks = await ParseTweaksAsync();
+        var tweaks = await ParseTweaksAsync(cancellationToken);
 
         await Parallel.ForEachAsync(
             tweaks,
             new ParallelOptions { MaxDegreeOfParallelism = Math.Max(1, Environment.ProcessorCount / 2) },
-            async (tweak, _) => {
+            async (tweak, ct) => {
                 try {
-                    await ApplyTweakAsync(tweak);
+                    await ApplyTweakAsync(tweak, ct);
                 } catch (Exception ex) {
                     logService.TweakApplyError(tweak, ex);
                 }
             });
     }
 
-    private async Task DownloadTweaksAsync() {
+    private async Task DownloadTweaksAsync(CancellationToken cancellationToken = default) {
         if (_config is null)
             throw new InvalidOperationException("Config has not been initialized.");
 
-        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, "Downloads")
+        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, "Downloads", cancellationToken: cancellationToken)
             ?? throw new InvalidOperationException("Failed to download tweaks.");
 
-        await extractionService.ExtractZipFile(tweaksArchive, TweakPath);
+        await extractionService.ExtractZipFile(tweaksArchive, TweakPath, cancellationToken);
     }
 
-    private async Task<List<Tweak>> ParseTweaksAsync() {
+    private async Task<List<Tweak>> ParseTweaksAsync(CancellationToken cancellationToken = default) {
         var tweaks = new List<Tweak>();
 
         if (!Directory.Exists(TweakPath))
@@ -47,7 +47,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
 
         foreach (var file in Directory.EnumerateFiles(TweakPath, "*.yml", SearchOption.AllDirectories)) {
             try {
-                var content = await File.ReadAllTextAsync(file);
+                var content = await File.ReadAllTextAsync(file, cancellationToken);
                 var tweak = deserializer.Deserialize<Tweak>(content);
 
                 if (tweak is not null)
@@ -60,20 +60,20 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         return tweaks;
     }
 
-    private async Task ApplyTweakAsync(Tweak tweak) {
+    private async Task ApplyTweakAsync(Tweak tweak, CancellationToken cancellationToken = default) {
         logService.ApplyingTweak(tweak);
 
         foreach (var action in tweak.Actions)
-            await ApplyActionAsync(tweak, action);
+            await ApplyActionAsync(tweak, action, cancellationToken);
 
         logService.AppliedTweak(tweak);
     }
 
-    private static async Task ApplyActionAsync(Tweak tweak, ActionBase action) {
+    private static async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken = default) {
         int returnCode;
 
         try {
-            returnCode = await action.ApplyAsync();
+            returnCode = await action.ApplyAsync(cancellationToken);
         } catch when (action.IgnoreErrors) {
             return;
         }

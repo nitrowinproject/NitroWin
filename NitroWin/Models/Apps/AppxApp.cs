@@ -7,11 +7,12 @@ public sealed class AppxApp(LogService logService) : AppBase(logService) {
     public string? Name { get; set; }
     public required string Path { get; set; }
 
-    protected override async Task InstallCoreAsync() {
+    protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
         await ProcessHelper.StartProcessAsync(
             "powershell.exe",
             $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{Path}'\" " + string.Join(" ", Arguments ?? []),
-            false
+            false,
+            cancellationToken: cancellationToken
         );
     }
 }

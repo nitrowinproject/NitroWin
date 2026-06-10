@@ -8,19 +8,19 @@ public sealed class ServiceAction : ActionBase {
     public required string Name { get; set; }
     public required ServiceOperation Operation { get; set; }
 
-    protected override async Task<int> ApplyAsyncCore() {
+    protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken = default) {
         switch (Operation) {
             case ServiceOperation.Delete:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"delete {Name}", true, RunAs);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"delete {Name}", true, RunAs, cancellationToken);
 
             case ServiceOperation.Disable:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= disabled", true, RunAs);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= disabled", true, RunAs, cancellationToken);
 
             case ServiceOperation.MakeManual:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= demand", true, RunAs);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= demand", true, RunAs, cancellationToken);
 
             case ServiceOperation.MakeDelayed:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= delayed-auto", true, RunAs);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= delayed-auto", true, RunAs, cancellationToken);
         }
 
         using ServiceController sc = new(Name);
@@ -46,7 +46,7 @@ public sealed class ServiceAction : ActionBase {
                 break;
         }
 
-        await ServiceHelper.WaitForStatusAsync(sc, GetTargetStatus(), TimeSpan.FromSeconds(10));
+        await ServiceHelper.WaitForStatusAsync(sc, GetTargetStatus(), TimeSpan.FromSeconds(10), cancellationToken);
         return 0;
     }
 

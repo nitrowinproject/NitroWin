@@ -78,12 +78,12 @@ try {
     var tweakService = AppHost.Services.GetRequiredService<TweakService>();
     var wingetService = AppHost.Services.GetRequiredService<WingetService>();
     var chocolateyService = AppHost.Services.GetRequiredService<ChocolateyService>();
+    var applicationLifetime = AppHost.Services.GetRequiredService<IHostApplicationLifetime>();
 
     commandLineService.WriteBranding();
     var options = commandLineService.ParseArguments(args);
 
-    if (AppHost.Services.GetRequiredService<IHostApplicationLifetime>()
-        .ApplicationStopping.IsCancellationRequested) {
+    if (applicationLifetime.ApplicationStopping.IsCancellationRequested) {
         await AppHost.StopAsync();
         AppHost.Dispose();
         return;
@@ -96,25 +96,25 @@ try {
         await Task.Delay(5000);
     }
 
-    var appInstallerConfig = await configService.GetAppInstallerAsync();
+    var appInstallerConfig = await configService.GetAppInstallerAsync(applicationLifetime.ApplicationStopping);
 
     if (!options.NoApps) {
-        if (chocolateyService.IsInstallationNeeded() && !await chocolateyService.IsInstalledAsync())
-            await chocolateyService.App.InstallAsync();
+        if (chocolateyService.IsInstallationNeeded() && !await chocolateyService.IsInstalledAsync(applicationLifetime.ApplicationStopping))
+            await chocolateyService.App.InstallAsync(applicationLifetime.ApplicationStopping);
 
-        if (wingetService.IsInstallationNeeded() && !await wingetService.IsInstalledAsync())
-            await wingetService.App.InstallAsync();
+        if (wingetService.IsInstallationNeeded() && !await wingetService.IsInstalledAsync(applicationLifetime.ApplicationStopping))
+            await wingetService.App.InstallAsync(applicationLifetime.ApplicationStopping);
 
-        if (appInstallerConfig.Apps != null) {
+        if (appInstallerConfig.Apps is not null) {
             logService.InstallingApps();
 
             foreach (var app in appInstallerConfig.Apps)
-                await app.InstallAsync();
+                await app.InstallAsync(applicationLifetime.ApplicationStopping);
         }
     }
 
     if (!options.NoTweaks)
-        await tweakService.ApplyTweaksAsync();
+        await tweakService.ApplyTweaksAsync(applicationLifetime.ApplicationStopping);
 } catch (Exception ex) {
     try {
         var logService = AppHost.Services.GetRequiredService<LogService>();

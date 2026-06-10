@@ -3,14 +3,16 @@
 namespace NitroWin.Helpers;
 
 internal static class ServiceHelper {
-    internal static async Task WaitForStatusAsync(ServiceController sc, ServiceControllerStatus desiredStatus, TimeSpan timeout) {
-        var startTime = DateTime.UtcNow;
+    internal static async Task WaitForStatusAsync(ServiceController sc, ServiceControllerStatus desiredStatus, TimeSpan timeout, CancellationToken cancellationToken = default) {
+        using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        cts.CancelAfter(timeout);
 
         while (sc.Status != desiredStatus) {
-            if (DateTime.UtcNow - startTime > timeout)
+            try {
+                await Task.Delay(500, cts.Token);
+            } catch (OperationCanceledException) when (cts.IsCancellationRequested && !cancellationToken.IsCancellationRequested) {
                 throw new System.TimeoutException();
-
-            await Task.Delay(500);
+            }
             sc.Refresh();
         }
     }

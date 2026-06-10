@@ -7,13 +7,14 @@ public class AppxWebApp(LogService logService, DownloaderService downloaderServi
     public string? Name { get; set; }
     public required string Url { get; set; }
 
-    protected override async Task InstallCoreAsync() {
-        var path = await downloaderService.DownloadFileAsync(Url, "Downloads");
+    protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
+        var path = await downloaderService.DownloadFileAsync(Url, "Downloads", cancellationToken: cancellationToken);
 
         await ProcessHelper.StartProcessAsync(
             "powershell.exe",
             $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\" " + string.Join(" ", Arguments ?? []),
-            false
+            false,
+            cancellationToken: cancellationToken
         );
     }
 }

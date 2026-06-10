@@ -7,10 +7,11 @@ namespace NitroWin.Services;
 
 public sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class ChocolateyInstallerApp(LogService logService, DownloaderService downloaderService) : WebApp(logService, downloaderService) {
-        protected override async Task InstallCoreAsync() {
+        protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
             await ProcessHelper.StartProcessAsync(
                 "powershell.exe",
-                $"-NoProfile -ExecutionPolicy Bypass -Command \"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('{Url}'))\""
+                $"-NoProfile -ExecutionPolicy Bypass -Command \"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('{Url}'))\"",
+                cancellationToken: cancellationToken
             );
         }
     }
@@ -37,15 +38,15 @@ public sealed class ChocolateyService(ConfigService configService, DownloaderSer
         return false;
     }
 
-    internal override async Task<bool> IsInstalledAsync() =>
-        await ProcessHelper.IsAppAvailable("choco.exe", "--version");
+    internal override async Task<bool> IsInstalledAsync(CancellationToken cancellationToken = default) =>
+        await ProcessHelper.IsAppAvailable("choco.exe", "--version", cancellationToken);
 
-    internal override async Task InstallAppAsync(string id, string[]? args) =>
-        await ProcessHelper.StartProcessAsync("choco.exe", $"install {id} --yes {string.Join(" ", args ?? [])}");
+    internal override async Task InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default) =>
+        await ProcessHelper.StartProcessAsync("choco.exe", $"install {id} --yes {string.Join(" ", args ?? [])}", cancellationToken: cancellationToken);
 
     public async Task StartAsync(CancellationToken cancellationToken) {
-        _config = await configService.GetAsync();
-        _appInstallerConfig = await configService.GetAppInstallerAsync();
+        _config = await configService.GetAsync(cancellationToken);
+        _appInstallerConfig = await configService.GetAppInstallerAsync(cancellationToken);
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;

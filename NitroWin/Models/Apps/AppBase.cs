@@ -7,7 +7,7 @@ public abstract class AppBase(LogService logService) {
     public List<string>? Arguments { get; set; }
     public Architectures Architectures { get; set; } = new();
 
-    internal async Task InstallAsync() {
+    internal async Task InstallAsync(CancellationToken cancellationToken = default) {
         if (!IsSupportedArchitecture()) {
             logService.NotInstallingApp(this);
             return;
@@ -16,13 +16,13 @@ public abstract class AppBase(LogService logService) {
         logService.InstallingApp(this);
 
         try {
-            await InstallCoreAsync();
+            await InstallCoreAsync(cancellationToken);
         } catch (Exception ex) {
             logService.AppInstallError(this, ex);
         }
     }
 
-    protected abstract Task InstallCoreAsync();
+    protected abstract Task InstallCoreAsync(CancellationToken cancellationToken = default);
 
     protected bool IsSupportedArchitecture() {
         return (RuntimeInformation.ProcessArchitecture == Architecture.X64 && Architectures.X64)

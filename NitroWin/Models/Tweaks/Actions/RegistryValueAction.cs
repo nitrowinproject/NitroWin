@@ -77,7 +77,7 @@ public sealed class RegistryValueAction : ActionBase {
         }
     }
 
-    private async Task<int> ApplyAsTrustedInstallerAsync() {
+    private async Task<int> ApplyAsTrustedInstallerAsync(CancellationToken cancellationToken = default) {
         var type = Type switch {
             RegistryValueType.REG_SZ => "REG_SZ",
             RegistryValueType.REG_MULTI_SZ => "REG_MULTI_SZ",
@@ -97,20 +97,20 @@ public sealed class RegistryValueAction : ActionBase {
             _ => throw new NotImplementedException()
         };
 
-        return await ProcessHelper.StartProcessAsync("reg.exe", arguments, true, Privilege.TrustedInstaller);
+        return await ProcessHelper.StartProcessAsync("reg.exe", arguments, true, Privilege.TrustedInstaller, cancellationToken);
     }
 
-    protected override async Task<int> ApplyAsyncCore() {
-        if (Operation == RegistryValueOperation.Delete && Type != null)
+    protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken = default) {
+        if (Operation == RegistryValueOperation.Delete && Type is not null)
             throw new NotImplementedException();
 
         switch (RunAs) {
             case Privilege.CurrentUserElevated:
-                await Task.Run(ApplyAsCurrentUserElevated);
+                await Task.Run(ApplyAsCurrentUserElevated, cancellationToken);
                 return 0;
 
             case Privilege.TrustedInstaller:
-                return await ApplyAsTrustedInstallerAsync();
+                return await ApplyAsTrustedInstallerAsync(cancellationToken);
 
             default:
                 throw new NotImplementedException();
