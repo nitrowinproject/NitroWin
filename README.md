@@ -34,16 +34,16 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 
 2. Extract it to the root of your installation media. Your file structure should now look like this:
 
-```text
-D: (or whatever your installation media is)/
-├── (Windows setup files)
-├── autounattend.xml
-└── NitroWin/
-    ├── NitroWin.exe
-    └── Configuration/
-        ├── (optional, not included by default) Apps.yml
-        └── (optional, not included by default) Configuration.yml
-```
+    ```text
+    D: (or whatever your installation media is)/
+    ├── (Windows setup files)
+    ├── autounattend.xml
+    └── NitroWin/
+        ├── NitroWin.exe
+        └── Configuration/
+            ├── (optional, not included by default) Apps.yml
+            └── (optional, not included by default) Configuration.yml
+    ```
 
 3. Install Windows as usual.
 
