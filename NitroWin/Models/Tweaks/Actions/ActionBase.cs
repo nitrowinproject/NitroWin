@@ -14,7 +14,11 @@ public abstract class ActionBase {
         if ((!Platforms.Mobile && PlatformHelper.IsMobile()) || (!Platforms.Desktop && !PlatformHelper.IsMobile()))
             return 0;
 
-        return await ApplyAsyncCore().WaitAsync(TimeSpan.FromSeconds(Timeout));
+        try {
+            return await ApplyAsyncCore().WaitAsync(TimeSpan.FromSeconds(Timeout));
+        } catch (OperationCanceledException) {
+            throw new TimeoutException($"Action timed out after {Timeout} seconds");
+        }
     }
 
     protected abstract Task<int> ApplyAsyncCore();
