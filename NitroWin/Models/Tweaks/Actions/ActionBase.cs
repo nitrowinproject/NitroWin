@@ -17,7 +17,7 @@ public abstract class ActionBase {
         try {
             return await ApplyAsyncCore().WaitAsync(TimeSpan.FromSeconds(Timeout));
         } catch (OperationCanceledException) {
-            throw new TimeoutException($"Action timed out after {Timeout} seconds");
+            throw new TimeoutException($"Action timed out after {Timeout} seconds.");
         }
     }
 
