@@ -116,8 +116,13 @@ try {
     if (!options.NoTweaks)
         await tweakService.ApplyTweaksAsync();
 } catch (Exception ex) {
-    var logService = AppHost.Services.GetRequiredService<LogService>();
-    logService.CriticalError(ex);
+    try {
+        var logService = AppHost.Services.GetRequiredService<LogService>();
+        logService.CriticalError(ex);
+    } catch {
+        Console.WriteLine($"FATAL ERROR: {ex.Message}");
+    }
+
     Environment.Exit(1);
 } finally {
     await AppHost.StopAsync();

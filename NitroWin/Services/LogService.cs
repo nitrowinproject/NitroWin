@@ -48,6 +48,10 @@ public sealed class LogService(ResourceManager resourceManager, ILogger<LogServi
         LogResource(LogLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
             ? "Log_NoAppInstallerConfigFound" : "Log_NoConfigFound");
 
+    internal void ConfigError<T>(Exception exception) where T : ConfigBase =>
+        LogResource(LogLevel.Error, typeof(T) == typeof(AppInstallerConfig)
+            ? "Log_AppInstallerConfigError" : "Log_ConfigError", exception.Message);
+
     internal void InstallingApps() =>
         LogResource(LogLevel.Information, "Log_InstallingApps");
 

@@ -20,8 +20,8 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
         try {
             var content = await File.ReadAllTextAsync(path);
             return deserializer.Deserialize<Config>(content);
-        } catch {
-            logService.NoConfigFound<Config>();
+        } catch (Exception ex) {
+            logService.ConfigError<Config>(ex);
             return new Config();
         }
     }
@@ -39,8 +39,8 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
         try {
             var content = await File.ReadAllTextAsync(path);
             return deserializer.Deserialize<AppInstallerConfig>(content);
-        } catch {
-            logService.NoConfigFound<AppInstallerConfig>();
+        } catch (Exception ex) {
+            logService.ConfigError<AppInstallerConfig>(ex);
             return new AppInstallerConfig();
         }
     }
