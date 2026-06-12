@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish
         run: >
-          dotnet publish NitroWin.slnx
+          dotnet publish NitroWin/NitroWin.csproj
           --configuration Release
           --runtime ${{ matrix.runtime }}
           --output ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
