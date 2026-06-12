@@ -25,7 +25,7 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 ## :books: Usage
 
 > [!CAUTION]
-> Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies.
+> Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies. Windows IoT Enterprise LTSC 2024 is recommended.
 
 > [!TIP]
 > Check out the [documentation](docs) if you have any questions.
