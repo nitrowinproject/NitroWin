@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NitroWin.Factories;
 using NitroWin.Models.Apps;
 using NitroWin.Models.Tweaks.Actions;
 using NitroWin.Services;
@@ -31,6 +32,7 @@ var AppHost = Host.CreateDefaultBuilder()
 
         services.AddSingleton(_ => new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .WithObjectFactory(new ServiceProviderObjectFactory(services.BuildServiceProvider()))
             .WithTagMapping("!choco:", typeof(ChocolateyApp))
             .WithTagMapping("!web:", typeof(WebApp))
             .WithTagMapping("!winget:", typeof(WingetApp))
