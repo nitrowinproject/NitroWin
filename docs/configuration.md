@@ -1,0 +1,60 @@
+# :wrench: Configuring NitroWin
+
+To configure NitroWin, there are two configuration files. Make sure they are named and placed **exactly** like the file structure below:
+
+```text
+    D:/
+    ├── ...
+    └── NitroWin/
+        ├── NitroWin.exe
+        └── Configuration/
+            ├── Apps.yml <= Configure automatic app installation
+            └── Config.yml <= Configure NitroWin itself
+```
+
+A good place to start are the default configuration files located [here](../dist/NitroWin/Configuration).
+
+## :package: Apps.yml
+
+This (not recommended) example configuration shows all of the options NitroWin has to offer:
+
+```yaml
+---
+name: My Apps # Give your app list a name.
+author: nitrowinproject # It is recommended that you use your GitHub username here.
+apps:
+  - !web:
+    architectures: # You can block certain CPU architectures here. All app types support this.
+      x64: false
+    # arm64: false
+    arguments: # An optional list of arguments to pass to the installer or package manager. All app types support this.
+      - "/install"
+      - "/passive"
+      - "/norestart"
+    name: Microsoft Visual C++ v14 Redistributable (arm64) # The name that will be shown inside the NitroWin console and log. This is not supported with package manager based apps. For appx files use the '!webAppx:' type.
+    url: https://aka.ms/vc14/vc_redist.arm64.exe # Only supports exe files and direct download links. This is not supported with package manager based apps.
+
+  - !winget:
+    id: M2Team.NanaZip # Needs to be the exact WinGet package ID.
+
+  - !choco: # Same syntax as WinGet apps
+    id: brave
+```
+
+If no valid `Apps.yml` file is found, no apps will be installed.
+
+## :nut_and_bolt: Config.yml
+
+This example configuration shows all the options that are available right now:
+
+```yaml
+---
+name: My Config # Give your configuration a name.
+author: nitrowinproject # It is recommended that you use your GitHub username here.
+options:
+  installWinget: ifNeeded # Available options: ifNeeded (default), always, never.
+  installChocolatey: ifNeeded # Available options: ifNeeded (default), always, never.
+  tweakUrl: "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/main.zip" # Feel free to fork the Tweaks repository and change this if you'd like.
+```
+
+If no valid `Config.yml` file is found, the [default configuration](../dist/NitroWin/Configuration/Config.yml) will be used.
