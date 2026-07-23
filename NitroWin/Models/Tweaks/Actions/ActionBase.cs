@@ -24,5 +24,5 @@ public abstract class ActionBase {
         }
     }
 
-    protected abstract Task<int> ApplyAsyncCore(CancellationToken cancellationToken = default);
+    protected abstract Task<int> ApplyAsyncCore(CancellationToken cancellationToken);
 }

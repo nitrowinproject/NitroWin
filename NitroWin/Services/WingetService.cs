@@ -12,7 +12,7 @@ public sealed class WingetService(ConfigService configService, ExtractionService
         private readonly DownloaderService _downloaderService = downloaderService;
         private readonly LogService _logService = logService;
 
-        private async Task InstallDependenciesAsync(CancellationToken cancellationToken = default) {
+        private async Task InstallDependenciesAsync(CancellationToken cancellationToken) {
             var depsPath = Path.Join("Downloads", "DesktopAppInstaller_Dependencies");
             var depsArchitecture = RuntimeInformation.ProcessArchitecture switch {
                 Architecture.Arm64 => "arm64",
@@ -28,7 +28,7 @@ public sealed class WingetService(ConfigService configService, ExtractionService
                 await app.InstallAsync(cancellationToken);
         }
 
-        protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
+        protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
             await InstallDependenciesAsync(cancellationToken);
 
             await base.InstallCoreAsync(cancellationToken);

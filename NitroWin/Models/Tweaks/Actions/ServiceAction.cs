@@ -8,7 +8,7 @@ public sealed class ServiceAction : ActionBase {
     public required string Name { get; set; }
     public required ServiceOperation Operation { get; set; }
 
-    protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken = default) {
+    protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         switch (Operation) {
             case ServiceOperation.Delete:
                 return await ProcessHelper.StartProcessAsync("sc.exe", $"delete {Name}", true, RunAs, cancellationToken);

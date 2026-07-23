@@ -21,7 +21,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
             await ApplyTweakAsync(tweak, cancellationToken);
     }
 
-    private async Task DownloadTweaksAsync(CancellationToken cancellationToken = default) {
+    private async Task DownloadTweaksAsync(CancellationToken cancellationToken) {
         if (_config is null)
             throw new InvalidOperationException("Config has not been initialized.");
 
@@ -31,7 +31,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         await extractionService.ExtractZipFile(tweaksArchive, TweakPath, cancellationToken);
     }
 
-    private async Task<List<Tweak>> ParseTweaksAsync(CancellationToken cancellationToken = default) {
+    private async Task<List<Tweak>> ParseTweaksAsync(CancellationToken cancellationToken) {
         var tweaks = new List<Tweak>();
 
         if (!Directory.Exists(TweakPath))
@@ -52,7 +52,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         return tweaks;
     }
 
-    private async Task ApplyTweakAsync(Tweak tweak, CancellationToken cancellationToken = default) {
+    private async Task ApplyTweakAsync(Tweak tweak, CancellationToken cancellationToken) {
         logService.ApplyingTweak(tweak);
 
         foreach (var action in tweak.Actions)
@@ -61,7 +61,7 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         logService.AppliedTweak(tweak);
     }
 
-    private static async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken = default) {
+    private static async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken) {
         int returnCode;
 
         try {

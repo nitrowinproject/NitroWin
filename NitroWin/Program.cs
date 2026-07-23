@@ -75,22 +75,20 @@ var AppHost = Host.CreateDefaultBuilder()
 try {
     await AppHost.StartAsync();
 
+    var applicationLifetime = AppHost.Services.GetRequiredService<IHostApplicationLifetime>();
+
+    if (applicationLifetime.ApplicationStopping.IsCancellationRequested)
+        return;
+
     var configService = AppHost.Services.GetRequiredService<ConfigService>();
     var logService = AppHost.Services.GetRequiredService<LogService>();
     var commandLineService = AppHost.Services.GetRequiredService<CommandLineService>();
     var tweakService = AppHost.Services.GetRequiredService<TweakService>();
     var wingetService = AppHost.Services.GetRequiredService<WingetService>();
     var chocolateyService = AppHost.Services.GetRequiredService<ChocolateyService>();
-    var applicationLifetime = AppHost.Services.GetRequiredService<IHostApplicationLifetime>();
 
     commandLineService.WriteBranding();
     var options = commandLineService.ParseArguments(args);
-
-    if (applicationLifetime.ApplicationStopping.IsCancellationRequested) {
-        await AppHost.StopAsync();
-        AppHost.Dispose();
-        return;
-    }
 
     logService.CommandLineArguments(args);
 

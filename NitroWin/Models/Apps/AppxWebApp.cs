@@ -7,7 +7,7 @@ public class AppxWebApp(LogService logService, DownloaderService downloaderServi
     public string? Name { get; set; }
     public required string Url { get; set; }
 
-    protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
+    protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
         var path = await downloaderService.DownloadFileAsync(Url, "Downloads", cancellationToken: cancellationToken);
 
         await ProcessHelper.StartProcessAsync(

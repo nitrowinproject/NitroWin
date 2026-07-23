@@ -34,7 +34,7 @@ internal static class ProcessHelper {
         }
     }
 
-    private static async Task<int> RunAsTrustedInstallerAsync(string filePath, string? arguments, CancellationToken cancellationToken = default) {
+    private static async Task<int> RunAsTrustedInstallerAsync(string filePath, string? arguments, CancellationToken cancellationToken) {
         var taskName = "NitroWinTweak_" + Guid.NewGuid().ToString("N");
 
         using TaskService ts = new();

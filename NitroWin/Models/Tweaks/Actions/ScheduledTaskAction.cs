@@ -7,7 +7,7 @@ public sealed class ScheduledTaskAction : ActionBase {
     public required string Path { get; set; }
     public required ScheduledTaskOperation Operation { get; set; }
 
-    protected override Task<int> ApplyAsyncCore(CancellationToken cancellationToken = default) {
+    protected override Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         using var ts = new TaskService();
 
         var task = ts.GetTask(Path) ?? throw new NullReferenceException();

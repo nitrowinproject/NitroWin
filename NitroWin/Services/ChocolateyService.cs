@@ -7,7 +7,7 @@ namespace NitroWin.Services;
 
 public sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
     private sealed class ChocolateyInstallerApp(LogService logService, DownloaderService downloaderService) : WebApp(logService, downloaderService) {
-        protected override async Task InstallCoreAsync(CancellationToken cancellationToken = default) {
+        protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
             await ProcessHelper.StartProcessAsync(
                 "powershell.exe",
                 $"-NoProfile -ExecutionPolicy Bypass -Command \"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('{Url}'))\"",
