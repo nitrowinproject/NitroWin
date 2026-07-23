@@ -61,7 +61,11 @@ public sealed class WingetService(ConfigService configService, ExtractionService
         await ProcessHelper.IsAppAvailable("winget.exe", "--version", cancellationToken);
 
     internal override async Task InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default) =>
-        await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {id} {string.Join(" ", args ?? [])} --accept-package-agreements --accept-source-agreements", cancellationToken: cancellationToken);
+        await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {id} {string.Join(" ", args ?? [])} --exact --accept-package-agreements --accept-source-agreements", cancellationToken: cancellationToken);
+
+    internal override async Task InstallAppBundleAsync(string fileName, string[]? args, CancellationToken cancellationToken = default) =>
+        await ProcessHelper.StartProcessAsync("winget.exe", $"import --import-file {Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            "Configuration", "Bundles", fileName)} {string.Join(" ", args ?? [])} --accept-package-agreements --accept-source-agreements", cancellationToken: cancellationToken);
 
     public async Task StartAsync(CancellationToken cancellationToken) {
         _config = await configService.GetAsync(cancellationToken);

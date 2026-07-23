@@ -9,4 +9,5 @@ public abstract class PackageManagerServiceBase {
     internal abstract Task<bool> IsInstalledAsync(CancellationToken cancellationToken = default);
 
     internal abstract Task InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default);
+    internal abstract Task InstallAppBundleAsync(string fileName, string[]? args, CancellationToken cancellationToken = default);
 }

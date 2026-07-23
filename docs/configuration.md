@@ -20,8 +20,8 @@ This (not recommended) example configuration shows all of the options NitroWin h
 
 ```yaml
 ---
-name: My Apps # Choose an appropriate name for your app list.
-author: nitrowinproject # It is recommended that you use your GitHub username here.
+name: My Apps # Choose an appropriate name for your app list. This is optional.
+author: nitrowinproject # It is recommended that you use your GitHub username here. This is optional.
 apps:
   - !web: # Check out all the supported app types below.
     architectures: # You can block certain CPU architectures here. All app types support this.
@@ -37,8 +37,14 @@ apps:
   - !winget:
     id: M2Team.NanaZip # Needs to be the exact WinGet package ID.
 
-  - !choco: # Same syntax as WinGet apps
+  - !choco: # Same syntax as WinGet apps.
     id: brave
+
+  - !wingetBundle:
+    fileName: MyAwesomeWinGetBundle.json # Located under `Configuration/Bundles`.
+
+  - !chocoBundle: # Same syntax as WinGet bundle.
+    fileName: packages.config # Located under `Configuration/Bundles`.
 ```
 
 If no valid `Apps.yml` file is found, no apps will be installed.
@@ -49,6 +55,8 @@ Name | Description
 ---- | -----------
 `!choco:` | Chocolatey App
 `!winget:` | Winget App
+`!chocoBundle:` | File name of a Chocolatey bundle located in the `Bundles` folder inside the `Configuration` folder.
+`!wingetBundle:` | File name of a WinGet bundle located in the `Bundles` folder inside the `Configuration` folder.
 `!web:` | Executes a file that will be downloaded from the internet (only supports `.exe` files).
 `!webAppx:` | Same as web, but only supports files that are supported by the App Installer (e.g. `.appx` or `.msixbundle`).
 
@@ -58,8 +66,8 @@ This example configuration shows all the options that are available right now:
 
 ```yaml
 ---
-name: My Config # Give your configuration a name.
-author: nitrowinproject # It is recommended that you use your GitHub username here.
+name: My Config # Choose an appropriate name for your configuration. This is optional.
+author: nitrowinproject # It is recommended that you use your GitHub username here. This is optional.
 options:
   installWinget: ifNeeded # Available options: ifNeeded (default), always, never.
   installChocolatey: ifNeeded # Available options: ifNeeded (default), always, never.

@@ -44,6 +44,10 @@ public sealed class ChocolateyService(ConfigService configService, DownloaderSer
     internal override async Task InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default) =>
         await ProcessHelper.StartProcessAsync("choco.exe", $"install {id} --yes {string.Join(" ", args ?? [])}", cancellationToken: cancellationToken);
 
+    internal override async Task InstallAppBundleAsync(string fileName, string[]? args, CancellationToken cancellationToken = default) =>
+        await ProcessHelper.StartProcessAsync("choco.exe", $"install {Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            "Configuration", "Bundles", fileName)} --yes {string.Join(" ", args ?? [])}", cancellationToken: cancellationToken);
+
     public async Task StartAsync(CancellationToken cancellationToken) {
         _config = await configService.GetAsync(cancellationToken);
         _appInstallerConfig = await configService.GetAppInstallerAsync(cancellationToken);
