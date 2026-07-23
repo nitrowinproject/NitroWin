@@ -40,12 +40,13 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
     ├── autounattend.xml
     └── NitroWin/
         ├── NitroWin.exe
-        └── Configuration/
-            ├── (optional, not included by default) Apps.yml
-            └── (optional, not included by default) Config.yml
+        └── (optional) Configuration/
+            ├── (optional) Bundles/
+            ├── (optional) Apps.yml
+            └── (optional) Config.yml
     ```
 
-3. Install Windows as usual.
+3. Install Windows as usual. NitroWin should run automatically. If it doesn't, run it manually.
 
 4. (Optional, but highly recommended) Use [WinUtil](https://github.com/ChrisTitusTech/winutil) and [OOSU](https://www.oo-software.com/en/shutup10) for even better privacy.
 
