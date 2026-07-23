@@ -1,10 +1,10 @@
-# :hammer: Building NitroWin from source
+# :hammer_and_wrench: Building NitroWin from Source
 
-## Requirements
+## :exclamation: Requirements
 
 - .NET 10 SDK
 
-## Building
+## :hammer: Building
 
 1. Clone the NitroWin repository and navigate into it:
 

@@ -20,10 +20,10 @@ This (not recommended) example configuration shows all of the options NitroWin h
 
 ```yaml
 ---
-name: My Apps # Give your app list a name.
+name: My Apps # Choose an appropriate name for your app list.
 author: nitrowinproject # It is recommended that you use your GitHub username here.
 apps:
-  - !web:
+  - !web: # Check out all the supported app types below.
     architectures: # You can block certain CPU architectures here. All app types support this.
       x64: false
     # arm64: false
@@ -31,7 +31,7 @@ apps:
       - "/install"
       - "/passive"
       - "/norestart"
-    name: Microsoft Visual C++ v14 Redistributable (arm64) # The name that will be shown inside the NitroWin console and log. This is not supported with package manager based apps. For appx files use the '!webAppx:' type.
+    name: Microsoft Visual C++ v14 Redistributable (arm64) # The name that will be shown inside the NitroWin console and log. This is not supported with package manager based apps.
     url: https://aka.ms/vc14/vc_redist.arm64.exe # Only supports exe files and direct download links. This is not supported with package manager based apps.
 
   - !winget:
@@ -42,6 +42,15 @@ apps:
 ```
 
 If no valid `Apps.yml` file is found, no apps will be installed.
+
+### :white_check_mark: Supported App Types
+
+Name | Description
+---- | -----------
+`!choco:` | Chocolatey App
+`!winget:` | Winget App
+`!web:` | Executes a file that will be downloaded from the internet (only supports `.exe` files).
+`!webAppx:` | Same as web, but only supports files that are supported by the App Installer (e.g. `.appx` or `.msixbundle`).
 
 ## :nut_and_bolt: Config.yml
 

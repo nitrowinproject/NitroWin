@@ -1,4 +1,4 @@
-# Third-party projects
+# Third-Party Projects
 
 ## [Tweaks](https://github.com/nitrowinproject/Tweaks)
 
