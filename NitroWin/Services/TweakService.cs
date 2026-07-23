@@ -17,16 +17,8 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         logService.ApplyingTweaks();
         var tweaks = await ParseTweaksAsync(cancellationToken);
 
-        await Parallel.ForEachAsync(
-            tweaks,
-            new ParallelOptions { MaxDegreeOfParallelism = Math.Max(1, Environment.ProcessorCount / 2) },
-            async (tweak, ct) => {
-                try {
-                    await ApplyTweakAsync(tweak, ct);
-                } catch (Exception ex) {
-                    logService.TweakApplyError(tweak, ex);
-                }
-            });
+        foreach (var tweak in tweaks)
+            await ApplyTweakAsync(tweak, cancellationToken);
     }
 
     private async Task DownloadTweaksAsync(CancellationToken cancellationToken = default) {
