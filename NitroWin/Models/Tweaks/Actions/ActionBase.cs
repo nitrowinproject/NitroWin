@@ -11,7 +11,7 @@ public abstract class ActionBase {
     public int Timeout { get; set; } = 30;
 
     internal async Task<int> ApplyAsync(CancellationToken cancellationToken = default) {
-        if ((!Platforms.Mobile && PlatformHelper.IsMobile()) || (!Platforms.Desktop && !PlatformHelper.IsMobile()))
+        if ((!Platforms.Mobile && PlatformHelper.IsMobile()) || (!Platforms.Desktop && PlatformHelper.IsDesktop()))
             return 0;
 
         using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
