@@ -92,9 +92,13 @@ try {
 
     logService.CommandLineArguments(args);
 
-    while (!NetworkInterface.GetIsNetworkAvailable()) {
+    while (!NetworkInterface.GetIsNetworkAvailable() && !applicationLifetime.ApplicationStopping.IsCancellationRequested) {
         logService.NoNetworkError();
-        await Task.Delay(5000, applicationLifetime.ApplicationStopping);
+        try {
+            await Task.Delay(5000, applicationLifetime.ApplicationStopping);
+        } catch (OperationCanceledException) {
+            return;
+        }
     }
 
     var appInstallerConfig = await configService.GetAppInstallerAsync(applicationLifetime.ApplicationStopping);
