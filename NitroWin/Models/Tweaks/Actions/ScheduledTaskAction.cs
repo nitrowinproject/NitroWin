@@ -10,7 +10,7 @@ public sealed class ScheduledTaskAction : ActionBase {
     protected override Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         using var ts = new TaskService();
 
-        var task = ts.GetTask(Path) ?? throw new NullReferenceException();
+        var task = ts.GetTask(Path) ?? throw new InvalidOperationException("Task was not found.");
 
         switch (Operation) {
             case ScheduledTaskOperation.Disable:

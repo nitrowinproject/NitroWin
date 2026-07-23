@@ -94,7 +94,7 @@ try {
 
     while (!NetworkInterface.GetIsNetworkAvailable()) {
         logService.NoNetworkError();
-        await Task.Delay(5000);
+        await Task.Delay(5000, applicationLifetime.ApplicationStopping);
     }
 
     var appInstallerConfig = await configService.GetAppInstallerAsync(applicationLifetime.ApplicationStopping);

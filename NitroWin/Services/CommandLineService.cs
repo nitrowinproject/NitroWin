@@ -32,13 +32,13 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
     }
 
     internal CommandLineOptions ParseArguments(string[] args) {
-        if (args.Contains("-h") || args.Contains("--help")) {
+        if (args.Contains("-h", StringComparer.OrdinalIgnoreCase) || args.Contains("--help", StringComparer.OrdinalIgnoreCase)) {
             WriteHelp();
             lifetime.StopApplication();
             return new CommandLineOptions();
         }
 
-        if (args.Contains("-v") || args.Contains("--version")) {
+        if (args.Contains("-v", StringComparer.OrdinalIgnoreCase) || args.Contains("--version", StringComparer.OrdinalIgnoreCase)) {
             if (logger.IsEnabled(LogLevel.Information))
                 logger.LogInformation("{Version}", _version);
             lifetime.StopApplication();
@@ -46,8 +46,8 @@ internal sealed class CommandLineService(ResourceManager resourceManager, LogSer
         }
 
         return new CommandLineOptions() {
-            NoApps = args.Contains("-na") || args.Contains("--no-apps"),
-            NoTweaks = args.Contains("-nt") || args.Contains("--no-tweaks")
+            NoApps = args.Contains("-na", StringComparer.OrdinalIgnoreCase) || args.Contains("--no-apps", StringComparer.OrdinalIgnoreCase),
+            NoTweaks = args.Contains("-nt", StringComparer.OrdinalIgnoreCase) || args.Contains("--no-tweaks", StringComparer.OrdinalIgnoreCase)
         };
     }
 

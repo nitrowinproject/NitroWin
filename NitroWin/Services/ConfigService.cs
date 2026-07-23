@@ -23,7 +23,7 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
 
         try {
             var content = await File.ReadAllTextAsync(path, cancellationToken);
-            return deserializer.Deserialize<T>(content);
+            return deserializer.Deserialize<T>(content) ?? new T();
         } catch (Exception ex) {
             logService.ConfigError<T>(ex);
             return new T();

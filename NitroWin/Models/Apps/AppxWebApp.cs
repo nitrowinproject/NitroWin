@@ -8,7 +8,7 @@ public class AppxWebApp(LogService logService, DownloaderService downloaderServi
     public required string Url { get; set; }
 
     protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
-        var path = await downloaderService.DownloadFileAsync(Url, "Downloads", cancellationToken: cancellationToken);
+        var path = await downloaderService.DownloadFileAsync(Url, "Downloads", cancellationToken: cancellationToken) ?? throw new InvalidOperationException("Failed to download the Appx package.");
 
         await ProcessHelper.StartProcessAsync(
             "powershell.exe",
