@@ -176,7 +176,7 @@ insert_final_newline = false
 trim_trailing_whitespace = false
 
 # Xml config files
-[*.{props,targets,config,nuspec}]
+[*.{props,targets,config,nuspec,manifest}]
 indent_size = 2
 
 # Data serialization
