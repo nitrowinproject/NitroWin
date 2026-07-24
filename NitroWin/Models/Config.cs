@@ -1,5 +1,5 @@
 ﻿namespace NitroWin.Models;
 
-public sealed record Config : ConfigBase {
-    public Options Options { get; init; } = new();
+public sealed class Config : ConfigBase {
+    public Options Options { get; set; } = new();
 }

@@ -2,7 +2,7 @@
 
 namespace NitroWin.Models;
 
-public sealed record Options {
+public sealed class Options {
     public enum InstallOptions {
         IfNeeded,
         Always,
@@ -10,10 +10,10 @@ public sealed record Options {
     }
 
     [YamlMember(typeof(InstallOptions), Alias = "installWinget")]
-    public InstallOptions InstallWinget { get; init; } = InstallOptions.IfNeeded;
+    public InstallOptions InstallWinget { get; set; } = InstallOptions.IfNeeded;
 
     [YamlMember(typeof(InstallOptions), Alias = "installChocolatey")]
-    public InstallOptions InstallChocolatey { get; init; } = InstallOptions.IfNeeded;
+    public InstallOptions InstallChocolatey { get; set; } = InstallOptions.IfNeeded;
 
-    public string TweakUrl { get; init; } = "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/main.zip";
+    public string TweakUrl { get; set; } = "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/main.zip";
 }

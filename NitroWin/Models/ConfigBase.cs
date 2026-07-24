@@ -1,5 +1,6 @@
 ﻿namespace NitroWin.Models;
 
-public abstract record ConfigBase(
-    string? Name = null,
-    string? Author = null);
+public abstract class ConfigBase {
+    public string? Name { get; set; } = null;
+    public string? Author { get; set; } = null;
+}

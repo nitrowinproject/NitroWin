@@ -2,7 +2,8 @@
 
 namespace NitroWin.Models;
 
-public sealed record Tweak(
-    string Title,
-    List<ActionBase> Actions,
-    string? Description = null);
+public sealed class Tweak {
+    public required string Title { get; set; }
+    public string? Description { get; set; } = null;
+    public required List<ActionBase> Actions { get; set; }
+}

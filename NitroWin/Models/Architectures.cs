@@ -1,5 +1,6 @@
 ﻿namespace NitroWin.Models;
 
-public sealed record Architectures(
-    bool Arm64 = true,
-    bool X64 = true);
+public sealed class Architectures {
+    public bool Arm64 { get; set; } = true;
+    public bool X64 { get; set; } = true;
+}

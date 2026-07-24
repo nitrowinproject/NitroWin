@@ -1,5 +1,6 @@
 ﻿namespace NitroWin.Models;
 
-internal sealed record CommandLineOptions(
-    bool NoApps = false,
-    bool NoTweaks = false);
+internal sealed class CommandLineOptions {
+    internal bool NoApps { get; set; } = false;
+    internal bool NoTweaks { get; set; } = false;
+}
