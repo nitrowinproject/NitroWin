@@ -61,18 +61,31 @@ internal sealed class TweakService(LogService logService, ConfigService configSe
         logService.AppliedTweak(tweak);
     }
 
-    private static async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken) {
-        int returnCode;
+    private async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken) {
+        var returnCode = 0;
 
         try {
             returnCode = await action.ApplyAsync(cancellationToken);
-        } catch when (action.IgnoreErrors) {
+        } catch (Exception ex) {
+            logService.TweakApplyError(tweak, ex);
+
+            if (action.IgnoreErrors)
+                return;
+
             return;
         }
 
-        if (returnCode != 0)
-            throw new InvalidOperationException(
+        if (returnCode != 0) {
+            var ex = new InvalidOperationException(
                 $"{action.GetType().Name} from tweak '{tweak.Title}' returned exit code '{returnCode}'.");
+
+            logService.TweakApplyError(tweak, ex);
+
+            if (action.IgnoreErrors)
+                return;
+
+            return;
+        }
     }
 
     public async Task StartAsync(CancellationToken cancellationToken) =>
