@@ -30,7 +30,7 @@ public sealed class ChocolateyService(ConfigService configService, DownloaderSer
 
         if (_appInstallerConfig!.Apps is not null && _config!.Options.InstallChocolatey == Options.InstallOptions.IfNeeded) {
             foreach (var app in _appInstallerConfig.Apps) {
-                if (app is ChocolateyApp)
+                if (app is ChocolateyApp or ChocolateyBundleApp)
                     return true;
             }
         }

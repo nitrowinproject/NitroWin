@@ -71,8 +71,10 @@ public sealed class LogService(ResourceManager resourceManager, ILogger<LogServi
         AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), resourceManager.GetString("AppSource_Appx")!],
         AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), resourceManager.GetString("AppSource_AppxWeb")!],
         ChocolateyApp chocolateyApp => [chocolateyApp.Id, resourceManager.GetString("AppSource_Chocolatey")!],
+        ChocolateyBundleApp chocolateyBundleApp => [chocolateyBundleApp.FileName, resourceManager.GetString("AppSource_ChocolateyBundle")!],
         WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), resourceManager.GetString("AppSource_Web")!],
         WingetApp wingetApp => [wingetApp.Id, resourceManager.GetString("AppSource_Winget")!],
+        WingetBundleApp wingetBundleApp => [wingetBundleApp.FileName, resourceManager.GetString("AppSource_WingetBundle")!],
         _ => throw new NotImplementedException()
     };
 

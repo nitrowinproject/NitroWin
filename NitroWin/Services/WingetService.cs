@@ -49,7 +49,7 @@ public sealed class WingetService(ConfigService configService, ExtractionService
 
         if (_appInstallerConfig!.Apps is not null && _config!.Options.InstallWinget == Options.InstallOptions.IfNeeded) {
             foreach (var app in _appInstallerConfig.Apps) {
-                if (app is WingetApp)
+                if (app is WingetApp or WingetBundleApp)
                     return true;
             }
         }

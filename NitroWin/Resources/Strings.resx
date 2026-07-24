@@ -59,7 +59,10 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root"
+    xmlns=""
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -138,6 +141,9 @@
   <data name="AppSource_Winget" xml:space="preserve">
     <value>WinGet</value>
   </data>
+  <data name="AppSource_WingetBundle" xml:space="preserve">
+    <value>WinGet (Bundle)</value>
+  </data>
   <data name="Log_AppInstallError" xml:space="preserve">
     <value>Error while installing '{0}' via {1}: {2}</value>
   </data>
@@ -164,6 +170,9 @@
   </data>
   <data name="AppSource_Chocolatey" xml:space="preserve">
     <value>Chocolatey</value>
+  </data>
+  <data name="AppSource_ChocolateyBundle" xml:space="preserve">
+    <value>Chocolatey (Bundle)</value>
   </data>
   <data name="Log_NoConfigFound" xml:space="preserve">
     <value>No config file found. Using default config...</value>
