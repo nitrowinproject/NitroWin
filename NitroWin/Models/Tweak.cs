@@ -3,7 +3,7 @@
 namespace NitroWin.Models;
 
 public sealed class Tweak {
-    public required string Title { get; set; }
-    public string? Description { get; set; } = null;
-    public required List<ActionBase> Actions { get; set; }
+    public required string Title { get; init; }
+    public string? Description { get; init; } = null;
+    public required List<ActionBase> Actions { get; init; }
 }

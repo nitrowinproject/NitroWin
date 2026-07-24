@@ -5,8 +5,8 @@ using NitroWin.Models.Tweaks.Actions.Operations;
 namespace NitroWin.Models.Tweaks.Actions;
 
 public sealed class ServiceAction : ActionBase {
-    public required string Name { get; set; }
-    public required ServiceOperation Operation { get; set; }
+    public required string Name { get; init; }
+    public required ServiceOperation Operation { get; init; }
 
     protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         switch (Operation) {

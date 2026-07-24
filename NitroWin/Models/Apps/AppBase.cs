@@ -4,8 +4,8 @@ using NitroWin.Services;
 namespace NitroWin.Models.Apps;
 
 public abstract class AppBase(LogService logService) {
-    public List<string>? Arguments { get; set; }
-    public Architectures Architectures { get; set; } = new();
+    public List<string>? Arguments { get; init; }
+    public Architectures Architectures { get; init; } = new();
 
     internal async Task InstallAsync(CancellationToken cancellationToken = default) {
         if (!IsSupportedArchitecture()) {

@@ -4,8 +4,8 @@ using NitroWin.Models.Tweaks.Actions.Operations;
 namespace NitroWin.Models.Tweaks.Actions;
 
 public sealed class ScheduledTaskAction : ActionBase {
-    public required string Path { get; set; }
-    public required ScheduledTaskOperation Operation { get; set; }
+    public required string Path { get; init; }
+    public required ScheduledTaskOperation Operation { get; init; }
 
     protected override Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         using var ts = new TaskService();

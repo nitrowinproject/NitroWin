@@ -5,11 +5,11 @@ using NitroWin.Models.Tweaks.Actions.Operations;
 namespace NitroWin.Models.Tweaks.Actions;
 
 public sealed class RegistryValueAction : ActionBase {
-    public required string Path { get; set; }
-    public required string Value { get; set; }
-    public string? Data { get; set; }
-    public RegistryValueType? Type { get; set; }
-    public RegistryValueOperation Operation { get; set; } = RegistryValueOperation.Modify;
+    public required string Path { get; init; }
+    public required string Value { get; init; }
+    public string? Data { get; init; }
+    public RegistryValueType? Type { get; init; }
+    public RegistryValueOperation Operation { get; init; } = RegistryValueOperation.Modify;
 
     private void ApplyAsCurrentUserElevated() {
         var parts = Path.Split('\\').ToList();

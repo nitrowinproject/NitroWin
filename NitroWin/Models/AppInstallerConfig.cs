@@ -3,5 +3,5 @@
 namespace NitroWin.Models;
 
 public sealed class AppInstallerConfig : ConfigBase {
-    public List<AppBase>? Apps { get; set; } = null;
+    public List<AppBase>? Apps { get; init; } = null;
 }
