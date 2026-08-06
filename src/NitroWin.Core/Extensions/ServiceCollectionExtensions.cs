@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions {
         services.AddSingleton<LogService>();
 
         services.AddSingleton(_ => new ResourceManager(
-            "NitroWin.Resources.Strings", Assembly.GetExecutingAssembly()));
+            "NitroWin.Core.Resources.Strings", Assembly.GetExecutingAssembly()));
 
         services.AddSingleton(_ => new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)

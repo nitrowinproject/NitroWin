@@ -3,7 +3,6 @@ using System.Resources;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NitroWin.Models;
-using NitroWin.Core.Services;
 
 namespace NitroWin.Services;
 

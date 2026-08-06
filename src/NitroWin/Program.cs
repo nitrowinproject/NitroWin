@@ -19,6 +19,8 @@ var AppHost = Host.CreateDefaultBuilder()
             .WriteTo.Console(outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}")
             .WriteTo.File(Path.Join("Logs", "NitroWin.txt"), rollingInterval: RollingInterval.Minute, restrictedToMinimumLevel: LogEventLevel.Debug));
 
+        services.AddSingleton<CommandLineService>();
+
         services.AddNitroWin();
     })
     .Build();
