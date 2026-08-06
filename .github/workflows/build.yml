@@ -5,7 +5,7 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'NitroWin/**'
+      - 'src/**'
       - '.github/workflows/build.yml'
       - 'global.json'
 
@@ -19,9 +19,6 @@ jobs:
           - win-x64
           - win-arm64
 
-    env:
-      PUBLISH_DIR: publish
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -31,15 +28,28 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Publish
+      - name: Publish NitroWin
         run: >
-          dotnet publish NitroWin/NitroWin.csproj
+          dotnet publish src/NitroWin/NitroWin.csproj
           --configuration Release
           --runtime ${{ matrix.runtime }}
-          --output ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+          --output publish/NitroWin-${{ matrix.runtime }}
 
-      - name: Upload binaries
+      - name: Upload NitroWin binaries
         uses: actions/upload-artifact@v7
         with:
           name: NitroWin-${{ matrix.runtime }}
-          path: ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+          path: publish/NitroWin-${{ matrix.runtime }}
+
+      - name: Publish NitroWin Control Panel
+        run: >
+          dotnet publish src/NitroWin.ControlPanel/NitroWin.ControlPanel
+          --configuration Release
+          --runtime ${{ matrix.runtime }}
+          --output publish/NitroWin.ControlPanel-${{ matrix.runtime }}
+
+      - name: Upload NitroWin Control Panel binaries
+        uses: actions/upload-artifact@v7
+        with:
+          name: NitroWin.ControlPanel-${{ matrix.runtime }}
+          path: publish/NitroWin.ControlPanel-${{ matrix.runtime }}
