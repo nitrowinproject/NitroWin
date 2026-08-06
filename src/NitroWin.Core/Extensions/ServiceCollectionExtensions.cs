@@ -38,12 +38,10 @@ public static class ServiceCollectionExtensions {
 
         services.AddSingleton<ConfigService>();
 
-        services.AddHttpClient("Default", client => {
+        services.AddHttpClient<DownloaderService>(client => {
             client.DefaultRequestHeaders.UserAgent.Add(
                 new ProductInfoHeaderValue(
-                    "NitroWin",
-                    Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                )
+                    "NitroWin", Assembly.GetExecutingAssembly().GetName().Version?.ToString())
             );
         });
         services.AddSingleton<DownloaderService>();
