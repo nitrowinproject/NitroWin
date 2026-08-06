@@ -31,43 +31,18 @@ try {
     if (applicationLifetime.ApplicationStopping.IsCancellationRequested)
         return;
 
-    var configService = AppHost.Services.GetRequiredService<ConfigService>();
-    var logService = AppHost.Services.GetRequiredService<LogService>();
     var commandLineService = AppHost.Services.GetRequiredService<CommandLineService>();
     var tweakService = AppHost.Services.GetRequiredService<TweakService>();
-    var wingetService = AppHost.Services.GetRequiredService<WingetService>();
-    var chocolateyService = AppHost.Services.GetRequiredService<ChocolateyService>();
+    var nitroWinService = AppHost.Services.GetRequiredService<NitroWinService>();
 
-    commandLineService.WriteBranding();
+    nitroWinService.WriteBranding(args);
+
+    await nitroWinService.WaitForNetworkAsync(true, applicationLifetime.ApplicationStopping);
+
     var options = commandLineService.ParseArguments(args);
 
-    logService.CommandLineArguments(args);
-
-    while (!NetworkInterface.GetIsNetworkAvailable() && !applicationLifetime.ApplicationStopping.IsCancellationRequested) {
-        logService.NoNetworkError();
-        try {
-            await Task.Delay(5000, applicationLifetime.ApplicationStopping);
-        } catch (OperationCanceledException) {
-            return;
-        }
-    }
-
-    var appInstallerConfig = await configService.GetAppInstallerAsync(applicationLifetime.ApplicationStopping);
-
-    if (!options.NoApps) {
-        if (chocolateyService.IsInstallationNeeded() && !await chocolateyService.IsInstalledAsync(applicationLifetime.ApplicationStopping))
-            await chocolateyService.InstallAsync(applicationLifetime.ApplicationStopping);
-
-        if (wingetService.IsInstallationNeeded() && !await wingetService.IsInstalledAsync(applicationLifetime.ApplicationStopping))
-            await wingetService.InstallAsync(applicationLifetime.ApplicationStopping);
-
-        if (appInstallerConfig.Apps is not null) {
-            logService.InstallingApps();
-
-            foreach (var app in appInstallerConfig.Apps)
-                await app.InstallAsync(applicationLifetime.ApplicationStopping);
-        }
-    }
+    if (!options.NoApps)
+        await nitroWinService.InstallAppsAsync(applicationLifetime.ApplicationStopping);
 
     if (!options.NoTweaks)
         await tweakService.ApplyTweaksAsync(applicationLifetime.ApplicationStopping);

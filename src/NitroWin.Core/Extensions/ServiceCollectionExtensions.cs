@@ -58,6 +58,8 @@ public static class ServiceCollectionExtensions {
         services.AddSingleton<WingetService>();
         services.AddHostedService(sp => sp.GetRequiredService<WingetService>());
 
+        services.AddSingleton<NitroWinService>();
+
         return services;
     }
 }
