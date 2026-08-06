@@ -9,18 +9,24 @@ public sealed class LogService(ResourceManager resourceManager, ILogger<LogServi
     internal void InstallingApp(AppBase app) => LogResource(
         LogLevel.Information, "Log_InstallingApp", GetAppParameters(app));
 
+#if DEBUG
     internal void NotInstallingApp(AppBase app) => LogResource(
         LogLevel.Debug, "Log_NotInstallingApp", GetAppParameters(app));
+#endif
 
     internal void AppInstallError(AppBase app, Exception exception) => LogResource(
         LogLevel.Error, "Log_AppInstallError", [.. GetAppParameters(app),
             exception.Message]);
 
+#if DEBUG
     internal void ApplyingTweak(Tweak tweak) =>
         LogResource(LogLevel.Debug, "Log_ApplyingTweak", tweak.Title);
+#endif
 
+#if DEBUG
     internal void AppliedTweak(Tweak tweak) =>
         LogResource(LogLevel.Debug, "Log_AppliedTweak", tweak.Title);
+#endif
 
     internal void TweakApplyError(Tweak tweak, Exception exception) => LogResource(
         LogLevel.Error, "Log_TweakApplyError", tweak.Title,
@@ -41,8 +47,10 @@ public sealed class LogService(ResourceManager resourceManager, ILogger<LogServi
     internal void NoNetworkError() =>
         LogResource(LogLevel.Error, "Log_NoNetwork");
 
+#if DEBUG
     internal void CommandLineArguments(string[] args) =>
         LogResource(LogLevel.Debug, "Log_CommandLineArguments", string.Join(", ", args));
+#endif
 
     internal void NoConfigFound<T>() where T : ConfigBase =>
         LogResource(LogLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
@@ -55,8 +63,10 @@ public sealed class LogService(ResourceManager resourceManager, ILogger<LogServi
     internal void InstallingApps() =>
         LogResource(LogLevel.Information, "Log_InstallingApps");
 
+#if DEBUG
     internal void HelloFrom(string app, string version) =>
         LogResource(LogLevel.Debug, "Log_HelloFrom", app, version);
+#endif
 
     internal void DownloadingTweaks() =>
         LogResource(LogLevel.Information, "Log_DownloadingTweaks");

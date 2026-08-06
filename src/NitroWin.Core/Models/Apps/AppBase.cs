@@ -9,7 +9,9 @@ public abstract class AppBase(LogService logService) {
 
     public async Task InstallAsync(CancellationToken cancellationToken = default) {
         if (!IsSupportedArchitecture()) {
+#if DEBUG
             logService.NotInstallingApp(this);
+#endif
             return;
         }
 

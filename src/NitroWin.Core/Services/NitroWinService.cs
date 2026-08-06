@@ -60,9 +60,11 @@ public sealed class NitroWinService(ChocolateyService chocolateyService, WingetS
         foreach (var line in branding)
             logger.LogInformation("{Line}", line);
 
+#if DEBUG
         logService.HelloFrom(_name, _version ?? resourceManager.GetString("CommandLine_UnknownVersion")!);
 
         if (args is not null)
             logService.CommandLineArguments(args);
+#endif
     }
 }

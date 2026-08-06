@@ -52,12 +52,16 @@ public sealed class TweakService(LogService logService, ConfigService configServ
     }
 
     private async Task ApplyTweakAsync(Tweak tweak, CancellationToken cancellationToken) {
+#if DEBUG
         logService.ApplyingTweak(tweak);
+#endif
 
         foreach (var action in tweak.Actions)
             await ApplyActionAsync(tweak, action, cancellationToken);
 
+#if DEBUG
         logService.AppliedTweak(tweak);
+#endif
     }
 
     private async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken) {
