@@ -17,10 +17,10 @@
 
     ```bash
     # x64
-    dotnet publish NitroWin/NitroWin.csproj -c Release -r win-x64
+    dotnet publish -c Release -r win-x64 -o publish/
 
     # arm64
-    dotnet publish NitroWin/NitroWin.csproj -c Release -r win-arm64
+    dotnet publish -c Release -r win-arm64 -o publish/
     ```
 
-The NitroWin binary will be located under `bin/Release/win-x64/publish/NitroWin.exe` or `bin/Release/win-arm64/publish/NitroWin.exe` depending on which CPU architecture NitroWin was built for.
+The NitroWin binary will be located under `publish/NitroWin.exe` and the NitroWin Control Panel will be located under `publish/NitroWin.ControlPanel.exe`.
