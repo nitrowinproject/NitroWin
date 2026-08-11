@@ -1,8 +1,8 @@
-namespace NitroWin.Cli.Helpers;
+namespace NitroWin.Helpers;
 
 internal static class Paths {
     internal static string NitroWinPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+        AppDomain.CurrentDomain.BaseDirectory,
         "NitroWin");
 
     internal static string DownloadPath = Path.Combine(

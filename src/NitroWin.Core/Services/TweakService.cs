@@ -5,16 +5,9 @@ using YamlDotNet.Serialization;
 namespace NitroWin.Core.Services;
 
 public sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer) {
-    private const string TweakPath = "Tweaks";
-
     private Config? _config;
 
-    public async Task ApplyTweaksAsync(string tweakPath = TweakPath, bool update = true, CancellationToken cancellationToken = default) {
-        if (update) {
-            logService.DownloadingTweaks();
-            await DownloadTweaksAsync(tweakPath, cancellationToken);
-        }
-
+    public async Task ApplyTweaksAsync(string tweakPath, CancellationToken cancellationToken = default) {
         logService.ApplyingTweaks();
         var tweaks = await ParseTweaksAsync(tweakPath, cancellationToken);
 
@@ -22,11 +15,11 @@ public sealed class TweakService(LogService logService, ConfigService configServ
             await ApplyTweakAsync(tweak, cancellationToken);
     }
 
-    public async Task DownloadTweaksAsync(string tweakPath = TweakPath, CancellationToken cancellationToken = default) {
+    public async Task DownloadTweaksAsync(string tweakPath, string downloadPath, CancellationToken cancellationToken = default) {
         _config ??= await configService.GetAsync(cancellationToken)
             ?? throw new InvalidOperationException("Config has not been initialized.");
 
-        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, "Downloads", cancellationToken: cancellationToken)
+        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, downloadPath, cancellationToken: cancellationToken)
             ?? throw new InvalidOperationException("Failed to download tweaks.");
 
         await extractionService.ExtractZipFile(tweaksArchive, tweakPath, cancellationToken);

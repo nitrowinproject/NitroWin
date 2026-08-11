@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Hosting;
 using NitroWin.Core.Extensions;
 using NitroWin.Core.Services;
+using NitroWin.Helpers;
 using NitroWin.Services;
 using Serilog;
 
@@ -44,8 +45,11 @@ try {
     if (!options.NoApps)
         await nitroWinService.InstallAppsAsync(applicationLifetime.ApplicationStopping);
 
-    if (!options.NoTweaks)
-        await tweakService.ApplyTweaksAsync(cancellationToken: applicationLifetime.ApplicationStopping);
+    if (!options.NoTweaks) {
+        await tweakService.DownloadTweaksAsync(Paths.TweakPath, Paths.DownloadPath, applicationLifetime.ApplicationStopping);
+        await tweakService.ApplyTweaksAsync(Paths.TweakPath, applicationLifetime.ApplicationStopping);
+    }
+
 } catch (Exception ex) {
     Console.WriteLine($"FATAL ERROR: {ex.Message}");
     Environment.Exit(1);
