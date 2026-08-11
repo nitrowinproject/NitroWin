@@ -45,7 +45,7 @@ try {
         await nitroWinService.InstallAppsAsync(applicationLifetime.ApplicationStopping);
 
     if (!options.NoTweaks)
-        await tweakService.ApplyTweaksAsync(applicationLifetime.ApplicationStopping);
+        await tweakService.ApplyTweaksAsync(cancellationToken: applicationLifetime.ApplicationStopping);
 } catch (Exception ex) {
     Console.WriteLine($"FATAL ERROR: {ex.Message}");
     Environment.Exit(1);

@@ -9,34 +9,36 @@ public sealed class TweakService(LogService logService, ConfigService configServ
 
     private Config? _config;
 
-    public async Task ApplyTweaksAsync(CancellationToken cancellationToken = default) {
-        logService.DownloadingTweaks();
-        await DownloadTweaksAsync(cancellationToken);
+    public async Task ApplyTweaksAsync(string tweakPath = TweakPath, bool update = true, CancellationToken cancellationToken = default) {
+        if (update) {
+            logService.DownloadingTweaks();
+            await DownloadTweaksAsync(tweakPath, cancellationToken);
+        }
 
         logService.ApplyingTweaks();
-        var tweaks = await ParseTweaksAsync(cancellationToken);
+        var tweaks = await ParseTweaksAsync(tweakPath, cancellationToken);
 
         foreach (var tweak in tweaks)
             await ApplyTweakAsync(tweak, cancellationToken);
     }
 
-    private async Task DownloadTweaksAsync(CancellationToken cancellationToken) {
+    public async Task DownloadTweaksAsync(string tweakPath = TweakPath, CancellationToken cancellationToken = default) {
         _config ??= await configService.GetAsync(cancellationToken)
             ?? throw new InvalidOperationException("Config has not been initialized.");
 
         var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, "Downloads", cancellationToken: cancellationToken)
             ?? throw new InvalidOperationException("Failed to download tweaks.");
 
-        await extractionService.ExtractZipFile(tweaksArchive, TweakPath, cancellationToken);
+        await extractionService.ExtractZipFile(tweaksArchive, tweakPath, cancellationToken);
     }
 
-    private async Task<List<Tweak>> ParseTweaksAsync(CancellationToken cancellationToken) {
+    private async Task<List<Tweak>> ParseTweaksAsync(string tweakPath, CancellationToken cancellationToken) {
         var tweaks = new List<Tweak>();
 
-        if (!Directory.Exists(TweakPath))
-            throw new InvalidOperationException($"Tweak directory '{TweakPath}' not found after extraction.");
+        if (!Directory.Exists(tweakPath))
+            throw new InvalidOperationException($"Tweak directory '{tweakPath}' was not found.");
 
-        foreach (var file in Directory.EnumerateFiles(TweakPath, "*.yml", SearchOption.AllDirectories)) {
+        foreach (var file in Directory.EnumerateFiles(tweakPath, "*.yml", SearchOption.AllDirectories)) {
             try {
                 var content = await File.ReadAllTextAsync(file, cancellationToken);
                 var tweak = deserializer.Deserialize<Tweak>(content);
