@@ -1,11 +1,9 @@
-﻿using System.Net.NetworkInformation;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NitroWin.Core.Extensions;
 using NitroWin.Core.Services;
 using NitroWin.Services;
 using Serilog;
-using Serilog.Events;
 
 var AppHost = Host.CreateDefaultBuilder()
     .ConfigureServices((hostContext, services) => {

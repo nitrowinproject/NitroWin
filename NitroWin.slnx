@@ -1,5 +1,4 @@
 <Solution>
   <Project Path="src/NitroWin.Core/NitroWin.Core.csproj" />
-  <Project Path="src/NitroWin.ControlPanel/NitroWin.ControlPanel.csproj" />
   <Project Path="src/NitroWin/NitroWin.csproj" />
 </Solution>

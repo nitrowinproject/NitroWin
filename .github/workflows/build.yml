@@ -40,16 +40,3 @@ jobs:
         with:
           name: NitroWin-${{ matrix.runtime }}
           path: publish/NitroWin-${{ matrix.runtime }}
-
-      - name: Publish NitroWin Control Panel
-        run: >
-          dotnet publish src/NitroWin.ControlPanel/NitroWin.ControlPanel
-          --configuration Release
-          --runtime ${{ matrix.runtime }}
-          --output publish/NitroWin.ControlPanel-${{ matrix.runtime }}
-
-      - name: Upload NitroWin Control Panel binaries
-        uses: actions/upload-artifact@v7
-        with:
-          name: NitroWin.ControlPanel-${{ matrix.runtime }}
-          path: publish/NitroWin.ControlPanel-${{ matrix.runtime }}
