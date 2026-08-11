@@ -23,4 +23,4 @@
     dotnet publish -c Release -r win-arm64 -o publish/
     ```
 
-The NitroWin binary will be located under `publish/NitroWin.exe`.
+The NitroWin binary will be located under `publish/NitroWin.exe` and the NitroWin Cli will be located under `publish/NitroWin.Cli.exe`.
