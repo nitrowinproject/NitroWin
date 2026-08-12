@@ -1,12 +1,11 @@
 using System.Net.NetworkInformation;
 using System.Reflection;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using NitroWin.Core.Models;
 
 namespace NitroWin.Core.Services;
 
-public sealed class NitroWinService(ChocolateyService chocolateyService, WingetService wingetService, LogService logService, ConfigService configService, IStringLocalizer<NitroWinService> localizer, ILogger<NitroWinService> logger) {
+public sealed class NitroWinService(ChocolateyService chocolateyService, WingetService wingetService, LogService logService, ConfigService configService, IStringLocalizer<NitroWinService> localizer) {
     private readonly string? _version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
 
     private AppInstallerConfig? _appInstallerConfig;
