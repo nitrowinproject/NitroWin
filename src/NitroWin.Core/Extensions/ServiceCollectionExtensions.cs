@@ -1,6 +1,5 @@
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using NitroWin.Core.Factories;
 using NitroWin.Core.Models.Apps;
@@ -16,8 +15,9 @@ public static class ServiceCollectionExtensions {
         services.AddLogging();
         services.AddSingleton<LogService>();
 
-        services.AddSingleton(_ => new ResourceManager(
-            "NitroWin.Core.Resources.Strings", Assembly.GetExecutingAssembly()));
+        services.AddLocalization(options => {
+            options.ResourcesPath = "Resources";
+        });
 
         services.AddSingleton(_ => new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)

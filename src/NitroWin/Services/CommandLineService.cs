@@ -1,12 +1,12 @@
 ﻿using System.Reflection;
-using System.Resources;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using NitroWin.Models;
 
 namespace NitroWin.Services;
 
-internal sealed class CommandLineService(ResourceManager resourceManager, IHostApplicationLifetime lifetime, ILogger<CommandLineService> logger) {
+internal sealed class CommandLineService(IStringLocalizer<CommandLineService> localizer, IHostApplicationLifetime lifetime, ILogger<CommandLineService> logger) {
     private readonly string? _version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
 
     internal CommandLineOptions ParseArguments(string[] args) {
@@ -32,13 +32,13 @@ internal sealed class CommandLineService(ResourceManager resourceManager, IHostA
     private void WriteHelp() {
         if (!logger.IsEnabled(LogLevel.Information)) return;
 
-        logger.LogInformation("{Options}", resourceManager.GetString("CommandLine_Options"));
+        logger.LogInformation("{Options}", localizer["CommandLine_Options"]);
 
         string[] options = [
-            $"-h, --help       => {resourceManager.GetString("Options_PrintHelp")}",
-            $"-v, --version    => {resourceManager.GetString("Options_PrintVersion")}",
-            $"-na, --no-apps   => {resourceManager.GetString("Options_NoApps")}",
-            $"-nt, --no-tweaks => {resourceManager.GetString("Options_NoTweaks")}"
+            $"-h, --help       => {localizer["Options_PrintHelp"]}",
+            $"-v, --version    => {localizer["Options_PrintVersion"]}",
+            $"-na, --no-apps   => {localizer["Options_NoApps"]}",
+            $"-nt, --no-tweaks => {localizer["Options_NoTweaks"]}"
             ];
 
         foreach (var option in options)

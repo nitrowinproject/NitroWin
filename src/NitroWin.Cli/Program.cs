@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NitroWin.Cli.Helpers;
 using NitroWin.Cli.Models;
@@ -23,7 +22,6 @@ var app = new CommandApp(registrar);
 app.Configure(config => {
     config.SetApplicationName("nitrowin");
     config.SetApplicationVersion("3.2.0");
-    config.SetApplicationCulture(CultureInfo.InvariantCulture);
 
     config.AddCommand<ApplyCommand>("apply")
         .WithDescription("Applies all locally cached tweaks");

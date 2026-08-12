@@ -20,7 +20,9 @@ public sealed class WingetService(ConfigService configService, ExtractionService
                 _ => throw new NotImplementedException()
             };
 
-            var depsArchive = await _downloaderService.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath, cancellationToken: cancellationToken) ?? throw new InvalidOperationException();
+            var depsArchive = await _downloaderService.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath, cancellationToken: cancellationToken)
+                ?? throw new InvalidOperationException();
+
             await _extractionService.ExtractZipFile(depsArchive, depsPath, cancellationToken);
 
             foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))

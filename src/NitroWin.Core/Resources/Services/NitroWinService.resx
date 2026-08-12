@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AppDescription" xml:space="preserve">
+    <value>A clean, debloated, optimized and privacy-friendly Windows modification.</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>NitroWin</value>
+  </data>
+  <data name="UnknownVersion" xml:space="preserve">
+    <value>(Unknown Version)</value>
+  </data>
+</root>

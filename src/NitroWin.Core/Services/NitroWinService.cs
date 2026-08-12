@@ -1,14 +1,13 @@
 using System.Net.NetworkInformation;
 using System.Reflection;
-using System.Resources;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using NitroWin.Core.Models;
 
 namespace NitroWin.Core.Services;
 
-public sealed class NitroWinService(ChocolateyService chocolateyService, WingetService wingetService, LogService logService, ConfigService configService, ResourceManager resourceManager, ILogger<NitroWinService> logger) {
+public sealed class NitroWinService(ChocolateyService chocolateyService, WingetService wingetService, LogService logService, ConfigService configService, IStringLocalizer<NitroWinService> localizer, ILogger<NitroWinService> logger) {
     private readonly string? _version = Assembly.GetExecutingAssembly().GetName().Version?.ToString();
-    private readonly string _name = resourceManager.GetString("App_Name")!;
 
     private AppInstallerConfig? _appInstallerConfig;
 
@@ -43,7 +42,7 @@ public sealed class NitroWinService(ChocolateyService chocolateyService, WingetS
     }
 
     public void WriteBranding(string[]? args) {
-        Console.Title = string.Join(" ", _name, _version);
+        Console.Title = string.Join(" ", localizer["AppName"], _version);
 
         if (!logger.IsEnabled(LogLevel.Information)) return;
 
@@ -54,14 +53,14 @@ public sealed class NitroWinService(ChocolateyService chocolateyService, WingetS
             "88 V8o88    88       88    88`8b   88    88 Y8   I8I   88    88    88 V8o88",
             "88  V888   .88.      88    88 `88. `8b  d8' `8b d8'8b d8'   .88.   88  V888",
             "VP   V8P Y888888P    YP    88   YD  `Y88P'   `8b8' `8d8'  Y888888P VP   V8P",
-            resourceManager.GetString("App_Description")!
+            localizer["AppDescription"]
             ];
 
         foreach (var line in branding)
             logger.LogInformation("{Line}", line);
 
 #if DEBUG
-        logService.HelloFrom(_name, _version ?? resourceManager.GetString("CommandLine_UnknownVersion")!);
+        logService.HelloFrom(localizer["AppName"], _version ?? localizer["UnknownVersion"]);
 
         if (args is not null)
             logService.CommandLineArguments(args);

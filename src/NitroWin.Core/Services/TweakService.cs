@@ -1,10 +1,11 @@
-﻿using NitroWin.Core.Models;
+﻿using Microsoft.Extensions.Localization;
+using NitroWin.Core.Models;
 using NitroWin.Core.Models.Tweaks.Actions;
 using YamlDotNet.Serialization;
 
 namespace NitroWin.Core.Services;
 
-public sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer) {
+public sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer, IStringLocalizer<TweakService> localizer) {
     private Config? _config;
 
     public async Task ApplyTweaksAsync(string tweakPath, CancellationToken cancellationToken = default) {
@@ -75,7 +76,7 @@ public sealed class TweakService(LogService logService, ConfigService configServ
 
         if (returnCode != 0) {
             var ex = new InvalidOperationException(
-                $"{action.GetType().Name} from tweak '{tweak.Title}' returned exit code '{returnCode}'.");
+                localizer["InvalidReturnCodeError", action.GetType().Name, tweak.Title, returnCode]);
 
             logService.TweakApplyError(tweak, ex);
 
