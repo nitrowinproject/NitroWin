@@ -38,6 +38,12 @@ jobs:
           --runtime ${{ matrix.runtime }}
           --output publish/NitroWin-${{ matrix.runtime }}
 
+      - name: Upload binaries
+        uses: actions/upload-artifact@v7
+        with:
+          name: NitroWin-${{ matrix.runtime }}
+          path: publish/NitroWin-${{ matrix.runtime }}
+
       - name: Compile installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
         with:
