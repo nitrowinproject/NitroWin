@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <data name="ConfigNotInitializedError" xml:space="preserve">
+    <value>Config has not been initialized.</value>
+  </data>
   <data name="InvalidReturnCodeError" xml:space="preserve">
     <value>{0} from tweak '{1}' returned exit code '{2}'.</value>
+  </data>
+  <data name="TweakDirectoryNotFoundError" xml:space="preserve">
+    <value>Tweak directory '{0}' was not found.</value>
+  </data>
+  <data name="TweakDownloadError" xml:space="preserve">
+    <value>Failed to download tweaks.</value>
   </data>
 </root>

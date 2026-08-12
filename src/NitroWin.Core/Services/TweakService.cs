@@ -18,10 +18,10 @@ public sealed class TweakService(LogService logService, ConfigService configServ
 
     public async Task DownloadTweaksAsync(string tweakPath, string downloadPath, CancellationToken cancellationToken = default) {
         _config ??= await configService.GetAsync(cancellationToken)
-            ?? throw new InvalidOperationException("Config has not been initialized.");
+            ?? throw new InvalidOperationException(localizer["ConfigNotInitializedError"]);
 
         var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, downloadPath, cancellationToken: cancellationToken)
-            ?? throw new InvalidOperationException("Failed to download tweaks.");
+            ?? throw new InvalidOperationException(localizer["TweakDownloadError"]);
 
         await extractionService.ExtractZipFile(tweaksArchive, tweakPath, cancellationToken);
     }
@@ -30,7 +30,7 @@ public sealed class TweakService(LogService logService, ConfigService configServ
         var tweaks = new List<Tweak>();
 
         if (!Directory.Exists(tweakPath))
-            throw new InvalidOperationException($"Tweak directory '{tweakPath}' was not found.");
+            throw new DirectoryNotFoundException(localizer["TweakDirectoryNotFoundError", tweakPath]);
 
         foreach (var file in Directory.EnumerateFiles(tweakPath, "*.yml", SearchOption.AllDirectories)) {
             try {
