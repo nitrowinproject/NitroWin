@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using NitroWin.Cli.Helpers;
 using NitroWin.Cli.Models;
@@ -25,14 +26,18 @@ services.AddNitroWin();
 var registrar = new TypeRegistrar(services);
 var app = new CommandApp(registrar);
 
+await using var serviceProvider = services.BuildServiceProvider();
+var localizerFactory = serviceProvider.GetRequiredService<IStringLocalizerFactory>();
+var localizer = localizerFactory.Create("Strings", "NitroWin.Cli");
+
 app.Configure(config => {
     config.SetApplicationName("nitrowin");
     config.SetApplicationVersion("3.2.0");
 
     config.AddCommand<ApplyCommand>("apply")
-        .WithDescription("Applies all locally cached tweaks");
+        .WithDescription(localizer["ApplyCommandDescription"]);
     config.AddCommand<UpdateCommand>("update")
-        .WithDescription("Updates locally cached tweaks");
+        .WithDescription(localizer["UpdateCommandDescription"]);
 });
 
 return await app.RunAsync(args);
