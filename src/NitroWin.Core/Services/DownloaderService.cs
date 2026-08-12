@@ -10,8 +10,8 @@ public sealed class DownloaderService(LogService logService, HttpClient httpClie
             using var response = await httpClient.GetAsync(url, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
             response.EnsureSuccessStatusCode();
 
-            using var downloadStream = await response.Content.ReadAsStreamAsync(cancellationToken);
-            using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: true);
+            await using var downloadStream = await response.Content.ReadAsStreamAsync(cancellationToken);
+            await using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, useAsync: true);
 
             await downloadStream.CopyToAsync(fileStream, 81920, cancellationToken);
 
