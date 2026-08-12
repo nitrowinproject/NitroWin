@@ -6,6 +6,7 @@ using NitroWin.Core.Extensions;
 using Spectre.Console.Cli;
 
 var services = new ServiceCollection();
+
 services.AddLogging(builder => {
     builder.AddConsole();
 #if DEBUG
@@ -14,6 +15,11 @@ services.AddLogging(builder => {
     builder.SetMinimumLevel(LogLevel.Error);
 #endif
 });
+
+services.AddLocalization(config => {
+    config.ResourcesPath = "Resources";
+});
+
 services.AddNitroWin();
 
 var registrar = new TypeRegistrar(services);
