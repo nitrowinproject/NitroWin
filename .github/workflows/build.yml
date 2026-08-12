@@ -5,9 +5,10 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'src/**'
-      - '.github/workflows/build.yml'
-      - 'global.json'
+      - "src/**"
+      - ".github/workflows/build.yml"
+      - "global.json"
+      - "deployment/**"
 
 jobs:
   build:
@@ -15,9 +16,11 @@ jobs:
 
     strategy:
       matrix:
-        runtime:
-          - win-x64
-          - win-arm64
+        include:
+          - runtime: win-x64
+            architecture: x64
+          - runtime: win-arm64
+            architecture: arm64
 
     steps:
       - name: Checkout repository
@@ -35,8 +38,14 @@ jobs:
           --runtime ${{ matrix.runtime }}
           --output publish/NitroWin-${{ matrix.runtime }}
 
-      - name: Upload NitroWin binaries
+      - name: Compile installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
+        with:
+          path: deployment/NitroWin.iss
+          options: /DTargetArch=${{ matrix.architecture }}
+
+      - name: Upload installer
         uses: actions/upload-artifact@v7
         with:
-          name: NitroWin-${{ matrix.runtime }}
-          path: publish/NitroWin-${{ matrix.runtime }}
+          path: deployment/Output/NitroWinSetup-${{ matrix.architecture }}.exe
+          archive: false
