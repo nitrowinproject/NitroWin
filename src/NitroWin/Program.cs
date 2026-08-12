@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NitroWin.Core.Extensions;
 using NitroWin.Helpers;
 using NitroWin.Models;
+using NitroWin.Services;
 using Spectre.Console.Cli;
 
 var services = new ServiceCollection();
@@ -20,6 +21,8 @@ services.AddLogging(builder => {
 services.AddLocalization(config => {
     config.ResourcesPath = "Resources";
 });
+
+services.AddSingleton<HelperService>();
 
 services.AddNitroWin();
 
