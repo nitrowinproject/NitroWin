@@ -1,59 +1,45 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Logging;
 using NitroWin.Core.Extensions;
-using NitroWin.Core.Services;
 using NitroWin.Helpers;
-using NitroWin.Services;
-using Serilog;
+using NitroWin.Models;
+using Spectre.Console.Cli;
 
-var AppHost = Host.CreateDefaultBuilder()
-    .ConfigureServices((hostContext, services) => {
-        services.AddLogging(loggingBuilder =>
-            loggingBuilder.AddSerilog(dispose: true));
+var services = new ServiceCollection();
 
-        services.AddSerilog((ctx, lc) => lc
+services.AddLogging(builder => {
+    builder.AddConsole();
 #if DEBUG
-            .MinimumLevel.Debug()
+    builder.SetMinimumLevel(LogLevel.Debug);
+#else
+    builder.SetMinimumLevel(LogLevel.Error);
 #endif
-            .WriteTo.Console(outputTemplate: "[{Level:u3}] {Message:lj}{NewLine}{Exception}")
-            .WriteTo.File(Path.Join("Logs", "NitroWin.txt"), rollingInterval: RollingInterval.Minute));
+});
 
-        services.AddSingleton<CommandLineService>();
+services.AddLocalization(config => {
+    config.ResourcesPath = "Resources";
+});
 
-        services.AddNitroWin();
-    })
-    .Build();
+services.AddNitroWin();
 
-try {
-    await AppHost.StartAsync();
+var registrar = new TypeRegistrar(services);
+var app = new CommandApp(registrar);
 
-    var applicationLifetime = AppHost.Services.GetRequiredService<IHostApplicationLifetime>();
+await using var serviceProvider = services.BuildServiceProvider();
+var localizerFactory = serviceProvider.GetRequiredService<IStringLocalizerFactory>();
+var localizer = localizerFactory.Create("Strings", "NitroWin");
 
-    if (applicationLifetime.ApplicationStopping.IsCancellationRequested)
-        return;
+app.Configure(config => {
+    config.SetApplicationName("nitrowin");
+    config.SetApplicationVersion("3.2.0");
 
-    var commandLineService = AppHost.Services.GetRequiredService<CommandLineService>();
-    var tweakService = AppHost.Services.GetRequiredService<TweakService>();
-    var nitroWinService = AppHost.Services.GetRequiredService<NitroWinService>();
+    config.AddCommand<ApplyCommand>("apply")
+        .WithDescription(localizer["ApplyCommandDescription"]);
+    config.AddCommand<ApplyCommand>("apps")
+        .WithDescription(localizer["AppsCommandDescription"]);
+    config.AddCommand<UpdateCommand>("update")
+        .WithDescription(localizer["UpdateCommandDescription"]);
+});
 
-    nitroWinService.WriteBranding(args);
-
-    await nitroWinService.WaitForNetworkAsync(true, applicationLifetime.ApplicationStopping);
-
-    var options = commandLineService.ParseArguments(args);
-
-    if (!options.NoApps)
-        await nitroWinService.InstallAppsAsync(applicationLifetime.ApplicationStopping);
-
-    if (!options.NoTweaks) {
-        await tweakService.DownloadTweaksAsync(Paths.TweakPath, Paths.DownloadPath, applicationLifetime.ApplicationStopping);
-        await tweakService.ApplyTweaksAsync(Paths.TweakPath, applicationLifetime.ApplicationStopping);
-    }
-
-} catch (Exception ex) {
-    Console.WriteLine($"FATAL ERROR: {ex.Message}");
-    Environment.Exit(1);
-} finally {
-    await AppHost.StopAsync();
-    AppHost.Dispose();
-}
+return await app.RunAsync(args);

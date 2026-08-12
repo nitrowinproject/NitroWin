@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Localization;
-using NitroWin.Cli.Helpers;
 using NitroWin.Core.Services;
+using NitroWin.Helpers;
 using Spectre.Console;
 
-namespace NitroWin.Cli.Services;
+namespace NitroWin.Services;
 
 internal sealed class HelperService(IAnsiConsole console, IStringLocalizer<HelperService> localizer, NitroWinService nitroWinService) {
     internal async Task WaitForNetwork(CancellationToken cancellationToken) =>

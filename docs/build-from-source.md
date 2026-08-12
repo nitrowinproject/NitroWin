@@ -17,10 +17,10 @@
 
     ```bash
     # x64
-    dotnet publish -c Release -r win-x64 -o publish/
+    dotnet publish src/NitroWin/NitroWin.csproj -c Release -r win-x64 -o publish/
 
     # arm64
-    dotnet publish -c Release -r win-arm64 -o publish/
+    dotnet publish src/NitroWin/NitroWin.csproj -c Release -r win-arm64 -o publish/
     ```
 
-The NitroWin binary will be located under `publish/NitroWin.exe` and the NitroWin Cli will be located under `publish/NitroWin.Cli.exe`.
+The NitroWin binary will be located under `publish/NitroWin.exe`.

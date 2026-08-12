@@ -40,16 +40,3 @@ jobs:
         with:
           name: NitroWin-${{ matrix.runtime }}
           path: publish/NitroWin-${{ matrix.runtime }}
-
-      - name: Publish NitroWin.Cli
-        run: >
-          dotnet publish src/NitroWin.Cli/NitroWin.Cli.csproj
-          --configuration Release
-          --runtime ${{ matrix.runtime }}
-          --output publish/NitroWin.Cli-${{ matrix.runtime }}
-
-      - name: Upload NitroWin.Cli binaries
-        uses: actions/upload-artifact@v7
-        with:
-          name: NitroWin.Cli-${{ matrix.runtime }}
-          path: publish/NitroWin.Cli-${{ matrix.runtime }}

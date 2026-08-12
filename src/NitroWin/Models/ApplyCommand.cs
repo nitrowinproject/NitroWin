@@ -1,10 +1,10 @@
 using Microsoft.Extensions.Localization;
-using NitroWin.Cli.Helpers;
 using NitroWin.Core.Services;
+using NitroWin.Helpers;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace NitroWin.Cli.Models;
+namespace NitroWin.Models;
 
 internal sealed class ApplyCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<ApplyCommand> localizer) : AsyncCommand {
     protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {

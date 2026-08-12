@@ -1,7 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Spectre.Console.Cli;
 
-namespace NitroWin.Cli.Helpers;
+namespace NitroWin.Helpers;
 
 internal sealed class TypeRegistrar(IServiceCollection services) : ITypeRegistrar {
     public ITypeResolver Build() => new TypeResolver(services.BuildServiceProvider());
