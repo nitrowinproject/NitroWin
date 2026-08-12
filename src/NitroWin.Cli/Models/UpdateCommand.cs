@@ -6,8 +6,13 @@ using Spectre.Console.Cli;
 
 namespace NitroWin.Cli.Models;
 
-internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<UpdateCommand> localizer) : AsyncCommand {
+internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<UpdateCommand> localizer, NitroWinService nitroWinService) : AsyncCommand {
     protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
+        await console.Status()
+            .StartAsync(localizer["StatusNetworkCheck"], async _ => {
+                await nitroWinService.WaitForNetworkAsync(false, cancellationToken);
+            });
+
         try {
             if (Directory.Exists(Paths.TweakPath))
                 Directory.Delete(Paths.TweakPath, true);

@@ -44,21 +44,6 @@ public sealed class NitroWinService(ChocolateyService chocolateyService, WingetS
     public void WriteBranding(string[]? args) {
         Console.Title = string.Join(" ", localizer["AppName"], _version);
 
-        if (!logger.IsEnabled(LogLevel.Information)) return;
-
-        string[] branding = [
-            "d8b   db d888888b d888888b d8888b.  .d88b.  db   d8b   db d888888b d8b   db",
-            "888o  88   `88'   `~~88~~' 88  `8D .8P  Y8. 88   I8I   88   `88'   888o  88",
-            "88V8o 88    88       88    88oobY' 88    88 88   I8I   88    88    88V8o 88",
-            "88 V8o88    88       88    88`8b   88    88 Y8   I8I   88    88    88 V8o88",
-            "88  V888   .88.      88    88 `88. `8b  d8' `8b d8'8b d8'   .88.   88  V888",
-            "VP   V8P Y888888P    YP    88   YD  `Y88P'   `8b8' `8d8'  Y888888P VP   V8P",
-            localizer["AppDescription"]
-            ];
-
-        foreach (var line in branding)
-            logger.LogInformation("{Line}", line);
-
 #if DEBUG
         logService.HelloFrom(localizer["AppName"], _version ?? localizer["UnknownVersion"]);
 

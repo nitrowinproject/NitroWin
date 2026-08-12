@@ -9,6 +9,9 @@
   <data name="StatusCleanup" xml:space="preserve">
     <value>Cleaning up...</value>
   </data>
+  <data name="StatusNetworkCheck" xml:space="preserve">
+    <value>Waiting for network...</value>
+  </data>
   <data name="StatusUpdating" xml:space="preserve">
     <value>Updating tweaks...</value>
   </data>
