@@ -2,9 +2,9 @@
 
 ## [Tweaks](https://github.com/nitrowinproject/Tweaks) by [NitroWin](https://github.com/nitrowinproject) (and others)
 
-The tweaks from [NitroWin](https://github.com/nitrowinproject/NitroWin) are licensed under the [Zero-Clause BSD License](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE).
+The tweaks from [NitroWin](https://github.com/nitrowinproject/Tweaks) are licensed under the [Zero-Clause BSD License](https://github.com/nitrowinproject/Tweaks/blob/main/LICENSE).
 
-The tweaks from [AtlasOS](https://github.com/atlas-os/atlas) are licensed under [GPL-3.0](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE).
+The tweaks from [AtlasOS](https://github.com/atlas-os/atlas) are licensed under the [GPL-3.0](https://github.com/Atlas-OS/Atlas/blob/main/LICENSE).
 
 The tweaks from [WinUtil](https://github.com/ChrisTitusTech/winutil) are licensed under the [MIT License](https://github.com/ChrisTitusTech/winutil/blob/main/LICENSE).
 
