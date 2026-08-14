@@ -29,4 +29,29 @@ apps:
     url: https://aka.ms/vc14/vc_redist.arm64.exe
 
   - !winget:
+    id: Microsoft.DotNet.DesktopRuntime.10
+
+  - !web:
+    architectures:
+      arm64: false
+    arguments:
+      - "/silent"
+      - "/suppressmsgboxes"
+      - "/nocancel"
+      - "/norestart"
+    name: NitroWin (x64)
+    url: https://github.com/nitrowinproject/NitroWin/releases/latest/download/NitroWinSetup-x64.exe
+
+  - !web:
+    architectures:
+      x64: false
+    arguments:
+      - "/silent"
+      - "/suppressmsgboxes"
+      - "/nocancel"
+      - "/norestart"
+    name: NitroWin (arm64)
+    url: https://github.com/nitrowinproject/NitroWin/releases/latest/download/NitroWinSetup-arm64.exe
+
+  - !winget:
     id: M2Team.NanaZip
