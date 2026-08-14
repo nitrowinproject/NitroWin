@@ -52,6 +52,3 @@ apps:
       - "/norestart"
     name: NitroWin (arm64)
     url: https://github.com/nitrowinproject/NitroWin/releases/latest/download/NitroWinSetup-arm64.exe
-
-  - !winget:
-    id: M2Team.NanaZip

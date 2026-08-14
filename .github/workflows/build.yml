@@ -6,9 +6,11 @@ on:
     branches: [ "main" ]
     paths:
       - "src/**"
+      - "deployment/**"
       - ".github/workflows/build.yml"
       - "global.json"
-      - "deployment/**"
+      - "NitroWin.slnx"
+      - "LICENSE"
 
 jobs:
   build:
@@ -36,13 +38,44 @@ jobs:
           dotnet publish src/NitroWin/NitroWin.csproj
           --configuration Release
           --runtime ${{ matrix.runtime }}
+          -p:PublishSingleFile=true
+          --self-contained
           --output publish/NitroWin-${{ matrix.runtime }}
 
-      - name: Upload binaries
+      - name: Copy files from dist
+        run: cp -r dist/. publish/NitroWin-${{ matrix.runtime }}
+
+      - name: Upload files
         uses: actions/upload-artifact@v7
         with:
-          name: NitroWin-${{ matrix.runtime }}
           path: publish/NitroWin-${{ matrix.runtime }}
+
+  build-installer:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        include:
+          - runtime: win-x64
+            architecture: x64
+          - runtime: win-arm64
+            architecture: arm64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish NitroWin
+        run: >
+          dotnet publish src/NitroWin/NitroWin.csproj
+          --configuration Release
+          --runtime ${{ matrix.runtime }}
+          --output publish/NitroWin-${{ matrix.runtime }}
 
       - name: Compile installer
         uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
