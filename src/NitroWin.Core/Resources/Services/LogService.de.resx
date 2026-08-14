@@ -42,9 +42,6 @@
   <data name="ConfigError" xml:space="preserve">
     <value>Fehler beim Lesen der Konfigurationsdatei: {0}</value>
   </data>
-  <data name="CommandLineArguments" xml:space="preserve">
-    <value>Fahre den folgenden Befehlszeilenargumenten fort: {0}</value>
-  </data>
   <data name="DownloadError" xml:space="preserve">
     <value>Fehler beim Herunterladen von '{0}': {1}</value>
   </data>
@@ -53,9 +50,6 @@
   </data>
   <data name="ExtractionError" xml:space="preserve">
     <value>Fehler beim Extrahieren von '{0}': {1}</value>
-  </data>
-  <data name="HelloFrom" xml:space="preserve">
-    <value>Hallo von {0} {1}!</value>
   </data>
   <data name="InstallingApp" xml:space="preserve">
     <value>Installiere '{0}' über {1}...</value>

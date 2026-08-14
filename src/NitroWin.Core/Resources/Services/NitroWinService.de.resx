@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <data name="AppName" xml:space="preserve">
-    <value>NitroWin</value>
-  </data>
-  <data name="UnknownVersion" xml:space="preserve">
-    <value>(Unbekannte Version)</value>
+  <data name="AppInstallerConfigNotInitializedError" xml:space="preserve">
+    <value>App-Installer-Konfiguration wurde nicht initialisiert.</value>
   </data>
 </root>

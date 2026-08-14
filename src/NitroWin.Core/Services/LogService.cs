@@ -47,11 +47,6 @@ public sealed class LogService(IStringLocalizer<LogService> localizer, ILogger<L
     internal void NoNetworkError() =>
         LogResource(LogLevel.Error, "NoNetwork");
 
-#if DEBUG
-    internal void CommandLineArguments(string[] args) =>
-        LogResource(LogLevel.Debug, "CommandLineArguments", string.Join(", ", args));
-#endif
-
     internal void NoConfigFound<T>() where T : ConfigBase =>
         LogResource(LogLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
             ? "NoAppInstallerConfigFound" : "NoConfigFound");
@@ -62,11 +57,6 @@ public sealed class LogService(IStringLocalizer<LogService> localizer, ILogger<L
 
     internal void InstallingApps() =>
         LogResource(LogLevel.Information, "InstallingApps");
-
-#if DEBUG
-    internal void HelloFrom(string app, string version) =>
-        LogResource(LogLevel.Debug, "HelloFrom", app, version);
-#endif
 
     internal void DownloadingTweaks() =>
         LogResource(LogLevel.Information, "DownloadingTweaks");

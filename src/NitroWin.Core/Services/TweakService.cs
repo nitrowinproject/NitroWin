@@ -17,6 +17,8 @@ public sealed class TweakService(LogService logService, ConfigService configServ
     }
 
     public async Task DownloadTweaksAsync(string tweakPath, string downloadPath, CancellationToken cancellationToken = default) {
+        logService.DownloadingTweaks();
+
         _config ??= await configService.GetAsync(cancellationToken)
             ?? throw new InvalidOperationException(localizer["ConfigNotInitializedError"]);
 

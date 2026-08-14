@@ -39,7 +39,7 @@ app.Configure(config => {
 
     config.AddCommand<ApplyCommand>("apply")
         .WithDescription(localizer["ApplyCommandDescription"]);
-    config.AddCommand<ApplyCommand>("apps")
+    config.AddCommand<AppsCommand>("apps")
         .WithDescription(localizer["AppsCommandDescription"]);
     config.AddCommand<UpdateCommand>("update")
         .WithDescription(localizer["UpdateCommandDescription"]);
