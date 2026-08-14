@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
   <data name="InstallError" xml:space="preserve">
-    <value>[bold red]✗ Error while installing apps:[/] {0}</value>
+    <value>[bold red]✗ Fehler bei der App-Installation:[/] {0}</value>
   </data>
   <data name="InstallSuccess" xml:space="preserve">
-    <value>[green]✓ Apps were installed successfully![/]</value>
+    <value>[green]✓ Apps wurden erfolgreich installiert![/]</value>
   </data>
   <data name="StatusInstallingApps" xml:space="preserve">
-    <value>Installing apps...</value>
+    <value>Apps installieren...</value>
   </data>
 </root>

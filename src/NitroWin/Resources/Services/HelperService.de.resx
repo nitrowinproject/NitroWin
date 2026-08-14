@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="CleanupError" xml:space="preserve">
+    <value>[bold red]✗ Fehler beim Aufräumen:[/] {0}</value>
+  </data>
+  <data name="CleanupSuccess" xml:space="preserve">
+    <value>[green]✓ Erfolgreich aufgeräumt![/]</value>
+  </data>
+  <data name="StatusCleanup" xml:space="preserve">
+    <value>Aufräumen...</value>
+  </data>
+  <data name="StatusNetworkCheck" xml:space="preserve">
+    <value>Warte auf Netzwerk...</value>
+  </data>
+</root>

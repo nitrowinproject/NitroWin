@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="ApplyError" xml:space="preserve">
+    <value>[bold red]✗ Fehler beim Anwenden der Tweaks:[/] {0}</value>
+  </data>
+  <data name="ApplySuccess" xml:space="preserve">
+    <value>[green]✓ Tweaks wurden erfolgreich angewandt![/]</value>
+  </data>
+  <data name="StatusApplying" xml:space="preserve">
+    <value>Tweaks anwenden...</value>
+  </data>
+</root>
