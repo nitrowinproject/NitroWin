@@ -51,7 +51,6 @@ WizardStyle=modern dynamic
 AllowNoIcons=yes
 
 ChangesEnvironment=yes
-SetupArchitecture=x64
 
 [Languages]
 Name: "arabic"; MessagesFile: "compiler:Languages\Arabic.isl"

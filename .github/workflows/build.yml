@@ -43,7 +43,7 @@ jobs:
           --output publish/NitroWin-${{ matrix.runtime }}
 
       - name: Copy files from dist
-        run: cp -r dist/. publish/NitroWin-${{ matrix.runtime }}
+        run: Copy-Item -Path ./dist/* -Destination publish/NitroWin-${{ matrix.runtime }} -Recurse -Force
 
       - name: Upload files
         uses: actions/upload-artifact@v7
