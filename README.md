@@ -27,12 +27,15 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 > [!CAUTION]
 > Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies. Windows IoT Enterprise LTSC 2024 is recommended.
 
-> [!TIP]
-> Check out the [documentation](docs) if you have any questions.
+> [!IMPORTANT]
+> The installer version (NitroWinSetup-...) requires some sort of [.NET 10 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
 
-1. Download the [latest version of NitroWin](https://github.com/nitrowinproject/NitroWin/releases/latest).
+> [!WARNING]
+> Don't forget to configure NitroWin! Check out the [documentation](docs) if you have any questions or problems.
 
-2. Extract it to the root of your installation media. Assuming, your installation media is mounted under `D:\`, your file structure should look like this:
+1. Download the [latest zipped version of NitroWin](https://github.com/nitrowinproject/NitroWin/releases/latest).
+
+2. Extract it to the root of your installation media. Assuming, your installation media is mounted under `D:/`, your file structure should look like this:
 
     ```text
     D:/
@@ -61,3 +64,5 @@ NitroWin also uses parts of other projects which are licensed under their respec
 This project is not affiliated with Microsoft or any other third-party projects referenced in this repository.
 
 This project does not distribute modified Windows ISOs.
+
+No one who has contributed to NitroWin is responsible for any damage or lost data. This program is provided without any warranty.

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AppInstallerConfigError" xml:space="preserve">
+    <value>Error while reading app installer config file: {0}</value>
+  </data>
+  <data name="AppInstallError" xml:space="preserve">
+    <value>Error while installing '{0}' via {1}: {2}</value>
+  </data>
+  <data name="AppSourceAppx" xml:space="preserve">
+    <value>App Installer</value>
+  </data>
+  <data name="AppSourceAppxWeb" xml:space="preserve">
+    <value>the internet (App Installer)</value>
+  </data>
+  <data name="AppSourceChocolatey" xml:space="preserve">
+    <value>Chocolatey</value>
+  </data>
+  <data name="AppSourceChocolateyBundle" xml:space="preserve">
+    <value>Chocolatey (Bundle)</value>
+  </data>
+  <data name="AppSourceWeb" xml:space="preserve">
+    <value>the internet</value>
+  </data>
+  <data name="AppSourceWinget" xml:space="preserve">
+    <value>WinGet</value>
+  </data>
+  <data name="AppSourceWingetBundle" xml:space="preserve">
+    <value>WinGet (Bundle)</value>
+  </data>
+  <data name="AppTypeNotImplementedError" xml:space="preserve">
+    <value>App type is not implemented.</value>
+  </data>
+  <data name="AppliedTweak" xml:space="preserve">
+    <value>Applied Tweak '{0}'.</value>
+  </data>
+  <data name="ApplyingTweak" xml:space="preserve">
+    <value>Applying tweak '{0}'...</value>
+  </data>
+  <data name="ApplyingTweaks" xml:space="preserve">
+    <value>Applying tweaks...</value>
+  </data>
+  <data name="ConfigError" xml:space="preserve">
+    <value>Error while reading config file: {0}</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Error while downloading '{0}': {1}</value>
+  </data>
+  <data name="DownloadingTweaks" xml:space="preserve">
+    <value>Downloading tweaks...</value>
+  </data>
+  <data name="ExtractionError" xml:space="preserve">
+    <value>Error while extracting '{0}': {1}</value>
+  </data>
+  <data name="InstallingApp" xml:space="preserve">
+    <value>Installing '{0}' via {1}...</value>
+  </data>
+  <data name="InstallingApps" xml:space="preserve">
+    <value>Installing apps...</value>
+  </data>
+  <data name="NoAppInstallerConfigFound" xml:space="preserve">
+    <value>No app installer config file found. Not installing any apps...</value>
+  </data>
+  <data name="NoConfigFound" xml:space="preserve">
+    <value>No config file found. Using default config...</value>
+  </data>
+  <data name="NoNetwork" xml:space="preserve">
+    <value>No network connection. An internet connection is required for NitroWin to function properly. Trying again in 5 seconds...</value>
+  </data>
+  <data name="NotInstallingApp" xml:space="preserve">
+    <value>Not installing '{0}' via {1} because it does not support the current CPU architecture...</value>
+  </data>
+  <data name="TweakApplyError" xml:space="preserve">
+    <value>Error while applying tweak '{0}': {1}</value>
+  </data>
+  <data name="TweakReadError" xml:space="preserve">
+    <value>Error while reading tweak '{0}': {1}</value>
+  </data>
+</root>

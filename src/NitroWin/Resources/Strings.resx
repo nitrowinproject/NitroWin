@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="ApplyCommandDescription" xml:space="preserve">
+    <value>Applies all locally cached tweaks</value>
+  </data>
+  <data name="AppsCommandDescription" xml:space="preserve">
+    <value>Installs all apps from the Apps.yml file</value>
+  </data>
+  <data name="UpdateCommandDescription" xml:space="preserve">
+    <value>Updates locally cached tweaks</value>
+  </data>
+</root>

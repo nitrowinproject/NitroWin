@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="StatusUpdating" xml:space="preserve">
+    <value>Tweaks aktualisieren...</value>
+  </data>
+  <data name="UpdateError" xml:space="preserve">
+    <value>[bold red]✗ Fehler beim Aktualisieren der Tweaks:[/] {0}</value>
+  </data>
+  <data name="UpdateSuccess" xml:space="preserve">
+    <value>[green]✓ Tweaks wurden erfolgreich aktualisiert![/]</value>
+  </data>
+</root>

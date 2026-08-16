@@ -1,0 +1,61 @@
+using System.Net.Http.Headers;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
+using NitroWin.Core.Factories;
+using NitroWin.Core.Models.Apps;
+using NitroWin.Core.Models.Tweaks.Actions;
+using NitroWin.Core.Services;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+
+namespace NitroWin.Core.Extensions;
+
+public static class ServiceCollectionExtensions {
+    public static IServiceCollection AddNitroWin(this IServiceCollection services) {
+        services.AddLogging();
+
+        services.AddSingleton<LogService>();
+
+        services.AddLocalization(options => {
+            options.ResourcesPath = "Resources";
+        });
+
+        services.AddSingleton(sp => new DeserializerBuilder()
+            .WithNamingConvention(CamelCaseNamingConvention.Instance)
+            .WithObjectFactory(new ServiceProviderObjectFactory(sp))
+            .WithTagMapping("!choco:", typeof(ChocolateyApp))
+            .WithTagMapping("!chocoBundle:", typeof(ChocolateyBundleApp))
+            .WithTagMapping("!web:", typeof(WebApp))
+            .WithTagMapping("!webAppx:", typeof(AppxWebApp))
+            .WithTagMapping("!winget:", typeof(WingetApp))
+            .WithTagMapping("!wingetBundle:", typeof(WingetBundleApp))
+            .WithTagMapping("!cmd:", typeof(CmdAction))
+            .WithTagMapping("!powerShell:", typeof(PowerShellAction))
+            .WithTagMapping("!registryValue:", typeof(RegistryValueAction))
+            .WithTagMapping("!run:", typeof(RunAction))
+            .WithTagMapping("!scheduledTask:", typeof(ScheduledTaskAction))
+            .WithTagMapping("!service:", typeof(ServiceAction))
+            .Build());
+
+        services.AddSingleton<ConfigService>();
+
+        services.AddHttpClient<DownloaderService>(client => {
+            client.DefaultRequestHeaders.UserAgent.Add(
+                new ProductInfoHeaderValue(
+                    "NitroWin", Assembly.GetExecutingAssembly().GetName().Version?.ToString())
+            );
+        });
+
+        services.AddSingleton<ExtractionService>();
+
+        services.AddSingleton<TweakService>();
+
+        services.AddSingleton<ChocolateyService>();
+
+        services.AddSingleton<WingetService>();
+
+        services.AddSingleton<NitroWinService>();
+
+        return services;
+    }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="AppInstallerConfigNotInitializedError" xml:space="preserve">
+    <value>App-Installer-Konfiguration wurde nicht initialisiert.</value>
+  </data>
+</root>

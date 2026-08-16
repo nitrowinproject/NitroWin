@@ -1,0 +1,92 @@
+﻿using Microsoft.Extensions.Localization;
+using NitroWin.Core.Helpers;
+using NitroWin.Core.Models;
+using NitroWin.Core.Models.Tweaks.Actions;
+using YamlDotNet.Serialization;
+
+namespace NitroWin.Core.Services;
+
+public sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer, IStringLocalizer<TweakService> localizer) {
+    private Config? _config;
+
+    public async Task ApplyTweaksAsync(CancellationToken cancellationToken = default) {
+        logService.ApplyingTweaks();
+        var tweaks = await ParseTweaksAsync(cancellationToken);
+
+        foreach (var tweak in tweaks)
+            await ApplyTweakAsync(tweak, cancellationToken);
+    }
+
+    public async Task DownloadTweaksAsync(CancellationToken cancellationToken = default) {
+        logService.DownloadingTweaks();
+
+        _config ??= await configService.GetAsync(cancellationToken)
+            ?? throw new InvalidOperationException(localizer["ConfigNotInitializedError"]);
+
+        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, Paths.DownloadPath, cancellationToken: cancellationToken)
+            ?? throw new InvalidOperationException(localizer["TweakDownloadError"]);
+
+        await extractionService.ExtractZipFile(tweaksArchive, Paths.TweakPath, cancellationToken);
+    }
+
+    private async Task<List<Tweak>> ParseTweaksAsync(CancellationToken cancellationToken) {
+        var tweaks = new List<Tweak>();
+
+        if (!Directory.Exists(Paths.TweakPath))
+            throw new DirectoryNotFoundException(localizer["TweakDirectoryNotFoundError", Paths.TweakPath]);
+
+        foreach (var file in Directory.EnumerateFiles(Paths.TweakPath, "*.yml", SearchOption.AllDirectories)) {
+            try {
+                var content = await File.ReadAllTextAsync(file, cancellationToken);
+                var tweak = deserializer.Deserialize<Tweak>(content);
+
+                if (tweak is not null)
+                    tweaks.Add(tweak);
+            } catch (Exception ex) {
+                logService.TweakReadError(file, ex);
+            }
+        }
+
+        return tweaks;
+    }
+
+    private async Task ApplyTweakAsync(Tweak tweak, CancellationToken cancellationToken) {
+#if DEBUG
+        logService.ApplyingTweak(tweak);
+#endif
+
+        foreach (var action in tweak.Actions)
+            await ApplyActionAsync(tweak, action, cancellationToken);
+
+#if DEBUG
+        logService.AppliedTweak(tweak);
+#endif
+    }
+
+    private async Task ApplyActionAsync(Tweak tweak, ActionBase action, CancellationToken cancellationToken) {
+        var returnCode = 0;
+
+        try {
+            returnCode = await action.ApplyAsync(cancellationToken);
+        } catch (Exception ex) {
+            logService.TweakApplyError(tweak, ex);
+
+            if (action.IgnoreErrors)
+                return;
+
+            return;
+        }
+
+        if (returnCode != 0) {
+            var ex = new InvalidOperationException(
+                localizer["InvalidReturnCodeError", action.GetType().Name, tweak.Title, returnCode]);
+
+            logService.TweakApplyError(tweak, ex);
+
+            if (action.IgnoreErrors)
+                return;
+
+            return;
+        }
+    }
+}

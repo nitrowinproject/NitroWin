@@ -5,9 +5,12 @@ on:
   push:
     branches: [ "main" ]
     paths:
-      - 'NitroWin/**'
-      - '.github/workflows/build.yml'
-      - 'global.json'
+      - "src/**"
+      - "deployment/**"
+      - ".github/workflows/build.yml"
+      - "global.json"
+      - "NitroWin.slnx"
+      - "LICENSE"
 
 jobs:
   build:
@@ -15,12 +18,11 @@ jobs:
 
     strategy:
       matrix:
-        runtime:
-          - win-x64
-          - win-arm64
-
-    env:
-      PUBLISH_DIR: publish
+        include:
+          - runtime: win-x64
+            architecture: x64
+          - runtime: win-arm64
+            architecture: arm64
 
     steps:
       - name: Checkout repository
@@ -31,15 +33,62 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      - name: Publish
+      - name: Publish NitroWin
         run: >
-          dotnet publish NitroWin/NitroWin.csproj
+          dotnet publish src/NitroWin/NitroWin.csproj
           --configuration Release
           --runtime ${{ matrix.runtime }}
-          --output ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+          -p:PublishSingleFile=true
+          --self-contained
+          --output publish/NitroWin-${{ matrix.runtime }}
 
-      - name: Upload binaries
+      - name: Copy files from dist
+        run: Copy-Item -Path ./dist/* -Destination publish/NitroWin-${{ matrix.runtime }} -Recurse -Force
+
+      - name: Move NitroWin executable
+        run: Move-Item -Path publish/NitroWin-${{ matrix.runtime }}/NitroWin.exe -Destination publish/NitroWin-${{ matrix.runtime }}/NitroWin
+
+      - name: Upload files
         uses: actions/upload-artifact@v7
         with:
           name: NitroWin-${{ matrix.runtime }}
-          path: ${{ env.PUBLISH_DIR }}/${{ matrix.runtime }}
+          path: publish/NitroWin-${{ matrix.runtime }}
+
+  build-installer:
+    runs-on: windows-latest
+
+    strategy:
+      matrix:
+        include:
+          - runtime: win-x64
+            architecture: x64
+          - runtime: win-arm64
+            architecture: arm64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Publish NitroWin
+        run: >
+          dotnet publish src/NitroWin/NitroWin.csproj
+          --configuration Release
+          --runtime ${{ matrix.runtime }}
+          --output publish/NitroWin-${{ matrix.runtime }}
+
+      - name: Compile installer
+        uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
+        with:
+          path: deployment/NitroWin.iss
+          options: /DTargetArch=${{ matrix.architecture }}
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v7
+        with:
+          path: deployment/Output/NitroWinSetup-${{ matrix.architecture }}.exe
+          archive: false

@@ -14,6 +14,8 @@ To configure NitroWin, there are two configuration files. Make sure they are nam
 
 A good place to start are the default configuration files located [here](../dist/NitroWin/Configuration).
 
+The first time you run NitroWin, your configuration files will be copied automatically to `C:\ProgramData\NitroWin\Configuration`. If no configuration file is found next to it, NitroWin will search there.
+
 ## :package: Apps.yml
 
 This (not recommended) example configuration shows all of the options NitroWin has to offer:

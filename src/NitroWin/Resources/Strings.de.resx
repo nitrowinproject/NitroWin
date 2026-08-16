@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="ApplyCommandDescription" xml:space="preserve">
+    <value>Wendet alle lokal gespeicherten Tweaks an</value>
+  </data>
+  <data name="AppsCommandDescription" xml:space="preserve">
+    <value>Installiert alle Apps aus der Apps.yml-Datei</value>
+  </data>
+  <data name="UpdateCommandDescription" xml:space="preserve">
+    <value>Aktualisiert lokal gespeicherte Tweaks</value>
+  </data>
+</root>
