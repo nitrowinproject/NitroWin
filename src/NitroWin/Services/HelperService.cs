@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Localization;
+using NitroWin.Core.Helpers;
 using NitroWin.Core.Services;
-using NitroWin.Helpers;
 using Spectre.Console;
 
 namespace NitroWin.Services;

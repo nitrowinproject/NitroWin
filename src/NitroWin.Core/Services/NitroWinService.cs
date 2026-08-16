@@ -8,10 +8,10 @@ public sealed class NitroWinService(ChocolateyService chocolateyService, WingetS
     private AppInstallerConfig? _appInstallerConfig;
 
     public async Task InstallAppsAsync(CancellationToken cancellationToken = default) {
-        if (chocolateyService.IsInstallationNeeded() && !await chocolateyService.IsInstalledAsync(cancellationToken))
+        if (await chocolateyService.IsInstallationNeededAsync(cancellationToken) && !await chocolateyService.IsInstalledAsync(cancellationToken))
             await chocolateyService.InstallAsync(cancellationToken);
 
-        if (wingetService.IsInstallationNeeded() && !await wingetService.IsInstalledAsync(cancellationToken))
+        if (await wingetService.IsInstallationNeededAsync(cancellationToken) && !await wingetService.IsInstalledAsync(cancellationToken))
             await wingetService.InstallAsync(cancellationToken);
 
         _appInstallerConfig ??= await configService.GetAppInstallerAsync(cancellationToken)

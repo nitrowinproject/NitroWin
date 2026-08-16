@@ -1,6 +1,5 @@
 using Microsoft.Extensions.Localization;
 using NitroWin.Core.Services;
-using NitroWin.Helpers;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
@@ -11,7 +10,7 @@ internal sealed class ApplyCommand(TweakService tweakService, IAnsiConsole conso
         try {
             await console.Status()
                 .StartAsync(localizer["StatusApplying"], async _ => {
-                    await tweakService.ApplyTweaksAsync(Paths.TweakPath, cancellationToken);
+                    await tweakService.ApplyTweaksAsync(cancellationToken);
                 });
         } catch (Exception ex) {
             console.MarkupLine(localizer["ApplyError", ex.Message]);

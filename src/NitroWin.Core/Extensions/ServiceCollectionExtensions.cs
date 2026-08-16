@@ -13,21 +13,22 @@ namespace NitroWin.Core.Extensions;
 public static class ServiceCollectionExtensions {
     public static IServiceCollection AddNitroWin(this IServiceCollection services) {
         services.AddLogging();
+
         services.AddSingleton<LogService>();
 
         services.AddLocalization(options => {
             options.ResourcesPath = "Resources";
         });
 
-        services.AddSingleton(_ => new DeserializerBuilder()
+        services.AddSingleton(sp => new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
-            .WithObjectFactory(new ServiceProviderObjectFactory(services.BuildServiceProvider()))
+            .WithObjectFactory(new ServiceProviderObjectFactory(sp))
             .WithTagMapping("!choco:", typeof(ChocolateyApp))
-            .WithTagMapping("!chocoBundle", typeof(ChocolateyBundleApp))
+            .WithTagMapping("!chocoBundle:", typeof(ChocolateyBundleApp))
             .WithTagMapping("!web:", typeof(WebApp))
             .WithTagMapping("!webAppx:", typeof(AppxWebApp))
             .WithTagMapping("!winget:", typeof(WingetApp))
-            .WithTagMapping("!wingetBundle", typeof(WingetBundleApp))
+            .WithTagMapping("!wingetBundle:", typeof(WingetBundleApp))
             .WithTagMapping("!cmd:", typeof(CmdAction))
             .WithTagMapping("!powerShell:", typeof(PowerShellAction))
             .WithTagMapping("!registryValue:", typeof(RegistryValueAction))
@@ -44,17 +45,14 @@ public static class ServiceCollectionExtensions {
                     "NitroWin", Assembly.GetExecutingAssembly().GetName().Version?.ToString())
             );
         });
-        services.AddSingleton<DownloaderService>();
 
         services.AddSingleton<ExtractionService>();
 
         services.AddSingleton<TweakService>();
 
         services.AddSingleton<ChocolateyService>();
-        services.AddHostedService(sp => sp.GetRequiredService<ChocolateyService>());
 
         services.AddSingleton<WingetService>();
-        services.AddHostedService(sp => sp.GetRequiredService<WingetService>());
 
         services.AddSingleton<NitroWinService>();
 

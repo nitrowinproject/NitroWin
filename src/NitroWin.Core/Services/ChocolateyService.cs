@@ -1,11 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
-using NitroWin.Core.Helpers;
+﻿using NitroWin.Core.Helpers;
 using NitroWin.Core.Models;
 using NitroWin.Core.Models.Apps;
 
 namespace NitroWin.Core.Services;
 
-public sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase, IHostedService {
+public sealed class ChocolateyService(ConfigService configService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase {
     private sealed class ChocolateyInstallerApp(LogService logService, DownloaderService downloaderService) : WebApp(logService, downloaderService) {
         protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
             await ProcessHelper.StartProcessAsync(
@@ -24,11 +23,14 @@ public sealed class ChocolateyService(ConfigService configService, DownloaderSer
         Url = "https://community.chocolatey.org/install.ps1"
     };
 
-    public override bool IsInstallationNeeded() {
-        if (_config!.Options.InstallChocolatey == Options.InstallOptions.Always)
+    public override async Task<bool> IsInstallationNeededAsync(CancellationToken cancellationToken = default) {
+        _config ??= await configService.GetAsync(cancellationToken);
+        _appInstallerConfig ??= await configService.GetAppInstallerAsync(cancellationToken);
+
+        if (_config.Options.InstallChocolatey == Options.InstallOptions.Always)
             return true;
 
-        if (_appInstallerConfig!.Apps is not null && _config!.Options.InstallChocolatey == Options.InstallOptions.IfNeeded) {
+        if (_appInstallerConfig.Apps is not null && _config.Options.InstallChocolatey == Options.InstallOptions.IfNeeded) {
             foreach (var app in _appInstallerConfig.Apps) {
                 if (app is ChocolateyApp or ChocolateyBundleApp)
                     return true;
@@ -45,13 +47,6 @@ public sealed class ChocolateyService(ConfigService configService, DownloaderSer
         await ProcessHelper.StartProcessAsync("choco.exe", $"install {id} --yes {string.Join(" ", args ?? [])}", cancellationToken: cancellationToken);
 
     public override async Task InstallAppBundleAsync(string fileName, string[]? args, CancellationToken cancellationToken = default) =>
-        await ProcessHelper.StartProcessAsync("choco.exe", $"install {Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+        await ProcessHelper.StartProcessAsync("choco.exe", $"install {Path.Combine(AppContext.BaseDirectory,
             "Configuration", "Bundles", fileName)} --yes {string.Join(" ", args ?? [])}", cancellationToken: cancellationToken);
-
-    public async Task StartAsync(CancellationToken cancellationToken) {
-        _config = await configService.GetAsync(cancellationToken);
-        _appInstallerConfig = await configService.GetAppInstallerAsync(cancellationToken);
-    }
-
-    public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 }

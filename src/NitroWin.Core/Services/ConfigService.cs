@@ -1,4 +1,5 @@
-﻿using NitroWin.Core.Models;
+﻿using NitroWin.Core.Helpers;
+using NitroWin.Core.Models;
 using YamlDotNet.Serialization;
 
 namespace NitroWin.Core.Services;
@@ -22,10 +23,10 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
         };
 
         var localPath = Path.Combine(
-            AppDomain.CurrentDomain.BaseDirectory, "Configuration", fileName);
+            AppContext.BaseDirectory, "Configuration", fileName);
 
         var programDataPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "NitroWin", "Configuration", fileName);
+            Paths.ConfigPath, fileName);
 
         if (File.Exists(localPath)) {
             if (!File.Exists(programDataPath)) {

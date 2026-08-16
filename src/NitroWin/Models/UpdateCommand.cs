@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Localization;
+using NitroWin.Core.Helpers;
 using NitroWin.Core.Services;
-using NitroWin.Helpers;
 using NitroWin.Services;
 using Spectre.Console;
 using Spectre.Console.Cli;
@@ -17,7 +17,7 @@ internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole cons
 
             await console.Status()
                 .StartAsync(localizer["StatusUpdating"], async _ => {
-                    await tweakService.DownloadTweaksAsync(Paths.TweakPath, Paths.DownloadPath, cancellationToken);
+                    await tweakService.DownloadTweaksAsync(cancellationToken);
                 });
         } catch (Exception ex) {
             console.MarkupLine(localizer["UpdateError", ex.Message]);
