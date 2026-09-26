@@ -1,5 +1,5 @@
 #define MyAppName "NitroWin"
-#define MyAppVersion "3.2.0"
+#define MyAppVersion "3.2.1"
 #define MyAppPublisher "nitrowinproject"
 #define MyAppURL "https://github.com/nitrowinproject/NitroWin"
 #define MyAppExeName "NitroWin.exe"

@@ -35,7 +35,7 @@ var localizer = localizerFactory.Create("Strings", "NitroWin");
 
 app.Configure(config => {
     config.SetApplicationName("nitrowin");
-    config.SetApplicationVersion("3.2.0");
+    config.SetApplicationVersion("3.2.1");
 
     config.AddCommand<ApplyCommand>("apply")
         .WithDescription(localizer["ApplyCommandDescription"]);
