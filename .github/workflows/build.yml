@@ -7,6 +7,7 @@ on:
     paths:
       - "src/**"
       - "deployment/**"
+      - "dist/**"
       - ".github/workflows/build.yml"
       - "global.json"
       - "NitroWin.slnx"
