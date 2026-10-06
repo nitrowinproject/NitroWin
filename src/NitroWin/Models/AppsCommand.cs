@@ -7,7 +7,7 @@ using Spectre.Console.Cli;
 namespace NitroWin.Models;
 
 internal sealed class AppsCommand(IAnsiConsole console, IStringLocalizer<AppsCommand> localizer, HelperService helperService, NitroWinService nitroWinService) : AsyncCommand {
-    protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
+    public override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
         await helperService.WaitForNetwork(cancellationToken);
 
         try {

@@ -8,7 +8,7 @@ using Spectre.Console.Cli;
 namespace NitroWin.Models;
 
 internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<UpdateCommand> localizer, HelperService helperService) : AsyncCommand {
-    protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
+    public override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
         await helperService.WaitForNetwork(cancellationToken);
 
         try {
