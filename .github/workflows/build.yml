@@ -83,7 +83,7 @@ jobs:
           --output publish/NitroWin-${{ matrix.runtime }}
 
       - name: Compile installer
-        uses: Minionguyjpro/Inno-Setup-Action@v1.2.9
+        uses: Minionguyjpro/Inno-Setup-Action@v1.3.0
         with:
           path: deployment/NitroWin.iss
           options: /DTargetArch=${{ matrix.architecture }}
