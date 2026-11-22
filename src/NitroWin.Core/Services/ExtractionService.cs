@@ -1,9 +1,12 @@
-﻿namespace NitroWin.Core.Services;
+﻿using System.IO.Compression;
+
+namespace NitroWin.Core.Services;
 
 public sealed class ExtractionService(LogService logService) {
-    internal async Task ExtractZipFile(string filePath, string outputPath, CancellationToken cancellationToken = default) {
+    internal async Task ExtractZipFile(string filePath, string outputPath,
+        CancellationToken cancellationToken = default) {
         try {
-            await System.IO.Compression.ZipFile.ExtractToDirectoryAsync(filePath, outputPath, overwriteFiles: true, cancellationToken);
+            await ZipFile.ExtractToDirectoryAsync(filePath, outputPath, true, cancellationToken);
         } catch (Exception ex) {
             logService.ExtractionError(filePath, ex);
         }

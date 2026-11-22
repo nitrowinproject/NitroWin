@@ -13,14 +13,14 @@ A clean, debloated, optimized and privacy-friendly Windows modification.
 
 ## :sparkles: Features
 
-Feature | NitroWin | Stock Windows 11 | Other Windows modifications
-------- | -------- | ---------------- | ---------------------------
-:lock: Better Privacy | :white_check_mark: | :no_entry_sign: | :white_check_mark:
-:scissors: Less bloat | :white_check_mark: | :no_entry_sign: | :white_check_mark:
-:rocket: Better performance | :white_check_mark: | :no_entry_sign: | :white_check_mark:
-:shield: No disabled security features | :white_check_mark: | :white_check_mark: | :no_entry_sign:
-:do_not_litter: No intrusive custom branding | :white_check_mark: | :white_check_mark: | :no_entry_sign:
-:no_entry_sign: No AME Playbook | :white_check_mark: | :white_check_mark: | :no_entry_sign:
+ Feature                                      | NitroWin           | Stock Windows 11   | Other Windows modifications
+----------------------------------------------|--------------------|--------------------|-----------------------------
+ :lock: Better Privacy                        | :white_check_mark: | :no_entry_sign:    | :white_check_mark:
+ :scissors: Less bloat                        | :white_check_mark: | :no_entry_sign:    | :white_check_mark:
+ :rocket: Better performance                  | :white_check_mark: | :no_entry_sign:    | :white_check_mark:
+ :shield: No disabled security features       | :white_check_mark: | :white_check_mark: | :no_entry_sign:
+ :do_not_litter: No intrusive custom branding | :white_check_mark: | :white_check_mark: | :no_entry_sign:
+ :no_entry_sign: No AME Playbook              | :white_check_mark: | :white_check_mark: | :no_entry_sign:
 
 ## :books: Usage
 
@@ -35,7 +35,8 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 
 1. Download the [latest zipped version of NitroWin](https://github.com/nitrowinproject/NitroWin/releases/latest).
 
-2. Extract it to the root of your installation media. Assuming, your installation media is mounted under `D:/`, your file structure should look like this:
+2. Extract it to the root of your installation media. Assuming, your installation media is mounted under `D:/`, your
+   file structure should look like this:
 
     ```text
     D:/
@@ -51,13 +52,15 @@ Feature | NitroWin | Stock Windows 11 | Other Windows modifications
 
 3. Install Windows as usual. NitroWin should run automatically. If it doesn't, run it manually.
 
-4. (Optional, but highly recommended) Use [WinUtil](https://github.com/ChrisTitusTech/winutil) and [OOSU](https://www.oo-software.com/en/shutup10) for even better privacy.
+4. (Optional, but highly recommended) Use [WinUtil](https://github.com/ChrisTitusTech/winutil)
+   and [OOSU](https://www.oo-software.com/en/shutup10) for even better privacy.
 
 ## :scroll: License
 
 This project is licensed under the [GPL-3.0 License](LICENSE).
 
-NitroWin also uses parts of other projects which are licensed under their respective licenses. See [this document](docs/other-projects.md) for more details.
+NitroWin also uses parts of other projects which are licensed under their respective licenses.
+See [this document](docs/other-projects.md) for more details.
 
 ### :heavy_exclamation_mark: Disclaimer
 
@@ -65,4 +68,5 @@ This project is not affiliated with Microsoft or any other third-party projects 
 
 This project does not distribute modified Windows ISOs.
 
-No one who has contributed to NitroWin is responsible for any damage or lost data. This program is provided without any warranty.
+No one who has contributed to NitroWin is responsible for any damage or lost data. This program is provided without any
+warranty.

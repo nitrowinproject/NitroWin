@@ -5,13 +5,15 @@ using Spectre.Console.Cli;
 
 namespace NitroWin.Models;
 
-internal sealed class ApplyCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<ApplyCommand> localizer) : AsyncCommand {
+internal sealed class ApplyCommand(
+    TweakService tweakService,
+    IAnsiConsole console,
+    IStringLocalizer<ApplyCommand> localizer) : AsyncCommand {
     public override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
         try {
             await console.Status()
-                .StartAsync(localizer["StatusApplying"], async _ => {
-                    await tweakService.ApplyTweaksAsync(cancellationToken);
-                });
+                .StartAsync(localizer["StatusApplying"],
+                    async _ => { await tweakService.ApplyTweaksAsync(cancellationToken); });
         } catch (Exception ex) {
             console.MarkupLine(localizer["ApplyError", ex.Message]);
             return 1;
@@ -21,5 +23,4 @@ internal sealed class ApplyCommand(TweakService tweakService, IAnsiConsole conso
 
         return 0;
     }
-
 }

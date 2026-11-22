@@ -7,7 +7,11 @@ using Spectre.Console.Cli;
 
 namespace NitroWin.Models;
 
-internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole console, IStringLocalizer<UpdateCommand> localizer, HelperService helperService) : AsyncCommand {
+internal sealed class UpdateCommand(
+    TweakService tweakService,
+    IAnsiConsole console,
+    IStringLocalizer<UpdateCommand> localizer,
+    HelperService helperService) : AsyncCommand {
     public override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken) {
         await helperService.WaitForNetwork(cancellationToken);
 
@@ -16,9 +20,8 @@ internal sealed class UpdateCommand(TweakService tweakService, IAnsiConsole cons
                 Directory.Delete(Paths.TweakPath, true);
 
             await console.Status()
-                .StartAsync(localizer["StatusUpdating"], async _ => {
-                    await tweakService.DownloadTweaksAsync(cancellationToken);
-                });
+                .StartAsync(localizer["StatusUpdating"],
+                    async _ => { await tweakService.DownloadTweaksAsync(cancellationToken); });
         } catch (Exception ex) {
             console.MarkupLine(localizer["UpdateError", ex.Message]);
             return 1;

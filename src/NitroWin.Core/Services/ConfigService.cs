@@ -5,8 +5,8 @@ using YamlDotNet.Serialization;
 namespace NitroWin.Core.Services;
 
 public sealed class ConfigService(IDeserializer deserializer, LogService logService) {
-    private Config? _config;
     private AppInstallerConfig? _appInstallerConfig;
+    private Config? _config;
 
     public async Task<Config> GetAsync(CancellationToken cancellationToken = default) =>
         _config ??= await LoadAsync<Config>(GetConfigFilePath<Config>(), cancellationToken);
@@ -30,13 +30,15 @@ public sealed class ConfigService(IDeserializer deserializer, LogService logServ
 
         if (File.Exists(localPath)) {
             if (!File.Exists(programDataPath)) {
-                Directory.CreateDirectory(Path.GetDirectoryName(programDataPath) ?? throw new InvalidOperationException());
+                Directory.CreateDirectory(Path.GetDirectoryName(programDataPath) ??
+                                          throw new InvalidOperationException());
                 File.Copy(localPath, programDataPath);
             }
 
             return localPath;
-        } else
-            return programDataPath;
+        }
+
+        return programDataPath;
     }
 
     private async Task<T> LoadAsync<T>(string path, CancellationToken cancellationToken) where T : ConfigBase, new() {

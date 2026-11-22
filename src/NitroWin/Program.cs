@@ -18,9 +18,7 @@ services.AddLogging(builder => {
 #endif
 });
 
-services.AddLocalization(config => {
-    config.ResourcesPath = "Resources";
-});
+services.AddLocalization(config => { config.ResourcesPath = "Resources"; });
 
 services.AddSingleton<HelperService>();
 

@@ -28,7 +28,7 @@ public sealed class RegistryValueAction : ActionBase {
                 _ => throw new NotImplementedException()
             };
 
-            using var key = baseKey.OpenSubKey(subKey, writable: true);
+            using var key = baseKey.OpenSubKey(subKey, true);
             key?.DeleteValue(Value, false);
 
             return;
@@ -97,7 +97,8 @@ public sealed class RegistryValueAction : ActionBase {
             _ => throw new NotImplementedException()
         };
 
-        return await ProcessHelper.StartProcessAsync("reg.exe", arguments, true, Privilege.TrustedInstaller, cancellationToken);
+        return await ProcessHelper.StartProcessAsync("reg.exe", arguments, true, Privilege.TrustedInstaller,
+            cancellationToken);
     }
 
     protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {

@@ -1,6 +1,7 @@
 # :wrench: Configuring NitroWin
 
-To configure NitroWin, there are two configuration files. Make sure they are named and placed **exactly** like the file structure below:
+To configure NitroWin, there are two configuration files. Make sure they are named and placed **exactly** like the file
+structure below:
 
 ```text
     D:/
@@ -14,7 +15,8 @@ To configure NitroWin, there are two configuration files. Make sure they are nam
 
 A good place to start are the default configuration files located [here](../dist/NitroWin/Configuration).
 
-The first time you run NitroWin, your configuration files will be copied automatically to `C:\ProgramData\NitroWin\Configuration`. If no configuration file is found next to it, NitroWin will search there.
+The first time you run NitroWin, your configuration files will be copied automatically to
+`C:\ProgramData\NitroWin\Configuration`. If no configuration file is found next to it, NitroWin will search there.
 
 ## :package: Apps.yml
 
@@ -53,14 +55,14 @@ If no valid `Apps.yml` file is found, no apps will be installed.
 
 ### :white_check_mark: Supported App Types
 
-Name | Description
----- | -----------
-`!choco:` | Chocolatey App
-`!winget:` | Winget App
-`!chocoBundle:` | File name of a Chocolatey bundle located in the `Bundles` folder inside the `Configuration` folder.
-`!wingetBundle:` | File name of a WinGet bundle located in the `Bundles` folder inside the `Configuration` folder.
-`!web:` | Executes a file that will be downloaded from the internet (only supports `.exe` files).
-`!webAppx:` | Same as web, but only supports files that are supported by the App Installer (e.g. `.appx` or `.msixbundle`).
+ Name             | Description
+------------------|---------------------------------------------------------------------------------------------------------------
+ `!choco:`        | Chocolatey App
+ `!winget:`       | WinGet App
+ `!chocoBundle:`  | File name of a Chocolatey bundle located in the `Bundles` folder inside the `Configuration` folder.
+ `!wingetBundle:` | File name of a WinGet bundle located in the `Bundles` folder inside the `Configuration` folder.
+ `!web:`          | Executes a file that will be downloaded from the internet (only supports `.exe` files).
+ `!webAppx:`      | Same as web, but only supports files that are supported by the App Installer (e.g. `.appx` or `.msixbundle`).
 
 ## :nut_and_bolt: Config.yml
 
@@ -76,4 +78,5 @@ options:
   tweakUrl: "https://github.com/nitrowinproject/Tweaks/archive/refs/heads/main.zip" # Feel free to fork the Tweaks repository and change this if you'd like.
 ```
 
-If no valid `Config.yml` file is found, the [default configuration](../dist/NitroWin/Configuration/Config.yml) will be used.
+If no valid `Config.yml` file is found, the [default configuration](../dist/NitroWin/Configuration/Config.yml) will be
+used.

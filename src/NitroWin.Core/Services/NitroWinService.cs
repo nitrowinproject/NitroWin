@@ -4,18 +4,26 @@ using NitroWin.Core.Models;
 
 namespace NitroWin.Core.Services;
 
-public sealed class NitroWinService(ChocolateyService chocolateyService, WingetService wingetService, LogService logService, ConfigService configService, IStringLocalizer<NitroWinService> localizer) {
+public sealed class NitroWinService(
+    ChocolateyService chocolateyService,
+    WingetService wingetService,
+    LogService logService,
+    ConfigService configService,
+    IStringLocalizer<NitroWinService> localizer) {
     private AppInstallerConfig? _appInstallerConfig;
 
     public async Task InstallAppsAsync(CancellationToken cancellationToken = default) {
-        if (await chocolateyService.IsInstallationNeededAsync(cancellationToken) && !await chocolateyService.IsInstalledAsync(cancellationToken))
+        if (await chocolateyService.IsInstallationNeededAsync(cancellationToken) &&
+            !await chocolateyService.IsInstalledAsync(cancellationToken))
             await chocolateyService.InstallAsync(cancellationToken);
 
-        if (await wingetService.IsInstallationNeededAsync(cancellationToken) && !await wingetService.IsInstalledAsync(cancellationToken))
+        if (await wingetService.IsInstallationNeededAsync(cancellationToken) &&
+            !await wingetService.IsInstalledAsync(cancellationToken))
             await wingetService.InstallAsync(cancellationToken);
 
         _appInstallerConfig ??= await configService.GetAppInstallerAsync(cancellationToken)
-            ?? throw new InvalidOperationException(localizer["AppInstallerConfigNotInitializedError"]);
+                                ?? throw new InvalidOperationException(
+                                    localizer["AppInstallerConfigNotInitializedError"]);
 
         if (_appInstallerConfig.Apps is not null) {
             logService.InstallingApps();

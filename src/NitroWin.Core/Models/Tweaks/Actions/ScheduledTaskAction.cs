@@ -1,9 +1,14 @@
 ﻿using Microsoft.Win32.TaskScheduler;
 using NitroWin.Core.Models.Tweaks.Actions.Operations;
+using Task = System.Threading.Tasks.Task;
 
 namespace NitroWin.Core.Models.Tweaks.Actions;
 
 public sealed class ScheduledTaskAction : ActionBase {
+    public ScheduledTaskAction() {
+        if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
+    }
+
     public required string Path { get; init; }
     public required ScheduledTaskOperation Operation { get; init; }
 
@@ -22,10 +27,6 @@ public sealed class ScheduledTaskAction : ActionBase {
                 break;
         }
 
-        return System.Threading.Tasks.Task.FromResult(0);
-    }
-
-    public ScheduledTaskAction() {
-        if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
+        return Task.FromResult(0);
     }
 }

@@ -5,22 +5,30 @@ using NitroWin.Core.Models.Tweaks.Actions.Operations;
 namespace NitroWin.Core.Models.Tweaks.Actions;
 
 public sealed class ServiceAction : ActionBase {
+    public ServiceAction() {
+        if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
+    }
+
     public required string Name { get; init; }
     public required ServiceOperation Operation { get; init; }
 
     protected override async Task<int> ApplyAsyncCore(CancellationToken cancellationToken) {
         switch (Operation) {
             case ServiceOperation.Delete:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"delete {Name}", true, RunAs, cancellationToken);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"delete {Name}", true, RunAs,
+                    cancellationToken);
 
             case ServiceOperation.Disable:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= disabled", true, RunAs, cancellationToken);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= disabled", true, RunAs,
+                    cancellationToken);
 
             case ServiceOperation.MakeManual:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= demand", true, RunAs, cancellationToken);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= demand", true, RunAs,
+                    cancellationToken);
 
             case ServiceOperation.MakeDelayed:
-                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= delayed-auto", true, RunAs, cancellationToken);
+                return await ProcessHelper.StartProcessAsync("sc.exe", $"config {Name} start= delayed-auto", true,
+                    RunAs, cancellationToken);
         }
 
         using ServiceController sc = new(Name);
@@ -58,8 +66,4 @@ public sealed class ServiceAction : ActionBase {
             ServiceOperation.Continue => ServiceControllerStatus.Running,
             _ => throw new NotImplementedException()
         };
-
-    public ServiceAction() {
-        if (RunAs == Privilege.TrustedInstaller) throw new NotImplementedException();
-    }
 }

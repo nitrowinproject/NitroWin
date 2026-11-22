@@ -5,43 +5,19 @@ using NitroWin.Core.Models.Apps;
 
 namespace NitroWin.Core.Services;
 
-public sealed class WingetService(ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : PackageManagerServiceBase {
-    private sealed class WingetInstallerApp(ExtractionService extractionService, DownloaderService downloaderService, LogService logService) : AppxWebApp(logService, downloaderService) {
-        private readonly ExtractionService _extractionService = extractionService;
-        private readonly DownloaderService _downloaderService = downloaderService;
-        private readonly LogService _logService = logService;
-
-        private async Task InstallDependenciesAsync(CancellationToken cancellationToken) {
-            var depsPath = Path.Join(Paths.DownloadPath, "DesktopAppInstaller_Dependencies");
-            var depsArchitecture = RuntimeInformation.ProcessArchitecture switch {
-                Architecture.Arm64 => "arm64",
-                Architecture.X64 => "x64",
-                _ => throw new NotImplementedException()
-            };
-
-            var depsArchive = await _downloaderService.DownloadFileAsync("https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip", depsPath, cancellationToken: cancellationToken)
-                ?? throw new InvalidOperationException();
-
-            await _extractionService.ExtractZipFile(depsArchive, depsPath, cancellationToken);
-
-            foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
-                .Select(file => new AppxApp(_logService) { Path = file }))
-                await app.InstallAsync(cancellationToken);
-        }
-
-        protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
-            await InstallDependenciesAsync(cancellationToken);
-
-            await base.InstallCoreAsync(cancellationToken);
-        }
-    }
+public sealed class WingetService(
+    ConfigService configService,
+    ExtractionService extractionService,
+    DownloaderService downloaderService,
+    LogService logService) : PackageManagerServiceBase {
+    private AppInstallerConfig? _appInstallerConfig;
 
     private Config? _config;
-    private AppInstallerConfig? _appInstallerConfig;
 
     protected override AppBase App => new WingetInstallerApp(extractionService, downloaderService, logService) {
         Name = "WinGet",
-        Url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
+        Url =
+            "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
     };
 
     public override async Task<bool> IsInstallationNeededAsync(CancellationToken cancellationToken = default) {
@@ -64,10 +40,50 @@ public sealed class WingetService(ConfigService configService, ExtractionService
     public override async Task<bool> IsInstalledAsync(CancellationToken cancellationToken = default) =>
         await ProcessHelper.IsAppAvailable("winget.exe", "--version", cancellationToken);
 
-    public override async Task InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default) =>
-        await ProcessHelper.StartProcessAsync("winget.exe", $"install --id {id} {string.Join(" ", args ?? [])} --exact --accept-package-agreements --accept-source-agreements", cancellationToken: cancellationToken);
+    public override async Task
+        InstallAppAsync(string id, string[]? args, CancellationToken cancellationToken = default) =>
+        await ProcessHelper.StartProcessAsync("winget.exe",
+            $"install --id {id} {string.Join(" ", args ?? [])} --exact --accept-package-agreements --accept-source-agreements",
+            cancellationToken: cancellationToken);
 
-    public override async Task InstallAppBundleAsync(string fileName, string[]? args, CancellationToken cancellationToken = default) =>
-        await ProcessHelper.StartProcessAsync("winget.exe", $"import --import-file {Path.Combine(AppContext.BaseDirectory,
-            "Configuration", "Bundles", fileName)} {string.Join(" ", args ?? [])} --accept-package-agreements --accept-source-agreements", cancellationToken: cancellationToken);
+    public override async Task InstallAppBundleAsync(string fileName, string[]? args,
+        CancellationToken cancellationToken = default) =>
+        await ProcessHelper.StartProcessAsync("winget.exe",
+            $"import --import-file {Path.Combine(AppContext.BaseDirectory,
+                "Configuration", "Bundles", fileName)} {string.Join(" ", args ?? [])} --accept-package-agreements --accept-source-agreements",
+            cancellationToken: cancellationToken);
+
+    private sealed class WingetInstallerApp(
+        ExtractionService extractionService,
+        DownloaderService downloaderService,
+        LogService logService) : AppxWebApp(logService, downloaderService) {
+        private readonly DownloaderService _downloaderService = downloaderService;
+        private readonly LogService _logService = logService;
+
+        private async Task InstallDependenciesAsync(CancellationToken cancellationToken) {
+            var depsPath = Path.Join(Paths.DownloadPath, "DesktopAppInstaller_Dependencies");
+            var depsArchitecture = RuntimeInformation.ProcessArchitecture switch {
+                Architecture.Arm64 => "arm64",
+                Architecture.X64 => "x64",
+                _ => throw new NotImplementedException()
+            };
+
+            var depsArchive = await _downloaderService.DownloadFileAsync(
+                                  "https://github.com/microsoft/winget-cli/releases/latest/download/DesktopAppInstaller_Dependencies.zip",
+                                  depsPath, cancellationToken: cancellationToken)
+                              ?? throw new InvalidOperationException();
+
+            await extractionService.ExtractZipFile(depsArchive, depsPath, cancellationToken);
+
+            foreach (var app in Directory.GetFiles(Path.Join(depsPath, depsArchitecture))
+                         .Select(file => new AppxApp(_logService) { Path = file }))
+                await app.InstallAsync(cancellationToken);
+        }
+
+        protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
+            await InstallDependenciesAsync(cancellationToken);
+
+            await base.InstallCoreAsync(cancellationToken);
+        }
+    }
 }

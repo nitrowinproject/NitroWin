@@ -6,7 +6,13 @@ using YamlDotNet.Serialization;
 
 namespace NitroWin.Core.Services;
 
-public sealed class TweakService(LogService logService, ConfigService configService, ExtractionService extractionService, DownloaderService downloaderService, IDeserializer deserializer, IStringLocalizer<TweakService> localizer) {
+public sealed class TweakService(
+    LogService logService,
+    ConfigService configService,
+    ExtractionService extractionService,
+    DownloaderService downloaderService,
+    IDeserializer deserializer,
+    IStringLocalizer<TweakService> localizer) {
     private Config? _config;
 
     public async Task ApplyTweaksAsync(CancellationToken cancellationToken = default) {
@@ -21,10 +27,11 @@ public sealed class TweakService(LogService logService, ConfigService configServ
         logService.DownloadingTweaks();
 
         _config ??= await configService.GetAsync(cancellationToken)
-            ?? throw new InvalidOperationException(localizer["ConfigNotInitializedError"]);
+                    ?? throw new InvalidOperationException(localizer["ConfigNotInitializedError"]);
 
-        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, Paths.DownloadPath, cancellationToken: cancellationToken)
-            ?? throw new InvalidOperationException(localizer["TweakDownloadError"]);
+        var tweaksArchive = await downloaderService.DownloadFileAsync(_config.Options.TweakUrl, Paths.DownloadPath,
+                                cancellationToken: cancellationToken)
+                            ?? throw new InvalidOperationException(localizer["TweakDownloadError"]);
 
         await extractionService.ExtractZipFile(tweaksArchive, Paths.TweakPath, cancellationToken);
     }
@@ -85,8 +92,6 @@ public sealed class TweakService(LogService logService, ConfigService configServ
 
             if (action.IgnoreErrors)
                 return;
-
-            return;
         }
     }
 }

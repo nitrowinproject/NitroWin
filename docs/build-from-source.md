@@ -24,7 +24,8 @@
     dotnet publish src/NitroWin/NitroWin.csproj -c Release -r win-arm64 -o publish/NitroWin-win-arm64
     ```
 
-The NitroWin binary will be located under `publish/NitroWin-win-x64/NitroWin.exe` or `publish/NitroWin-win-arm64/NitroWin.exe`.
+The NitroWin binary will be located under `publish/NitroWin-win-x64/NitroWin.exe` or
+`publish/NitroWin-win-arm64/NitroWin.exe`.
 
 ### :cd: Compiling the Installer
 
@@ -38,4 +39,5 @@ iscc /DTargetArch=x64 ./deployment/NitroWin.iss
 iscc /DTargetArch=arm64 ./deployment/NitroWin.iss
 ```
 
-The installer will be located under `deployment/Output/NitroWinSetup-x64.exe` or `deployment/Output/NitroWinSetup-arm64.exe`.
+The installer will be located under `deployment/Output/NitroWinSetup-x64.exe` or
+`deployment/Output/NitroWinSetup-arm64.exe`.

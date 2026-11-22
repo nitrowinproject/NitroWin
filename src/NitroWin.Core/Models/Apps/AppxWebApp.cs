@@ -8,11 +8,14 @@ public class AppxWebApp(LogService logService, DownloaderService downloaderServi
     public required string Url { get; init; }
 
     protected override async Task InstallCoreAsync(CancellationToken cancellationToken) {
-        var path = await downloaderService.DownloadFileAsync(Url, Paths.DownloadPath, cancellationToken: cancellationToken) ?? throw new InvalidOperationException("Failed to download the Appx package.");
+        var path =
+            await downloaderService.DownloadFileAsync(Url, Paths.DownloadPath, cancellationToken: cancellationToken) ??
+            throw new InvalidOperationException("Failed to download the Appx package.");
 
         await ProcessHelper.StartProcessAsync(
             "powershell.exe",
-            $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\" " + string.Join(" ", Arguments ?? []),
+            $"-NoProfile -ExecutionPolicy Bypass -Command \"Add-AppxPackage -Path '{path}'\" " +
+            string.Join(" ", Arguments ?? []),
             false,
             cancellationToken: cancellationToken
         );

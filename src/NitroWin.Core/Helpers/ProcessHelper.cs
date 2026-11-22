@@ -1,15 +1,17 @@
 ﻿using System.Diagnostics;
 using Microsoft.Win32.TaskScheduler;
 using NitroWin.Core.Models.Tweaks;
+using Task = System.Threading.Tasks.Task;
 
 namespace NitroWin.Core.Helpers;
 
 internal static class ProcessHelper {
-    internal static async Task<int> StartProcessAsync(string fileName, string? arguments = null, bool visible = true, Privilege privilege = Privilege.CurrentUserElevated, CancellationToken cancellationToken = default) {
+    internal static async Task<int> StartProcessAsync(string fileName, string? arguments = null, bool visible = true,
+        Privilege privilege = Privilege.CurrentUserElevated, CancellationToken cancellationToken = default) {
         if (privilege == Privilege.TrustedInstaller)
             return await RunAsTrustedInstallerAsync(fileName, arguments, cancellationToken);
 
-        var startInfo = new ProcessStartInfo() {
+        var startInfo = new ProcessStartInfo {
             FileName = fileName,
             Arguments = arguments,
             UseShellExecute = visible,
@@ -25,7 +27,8 @@ internal static class ProcessHelper {
         return process.ExitCode;
     }
 
-    internal static async Task<bool> IsAppAvailable(string fileName, string? arguments = null, CancellationToken cancellationToken = default) {
+    internal static async Task<bool> IsAppAvailable(string fileName, string? arguments = null,
+        CancellationToken cancellationToken = default) {
         try {
             var exitCode = await StartProcessAsync(fileName, arguments, false, cancellationToken: cancellationToken);
             return exitCode == 0;
@@ -34,7 +37,8 @@ internal static class ProcessHelper {
         }
     }
 
-    private static async Task<int> RunAsTrustedInstallerAsync(string filePath, string? arguments, CancellationToken cancellationToken) {
+    private static async Task<int> RunAsTrustedInstallerAsync(string filePath, string? arguments,
+        CancellationToken cancellationToken) {
         var taskName = "NitroWinTweak_" + Guid.NewGuid().ToString("N");
 
         using TaskService ts = new();
@@ -47,7 +51,8 @@ internal static class ProcessHelper {
         var task = ts.GetTask(taskName);
 
         var runningTask = task.RunEx(TaskRunFlags.NoFlags, 0, @"NT SERVICE\TrustedInstaller")
-            ?? throw new InvalidOperationException($"Failed to start task '{taskName}' as TrustedInstaller.");
+                          ?? throw new InvalidOperationException(
+                              $"Failed to start task '{taskName}' as TrustedInstaller.");
 
         int result;
 
@@ -56,7 +61,7 @@ internal static class ProcessHelper {
 
         try {
             while (runningTask.State == TaskState.Running) {
-                await System.Threading.Tasks.Task.Delay(200, cts.Token);
+                await Task.Delay(200, cts.Token);
                 try {
                     runningTask.Refresh();
                 } catch {

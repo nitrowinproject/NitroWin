@@ -6,6 +6,7 @@ namespace NitroWin.Core.Models.Tweaks.Actions;
 public abstract class ActionBase {
     [YamlMember(typeof(Privilege), Alias = "runas")]
     public Privilege RunAs { get; init; } = Privilege.CurrentUserElevated;
+
     public bool IgnoreErrors { get; init; } = false;
     public Platforms Platforms { get; init; } = new();
     public int Timeout { get; init; } = 30;
@@ -19,7 +20,8 @@ public abstract class ActionBase {
 
         try {
             return await ApplyAsyncCore(cts.Token);
-        } catch (OperationCanceledException) when (cts.IsCancellationRequested && !cancellationToken.IsCancellationRequested) {
+        } catch (OperationCanceledException) when (cts.IsCancellationRequested &&
+                                                   !cancellationToken.IsCancellationRequested) {
             throw new TimeoutException($"Action timed out after {Timeout} seconds.");
         }
     }

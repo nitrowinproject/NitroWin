@@ -15,8 +15,10 @@ public sealed class LogService(IStringLocalizer<LogService> localizer, ILogger<L
 #endif
 
     internal void AppInstallError(AppBase app, Exception exception) => LogResource(
-        LogLevel.Error, "AppInstallError", [.. GetAppParameters(app),
-            exception.Message]);
+        LogLevel.Error, "AppInstallError", [
+            .. GetAppParameters(app),
+            exception.Message
+        ]);
 
 #if DEBUG
     internal void ApplyingTweak(Tweak tweak) =>
@@ -49,11 +51,13 @@ public sealed class LogService(IStringLocalizer<LogService> localizer, ILogger<L
 
     internal void NoConfigFound<T>() where T : ConfigBase =>
         LogResource(LogLevel.Warning, typeof(T) == typeof(AppInstallerConfig)
-            ? "NoAppInstallerConfigFound" : "NoConfigFound");
+            ? "NoAppInstallerConfigFound"
+            : "NoConfigFound");
 
     internal void ConfigError<T>(Exception exception) where T : ConfigBase =>
         LogResource(LogLevel.Error, typeof(T) == typeof(AppInstallerConfig)
-            ? "AppInstallerConfigError" : "ConfigError", exception.Message);
+            ? "AppInstallerConfigError"
+            : "ConfigError", exception.Message);
 
     internal void InstallingApps() =>
         LogResource(LogLevel.Information, "InstallingApps");
@@ -68,7 +72,8 @@ public sealed class LogService(IStringLocalizer<LogService> localizer, ILogger<L
         AppxApp appxApp => [appxApp.Name ?? Path.GetFileName(appxApp.Path), localizer["AppSourceAppx"]],
         AppxWebApp appxWebApp => [appxWebApp.Name ?? Path.GetFileName(appxWebApp.Url), localizer["AppSourceAppxWeb"]],
         ChocolateyApp chocolateyApp => [chocolateyApp.Id, localizer["AppSourceChocolatey"]],
-        ChocolateyBundleApp chocolateyBundleApp => [chocolateyBundleApp.FileName, localizer["AppSourceChocolateyBundle"]],
+        ChocolateyBundleApp chocolateyBundleApp =>
+            [chocolateyBundleApp.FileName, localizer["AppSourceChocolateyBundle"]],
         WebApp webApp => [webApp.Name ?? Path.GetFileName(webApp.Url), localizer["AppSourceWeb"]],
         WingetApp wingetApp => [wingetApp.Id, localizer["AppSourceWinget"]],
         WingetBundleApp wingetBundleApp => [wingetBundleApp.FileName, localizer["AppSourceWingetBundle"]],

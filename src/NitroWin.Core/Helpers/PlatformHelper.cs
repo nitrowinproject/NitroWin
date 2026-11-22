@@ -3,6 +3,16 @@
 namespace NitroWin.Core.Helpers;
 
 internal partial class PlatformHelper {
+    [LibraryImport("PowrProf.dll")]
+    private static partial POWER_PLATFORM_ROLE PowerDeterminePlatformRole();
+
+    internal static bool IsDesktop() =>
+        PowerDeterminePlatformRole() == POWER_PLATFORM_ROLE.PlatformRoleDesktop;
+
+    internal static bool IsMobile() =>
+        PowerDeterminePlatformRole() is POWER_PLATFORM_ROLE.PlatformRoleMobile
+            or POWER_PLATFORM_ROLE.PlatformRoleSlate;
+
     private enum POWER_PLATFORM_ROLE {
         PlatformRoleUnspecified = 0,
         PlatformRoleDesktop = 1,
@@ -15,14 +25,4 @@ internal partial class PlatformHelper {
         PlatformRoleSlate = 8,
         PlatformRoleMaximum = 9
     }
-
-    [LibraryImport("PowrProf.dll")]
-    private static partial POWER_PLATFORM_ROLE PowerDeterminePlatformRole();
-
-    internal static bool IsDesktop() =>
-        PowerDeterminePlatformRole() == POWER_PLATFORM_ROLE.PlatformRoleDesktop;
-
-    internal static bool IsMobile() =>
-        PowerDeterminePlatformRole() is POWER_PLATFORM_ROLE.PlatformRoleMobile
-            or POWER_PLATFORM_ROLE.PlatformRoleSlate;
 }

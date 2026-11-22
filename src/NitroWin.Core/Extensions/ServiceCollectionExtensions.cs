@@ -16,9 +16,7 @@ public static class ServiceCollectionExtensions {
 
         services.AddSingleton<LogService>();
 
-        services.AddLocalization(options => {
-            options.ResourcesPath = "Resources";
-        });
+        services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
         services.AddSingleton(sp => new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)

@@ -26,8 +26,7 @@ public abstract class AppBase(LogService logService) {
 
     protected abstract Task InstallCoreAsync(CancellationToken cancellationToken);
 
-    protected bool IsSupportedArchitecture() {
-        return (RuntimeInformation.ProcessArchitecture == Architecture.X64 && Architectures.X64)
-            || (RuntimeInformation.ProcessArchitecture == Architecture.Arm64 && Architectures.Arm64);
-    }
+    protected bool IsSupportedArchitecture() =>
+        (RuntimeInformation.ProcessArchitecture == Architecture.X64 && Architectures.X64)
+        || (RuntimeInformation.ProcessArchitecture == Architecture.Arm64 && Architectures.Arm64);
 }

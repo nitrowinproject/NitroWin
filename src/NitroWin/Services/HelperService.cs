@@ -5,12 +5,14 @@ using Spectre.Console;
 
 namespace NitroWin.Services;
 
-internal sealed class HelperService(IAnsiConsole console, IStringLocalizer<HelperService> localizer, NitroWinService nitroWinService) {
+internal sealed class HelperService(
+    IAnsiConsole console,
+    IStringLocalizer<HelperService> localizer,
+    NitroWinService nitroWinService) {
     internal async Task WaitForNetwork(CancellationToken cancellationToken) =>
         await console.Status()
-            .StartAsync(localizer["StatusNetworkCheck"], async _ => {
-                await nitroWinService.WaitForNetworkAsync(false, cancellationToken);
-            });
+            .StartAsync(localizer["StatusNetworkCheck"],
+                async _ => { await nitroWinService.WaitForNetworkAsync(false, cancellationToken); });
 
     internal int CleanupDownloads() {
         try {
