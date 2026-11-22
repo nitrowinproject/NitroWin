@@ -28,7 +28,7 @@ A clean, debloated, optimized and privacy-friendly Windows modification.
 > Either a Pro or an Enterprise version of Windows 11 is required, as other versions do not support Group Policies. Windows IoT Enterprise LTSC 2024 is recommended.
 
 > [!IMPORTANT]
-> The installer version (NitroWinSetup-...) requires some sort of [.NET 10 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/10.0).
+> The installer version (NitroWinSetup-...) requires the [.NET 11 Runtime](https://dotnet.microsoft.com/en-us/download/dotnet/11.0).
 
 > [!WARNING]
 > Don't forget to configure NitroWin! Check out the [documentation](docs) if you have any questions or problems.

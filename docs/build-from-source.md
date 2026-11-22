@@ -2,8 +2,8 @@
 
 ## :exclamation: Requirements
 
-- .NET 10 SDK
-- Inno Setup (latest version)
+- .NET 11 SDK
+- Inno Setup 6 or later
 
 ## :hammer: Building
 
